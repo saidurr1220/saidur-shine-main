@@ -11,12 +11,10 @@ import ContactPage from "./pages/ContactPage";
 import ProjectDetail from "./pages/ProjectDetail";
 import Resume from "./pages/Resume";
 import NotFound from "./pages/NotFound";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <SpeedInsights />
     <TooltipProvider>
       <Toaster />
       <Sonner />
