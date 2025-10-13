@@ -12,11 +12,16 @@ import { useEffect } from "react";
 
 const Index = () => {
   useEffect(() => {
-    // Set light theme by default
-    const root = window.document.documentElement;
-    if (!localStorage.getItem("theme")) {
-      root.classList.add("light");
+    // ✅ Default DARK theme (Tailwind darkMode: "class")
+    const root = document.documentElement;
+    const t = localStorage.getItem("theme");
+    if (!t) {
+      root.classList.add("dark"); // default dark
       localStorage.setItem("theme", "dark");
+    } else if (t === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
     }
   }, []);
 
