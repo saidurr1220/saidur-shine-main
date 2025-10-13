@@ -19,9 +19,7 @@ function cors(res, origin) {
   res.setHeader("Vary", "Origin");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  if (isAllowed(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
+  if (isAllowed(origin)) res.setHeader("Access-Control-Allow-Origin", origin);
 }
 
 export default function handler(req, res) {
@@ -32,18 +30,9 @@ export default function handler(req, res) {
     res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
     return res.status(204).end();
   }
-
-  if (req.method !== "GET") {
-    return res.status(405).json({ ok: false, error: "Method not allowed" });
-  }
-
-  if (!isAllowed(origin)) {
-    return res.status(403).json({ ok: false, error: `Origin blocked: ${origin}` });
-  }
-
-  if (!process.env.CONTACT_SECRET) {
-    return res.status(500).json({ ok:false, error:"CONTACT_SECRET missing" });
-  }
+  if (req.method !== "GET") return res.status(405).json({ ok:false, error:"Method not allowed" });
+  if (!isAllowed(origin)) return res.status(403).json({ ok:false, error:`Origin blocked: ${origin}` });
+  if (!process.env.CONTACT_SECRET) return res.status(500).json({ ok:false, error:"CONTACT_SECRET missing" });
 
   const ts = Date.now().toString();
   const nonce = crypto.randomBytes(16).toString("hex");
@@ -51,5 +40,5 @@ export default function handler(req, res) {
   const token = `${ts}.${nonce}.${sig}`;
 
   res.setHeader("Set-Cookie", `contact_csrf=${token}; Path=/; HttpOnly; SameSite=Strict; Secure; Max-Age=600`);
-  return res.status(200).json({ ok: true, token });
+  return res.status(200).json({ ok:true, token });
 }

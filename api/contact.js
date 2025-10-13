@@ -20,9 +20,7 @@ function cors(res, origin) {
   res.setHeader("Vary", "Origin");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  if (isAllowed(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
+  if (isAllowed(origin)) res.setHeader("Access-Control-Allow-Origin", origin);
 }
 
 function textOnly(s, max = 2000) { return String(s ?? "").replace(/\r/g, "").slice(0, max); }
@@ -53,42 +51,33 @@ export default async function handler(req, res) {
     res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
     return res.status(204).end();
   }
-
-  if (req.method !== "POST") {
-    return res.status(405).json({ ok: false, error: "Method not allowed" });
-  }
-
-  if (!isAllowed(origin)) {
-    return res.status(403).json({ ok: false, error: `Origin blocked: ${origin}` });
-  }
-
-  if (!process.env.CONTACT_SECRET) {
-    return res.status(500).json({ ok:false, error:"CONTACT_SECRET missing" });
-  }
+  if (req.method !== "POST") return res.status(405).json({ ok:false, error:"Method not allowed" });
+  if (!isAllowed(origin)) return res.status(403).json({ ok:false, error:`Origin blocked: ${origin}` });
+  if (!process.env.CONTACT_SECRET) return res.status(500).json({ ok:false, error:"CONTACT_SECRET missing" });
 
   const cookies = parseCookie(req);
   const cooldown = Number(process.env.COOLDOWN_SECONDS || "60");
   const last = Number(cookies["contact_last"] || "0");
   if (last && Date.now() - last < cooldown * 1000) {
-    return res.status(429).json({ ok: false, error: "Slow down" });
+    return res.status(429).json({ ok:false, error:"Slow down" });
   }
 
   const { name, email, message, botField, csrfToken } = req.body || {};
-  if (botField) return res.status(200).json({ ok: true });
+  if (botField) return res.status(200).json({ ok:true });
 
   const tokenCookie = cookies["contact_csrf"] || "";
   if (!csrfToken || csrfToken !== tokenCookie || !verifyToken(csrfToken)) {
-    return res.status(403).json({ ok: false, error: "Invalid CSRF" });
+    return res.status(403).json({ ok:false, error:"Invalid CSRF" });
   }
 
   const _name = textOnly(name, 80).trim();
   const _email = textOnly(email, 120).trim().toLowerCase();
   const _msg = textOnly(message, 2000).trim();
   if (_name.length < 2 || !isEmail(_email) || _msg.length < 10) {
-    return res.status(400).json({ ok: false, error: "Invalid input" });
+    return res.status(400).json({ ok:false, error:"Invalid input" });
   }
   if (badHeader(_name) || badHeader(_email)) {
-    return res.status(400).json({ ok: false, error: "Invalid header chars" });
+    return res.status(400).json({ ok:false, error:"Invalid header chars" });
   }
 
   const transporter = nodemailer.createTransport({
@@ -106,11 +95,10 @@ export default async function handler(req, res) {
       subject: `New message from ${_name}`,
       text: `Name: ${_name}\nEmail: ${_email}\n\n${_msg}`,
     });
-
     res.setHeader("Set-Cookie", `contact_last=${Date.now()}; Path=/; Max-Age=${cooldown}; SameSite=Strict; Secure`);
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({ ok:true });
   } catch (e) {
     console.error(e);
-    return res.status(500).json({ ok: false, error: "Email send failed" });
+    return res.status(500).json({ ok:false, error:"Email send failed" });
   }
 }
