@@ -64,6 +64,17 @@ function verifyToken(token) {
 const esc = (s = "") =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+// ✅ helper: ENV truthy check + fallback keys so spelling mismatch হলেও কাজ করবে
+const envTrue = (k) => {
+  const v = (process.env[k] || "").toLowerCase();
+  return v === "1" || v === "true" || v === "yes";
+};
+const SEND_ACK =
+  envTrue("SEND_COPY_TO_SENDER") ||
+  envTrue("SEND_ACK_TO_SENDER") ||
+  envTrue("SEND_COPY_MAILER") ||
+  envTrue("SEND_THANKS_TO_SENDER"); // any of these will enable auto-reply
+
 export default async function handler(req, res) {
   const origin = req.headers.origin || "";
   cors(res, origin);
@@ -115,7 +126,7 @@ export default async function handler(req, res) {
     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
   });
 
-  // 1) Owner mail
+  // 1) owner mail (required)
   await transporter.sendMail({
     from: process.env.MAIL_FROM || process.env.SMTP_USER,
     to: process.env.MAIL_TO,
@@ -127,23 +138,21 @@ export default async function handler(req, res) {
     )}</p><p>${esc(_msg).replace(/\n/g, "<br/>")}</p>`,
   });
 
-  // 2) Auto "Thanks" to the sender (controlled by ENV)
-  const sendAck =
-    (process.env.SEND_COPY_TO_SENDER || "").toLowerCase() === "1" ||
-    (process.env.SEND_COPY_TO_SENDER || "").toLowerCase() === "true";
-
-  if (sendAck) {
-    await transporter.sendMail({
-      from: process.env.MAIL_FROM || process.env.SMTP_USER, // keep same "from" for DKIM/DMARC safety
-      to: _email,
-      subject: "Thanks! I received your message",
-      text: `Hi ${_name},
+  // 2) optional: thanks to sender
+  let ackSent = false;
+  if (SEND_ACK) {
+    try {
+      await transporter.sendMail({
+        from: process.env.MAIL_FROM || process.env.SMTP_USER, // DKIM/DMARC safe
+        to: _email,                                          // visitor
+        subject: "Thanks! I received your message",
+        text: `Hi ${_name},
 
 Thanks for reaching out. I received your message and will reply soon.
 
 — Saidur
 Portfolio: https://saidur-it.vercel.app/`,
-      html: `<p>Hi ${esc(_name)},</p>
+        html: `<p>Hi ${esc(_name)},</p>
 <p>Thanks for reaching out. I received your message and will reply soon.</p>
 <p><b>Your message:</b></p>
 <blockquote style="margin:0;padding:8px 12px;border-left:3px solid #ccc;background:#f8f8f8;border-radius:6px;">
@@ -151,12 +160,18 @@ ${esc(_msg).replace(/\n/g, "<br/>")}
 </blockquote>
 <p style="margin-top:12px;">— Saidur<br/>
 <a href="https://saidur-it.vercel.app/">saidur-it.vercel.app</a></p>`,
-    });
+      });
+      ackSent = true;
+    } catch (e) {
+      console.error("Auto-ack failed:", e);
+      // ইচ্ছা করলে এখানে Sentry/LogDrain এ পাঠাতে পারো
+    }
   }
 
   res.setHeader(
     "Set-Cookie",
     `contact_last=${Date.now()}; Path=/; Max-Age=${cooldown}; SameSite=Strict; Secure`
   );
-  return res.status(200).json({ ok: true });
+  // dev/debug এ কাজে লাগবে
+  return res.status(200).json({ ok: true, sentAck: ackSent });
 }
