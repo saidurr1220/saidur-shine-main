@@ -86,7 +86,7 @@ export function Skills() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
@@ -132,7 +132,7 @@ export function Skills() {
               <Badge
                 key={skill}
                 variant="secondary"
-                className="text-sm animate-fade-in-up"
+                className="text-xs sm:text-sm animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
                 {skill}

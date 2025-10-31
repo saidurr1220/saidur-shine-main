@@ -61,7 +61,7 @@ export function Services() {
             Full-stack development services for modern web applications
           </p>
         </motion.div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -70,10 +70,14 @@ export function Services() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
-              <Card className="p-6 bg-card hover:bg-surface-hover transition-all border-border group h-full">
-                <service.icon className="h-10 w-10 text-primary mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-muted-foreground">{service.description}</p>
+              <Card className="p-4 sm:p-6 bg-card hover:bg-surface-hover transition-all border-border group h-full">
+                <service.icon className="h-8 w-8 sm:h-10 sm:w-10 text-primary mb-4 group-hover:scale-110 transition-transform" />
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-sm sm:text-base text-muted-foreground">
+                  {service.description}
+                </p>
               </Card>
             </motion.div>
           ))}

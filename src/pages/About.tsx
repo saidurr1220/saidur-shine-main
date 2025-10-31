@@ -18,10 +18,12 @@ const About = () => {
       <Navigation />
       <main className="pt-24">
         {/* Hero Section */}
-        <section className="py-16 px-4">
+        <section className="py-12 sm:py-16 px-4">
           <div className="container mx-auto max-w-4xl text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About Me</h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+              About Me
+            </h1>
+            <p className="text-lg sm:text-xl text-muted-foreground mb-8">
               MERN Stack Developer & WordPress Expert with 3+ years building
               scalable web applications for international clients
             </p>
@@ -37,11 +39,11 @@ const About = () => {
         </section>
 
         {/* Bio Section */}
-        <section className="py-16 px-4 bg-surface">
+        <section className="py-12 sm:py-16 px-4 bg-surface">
           <div className="container mx-auto max-w-4xl">
-            <Card className="p-8 bg-card border-border">
-              <h2 className="text-2xl font-bold mb-6">My Story</h2>
-              <div className="space-y-4 text-muted-foreground">
+            <Card className="p-4 sm:p-6 md:p-8 bg-card border-border">
+              <h2 className="text-xl sm:text-2xl font-bold mb-6">My Story</h2>
+              <div className="space-y-4 text-sm sm:text-base text-muted-foreground">
                 <p>
                   Hi! I'm Saidur, a MERN Stack Developer and WordPress Expert
                   based in Dhaka, Bangladesh. Over the past 3+ years, I've
@@ -73,9 +75,11 @@ const About = () => {
                 </p>
               </div>
 
-              <div className="mt-8 pt-8 border-t border-border">
-                <h3 className="text-xl font-semibold mb-4">Core Strengths</h3>
-                <ul className="grid md:grid-cols-2 gap-3">
+              <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border">
+                <h3 className="text-lg sm:text-xl font-semibold mb-4">
+                  Core Strengths
+                </h3>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
                     "MERN Stack Development",
                     "React & JavaScript ES6+",
@@ -86,8 +90,11 @@ const About = () => {
                     "Performance & SEO Optimization",
                     "AI-Assisted Development",
                   ].map((strength) => (
-                    <li key={strength} className="flex items-center">
-                      <span className="text-primary mr-2">✓</span>
+                    <li
+                      key={strength}
+                      className="flex items-center text-sm sm:text-base"
+                    >
+                      <span className="text-primary mr-2 flex-shrink-0">✓</span>
                       <span>{strength}</span>
                     </li>
                   ))}

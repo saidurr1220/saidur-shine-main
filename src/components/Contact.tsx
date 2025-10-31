@@ -96,11 +96,11 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {/* Contact Info (বামে) */}
           <div className="space-y-6">
             <div>
-              <h3 className="text-2xl font-semibold mb-6">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-6">
                 Contact Information
               </h3>
               <div className="space-y-4">
@@ -145,7 +145,7 @@ export function Contact() {
 
           {/* Contact Form (ডানে) */}
           <div>
-            <Card className="p-8 bg-card border-border">
+            <Card className="p-4 sm:p-6 md:p-8 bg-card border-border">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label

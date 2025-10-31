@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="">
   <head>
     <script>
       try {
         var t = localStorage.getItem("ui-theme");
-        if (t === "light") {
-          document.documentElement.classList.remove("dark");
-        } else {
+        if (t === "dark") {
           document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
         }
       } catch (e) {}
     </script>

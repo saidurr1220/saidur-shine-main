@@ -147,7 +147,10 @@ export function Projects() {
                 key={cat}
                 variant={selectedCategory === cat ? "default" : "outline"}
                 onClick={() => setSelectedCategory(cat)}
-                className={selectedCategory === cat ? "gradient-hero" : ""}
+                className={`text-xs sm:text-sm ${
+                  selectedCategory === cat ? "gradient-hero" : ""
+                }`}
+                size="sm"
               >
                 {cat}
               </Button>
@@ -155,7 +158,7 @@ export function Projects() {
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}

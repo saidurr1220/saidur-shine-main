@@ -88,9 +88,9 @@ export function Experience() {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-border" />
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-border" />
 
-          <div className="space-y-12">
+          <div className="space-y-8 md:space-y-12">
             {timeline.map((item, index) => (
               <div
                 key={index}
@@ -100,7 +100,7 @@ export function Experience() {
                 style={{ animationDelay: `${index * 0.15}s` }}
               >
                 {/* Icon */}
-                <div className="absolute left-8 md:left-1/2 -ml-4 w-8 h-8 rounded-full bg-primary flex items-center justify-center z-10">
+                <div className="absolute left-6 md:left-1/2 -ml-4 w-8 h-8 rounded-full bg-primary flex items-center justify-center z-10">
                   <item.icon className="w-4 h-4 text-primary-foreground" />
                 </div>
 
@@ -108,21 +108,21 @@ export function Experience() {
                 <div
                   className={`w-full md:w-1/2 ${
                     index % 2 === 0 ? "md:pr-12" : "md:pl-12"
-                  } pl-20 md:pl-0`}
+                  } pl-16 md:pl-0`}
                 >
-                  <Card className="p-6 bg-card border-border">
+                  <Card className="p-4 sm:p-6 bg-card border-border">
                     <div className="mb-2">
-                      <h3 className="text-xl font-semibold mb-1">
+                      <h3 className="text-lg sm:text-xl font-semibold mb-1">
                         {item.title}
                       </h3>
-                      <p className="text-primary font-medium">
+                      <p className="text-primary font-medium text-sm sm:text-base">
                         {item.organization}
                       </p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs sm:text-sm text-muted-foreground">
                         {item.period} • {item.location}
                       </p>
                     </div>
-                    <p className="text-muted-foreground mb-3">
+                    <p className="text-sm sm:text-base text-muted-foreground mb-3">
                       {item.description}
                     </p>
                     {item.achievements && (

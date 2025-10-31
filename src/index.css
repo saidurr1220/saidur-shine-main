@@ -135,8 +135,75 @@ All colors MUST be HSL.
 
 
 /* Mobile polish */
-html, body { overflow-x: hidden; }
-* { -webkit-tap-highlight-color: transparent; }
+html, body { 
+  overflow-x: hidden; 
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+* { 
+  -webkit-tap-highlight-color: transparent; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Prevent horizontal scroll on small screens */
+  body {
+    min-width: 320px;
+  }
+  
+  /* Better touch targets */
+  button, a {
+    min-height: 44px;
+  }
+  
+  /* Improve readability on mobile */
+  p, li {
+    line-height: 1.6;
+  }
+  
+  /* Better spacing for mobile */
+  section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  /* Ensure images don't overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Tablet improvements */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Ensure proper viewport behavior */
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .text-4xl {
+    font-size: 2rem;
+  }
+  
+  .text-3xl {
+    font-size: 1.75rem;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+}
 
 html{scroll-behavior:smooth}
 @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}.animate-blink{animation:blink 1s steps(1,end) infinite}
