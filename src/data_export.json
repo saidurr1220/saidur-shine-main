@@ -1,0 +1,193 @@
+{
+    "exportedAt": "2025-10-30T15:30:00.000Z",
+    "source": "mern_vat_system",
+    "description": "Complete MERN Stack VAT Management System with Real Business Data",
+    "products": [
+        {
+            "name": "BABY FOOTWEAR",
+            "category": "Footwear",
+            "unit": "PAIR",
+            "sku": "BF001",
+            "hsCode": "6403.99.00",
+            "currentStock": 50940,
+            "costExVat": 180.83,
+            "sellExVat": 226.04,
+            "isActive": true
+        },
+        {
+            "name": "BABY FOOTWEAR SZ 25-30 G.B NM",
+            "category": "Footwear",
+            "unit": "PAIR",
+            "sku": "BF002",
+            "hsCode": "6403.99.00",
+            "currentStock": 12660,
+            "costExVat": 166.85,
+            "sellExVat": 208.56,
+            "isActive": true
+        },
+        {
+            "name": "CEILING FAN 56 INCH",
+            "category": "Fan",
+            "unit": "PCS",
+            "sku": "CF001",
+            "hsCode": "8414.51.00",
+            "currentStock": 250,
+            "costExVat": 3600,
+            "sellExVat": 4500,
+            "isActive": true
+        },
+        {
+            "name": "COVID-19 RAPID TEST KIT",
+            "category": "BioShield",
+            "unit": "KIT",
+            "sku": "RT001",
+            "hsCode": "3822.00.00",
+            "testsPerKit": 25,
+            "currentStock": 1500,
+            "costExVat": 600,
+            "sellExVat": 750,
+            "isActive": true
+        },
+        {
+            "name": "DIGITAL THERMOMETER",
+            "category": "Instrument",
+            "unit": "PCS",
+            "sku": "DT001",
+            "hsCode": "9025.19.00",
+            "currentStock": 300,
+            "costExVat": 960,
+            "sellExVat": 1200,
+            "isActive": true
+        }
+    ],
+    "sales": [
+        {
+            "invoiceNo": "BULK-20221130",
+            "date": "2022-11-30T00:00:00.000Z",
+            "customer": {
+                "name": "Monthly Cash Sales - November 2022",
+                "address": "Dhaka, Bangladesh",
+                "phone": "01700000001",
+                "bin": "000123456789"
+            },
+            "lines": [
+                {
+                    "productName": "BABY FOOTWEAR",
+                    "unit": "PAIR",
+                    "quantity": 15400,
+                    "unitPrice": 226.04,
+                    "amountType": "EXCL",
+                    "lineTotal": 3481016,
+                    "vatAmount": 522152.4
+                }
+            ],
+            "totalValue": 3481016,
+            "totalVat": 522152.4,
+            "netAmount": 3481016,
+            "vatRate": 0.15,
+            "paymentMethod": "CASH",
+            "status": "CONFIRMED"
+        },
+        {
+            "invoiceNo": "BULK-20221231",
+            "date": "2022-12-31T00:00:00.000Z",
+            "customer": {
+                "name": "Monthly Cash Sales - December 2022",
+                "address": "Dhaka, Bangladesh",
+                "phone": "01700000002"
+            },
+            "lines": [
+                {
+                    "productName": "CEILING FAN 56 INCH",
+                    "unit": "PCS",
+                    "quantity": 612,
+                    "unitPrice": 4500,
+                    "amountType": "EXCL",
+                    "lineTotal": 2754000,
+                    "vatAmount": 413100
+                }
+            ],
+            "totalValue": 2754000,
+            "totalVat": 413100,
+            "netAmount": 2754000,
+            "vatRate": 0.15,
+            "paymentMethod": "BANK",
+            "status": "CONFIRMED"
+        }
+    ],
+    "vatLedger": [
+        {
+            "year": 2022,
+            "month": 11,
+            "grossSales": 3481016,
+            "netSalesExVat": 3481016,
+            "vatRate": 0.15,
+            "vatPayable": 522152.4,
+            "vatPaid": 0,
+            "openingBalance": 0,
+            "closingBalance": 803517.18,
+            "usedFromClosingBalance": 0,
+            "treasuryNeeded": 522152.4,
+            "isLocked": true,
+            "calculations": {
+                "totalSales": 3481016,
+                "totalVatCollected": 522152.4,
+                "adjustments": 0,
+                "finalVatPayable": 522152.4
+            }
+        },
+        {
+            "year": 2022,
+            "month": 12,
+            "grossSales": 2754000,
+            "netSalesExVat": 2754000,
+            "vatRate": 0.15,
+            "vatPayable": 413100,
+            "vatPaid": 0,
+            "openingBalance": 803517.18,
+            "closingBalance": 3558893.73,
+            "usedFromClosingBalance": 0,
+            "treasuryNeeded": 413100,
+            "isLocked": true,
+            "calculations": {
+                "totalSales": 2754000,
+                "totalVatCollected": 413100,
+                "adjustments": 0,
+                "finalVatPayable": 413100
+            }
+        }
+    ],
+    "stockLedger": [
+        {
+            "date": "2024-01-01T00:00:00.000Z",
+            "productName": "BABY FOOTWEAR",
+            "refType": "OPENING",
+            "refNo": "OPENING-2024",
+            "qtyIn": 50940,
+            "qtyOut": 0,
+            "unitCost": 180.83,
+            "runningBalance": 50940,
+            "notes": "Opening stock for 2024"
+        },
+        {
+            "date": "2022-11-30T00:00:00.000Z",
+            "productName": "BABY FOOTWEAR",
+            "refType": "SALE",
+            "refNo": "BULK-20221130",
+            "qtyIn": 0,
+            "qtyOut": 15400,
+            "unitCost": 226.04,
+            "runningBalance": 35540,
+            "notes": "Sale to Monthly Cash Sales - November 2022"
+        }
+    ],
+    "settings": {
+        "bin": "000123456789",
+        "taxpayerName": "Your Business Name",
+        "address": "Business Address, Dhaka, Bangladesh",
+        "vatRateDefault": 0.15,
+        "currency": "BDT",
+        "testsPerKitDefault": 120,
+        "simpleChalanThreshold": 200000
+    }
+}

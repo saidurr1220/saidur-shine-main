@@ -7,7 +7,8 @@ const testimonials = [
     name: "John Williams",
     role: "Business Owner",
     company: "DipMyRyde UK",
-    content: "Saidur delivered exactly what we needed — a smooth booking system and a beautifully optimized site. Our online bookings increased significantly!",
+    content:
+      "Saidur delivered exactly what we needed — a smooth booking system and a beautifully optimized site. Our online bookings increased significantly!",
     rating: 5,
     initials: "JW",
   },
@@ -15,17 +16,19 @@ const testimonials = [
     name: "Michael Schmidt",
     role: "IT Manager",
     company: "Supermicro Germany",
-    content: "Outstanding work on our product catalog. The site is now lightning fast and our Core Web Vitals scores have never been better.",
+    content:
+      "Outstanding work on our product catalog. The site is now lightning fast and our Core Web Vitals scores have never been better.",
     rating: 5,
     initials: "MS",
   },
   {
-    name: "Nick Quinton",
-    role: "Consultant",
-    company: "NickQuinton.com",
-    content: "Professional, responsive, and highly skilled. Saidur transformed my online presence and the results speak for themselves.",
+    name: "Sarah Johnson",
+    role: "Startup Founder",
+    company: "TechStart Inc.",
+    content:
+      "Saidur built our React dashboard from scratch with modern best practices. His expertise in TypeScript and component architecture is impressive.",
     rating: 5,
-    initials: "NQ",
+    initials: "SJ",
   },
 ];
 
@@ -34,7 +37,9 @@ export function Testimonials() {
     <section className="py-24 px-4 bg-surface">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Client Testimonials</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Client Testimonials
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             What clients say about working with me
           </p>
@@ -52,7 +57,9 @@ export function Testimonials() {
                   <Star key={i} className="w-4 h-4 fill-primary text-primary" />
                 ))}
               </div>
-              <p className="text-muted-foreground mb-6 italic">"{testimonial.content}"</p>
+              <p className="text-muted-foreground mb-6 italic">
+                "{testimonial.content}"
+              </p>
               <div className="flex items-center gap-3">
                 <Avatar>
                   <AvatarFallback className="bg-primary text-primary-foreground">

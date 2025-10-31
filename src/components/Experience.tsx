@@ -1,19 +1,39 @@
 import { Briefcase, GraduationCap, Award } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const timeline = [
   {
     type: "work",
     icon: Briefcase,
-    title: "Freelance Web Developer",
-    organization: "Self-Employed",
-    period: "January 2021 – June 2023",
-    location: "Remote",
-    description: "Delivered 15+ WordPress projects for international clients (UK & Germany). Specialized in custom theme development, performance optimization, and technical SEO.",
+    title: "MERN Stack Developer",
+    organization: "Freelance",
+    period: "2022 – Present",
+    location: "Remote (USA, UK, Germany)",
+    description:
+      "Specialized in full-stack MERN applications for international clients. Built scalable web applications with modern JavaScript ecosystem and cloud deployment.",
     achievements: [
-      "Improved Core Web Vitals scores by average 50%",
-      "Managed full project lifecycle from requirements to deployment",
-      "Maintained 5-star client satisfaction rating",
+      "Delivered 25+ MERN stack applications with 99% uptime",
+      "Built real-time applications using Socket.io and WebSocket connections",
+      "Integrated payment systems (Stripe, PayPal) and third-party APIs",
+      "Achieved 40% faster development cycles using modern tooling and best practices",
+    ],
+  },
+  {
+    type: "work",
+    icon: Briefcase,
+    title: "WordPress Developer",
+    organization: "Freelance",
+    period: "2021 – 2022",
+    location: "Remote (UK & Germany)",
+    description:
+      "Delivered 30+ WordPress projects for international clients. Specialized in custom theme development, ACF integration, and performance optimization.",
+    achievements: [
+      "Built custom WordPress themes from scratch with ACF integration",
+      "Improved Core Web Vitals scores by average 60%",
+      "Managed complete project lifecycle from design to deployment",
+      "Mastered Elementor Pro, WooCommerce, and custom post types",
     ],
   },
   {
@@ -23,7 +43,8 @@ const timeline = [
     organization: "North South University",
     period: "2017 – 2021",
     location: "Dhaka, Bangladesh",
-    description: "Comprehensive computer science education covering algorithms, data structures, web technologies, and software engineering principles.",
+    description:
+      "Comprehensive computer science education covering algorithms, data structures, web technologies, and software engineering principles.",
   },
   {
     type: "course",
@@ -31,28 +52,39 @@ const timeline = [
     title: "Complete Web Development Course",
     organization: "Programming Hero",
     period: "2020",
-    description: "Intensive bootcamp covering HTML, CSS, JavaScript, React, Node.js, and MongoDB. Built multiple full-stack projects.",
+    description:
+      "Intensive bootcamp covering HTML, CSS, JavaScript, React, Node.js, and MongoDB. Built multiple full-stack projects including e-commerce and social media applications.",
   },
   {
     type: "course",
     icon: Award,
-    title: "WordPress & Freelancing Masterclass",
-    organization: "Shikhbe Shobai",
-    period: "2020",
-    description: "Comprehensive WordPress development training including theme customization, plugin development, and freelancing best practices.",
+    title: "Advanced React & Next.js",
+    organization: "Self-Learning",
+    period: "2021 – 2022",
+    description:
+      "Deep dive into React ecosystem including hooks, context, Redux, Next.js, TypeScript, and modern development practices.",
   },
 ];
 
 export function Experience() {
+  const { ref, isVisible } = useScrollAnimation();
+
   return (
-    <section className="py-24 px-4">
+    <section ref={ref} className="py-24 px-4">
       <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Experience & Education</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            Professional Experience
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Professional journey and continuous learning
+            3+ years delivering scalable solutions for global clients
           </p>
-        </div>
+        </motion.div>
 
         <div className="relative">
           {/* Timeline line */}
@@ -73,20 +105,33 @@ export function Experience() {
                 </div>
 
                 {/* Content */}
-                <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"} pl-20 md:pl-0`}>
+                <div
+                  className={`w-full md:w-1/2 ${
+                    index % 2 === 0 ? "md:pr-12" : "md:pl-12"
+                  } pl-20 md:pl-0`}
+                >
                   <Card className="p-6 bg-card border-border">
                     <div className="mb-2">
-                      <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
-                      <p className="text-primary font-medium">{item.organization}</p>
+                      <h3 className="text-xl font-semibold mb-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-primary font-medium">
+                        {item.organization}
+                      </p>
                       <p className="text-sm text-muted-foreground">
                         {item.period} • {item.location}
                       </p>
                     </div>
-                    <p className="text-muted-foreground mb-3">{item.description}</p>
+                    <p className="text-muted-foreground mb-3">
+                      {item.description}
+                    </p>
                     {item.achievements && (
                       <ul className="space-y-1">
                         {item.achievements.map((achievement, idx) => (
-                          <li key={idx} className="text-sm text-muted-foreground flex items-start">
+                          <li
+                            key={idx}
+                            className="text-sm text-muted-foreground flex items-start"
+                          >
                             <span className="text-primary mr-2">•</span>
                             {achievement}
                           </li>

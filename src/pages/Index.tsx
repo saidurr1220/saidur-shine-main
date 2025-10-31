@@ -1,6 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
-import { TrustBadges } from "@/components/TrustBadges";
+
 import { Services } from "@/components/Services";
 import { Projects } from "@/components/Projects";
 import { Skills } from "@/components/Skills";
@@ -8,6 +8,7 @@ import { Experience } from "@/components/Experience";
 import { Testimonials } from "@/components/Testimonials";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -26,19 +27,20 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      <main>
-        <Hero />
-        <TrustBadges />
-        <Services />
-        <Projects />
-        <Skills />
-        <Experience />
-        <Testimonials />
-        <Contact />
-      </main>
-      <Footer />
+    <div className="min-h-screen relative">
+      <AnimatedBackground />
+      <div className="relative z-10">
+        <Navigation />
+        <main>
+          <Hero />
+          <Skills />
+          <Projects />
+          <Experience />
+          <Services />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 };
