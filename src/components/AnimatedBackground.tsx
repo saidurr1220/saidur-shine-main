@@ -89,7 +89,7 @@ export function AnimatedBackground() {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(59, 130, 246, ${
+            ctx.strokeStyle = `rgba(139, 92, 246, ${
               0.1 * (1 - distance / 100)
             })`;
             ctx.lineWidth = 1;

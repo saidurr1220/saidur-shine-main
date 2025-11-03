@@ -8,77 +8,77 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 214 32% 91%;
-    --foreground: 216 65% 8%;
+    --background: 0 0% 98%;
+    --foreground: 220 25% 15%;
 
-    --card: 0 0% 98%;
-    --card-foreground: 216 65% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 15%;
 
-    --popover: 0 0% 98%;
-    --popover-foreground: 216 65% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 15%;
 
-    --primary: 173 65% 45%;
+    --primary: 220 25% 25%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 215 16% 65%;
-    --secondary-foreground: 216 65% 8%;
+    --secondary: 220 10% 90%;
+    --secondary-foreground: 220 25% 15%;
 
-    --muted: 215 25% 85%;
-    --muted-foreground: 215 16% 45%;
+    --muted: 220 10% 92%;
+    --muted-foreground: 220 15% 50%;
 
-    --accent: 173 60% 46%;
+    --accent: 220 25% 35%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 20% 82%;
-    --input: 215 20% 82%;
-    --ring: 173 80% 40%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 220 25% 25%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Custom portfolio tokens */
-    --hero-gradient-from: 173 80% 40%;
-    --hero-gradient-to: 173 80% 30%;
-    --surface: 0 0% 96%;
-    --surface-hover: 0 0% 93%;
+    /* Custom portfolio tokens - Professional */
+    --hero-gradient-from: 220 25% 25%;
+    --hero-gradient-to: 220 25% 35%;
+    --surface: 220 10% 96%;
+    --surface-hover: 220 10% 94%;
   }
 
   .dark {
-    --background: 216 65% 8%;
-    --foreground: 214 32% 91%;
+    --background: 220 25% 7%;
+    --foreground: 220 15% 95%;
 
-    --card: 222 47% 11%;
-    --card-foreground: 214 32% 91%;
+    --card: 220 25% 10%;
+    --card-foreground: 220 15% 95%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 214 32% 91%;
+    --popover: 220 25% 10%;
+    --popover-foreground: 220 15% 95%;
 
-    --primary: 173 65% 45%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 95%;
+    --primary-foreground: 220 25% 7%;
 
-    --secondary: 222 47% 15%;
-    --secondary-foreground: 214 32% 91%;
+    --secondary: 220 25% 15%;
+    --secondary-foreground: 220 15% 95%;
 
-    --muted: 222 47% 15%;
-    --muted-foreground: 215 16% 65%;
+    --muted: 220 25% 15%;
+    --muted-foreground: 220 15% 70%;
 
-    --accent: 173 60% 46%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 220 15% 85%;
+    --accent-foreground: 220 25% 7%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 222 47% 17%;
-    --input: 222 47% 17%;
-    --ring: 173 80% 40%;
+    --border: 220 25% 18%;
+    --input: 220 25% 18%;
+    --ring: 0 0% 95%;
 
-    /* Custom portfolio tokens */
-    --hero-gradient-from: 173 80% 40%;
-    --hero-gradient-to: 173 80% 30%;
-    --surface: 222 47% 13%;
-    --surface-hover: 222 47% 16%;
+    /* Custom portfolio tokens - Professional Dark */
+    --hero-gradient-from: 0 0% 95%;
+    --hero-gradient-to: 220 15% 85%;
+    --surface: 220 25% 12%;
+    --surface-hover: 220 25% 15%;
   }
 }
 
@@ -99,7 +99,68 @@ All colors MUST be HSL.
 
 @layer utilities {
   .gradient-hero {
-    background: linear-gradient(135deg, hsl(var(--hero-gradient-from)), hsl(var(--hero-gradient-to)));
+    background: linear-gradient(
+      135deg, 
+      hsl(var(--hero-gradient-from)), 
+      hsl(var(--hero-gradient-to))
+    );
+  }
+
+  .professional-button {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border: 1px solid hsl(var(--primary));
+    transition: all 0.3s ease;
+  }
+
+  .professional-button:hover {
+    background: hsl(var(--accent));
+    border-color: hsl(var(--accent));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .professional-text {
+    color: hsl(var(--primary));
+    font-weight: 600;
+  }
+
+  .professional-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .professional-card:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .dark .professional-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .dark .professional-card:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .subtle-hover {
+    transition: all 0.3s ease;
+  }
+
+  .subtle-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .professional-accent {
+    color: hsl(var(--primary));
+    font-weight: 600;
   }
 
   .animate-fade-in-up {
@@ -108,6 +169,12 @@ All colors MUST be HSL.
 
   .animate-slide-in-right {
     animation: slide-in-right 0.5s ease-out;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   @keyframes fade-in-up {

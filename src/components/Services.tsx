@@ -54,7 +54,7 @@ export function Services() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
             Services
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -70,7 +70,7 @@ export function Services() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
-              <Card className="p-4 sm:p-6 bg-card hover:bg-surface-hover transition-all border-border group h-full">
+              <Card className="p-4 sm:p-6 professional-card group h-full">
                 <service.icon className="h-8 w-8 sm:h-10 sm:w-10 text-primary mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="text-lg sm:text-xl font-semibold mb-2">
                   {service.title}

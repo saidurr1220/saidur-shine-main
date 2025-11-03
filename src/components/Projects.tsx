@@ -134,7 +134,7 @@ export function Projects() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
             Featured Projects
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
@@ -167,7 +167,7 @@ export function Projects() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
-              <Card className="overflow-hidden bg-card border-border hover:border-primary/50 transition-all group h-full">
+              <Card className="overflow-hidden professional-card transition-all group h-full">
                 <div
                   className="relative overflow-hidden bg-muted"
                   style={{ aspectRatio: "16/10" }}

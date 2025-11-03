@@ -90,10 +90,10 @@ export function Hero() {
             {/* Quick Stats */}
             <div className="grid grid-cols-3 gap-2 sm:gap-4">
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-4 text-center"
+                whileHover={{ scale: 1.02 }}
+                className="professional-card rounded-lg p-2 sm:p-4 text-center subtle-hover"
               >
-                <div className="text-lg sm:text-2xl font-bold text-primary">
+                <div className="text-lg sm:text-2xl font-bold professional-accent">
                   3+
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground">
@@ -101,10 +101,10 @@ export function Hero() {
                 </div>
               </motion.div>
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-4 text-center"
+                whileHover={{ scale: 1.02 }}
+                className="professional-card rounded-lg p-2 sm:p-4 text-center subtle-hover"
               >
-                <div className="text-lg sm:text-2xl font-bold text-primary">
+                <div className="text-lg sm:text-2xl font-bold professional-accent">
                   50+
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground">
@@ -112,10 +112,10 @@ export function Hero() {
                 </div>
               </motion.div>
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-2 sm:p-4 text-center"
+                whileHover={{ scale: 1.02 }}
+                className="professional-card rounded-lg p-2 sm:p-4 text-center subtle-hover"
               >
-                <div className="text-lg sm:text-2xl font-bold text-primary">
+                <div className="text-lg sm:text-2xl font-bold professional-accent">
                   15+
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground">
@@ -139,20 +139,18 @@ export function Hero() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
               >
-                <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
+                <span className="text-foreground">
                   Saidur Rahman
                 </span>
-              </motion.h1>
-
-              <motion.p
+              </motion.h1>              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6"
               >
                 Full Stack Developer specializing in{" "}
-                <span className="text-primary font-semibold">MERN Stack</span> &
-                <span className="text-primary font-semibold"> WordPress</span>
+                <span className="professional-accent">MERN Stack</span> &
+                <span className="professional-accent"> WordPress</span>
               </motion.p>
 
               <motion.p
@@ -193,7 +191,7 @@ export function Hero() {
             >
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white w-full sm:w-auto"
+                className="professional-button w-full sm:w-auto"
                 onClick={scrollToContact}
               >
                 <Mail className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
