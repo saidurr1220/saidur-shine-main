@@ -24,8 +24,8 @@ const About = () => {
               About Me
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground mb-8">
-              MERN Stack Developer & WordPress Expert with 3+ years building
-              scalable web applications for international clients
+              Full Stack Developer & UI/UX Designer with 4+ years building
+              scalable web applications and modern digital experiences
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button size="lg" asChild className="gradient-hero">
@@ -45,18 +45,18 @@ const About = () => {
               <h2 className="text-xl sm:text-2xl font-bold mb-6">My Story</h2>
               <div className="space-y-4 text-sm sm:text-base text-muted-foreground">
                 <p>
-                  Hi! I'm Saidur, a MERN Stack Developer and WordPress Expert
-                  based in Dhaka, Bangladesh. Over the past 3+ years, I've
+                  Hi! I'm Saidur, a Full Stack Developer and UI/UX Designer
+                  based in Dhaka, Bangladesh. Over the past 4+ years, I've
                   specialized in building scalable web applications using
-                  MongoDB, Express.js, React, Node.js, and WordPress for
-                  international clients.
+                  MongoDB, Express.js, React, Node.js, and WordPress, plus 
+                  designing modern user interfaces with Figma and Adobe Creative Suite.
                 </p>
                 <p>
                   My journey started during my Computer Science studies at North
                   South University. What began as learning HTML and CSS evolved
                   into mastering full-stack development with modern JavaScript
-                  technologies. I've delivered 50+ projects for clients across
-                  UK, Germany, USA, and Bangladesh.
+                  technologies. I've delivered 100+ projects across various
+                  industries and am now seeking full-time opportunities.
                 </p>
                 <p>
                   I specialize in MERN stack development with expertise in

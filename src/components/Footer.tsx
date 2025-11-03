@@ -8,7 +8,7 @@ const socialLinks = [
     href: "https://www.linkedin.com/in/rahmansaidur/",
     label: "LinkedIn",
   },
-  { icon: Mail, href: "mailto:saidurr156@gmail.com", label: "Email" },
+  { icon: Mail, href: "mailto:saidurr1256@gmail.com", label: "Email" },
 ];
 
 const footerLinks = [
@@ -27,9 +27,12 @@ export function Footer() {
             <h3 className="text-lg sm:text-xl font-bold mb-4">
               Md. Saidur Rahman
             </h3>
-            <p className="text-sm sm:text-base text-muted-foreground">
-              WordPress Developer focused on fast, SEO-friendly sites with 2.5+
-              years experience.
+            <p className="text-sm sm:text-base text-muted-foreground mb-2">
+              Full Stack Developer & UI/UX Designer with 4+ years building 
+              scalable web applications and modern digital experiences.
+            </p>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Open to full-time web development opportunities.
             </p>
           </div>
 
