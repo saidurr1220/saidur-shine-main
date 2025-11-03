@@ -10,8 +10,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "saidurr156@gmail.com",
-    href: "mailto:saidurr156@gmail.com",
+    value: "saidurr1256@gmail.com",
+    href: "mailto:saidurr1256@gmail.com",
   },
   { icon: MapPin, label: "Location", value: "Dhaka, Bangladesh" },
   {
@@ -132,13 +132,13 @@ export function Contact() {
             </div>
 
             <div className="pt-6">
-              <h4 className="font-semibold mb-4">Quick Response Time</h4>
+              <h4 className="font-semibold mb-4">Availability</h4>
               <p className="text-muted-foreground mb-2">
                 I typically respond within 24 hours on weekdays.
               </p>
               <p className="text-muted-foreground">
-                Available for freelance projects, consultations, and long-term
-                collaborations.
+                Open to full-time web development roles. Please reach out via
+                email or LinkedIn to discuss opportunities.
               </p>
             </div>
           </div>

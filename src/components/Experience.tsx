@@ -8,7 +8,7 @@ const timeline = [
     type: "work",
     icon: Briefcase,
     title: "MERN Stack Developer",
-    organization: "Freelance",
+  organization: "Independent Projects",
     period: "2022 – Present",
     location: "Remote (USA, UK, Germany)",
     description:
@@ -24,7 +24,7 @@ const timeline = [
     type: "work",
     icon: Briefcase,
     title: "WordPress Developer",
-    organization: "Freelance",
+  organization: "Independent Projects",
     period: "2021 – 2022",
     location: "Remote (UK & Germany)",
     description:

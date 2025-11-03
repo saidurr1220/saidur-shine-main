@@ -123,7 +123,7 @@ export function Hero() {
                   25+
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground">
-                  Remote Clients
+                  Past Clients
                 </div>
               </motion.div>
             </div>
@@ -199,7 +199,7 @@ export function Hero() {
                 onClick={scrollToContact}
               >
                 <Mail className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                Let's Work Together
+                Open to Full-time Roles
               </Button>
 
               <Button
