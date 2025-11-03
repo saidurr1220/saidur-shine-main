@@ -7,37 +7,37 @@ const skillCategories = [
   {
     title: "MERN Stack",
     skills: [
-      { name: "MongoDB", level: 90 },
-      { name: "Express.js", level: 88 },
+      { name: "MongoDB", level: 92 },
+      { name: "Express.js", level: 90 },
       { name: "React", level: 95 },
-      { name: "Node.js", level: 85 },
+      { name: "Node.js", level: 88 },
     ],
   },
   {
     title: "Frontend",
     skills: [
       { name: "JavaScript ES6+", level: 95 },
+      { name: "TypeScript", level: 85 },
       { name: "HTML5/CSS3", level: 98 },
-      { name: "Tailwind CSS", level: 90 },
-      { name: "Bootstrap", level: 88 },
+      { name: "Tailwind CSS", level: 92 },
     ],
   },
   {
-    title: "WordPress",
+    title: "Design & UI/UX",
+    skills: [
+      { name: "Figma", level: 90 },
+      { name: "Adobe Photoshop", level: 88 },
+      { name: "Adobe Illustrator", level: 85 },
+      { name: "UI/UX Design", level: 87 },
+    ],
+  },
+  {
+    title: "WordPress & CMS",
     skills: [
       { name: "Custom Themes", level: 95 },
-      { name: "ACF & CPT", level: 93 },
       { name: "Elementor Pro", level: 98 },
-      { name: "WooCommerce", level: 90 },
-    ],
-  },
-  {
-    title: "Database & Tools",
-    skills: [
-      { name: "PostgreSQL (Neon)", level: 85 },
-      { name: "REST APIs", level: 90 },
-      { name: "Git/GitHub", level: 92 },
-      { name: "cPanel/Hosting", level: 95 },
+      { name: "WooCommerce", level: 92 },
+      { name: "ACF & CPT", level: 90 },
     ],
   },
 ];
@@ -48,19 +48,21 @@ const additionalSkills = [
   "JWT Authentication",
   "Stripe Integration",
   "PayPal Integration",
-  "Cloudinary",
-  "Multer File Upload",
-  "Bcrypt Hashing",
-  "Postman API Testing",
+  "Next.js",
+  "PostgreSQL",
+  "MySQL",
+  "Bootstrap 5",
+  "SCSS/SASS",
+  "REST APIs",
+  "Git/GitHub",
   "VS Code",
-  "Figma Design",
-  "Photoshop",
-  "cPanel Management",
-  "Domain & SSL Setup",
-  "Site Migration",
-  "Performance Optimization",
+  "Postman",
+  "cPanel/Hosting",
+  "Adobe XD",
+  "InDesign",
+  "Video Editing",
   "SEO Optimization",
-  "Responsive Design",
+  "Digital Marketing",
 ];
 
 export function Skills() {
@@ -82,7 +84,7 @@ export function Skills() {
             Technical Skills
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Core technologies and tools used in 50+ production projects
+            Core technologies and design tools used in 100+ production projects across web development and UI/UX design
           </p>
         </motion.div>
 

@@ -77,11 +77,15 @@ export function Hero() {
                 </div>
                 <div>$ ls experience/</div>
                 <div className="text-blue-400 break-words text-xs sm:text-sm">
-                  wordpress_3years/ mern_stack/ remote_clients/
+                  wordpress_4years/ mern_stack/ ui_ux_design/
+                </div>
+                <div>$ cat contact.json</div>
+                <div className="text-green-400 break-words text-xs sm:text-sm">
+                  {"{"}"email": "saidurr1256@gmail.com", "phone": "+880 1515-687002"{"}"}
                 </div>
                 <div>$ cat stats.json</div>
                 <div className="text-yellow-400 break-words text-xs sm:text-sm">
-                  {"{"}"projects": 50+, "clients": 15+, "experience": "3+ years"
+                  {"{"}"projects": 100+, "clients": 25+, "experience": "4+ years"
                   {"}"}
                 </div>
               </div>
@@ -94,7 +98,7 @@ export function Hero() {
                 className="professional-card rounded-lg p-2 sm:p-4 text-center subtle-hover"
               >
                 <div className="text-lg sm:text-2xl font-bold professional-accent">
-                  3+
+                  4+
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground">
                   Years Experience
@@ -105,7 +109,7 @@ export function Hero() {
                 className="professional-card rounded-lg p-2 sm:p-4 text-center subtle-hover"
               >
                 <div className="text-lg sm:text-2xl font-bold professional-accent">
-                  50+
+                  100+
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground">
                   Projects Done
@@ -116,7 +120,7 @@ export function Hero() {
                 className="professional-card rounded-lg p-2 sm:p-4 text-center subtle-hover"
               >
                 <div className="text-lg sm:text-2xl font-bold professional-accent">
-                  15+
+                  25+
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground">
                   Remote Clients
@@ -148,7 +152,7 @@ export function Hero() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6"
               >
-                Full Stack Developer specializing in{" "}
+                Full Stack Developer & UI/UX Designer specializing in{" "}
                 <span className="professional-accent">MERN Stack</span> &
                 <span className="professional-accent"> WordPress</span>
               </motion.p>
@@ -159,9 +163,9 @@ export function Hero() {
                 transition={{ duration: 0.8, delay: 0.8 }}
                 className="text-sm sm:text-base text-muted-foreground mb-8 leading-relaxed"
               >
-                3+ years building scalable web applications with React, Node.js,
-                MongoDB, and WordPress. Delivered 50+ projects for international
-                clients across UK, Germany, and USA.
+                4+ years building scalable web applications with React, Node.js,
+                MongoDB, and WordPress. Expert in UI/UX design with Figma and Adobe tools. 
+                Delivered 100+ projects for international clients.
               </motion.p>
             </div>
 
@@ -178,7 +182,7 @@ export function Hero() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                <span className="break-all">saidurr156@gmail.com</span>
+                <span className="break-all">saidurr1256@gmail.com</span>
               </div>
             </motion.div>
 

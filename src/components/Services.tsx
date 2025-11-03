@@ -1,4 +1,4 @@
-import { Blocks, Code, Gauge, Settings, Wrench, Zap } from "lucide-react";
+import { Blocks, Code, Gauge, Settings, Wrench, Zap, Palette, Smartphone } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -11,34 +11,34 @@ const services = [
       "Full-stack applications with MongoDB, Express.js, React, and Node.js - complete end-to-end solutions",
   },
   {
-    icon: Settings,
-    title: "Real-time Applications",
+    icon: Palette,
+    title: "UI/UX Design",
     description:
-      "Socket.io integration for live chat, notifications, collaborative tools, and real-time data updates",
+      "Modern interface design with Figma, Adobe Creative Suite, user research, prototyping, and design systems",
   },
   {
     icon: Blocks,
     title: "WordPress Solutions",
     description:
-      "Custom themes, ACF integration, Elementor Pro customization, and WooCommerce e-commerce platforms",
+      "Custom themes, Elementor Pro customization, WooCommerce e-commerce, and CMS development",
   },
   {
-    icon: Gauge,
-    title: "Database & Backend",
+    icon: Smartphone,
+    title: "Responsive Web Design",
     description:
-      "PostgreSQL, MongoDB, REST APIs, authentication, and server-side development",
+      "Mobile-first responsive designs, cross-browser compatibility, and modern CSS frameworks",
   },
   {
-    icon: Wrench,
-    title: "DevOps & Deployment",
+    icon: Settings,
+    title: "E-commerce Development",
     description:
-      "AWS services, cPanel hosting, domain management, Git workflows, and CI/CD",
+      "Online stores with payment integration, inventory management, and customer portals",
   },
   {
     icon: Zap,
-    title: "Performance Optimization",
+    title: "Digital Marketing & SEO",
     description:
-      "Core Web Vitals, SEO optimization, speed improvements, and modern best practices",
+      "Search engine optimization, performance optimization, social media integration, and analytics",
   },
 ];
 
@@ -58,7 +58,7 @@ export function Services() {
             Services
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Full-stack development services for modern web applications
+            Full-stack development and UI/UX design services for modern web applications and digital experiences
           </p>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
