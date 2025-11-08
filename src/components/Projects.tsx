@@ -33,7 +33,7 @@ export const projects = [
       "Neon DB",
     ],
     url: "https://vat-dashboard.vercel.app/",
-    github: "",
+    github: "https://github.com/saidurr1220/vat-dashboard",
     metrics: {
       apis: "15+ endpoints",
       database: "10K+ records",
