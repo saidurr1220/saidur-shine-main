@@ -20,7 +20,7 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card py-12 px-4">
+    <footer className="border-t border-border bg-surface py-12 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-8">
           <div className="sm:col-span-2 md:col-span-1">

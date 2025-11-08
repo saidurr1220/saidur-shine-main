@@ -46,39 +46,39 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 220 25% 7%;
-    --foreground: 220 15% 95%;
+    --background: 220 26% 8%;
+    --foreground: 210 40% 98%;
 
-    --card: 220 25% 10%;
-    --card-foreground: 220 15% 95%;
+    --card: 220 26% 11%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 220 25% 10%;
-    --popover-foreground: 220 15% 95%;
+    --popover: 220 26% 11%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 0 0% 95%;
-    --primary-foreground: 220 25% 7%;
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 25% 15%;
-    --secondary-foreground: 220 15% 95%;
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 220 25% 15%;
-    --muted-foreground: 220 15% 70%;
+    --muted: 220 26% 14%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 220 15% 85%;
-    --accent-foreground: 220 25% 7%;
+    --accent: 142 76% 36%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 25% 18%;
-    --input: 220 25% 18%;
-    --ring: 0 0% 95%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 142 76% 36%;
 
-    /* Custom portfolio tokens - Professional Dark */
-    --hero-gradient-from: 0 0% 95%;
-    --hero-gradient-to: 220 15% 85%;
-    --surface: 220 25% 12%;
-    --surface-hover: 220 25% 15%;
+    /* Custom portfolio tokens - Backend Developer Theme */
+    --hero-gradient-from: 142 76% 36%;
+    --hero-gradient-to: 160 84% 39%;
+    --surface: 220 26% 10%;
+    --surface-hover: 220 20% 18%;
   }
 }
 

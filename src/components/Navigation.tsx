@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "Projects", path: "/projects" },
-  { name: "About", path: "/about" },
-  { name: "Contact", path: "/contact" },
+  { name: "Home", path: "/", section: "home" },
+  { name: "About", path: "/", section: "about" },
+  { name: "Skills", path: "/", section: "skills" },
+  { name: "Projects", path: "/", section: "projects" },
+  { name: "Experience", path: "/", section: "experience" },
+  { name: "Contact", path: "/", section: "contact" },
 ];
 
 export function Navigation() {
@@ -27,6 +29,23 @@ export function Navigation() {
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
+
+  const handleNavClick = (e: React.MouseEvent, section?: string) => {
+    if (section && location.pathname === "/") {
+      e.preventDefault();
+      const element = document.getElementById(section);
+      if (element) {
+        const offset = 80; // navbar height
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav
@@ -49,13 +68,10 @@ export function Navigation() {
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
-                key={link.path}
+                key={link.name}
                 to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  location.pathname === link.path
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                }`}
+                onClick={(e) => handleNavClick(e, link.section)}
+                className="text-sm font-medium transition-colors hover:text-primary text-muted-foreground"
               >
                 {link.name}
               </Link>
@@ -86,13 +102,10 @@ export function Navigation() {
           <div className="md:hidden py-4 border-t border-border bg-card/95 backdrop-blur-sm">
             {navLinks.map((link) => (
               <Link
-                key={link.path}
+                key={link.name}
                 to={link.path}
-                className={`block py-3 px-2 text-base font-medium transition-colors hover:text-primary rounded-md ${
-                  location.pathname === link.path
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground"
-                }`}
+                onClick={(e) => handleNavClick(e, link.section)}
+                className="block py-3 px-2 text-base font-medium transition-colors hover:text-primary rounded-md text-muted-foreground"
               >
                 {link.name}
               </Link>

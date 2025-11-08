@@ -1,68 +1,89 @@
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Server, Code, Wrench, Database, Cloud, Shield } from "lucide-react";
 
 const skillCategories = [
   {
-    title: "MERN Stack",
+    title: "Backend Development",
+    icon: Server,
     skills: [
-      { name: "MongoDB", level: 92 },
-      { name: "Express.js", level: 90 },
-      { name: "React", level: 95 },
-      { name: "Node.js", level: 88 },
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "JWT Authentication",
+      "Middleware Design",
+      "Error Handling",
+      "OOP & Design Patterns",
     ],
+    color: "from-green-500/20 to-emerald-500/20",
   },
   {
-    title: "Frontend",
+    title: "Database & ORM",
+    icon: Database,
     skills: [
-      { name: "JavaScript ES6+", level: 95 },
-      { name: "TypeScript", level: 85 },
-      { name: "HTML5/CSS3", level: 98 },
-      { name: "Tailwind CSS", level: 92 },
+      "PostgreSQL",
+      "MongoDB",
+      "Drizzle ORM",
+      "Query Optimization",
+      "Database Design",
+      "Indexing",
+      "Transactions",
     ],
+    color: "from-blue-500/20 to-cyan-500/20",
   },
   {
-    title: "Design & UI/UX",
+    title: "Frontend & UI",
+    icon: Code,
     skills: [
-      { name: "Figma", level: 90 },
-      { name: "Adobe Photoshop", level: 88 },
-      { name: "Adobe Illustrator", level: 85 },
-      { name: "UI/UX Design", level: 87 },
+      "React.js",
+      "JavaScript (ES6+)",
+      "TypeScript",
+      "Redux",
+      "Tailwind CSS",
+      "Responsive Design",
     ],
+    color: "from-cyan-500/20 to-blue-500/20",
   },
   {
-    title: "WordPress & CMS",
+    title: "DevOps & Cloud",
+    icon: Cloud,
     skills: [
-      { name: "Custom Themes", level: 95 },
-      { name: "Elementor Pro", level: 98 },
-      { name: "WooCommerce", level: 92 },
-      { name: "ACF & CPT", level: 90 },
+      "Git & GitHub",
+      "Vercel",
+      "AWS (basics)",
+      "CI/CD",
+      "Docker (basics)",
+      "Linux",
     ],
+    color: "from-purple-500/20 to-pink-500/20",
   },
-];
-
-const additionalSkills = [
-  "Socket.io",
-  "Mongoose ODM",
-  "JWT Authentication",
-  "Stripe Integration",
-  "PayPal Integration",
-  "Next.js",
-  "PostgreSQL",
-  "MySQL",
-  "Bootstrap 5",
-  "SCSS/SASS",
-  "REST APIs",
-  "Git/GitHub",
-  "VS Code",
-  "Postman",
-  "cPanel/Hosting",
-  "Adobe XD",
-  "InDesign",
-  "Video Editing",
-  "SEO Optimization",
-  "Digital Marketing",
+  {
+    title: "API & Integration",
+    icon: Shield,
+    skills: [
+      "RESTful Design",
+      "API Documentation",
+      "Postman",
+      "Validation (Zod)",
+      "Rate Limiting",
+      "CORS",
+    ],
+    color: "from-orange-500/20 to-red-500/20",
+  },
+  {
+    title: "Tools & Workflow",
+    icon: Wrench,
+    skills: [
+      "VS Code",
+      "npm/yarn",
+      "ESLint",
+      "Prettier",
+      "Agile/Scrum",
+      "Code Review",
+    ],
+    color: "from-yellow-500/20 to-orange-500/20",
+  },
 ];
 
 export function Skills() {
@@ -70,10 +91,11 @@ export function Skills() {
 
   return (
     <section
+      id="skills"
       ref={ref}
       className="py-24 px-4 bg-gradient-to-br from-background via-surface to-background"
     >
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -81,67 +103,77 @@ export function Skills() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-            Technical Skills
+            <span className="font-mono text-primary">&lt;</span>
+            Technical Stack
+            <span className="font-mono text-primary">/&gt;</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Core technologies and design tools used in 100+ production projects across web development and UI/UX design
+            Production-tested technologies for building scalable backend systems
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
               initial={{ opacity: 0, y: 20 }}
               animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-4 hover:border-primary/50 transition-all duration-300 hover:transform hover:scale-105"
+              whileHover={{ y: -5 }}
+              className={`relative bg-gradient-to-br ${category.color} backdrop-blur-sm border border-border rounded-xl p-6 hover:border-primary/50 transition-all duration-300 overflow-hidden group`}
             >
-              <h3 className="text-lg font-semibold mb-4 text-primary">
-                {category.title}
-              </h3>
-              <div className="space-y-3">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={
-                      isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }
-                    }
-                    transition={{
-                      duration: 0.3,
-                      delay: index * 0.1 + skillIndex * 0.05,
-                    }}
-                    className="flex justify-between items-center"
-                  >
-                    <span className="text-sm font-medium">{skill.name}</span>
-                    <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
-                      {skill.level}%
-                    </span>
-                  </motion.div>
-                ))}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all"></div>
+
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-card/80 flex items-center justify-center border border-primary/20">
+                    <category.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {category.title}
+                  </h3>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <Badge
+                      key={skill}
+                      variant="secondary"
+                      className="text-xs bg-card/80 hover:bg-card transition-colors"
+                    >
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        <div>
-          <h3 className="text-xl font-semibold mb-4 text-center">
-            Additional Tools & Technologies
-          </h3>
-          <div className="flex flex-wrap justify-center gap-2">
-            {additionalSkills.map((skill, index) => (
-              <Badge
-                key={skill}
-                variant="secondary"
-                className="text-xs sm:text-sm animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                {skill}
-              </Badge>
-            ))}
+        {/* Additional Tech Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
+          <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-6 text-center">
+            <div className="text-3xl font-bold text-primary mb-2">7+</div>
+            <div className="text-sm text-muted-foreground">
+              Backend Technologies
+            </div>
           </div>
-        </div>
+          <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-6 text-center">
+            <div className="text-3xl font-bold text-primary mb-2">5+</div>
+            <div className="text-sm text-muted-foreground">
+              Database Systems
+            </div>
+          </div>
+          <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-6 text-center">
+            <div className="text-3xl font-bold text-primary mb-2">10+</div>
+            <div className="text-sm text-muted-foreground">DevOps Tools</div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

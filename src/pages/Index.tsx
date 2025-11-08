@@ -1,11 +1,9 @@
 import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
-
-import { Services } from "@/components/Services";
-import { Projects } from "@/components/Projects";
+import { About } from "@/components/About";
 import { Skills } from "@/components/Skills";
+import { Projects } from "@/components/Projects";
 import { Experience } from "@/components/Experience";
-import { Testimonials } from "@/components/Testimonials";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
@@ -13,12 +11,12 @@ import { useEffect } from "react";
 
 const Index = () => {
   useEffect(() => {
-    // ✅ Default LIGHT theme (Tailwind darkMode: "class")
+    // ✅ Default DARK theme (Tailwind darkMode: "class")
     const root = document.documentElement;
     const t = localStorage.getItem("theme");
     if (!t) {
-      root.classList.remove("dark"); // default light
-      localStorage.setItem("theme", "light");
+      root.classList.add("dark"); // default dark
+      localStorage.setItem("theme", "dark");
     } else if (t === "dark") {
       root.classList.add("dark");
     } else {
@@ -33,10 +31,10 @@ const Index = () => {
         <Navigation />
         <main>
           <Hero />
+          <About />
           <Skills />
           <Projects />
           <Experience />
-          <Services />
           <Contact />
         </main>
         <Footer />

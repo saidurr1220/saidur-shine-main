@@ -24,7 +24,7 @@ const contactInfo = [
     icon: Linkedin,
     label: "LinkedIn",
     value: "linkedin.com/in/rahmansaidur",
-    href: "https://www.linkedin.com/in/rahmansaidur/",
+    href: "https://www.linkedin.com/in/rahmansaidur",
   },
 ];
 
@@ -86,7 +86,10 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-4">
+    <section
+      id="contact"
+      className="py-24 px-4 bg-gradient-to-br from-background via-surface to-background"
+    >
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>

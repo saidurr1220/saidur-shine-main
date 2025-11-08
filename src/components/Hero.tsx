@@ -5,38 +5,53 @@ import {
   Linkedin,
   MapPin,
   Terminal,
+  Database,
+  Server,
+  Code2,
+  Braces,
+  GitBranch,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import ConstellationNetwork from "@/components/ConstellationNetwork";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function Hero() {
-  const [displayText, setDisplayText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const fullText = "MERN Stack Developer & WordPress Expert";
+  const [terminalText, setTerminalText] = useState("");
+  const fullText = "$ npm run build:career --target=backend-engineer";
 
   useEffect(() => {
-    if (currentIndex < fullText.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText((prev) => prev + fullText[currentIndex]);
-        setCurrentIndex((prev) => prev + 1);
-      }, 100);
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, fullText]);
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= fullText.length) {
+        setTerminalText(fullText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 50);
+    return () => clearInterval(timer);
+  }, []);
 
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
     contactSection?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const techStack = [
+    { icon: Server, label: "Node.js", color: "text-green-500" },
+    { icon: Database, label: "PostgreSQL", color: "text-blue-500" },
+    { icon: Braces, label: "Express", color: "text-gray-400" },
+    { icon: Code2, label: "React", color: "text-cyan-500" },
+    { icon: Database, label: "MongoDB", color: "text-emerald-500" },
+    { icon: GitBranch, label: "REST APIs", color: "text-orange-500" },
+  ];
+
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-20"
     >
-      {/* ✨ Constellation background */}
       <ConstellationNetwork
         density={0.00018}
         linkDistance={140}
@@ -45,88 +60,81 @@ export function Hero() {
         mouseStrength={0.06}
       />
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto max-w-6xl">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Left side - Terminal-like intro */}
+      <div className="relative z-10 container mx-auto max-w-7xl">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left side - Terminal & Tech Stack */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
-            {/* Terminal Header */}
-            <div className="bg-gray-900/90 backdrop-blur-sm rounded-lg border border-gray-700 p-4 sm:p-6 font-mono text-xs sm:text-sm overflow-x-auto">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="flex gap-2">
+            {/* Terminal Window */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="bg-gray-900/90 backdrop-blur-sm border border-gray-700 rounded-lg overflow-hidden shadow-2xl"
+            >
+              <div className="bg-gray-800 px-4 py-2 flex items-center gap-2">
+                <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-red-500"></div>
                   <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                   <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
-                <span className="text-gray-400 ml-2 text-xs sm:text-sm">
-                  saidur@portfolio:~$
-                </span>
+                <span className="text-xs text-gray-400 ml-2">terminal</span>
               </div>
-              <div className="space-y-2 text-green-400 min-w-0">
-                <div>$ whoami</div>
-                <div className="text-white break-words">Md. Saidur Rahman</div>
-                <div>$ cat skills.txt</div>
-                <div className="text-white break-words">
-                  {displayText}
+              <div className="p-4 font-mono text-sm">
+                <div className="text-green-400 mb-2">
+                  {terminalText}
                   <span className="animate-pulse">|</span>
                 </div>
-                <div>$ ls experience/</div>
-                <div className="text-blue-400 break-words text-xs sm:text-sm">
-                  wordpress_4years/ mern_stack/ ui_ux_design/
-                </div>
-                <div>$ cat contact.json</div>
-                <div className="text-green-400 break-words text-xs sm:text-sm">
-                  {"{"}"email": "saidurr1256@gmail.com", "phone": "+880 1515-687002"{"}"}
-                </div>
-                <div>$ cat stats.json</div>
-                <div className="text-yellow-400 break-words text-xs sm:text-sm">
-                  {"{"}"projects": 100+, "clients": 25+, "experience": "4+ years"
-                  {"}"}
+                <div className="text-gray-400 text-xs space-y-1">
+                  <div>✓ Building fullstack applications...</div>
+                  <div>✓ Optimizing database queries...</div>
+                  <div>✓ Designing RESTful APIs...</div>
+                  <div className="text-green-400">✓ Ready for production!</div>
                 </div>
               </div>
+            </motion.div>
+
+            {/* Tech Stack Grid */}
+            <div className="grid grid-cols-3 gap-3">
+              {techStack.map((tech, index) => (
+                <motion.div
+                  key={tech.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className="bg-card/80 backdrop-blur-sm border border-border rounded-lg p-4 text-center hover:border-primary/50 transition-all"
+                >
+                  <tech.icon className={`w-8 h-8 mx-auto mb-2 ${tech.color}`} />
+                  <p className="text-xs font-medium">{tech.label}</p>
+                </motion.div>
+              ))}
             </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-4">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="professional-card rounded-lg p-2 sm:p-4 text-center subtle-hover"
-              >
-                <div className="text-lg sm:text-2xl font-bold professional-accent">
-                  4+
-                </div>
-                <div className="text-xs sm:text-sm text-muted-foreground">
-                  Years Experience
-                </div>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="professional-card rounded-lg p-2 sm:p-4 text-center subtle-hover"
-              >
-                <div className="text-lg sm:text-2xl font-bold professional-accent">
-                  100+
-                </div>
-                <div className="text-xs sm:text-sm text-muted-foreground">
-                  Projects Done
-                </div>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="professional-card rounded-lg p-2 sm:p-4 text-center subtle-hover"
-              >
-                <div className="text-lg sm:text-2xl font-bold professional-accent">
-                  25+
-                </div>
-                <div className="text-xs sm:text-sm text-muted-foreground">
-                  Past Clients
-                </div>
-              </motion.div>
-            </div>
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="grid grid-cols-3 gap-4"
+            >
+              <div className="bg-card/60 backdrop-blur-sm border border-border rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-primary">4+</div>
+                <div className="text-xs text-muted-foreground">Years Exp</div>
+              </div>
+              <div className="bg-card/60 backdrop-blur-sm border border-border rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-primary">50+</div>
+                <div className="text-xs text-muted-foreground">Projects</div>
+              </div>
+              <div className="bg-card/60 backdrop-blur-sm border border-border rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-primary">15+</div>
+                <div className="text-xs text-muted-foreground">Clients</div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Right side - Main content */}
@@ -137,52 +145,85 @@ export function Hero() {
             className="space-y-8"
           >
             <div>
-              <motion.h1
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+                className="mb-4"
               >
-                <span className="text-foreground">
-                  Saidur Rahman
+                <span className="inline-block px-3 py-1 bg-primary/10 border border-primary/30 rounded-full text-sm text-primary mb-4">
+                  <Terminal className="inline w-4 h-4 mr-1" />
+                  Backend Engineer
                 </span>
-              </motion.h1>              <motion.p
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4"
+              >
+                <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                  Md. Saidur Rahman
+                </span>
+              </motion.h1>
+
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6"
+                className="text-xl md:text-2xl text-muted-foreground mb-6 font-mono"
               >
-                Full Stack Developer & UI/UX Designer specializing in{" "}
-                <span className="professional-accent">MERN Stack</span> &
-                <span className="professional-accent"> WordPress</span>
+                <span className="text-primary">const</span> role ={" "}
+                <span className="text-green-400">"MERN Stack Developer"</span>;
               </motion.p>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                className="text-sm sm:text-base text-muted-foreground mb-8 leading-relaxed"
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="text-base text-muted-foreground mb-6 leading-relaxed"
               >
-                4+ years building scalable web applications with React, Node.js,
-                MongoDB, and WordPress. Expert in UI/UX design with Figma and Adobe tools. 
-                Delivered 100+ projects for international clients.
+                Fullstack engineer specializing in scalable backend systems.
+                Built production-grade applications with Node.js, Express,
+                PostgreSQL, and MongoDB. Experienced in REST API design,
+                database optimization, and deploying cloud-native solutions.
               </motion.p>
+
+              {/* Key Highlights */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="space-y-2 mb-6"
+              >
+                {[
+                  "Built fullstack VAT Dashboard with PostgreSQL & Drizzle ORM",
+                  "Designed RESTful APIs serving 1000+ daily requests",
+                  "Optimized database queries reducing load time by 60%",
+                ].map((highlight, i) => (
+                  <div key={i} className="flex items-start gap-2 text-sm">
+                    <span className="text-primary mt-1">▹</span>
+                    <span className="text-muted-foreground">{highlight}</span>
+                  </div>
+                ))}
+              </motion.div>
             </div>
 
             {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground mb-8"
+              transition={{ duration: 0.8, delay: 0.9 }}
+              className="flex flex-col sm:flex-row flex-wrap gap-3 text-sm text-muted-foreground"
             >
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 flex-shrink-0" />
+                <MapPin className="w-4 h-4 flex-shrink-0 text-primary" />
                 <span>Dhaka, Bangladesh</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 flex-shrink-0" />
-                <span className="break-all">saidurr1256@gmail.com</span>
+                <Mail className="w-4 h-4 flex-shrink-0 text-primary" />
+                <span>saidurr1256@gmail.com</span>
               </div>
             </motion.div>
 
@@ -190,63 +231,46 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4"
+              transition={{ duration: 0.8, delay: 1 }}
+              className="flex flex-wrap gap-3"
             >
               <Button
                 size="lg"
-                className="professional-button w-full sm:w-auto"
+                className="bg-primary hover:bg-primary/90"
                 onClick={scrollToContact}
               >
-                <Mail className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                Open to Full-time Roles
+                <Mail className="mr-2 h-5 w-5" />
+                Hire Me
               </Button>
 
-              <Button
-                size="lg"
-                variant="outline"
-                asChild
-                className="w-full sm:w-auto"
-              >
+              <Button size="lg" variant="outline" asChild>
                 <a href="/resume.pdf" download>
-                  <Download className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                  Download Resume
+                  <Download className="mr-2 h-5 w-5" />
+                  Download CV
                 </a>
               </Button>
 
-              <div className="flex gap-3 sm:gap-4 w-full sm:w-auto">
-                <Button
-                  size="lg"
-                  variant="ghost"
-                  asChild
-                  className="flex-1 sm:flex-none"
+              <Button size="lg" variant="ghost" asChild>
+                <a
+                  href="https://github.com/saidur1529"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <a
-                    href="https://github.com/saidur1529"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Github className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    GitHub
-                  </a>
-                </Button>
+                  <Github className="mr-2 h-5 w-5" />
+                  GitHub
+                </a>
+              </Button>
 
-                <Button
-                  size="lg"
-                  variant="ghost"
-                  asChild
-                  className="flex-1 sm:flex-none"
+              <Button size="lg" variant="ghost" asChild>
+                <a
+                  href="https://www.linkedin.com/in/rahmansaidur/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <a
-                    href="https://www.linkedin.com/in/rahmansaidur/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Linkedin className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    LinkedIn
-                  </a>
-                </Button>
-              </div>
+                  <Linkedin className="mr-2 h-5 w-5" />
+                  LinkedIn
+                </a>
+              </Button>
             </motion.div>
           </motion.div>
         </div>
