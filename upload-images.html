@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Portfolio Images</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .container {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 800px;
+        width: 100%;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 10px;
+        font-size: 28px;
+      }
+      .subtitle {
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
+      .upload-section {
+        margin-bottom: 30px;
+      }
+      .upload-box {
+        border: 3px dashed #667eea;
+        border-radius: 15px;
+        padding: 40px;
+        text-align: center;
+        background: #f8f9ff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .upload-box:hover {
+        background: #eef1ff;
+        border-color: #764ba2;
+      }
+      .upload-box.dragover {
+        background: #e0e7ff;
+        border-color: #4f46e5;
+      }
+      .upload-icon {
+        font-size: 48px;
+        margin-bottom: 15px;
+      }
+      .upload-text {
+        color: #667eea;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .upload-hint {
+        color: #999;
+        font-size: 14px;
+      }
+      input[type="file"] {
+        display: none;
+      }
+      .preview {
+        margin-top: 20px;
+        display: none;
+      }
+      .preview img {
+        max-width: 100%;
+        max-height: 300px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .status {
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 10px;
+        display: none;
+      }
+      .status.success {
+        background: #d1fae5;
+        color: #065f46;
+        display: block;
+      }
+      .status.error {
+        background: #fee2e2;
+        color: #991b1b;
+        display: block;
+      }
+      .instructions {
+        background: #fff7ed;
+        border-left: 4px solid #f59e0b;
+        padding: 20px;
+        margin-top: 30px;
+        border-radius: 8px;
+      }
+      .instructions h3 {
+        color: #92400e;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+      .instructions ol {
+        margin-left: 20px;
+        color: #78350f;
+      }
+      .instructions li {
+        margin-bottom: 8px;
+        line-height: 1.6;
+      }
+      .section-title {
+        color: #667eea;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .badge {
+        background: #667eea;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📸 Portfolio Images Upload</h1>
+      <p class="subtitle">
+        Upload your profile picture and Sukoon app screenshot
+      </p>
+
+      <!-- Profile Picture Upload -->
+      <div class="upload-section">
+        <div class="section-title">
+          <span>1️⃣ Profile Picture</span>
+          <span class="badge">Required</span>
+        </div>
+        <div class="upload-box" id="profileBox">
+          <div class="upload-icon">👤</div>
+          <div class="upload-text">Click or Drag & Drop</div>
+          <div class="upload-hint">Your professional photo (JPG, PNG)</div>
+          <input type="file" id="profileInput" accept="image/*" />
+        </div>
+        <div class="preview" id="profilePreview">
+          <img id="profileImg" alt="Profile Preview" />
+        </div>
+        <div class="status" id="profileStatus"></div>
+      </div>
+
+      <!-- Sukoon Thumbnail Upload -->
+      <div class="upload-section">
+        <div class="section-title">
+          <span>2️⃣ Sukoon App Screenshot</span>
+          <span class="badge">Required</span>
+        </div>
+        <div class="upload-box" id="sukoonBox">
+          <div class="upload-icon">🖼️</div>
+          <div class="upload-text">Click or Drag & Drop</div>
+          <div class="upload-hint">Sukoon app screenshot (PNG, JPG)</div>
+          <input type="file" id="sukoonInput" accept="image/*" />
+        </div>
+        <div class="preview" id="sukoonPreview">
+          <img id="sukoonImg" alt="Sukoon Preview" />
+        </div>
+        <div class="status" id="sukoonStatus"></div>
+      </div>
+
+      <!-- Instructions -->
+      <div class="instructions">
+        <h3>⚠️ Important Instructions:</h3>
+        <ol>
+          <li>এই page টি শুধু preview এর জন্য। Images আসলে save হবে না।</li>
+          <li>
+            <strong>Manual Copy করুন:</strong>
+            <ul style="margin-top: 8px">
+              <li>Profile photo → <code>public/images/profile.jpg</code></li>
+              <li>
+                Sukoon screenshot →
+                <code>public/images/portfolio/sukoon.png</code>
+              </li>
+            </ul>
+          </li>
+          <li>Images copy করার পর <code>npm run dev</code> চালান</li>
+          <li>
+            Browser এ <code>http://localhost:5173</code> open করে check করুন
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <script>
+      // Profile Picture Upload
+      const profileBox = document.getElementById("profileBox");
+      const profileInput = document.getElementById("profileInput");
+      const profilePreview = document.getElementById("profilePreview");
+      const profileImg = document.getElementById("profileImg");
+      const profileStatus = document.getElementById("profileStatus");
+
+      profileBox.addEventListener("click", () => profileInput.click());
+      profileBox.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        profileBox.classList.add("dragover");
+      });
+      profileBox.addEventListener("dragleave", () => {
+        profileBox.classList.remove("dragover");
+      });
+      profileBox.addEventListener("drop", (e) => {
+        e.preventDefault();
+        profileBox.classList.remove("dragover");
+        const file = e.dataTransfer.files[0];
+        handleProfileFile(file);
+      });
+      profileInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        handleProfileFile(file);
+      });
+
+      function handleProfileFile(file) {
+        if (file && file.type.startsWith("image/")) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            profileImg.src = e.target.result;
+            profilePreview.style.display = "block";
+            profileStatus.className = "status success";
+            profileStatus.textContent = `✓ Preview loaded: ${file.name} (${(
+              file.size / 1024
+            ).toFixed(2)} KB)`;
+            profileStatus.innerHTML +=
+              "<br><small>Now copy this file to: public/images/profile.jpg</small>";
+          };
+          reader.readAsDataURL(file);
+        } else {
+          profileStatus.className = "status error";
+          profileStatus.textContent = "✗ Please select a valid image file";
+        }
+      }
+
+      // Sukoon Screenshot Upload
+      const sukoonBox = document.getElementById("sukoonBox");
+      const sukoonInput = document.getElementById("sukoonInput");
+      const sukoonPreview = document.getElementById("sukoonPreview");
+      const sukoonImg = document.getElementById("sukoonImg");
+      const sukoonStatus = document.getElementById("sukoonStatus");
+
+      sukoonBox.addEventListener("click", () => sukoonInput.click());
+      sukoonBox.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        sukoonBox.classList.add("dragover");
+      });
+      sukoonBox.addEventListener("dragleave", () => {
+        sukoonBox.classList.remove("dragover");
+      });
+      sukoonBox.addEventListener("drop", (e) => {
+        e.preventDefault();
+        sukoonBox.classList.remove("dragover");
+        const file = e.dataTransfer.files[0];
+        handleSukoonFile(file);
+      });
+      sukoonInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        handleSukoonFile(file);
+      });
+
+      function handleSukoonFile(file) {
+        if (file && file.type.startsWith("image/")) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            sukoonImg.src = e.target.result;
+            sukoonPreview.style.display = "block";
+            sukoonStatus.className = "status success";
+            sukoonStatus.textContent = `✓ Preview loaded: ${file.name} (${(
+              file.size / 1024
+            ).toFixed(2)} KB)`;
+            sukoonStatus.innerHTML +=
+              "<br><small>Now copy this file to: public/images/portfolio/sukoon.png</small>";
+          };
+          reader.readAsDataURL(file);
+        } else {
+          sukoonStatus.className = "status error";
+          sukoonStatus.textContent = "✗ Please select a valid image file";
+        }
+      }
+    </script>
+  </body>
+</html>

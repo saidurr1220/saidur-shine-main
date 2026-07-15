@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+  <head>
+    <script>
+      try {
+        var t = localStorage.getItem("ui-theme");
+        if (t === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } catch (e) {}
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Md. Saidur Rahman - Full Stack WordPress Developer</title>
+    <meta
+      name="description"
+      content="Full Stack WordPress Developer with 2+ years experience building custom, production-grade WordPress platforms. Expert in PHP, WooCommerce, custom plugin architecture, and membership/booking systems for international clients."
+    />
+    <meta name="author" content="Md. Saidur Rahman" />
+    <meta
+      name="keywords"
+      content="WordPress Developer, WooCommerce, PHP, Custom Plugin Development, Elementor Pro, MySQL, Full Stack WordPress Developer, Stripe Integration, Membership Systems, Booking Systems"
+    />
+
+    <meta
+      property="og:title"
+      content="Md. Saidur Rahman - Full Stack WordPress Developer"
+    />
+    <meta
+      property="og:description"
+      content="Full Stack WordPress Developer with 2+ years experience building custom, production-grade WordPress platforms. Expert in PHP, WooCommerce, and custom plugin architecture."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Md. Saidur Rahman - Full Stack WordPress Developer"
+    />
+    <meta
+      name="twitter:description"
+      content="Full Stack WordPress Developer with 2+ years experience building custom, production-grade WordPress platforms with PHP, WooCommerce, and custom plugin architecture."
+    />
+    <meta name="twitter:image" content="/og.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Md. Saidur Rahman",
+        "jobTitle": "Full Stack WordPress Developer",
+        "url": "https://saidur-it.vercel.app",
+        "sameAs": [
+          "https://github.com/saidur1529",
+          "https://www.linkedin.com/in/rahmansaidur/"
+        ],
+        "email": "saidurr156@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dhaka",
+          "addressCountry": "Bangladesh"
+        }
+      }
+    </script>
+    <meta name="theme-color" content="#0B1220" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
