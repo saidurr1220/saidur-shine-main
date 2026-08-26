@@ -51,7 +51,7 @@ const contactInfo = [
   },
 ];
 
-export function ContactUnique() {
+export function ContactFresh() {
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({
@@ -77,24 +77,24 @@ export function ContactUnique() {
   };
 
   return (
-    <section id="contact" className="py-28 px-4 bg-[#060813] relative overflow-hidden">
+    <section id="contact" className="py-28 px-4 bg-slate-50 relative overflow-hidden border-t border-slate-200/80">
       <div className="container mx-auto max-w-6xl relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-400 mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-mono text-emerald-800 mb-4 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             <span>Direct Communication & Scoping</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
             Let's Build Together
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
             Need a custom WordPress plugin, complex WooCommerce engine, dynamic pricing integration, or high-volume agency support? Let's talk!
           </p>
         </motion.div>
@@ -102,22 +102,22 @@ export function ContactUnique() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Contact Channels */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="bg-slate-900/85 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 shadow-xl shimmer-border">
-              <h3 className="text-xl font-bold mb-4 text-white flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+              <h3 className="text-xl font-bold mb-4 text-slate-900 flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span>
                 Direct Channels
               </h3>
               <div className="grid gap-3">
                 {contactInfo.map((item) => (
                   <div
                     key={item.label}
-                    className="p-3 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-emerald-500/40 transition-all flex items-start gap-3"
+                    className="p-3 rounded-2xl bg-slate-50 border border-slate-200 hover:border-emerald-500 transition-all flex items-start gap-3"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0 text-emerald-400 mt-0.5">
+                    <div className="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center flex-shrink-0 text-emerald-700 mt-0.5">
                       <item.icon className="w-4 h-4" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[11px] font-mono text-slate-400">
+                      <p className="text-[11px] font-mono text-slate-500">
                         {item.label}
                       </p>
                       {item.href ? (
@@ -125,16 +125,16 @@ export function ContactUnique() {
                           href={item.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs sm:text-sm font-semibold text-white hover:text-emerald-400 transition-colors truncate block"
+                          className="text-xs sm:text-sm font-semibold text-slate-900 hover:text-emerald-700 transition-colors truncate block"
                         >
                           {item.value}
                         </a>
                       ) : (
-                        <p className="text-xs sm:text-sm font-semibold text-white truncate">
+                        <p className="text-xs sm:text-sm font-semibold text-slate-900 truncate">
                           {item.value}
                         </p>
                       )}
-                      <p className="text-[10px] text-slate-400 mt-0.5 truncate">
+                      <p className="text-[10px] text-slate-500 mt-0.5 truncate">
                         {item.subtext}
                       </p>
                     </div>
@@ -144,11 +144,11 @@ export function ContactUnique() {
             </div>
 
             {/* Turnaround Guarantee Card */}
-            <Card className="p-5 bg-slate-900/85 backdrop-blur-xl border border-white/10 rounded-3xl">
+            <Card className="p-5 bg-white border border-slate-200 rounded-3xl shadow-sm">
               <div className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                <div className="text-xs text-slate-300 leading-relaxed">
-                  <span className="font-bold text-white block mb-1">
+                <Clock className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                <div className="text-xs text-slate-600 leading-relaxed">
+                  <span className="font-bold text-slate-900 block mb-1">
                     Agency Delivery Guarantee
                   </span>
                   Average turnaround under 24-48 hours for scoped tasks. 10 to 15 projects successfully delivered per month with 100% upgrade safety.
@@ -159,18 +159,18 @@ export function ContactUnique() {
 
           {/* Right Column: Project Inquiry Form */}
           <div className="lg:col-span-7">
-            <Card className="p-6 sm:p-8 bg-slate-900/90 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-xl shimmer-border">
-              <h3 className="text-xl font-bold mb-2 text-white">
+            <Card className="p-6 sm:p-8 bg-white border border-slate-200 rounded-3xl shadow-md">
+              <h3 className="text-xl font-bold mb-2 text-slate-900">
                 Start a Conversation
               </h3>
-              <p className="text-xs sm:text-sm text-slate-400 mb-6">
+              <p className="text-xs sm:text-sm text-slate-500 mb-6">
                 Fill out your project requirements below to receive a proposed architecture and timeline.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-mono text-slate-400 mb-1.5">
+                    <label className="block text-xs font-mono text-slate-700 mb-1.5 font-medium">
                       Your Name / Company
                     </label>
                     <Input
@@ -178,12 +178,12 @@ export function ContactUnique() {
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Alex Morgan"
                       required
-                      className="bg-white/[0.04] border-white/10 rounded-xl text-sm text-white focus:border-emerald-400"
+                      className="bg-slate-50 border-slate-200 rounded-xl text-sm text-slate-900 focus:border-emerald-600"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-slate-400 mb-1.5">
+                    <label className="block text-xs font-mono text-slate-700 mb-1.5 font-medium">
                       Work Email
                     </label>
                     <Input
@@ -192,19 +192,19 @@ export function ContactUnique() {
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="alex@company.com"
                       required
-                      className="bg-white/[0.04] border-white/10 rounded-xl text-sm text-white focus:border-emerald-400"
+                      className="bg-slate-50 border-slate-200 rounded-xl text-sm text-slate-900 focus:border-emerald-600"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1.5">
+                  <label className="block text-xs font-mono text-slate-700 mb-1.5 font-medium">
                     Project Scope / Requirement
                   </label>
                   <select
                     value={formData.projectType}
                     onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                    className="w-full h-10 px-3 py-2 text-xs font-mono rounded-xl border border-white/10 bg-slate-950 text-white focus:outline-none focus:ring-1 focus:ring-emerald-400"
+                    className="w-full h-10 px-3 py-2 text-xs font-mono rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:ring-1 focus:ring-emerald-600"
                   >
                     <option value="Custom WordPress Plugin">Custom WordPress Plugin Development (OOP)</option>
                     <option value="WooCommerce Custom Platform">WooCommerce Custom Engine / B2B Wholesale</option>
@@ -217,7 +217,7 @@ export function ContactUnique() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1.5">
+                  <label className="block text-xs font-mono text-slate-700 mb-1.5 font-medium">
                     Project Details & Goals
                   </label>
                   <Textarea
@@ -226,14 +226,14 @@ export function ContactUnique() {
                     placeholder="Describe your platform requirements, timeline, and current WordPress setup..."
                     rows={4}
                     required
-                    className="bg-white/[0.04] border-white/10 rounded-xl text-sm text-white resize-none focus:border-emerald-400"
+                    className="bg-slate-50 border-slate-200 rounded-xl text-sm text-slate-900 resize-none focus:border-emerald-600"
                   />
                 </div>
 
                 <Button
                   type="submit"
                   disabled={isSending}
-                  className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-2xl shadow-xl shadow-emerald-500/25 transition-all h-12"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-2xl shadow-lg shadow-emerald-600/20 transition-all h-12"
                 >
                   <Send className="mr-2 h-4 w-4" />
                   {isSending ? "Dispatching Message..." : "Send Project Inquiry"}

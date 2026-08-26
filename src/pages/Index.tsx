@@ -1,36 +1,37 @@
 import React, { useEffect } from "react";
-import { NavbarUnique } from "@/components/NavbarUnique";
-import { HeroUnique } from "@/components/HeroUnique";
-import { AboutUnique } from "@/components/AboutUnique";
-import { SkillsRadar } from "@/components/SkillsRadar";
-import { ServicesUnique } from "@/components/ServicesUnique";
-import { ProjectCarousel } from "@/components/ProjectCarousel";
-import { ExperienceUnique } from "@/components/ExperienceUnique";
-import { ContactUnique } from "@/components/ContactUnique";
-import { FooterUnique } from "@/components/FooterUnique";
+import { NavbarFresh } from "@/components/NavbarFresh";
+import { HeroFresh } from "@/components/HeroFresh";
+import { AboutFresh } from "@/components/AboutFresh";
+import { SkillsFresh } from "@/components/SkillsFresh";
+import { ServicesFresh } from "@/components/ServicesFresh";
+import { ProjectsFresh } from "@/components/ProjectsFresh";
+import { ExperienceFresh } from "@/components/ExperienceFresh";
+import { ContactFresh } from "@/components/ContactFresh";
+import { FooterFresh } from "@/components/FooterFresh";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
 const Index = () => {
   useEffect(() => {
+    // Remove dark class to ensure fresh, clean, high-contrast light mode
     const root = document.documentElement;
-    root.classList.add("dark");
-    localStorage.setItem("theme", "dark");
+    root.classList.remove("dark");
+    localStorage.setItem("theme", "light");
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#060813] text-slate-100 relative selection:bg-emerald-500/30 selection:text-emerald-300">
+    <div className="min-h-screen bg-slate-50 text-slate-800 relative selection:bg-emerald-100 selection:text-emerald-900">
       <ScrollProgress />
-      <NavbarUnique />
+      <NavbarFresh />
       <main>
-        <HeroUnique />
-        <AboutUnique />
-        <SkillsRadar />
-        <ServicesUnique />
-        <ProjectCarousel />
-        <ExperienceUnique />
-        <ContactUnique />
+        <HeroFresh />
+        <AboutFresh />
+        <SkillsFresh />
+        <ServicesFresh />
+        <ProjectsFresh />
+        <ExperienceFresh />
+        <ContactFresh />
       </main>
-      <FooterUnique />
+      <FooterFresh />
     </div>
   );
 };

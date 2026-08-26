@@ -63,27 +63,27 @@ const services = [
   },
 ];
 
-export function ServicesUnique() {
+export function ServicesFresh() {
   return (
-    <section id="services" className="py-28 px-4 bg-[#060813] relative overflow-hidden">
+    <section id="services" className="py-28 px-4 bg-white relative overflow-hidden border-t border-slate-200/80">
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-400 mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-mono text-emerald-800 mb-4 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             <span>Tailored WordPress Engineering</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
             Specialized Development Services
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
             From single-feature custom plugins to multi-thousand dollar production platforms with full ownership.
           </p>
         </motion.div>
@@ -93,37 +93,37 @@ export function ServicesUnique() {
           {services.map((service, idx) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
               className="h-full"
             >
-              <Card className="p-6 sm:p-7 bg-slate-900/80 backdrop-blur-2xl border border-white/10 hover:border-emerald-500/50 transition-all duration-300 group h-full flex flex-col justify-between rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-emerald-500/5 shimmer-border">
+              <Card className="p-6 sm:p-7 bg-white border border-slate-200 hover:border-emerald-500 transition-all duration-300 group h-full flex flex-col justify-between rounded-3xl shadow-sm hover:shadow-md">
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 group-hover:scale-105 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 group-hover:scale-105 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
                       <service.icon className="h-6 w-6" />
                     </div>
-                    <Badge variant="outline" className="text-[10px] font-mono border-emerald-500/30 text-emerald-400 bg-emerald-500/5">
+                    <Badge variant="outline" className="text-[10px] font-mono border-emerald-200 text-emerald-800 bg-emerald-50/50">
                       {service.badge}
                     </Badge>
                   </div>
 
-                  <h3 className="text-lg sm:text-xl font-bold mb-2.5 text-white group-hover:text-emerald-400 transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold mb-2.5 text-slate-900 group-hover:text-emerald-700 transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
                     {service.description}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/10">
+                <div className="pt-4 border-t border-slate-100">
                   <div className="flex flex-wrap gap-1.5">
                     {service.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[11px] font-mono text-slate-400 bg-white/[0.03] px-2.5 py-0.5 rounded-lg border border-white/5"
+                        className="text-[11px] font-mono text-slate-600 bg-slate-50 px-2.5 py-0.5 rounded-lg border border-slate-200"
                       >
                         {tag}
                       </span>

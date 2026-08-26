@@ -17,8 +17,8 @@ const skillCategories = [
   {
     title: "WordPress Development",
     icon: Server,
-    color: "from-blue-500/20 via-indigo-500/10 to-transparent",
-    accent: "text-blue-400",
+    color: "bg-blue-50/60 border-blue-200",
+    accent: "text-blue-600",
     skills: [
       "Custom Themes & Bespoke Builds",
       "Child Theme Architecture",
@@ -34,8 +34,8 @@ const skillCategories = [
   {
     title: "Analytics & Tracking",
     icon: BarChart3,
-    color: "from-emerald-500/20 via-teal-500/10 to-transparent",
-    accent: "text-emerald-400",
+    color: "bg-emerald-50/60 border-emerald-200",
+    accent: "text-emerald-600",
     skills: [
       "Google Tag Manager (GTM)",
       "GA4 E-Commerce Events",
@@ -49,8 +49,8 @@ const skillCategories = [
   {
     title: "Page Builders & UI",
     icon: Layout,
-    color: "from-cyan-500/20 via-blue-500/10 to-transparent",
-    accent: "text-cyan-400",
+    color: "bg-cyan-50/60 border-cyan-200",
+    accent: "text-cyan-600",
     skills: [
       "Elementor Pro",
       "Gutenberg Block Editor",
@@ -63,8 +63,8 @@ const skillCategories = [
   {
     title: "Integrations & Gateways",
     icon: Shield,
-    color: "from-purple-500/20 via-pink-500/10 to-transparent",
-    accent: "text-purple-400",
+    color: "bg-purple-50/60 border-purple-200",
+    accent: "text-purple-600",
     skills: [
       "Stripe Payment Gateway & Webhooks",
       "Google Maps & Distance Matrix API",
@@ -79,8 +79,8 @@ const skillCategories = [
   {
     title: "Backend & Database",
     icon: Database,
-    color: "from-indigo-500/20 via-purple-500/10 to-transparent",
-    accent: "text-indigo-400",
+    color: "bg-indigo-50/60 border-indigo-200",
+    accent: "text-indigo-600",
     skills: [
       "PHP (OOP & Functional)",
       "MySQL Database Indexing",
@@ -93,8 +93,8 @@ const skillCategories = [
   {
     title: "Frontend Development",
     icon: Globe,
-    color: "from-teal-500/20 via-emerald-500/10 to-transparent",
-    accent: "text-teal-400",
+    color: "bg-teal-50/60 border-teal-200",
+    accent: "text-teal-600",
     skills: [
       "HTML5 & Semantic Markup",
       "CSS3 & SCSS Preprocessing",
@@ -107,8 +107,8 @@ const skillCategories = [
   {
     title: "Performance & SEO",
     icon: Zap,
-    color: "from-amber-500/20 via-yellow-500/10 to-transparent",
-    accent: "text-amber-400",
+    color: "bg-amber-50/60 border-amber-200",
+    accent: "text-amber-600",
     skills: [
       "Core Web Vitals (LCP, CLS, INP)",
       "LiteSpeed Cache & Redis Tuning",
@@ -122,8 +122,8 @@ const skillCategories = [
   {
     title: "Workflow & AI Tools",
     icon: Bot,
-    color: "from-rose-500/20 via-orange-500/10 to-transparent",
-    accent: "text-rose-400",
+    color: "bg-rose-50/60 border-rose-200",
+    accent: "text-rose-600",
     skills: [
       "Claude Code & Claude 3.7",
       "Cursor & GitHub Copilot",
@@ -135,7 +135,7 @@ const skillCategories = [
   },
 ];
 
-export function SkillsRadar() {
+export function SkillsFresh() {
   const [activeFilter, setActiveFilter] = useState("All");
 
   const filterTabs = ["All", "WordPress", "Analytics", "Backend", "Integrations", "AI & Workflow"];
@@ -151,25 +151,25 @@ export function SkillsRadar() {
   });
 
   return (
-    <section id="skills" className="py-28 px-4 bg-[#060813] relative overflow-hidden">
+    <section id="skills" className="py-28 px-4 bg-slate-50 relative overflow-hidden">
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-400 mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-mono text-emerald-800 mb-4 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             <span>Comprehensive Technical Capabilities</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
             Core Skills & Technical Matrix
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
             Production-tested technologies across custom WordPress development, conversion tracking, database optimization, and modern AI engineering workflows.
           </p>
 
@@ -181,8 +181,8 @@ export function SkillsRadar() {
                 onClick={() => setActiveFilter(f)}
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
                   activeFilter === f
-                    ? "bg-emerald-500 text-slate-950 font-bold shadow-lg shadow-emerald-500/25"
-                    : "bg-white/[0.04] border border-white/10 text-slate-400 hover:text-white hover:border-emerald-500/40"
+                    ? "bg-emerald-600 text-white font-semibold shadow-sm"
+                    : "bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:border-emerald-500/50 shadow-sm"
                 }`}
               >
                 {f}
@@ -202,13 +202,13 @@ export function SkillsRadar() {
               transition={{ duration: 0.4, delay: idx * 0.05 }}
               className="h-full"
             >
-              <div className="relative bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 hover:border-emerald-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between h-full group">
+              <div className="fresh-card rounded-3xl p-6 flex flex-col justify-between h-full group">
                 <div>
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-slate-950 flex items-center justify-center border border-white/10 shadow-sm group-hover:scale-105 transition-transform">
+                    <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center border border-slate-200 shadow-sm group-hover:scale-105 transition-transform">
                       <category.icon className={`w-6 h-6 ${category.accent}`} />
                     </div>
-                    <h3 className="text-base font-bold text-white group-hover:text-emerald-400 transition-colors">
+                    <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
                       {category.title}
                     </h3>
                   </div>
@@ -218,7 +218,7 @@ export function SkillsRadar() {
                       <Badge
                         key={skill}
                         variant="secondary"
-                        className="text-xs font-mono bg-white/[0.03] hover:bg-white/[0.06] border border-white/10 text-slate-300 transition-colors py-1 px-2.5 rounded-lg"
+                        className="text-xs font-mono bg-slate-50 hover:bg-emerald-50 border border-slate-200 text-slate-700 hover:text-emerald-800 transition-colors py-1 px-2.5 rounded-lg"
                       >
                         {skill}
                       </Badge>
@@ -226,9 +226,9 @@ export function SkillsRadar() {
                   </div>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-slate-400 flex items-center justify-between">
+                <div className="mt-6 pt-4 border-t border-slate-100 text-[11px] font-mono text-slate-500 flex items-center justify-between">
                   <span>{category.skills.length} competencies</span>
-                  <span className="text-emerald-400 font-semibold">Production Ready</span>
+                  <span className="text-emerald-700 font-semibold">Production Ready</span>
                 </div>
               </div>
             </motion.div>
@@ -237,21 +237,21 @@ export function SkillsRadar() {
 
         {/* Bottom Guarantee Stats */}
         <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="glass-card p-5 rounded-2xl text-center border border-white/10">
-            <div className="text-3xl font-extrabold text-emerald-400 mb-1">100%</div>
-            <div className="text-xs text-slate-400 font-mono">Upgrade-Safe Hooks & Filters</div>
+          <div className="fresh-card p-5 rounded-2xl text-center">
+            <div className="text-3xl font-extrabold text-emerald-700 mb-1">100%</div>
+            <div className="text-xs text-slate-600 font-mono font-medium">Upgrade-Safe Hooks & Filters</div>
           </div>
-          <div className="glass-card p-5 rounded-2xl text-center border border-white/10">
-            <div className="text-3xl font-extrabold text-emerald-400 mb-1">GTM/GA4</div>
-            <div className="text-xs text-slate-400 font-mono">Deduplicated Ad Tracking</div>
+          <div className="fresh-card p-5 rounded-2xl text-center">
+            <div className="text-3xl font-extrabold text-emerald-700 mb-1">GTM/GA4</div>
+            <div className="text-xs text-slate-600 font-mono font-medium">Deduplicated Ad Tracking</div>
           </div>
-          <div className="glass-card p-5 rounded-2xl text-center border border-white/10">
-            <div className="text-3xl font-extrabold text-emerald-400 mb-1">10–15</div>
-            <div className="text-xs text-slate-400 font-mono">Monthly Shipped Builds</div>
+          <div className="fresh-card p-5 rounded-2xl text-center">
+            <div className="text-3xl font-extrabold text-emerald-700 mb-1">10–15</div>
+            <div className="text-xs text-slate-600 font-mono font-medium">Monthly Shipped Builds</div>
           </div>
-          <div className="glass-card p-5 rounded-2xl text-center border border-white/10">
-            <div className="text-3xl font-extrabold text-emerald-400 mb-1">B.Sc. CSE</div>
-            <div className="text-xs text-slate-400 font-mono">North South University</div>
+          <div className="fresh-card p-5 rounded-2xl text-center">
+            <div className="text-3xl font-extrabold text-emerald-700 mb-1">B.Sc. CSE</div>
+            <div className="text-xs text-slate-600 font-mono font-medium">North South University</div>
           </div>
         </div>
       </div>

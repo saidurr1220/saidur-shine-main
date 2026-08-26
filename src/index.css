@@ -4,71 +4,35 @@
 
 @layer base {
   :root {
-    --background: 232 47% 4%;
-    --foreground: 210 40% 98%;
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
 
-    --card: 230 35% 7%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 230 35% 7%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 160 84% 45%;
-    --primary-foreground: 232 47% 4%;
+    --primary: 158 75% 38%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 230 25% 12%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 230 25% 12%;
-    --muted-foreground: 220 20% 65%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 187 92% 50%;
-    --accent-foreground: 232 47% 4%;
+    --accent: 158 75% 38%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 230 25% 15%;
-    --input: 230 25% 15%;
-    --ring: 160 84% 45%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 158 75% 38%;
 
     --radius: 1rem;
-
-    --surface: 232 40% 6%;
-    --surface-hover: 230 30% 12%;
-  }
-
-  .dark {
-    --background: 232 47% 4%;
-    --foreground: 210 40% 98%;
-
-    --card: 230 35% 7%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 230 35% 7%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 160 84% 45%;
-    --primary-foreground: 232 47% 4%;
-
-    --secondary: 230 25% 12%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 230 25% 12%;
-    --muted-foreground: 220 20% 65%;
-
-    --accent: 187 92% 50%;
-    --accent-foreground: 232 47% 4%;
-
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 230 25% 15%;
-    --input: 230 25% 15%;
-    --ring: 160 84% 45%;
-
-    --surface: 232 40% 6%;
-    --surface-hover: 230 30% 12%;
   }
 }
 
@@ -78,9 +42,9 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased selection:bg-emerald-500/30 selection:text-emerald-300;
+    @apply bg-slate-50 text-slate-800 antialiased selection:bg-emerald-100 selection:text-emerald-900;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background-color: #060813;
+    background-color: #f8fafc;
     overflow-x: hidden;
   }
 
@@ -89,47 +53,25 @@
   }
 }
 
-/* Glassmorphism & Aurora Gradients */
-.aurora-bg {
-  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12) 0%, transparent 60%),
-              radial-gradient(circle at 100% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 0% 100%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
-              #060813;
+/* Fresh Clean Gradients & Cards */
+.fresh-hero-bg {
+  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 100% 50%, rgba(6, 182, 212, 0.06) 0%, transparent 40%),
+              radial-gradient(circle at 0% 100%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+              #f8fafc;
 }
 
-.glass-card {
-  background: rgba(12, 16, 33, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.glass-card-hover {
+.fresh-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.04), 0 2px 6px -2px rgba(15, 23, 42, 0.02);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-card-hover:hover {
-  background: rgba(16, 22, 45, 0.85);
+.fresh-card:hover {
   border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.12), 0 0 0 1px rgba(16, 185, 129, 0.1);
   transform: translateY(-2px);
-}
-
-.shimmer-border {
-  position: relative;
-}
-
-.shimmer-border::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.5), transparent 40%, rgba(6, 182, 212, 0.5));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
 }
 
 /* Custom Scrollbar */
@@ -138,11 +80,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #060813;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
