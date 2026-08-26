@@ -1,33 +1,37 @@
 import React, { useEffect } from "react";
-import { Navigation3D } from "@/components/Navigation3D";
-import { Hero3D } from "@/components/Hero3D";
-import { ProjectGrid3D } from "@/components/ProjectGrid3D";
-import { About3DSection } from "@/components/About3DSection";
-import { Resources3D } from "@/components/Resources3D";
-import { Contact3D } from "@/components/Contact3D";
-import { Footer3D } from "@/components/Footer3D";
+import { NavigationDev } from "@/components/NavigationDev";
+import { HeroDev } from "@/components/HeroDev";
+import { AboutDev } from "@/components/AboutDev";
+import { SkillsMatrix } from "@/components/SkillsMatrix";
+import { ServicesDev } from "@/components/ServicesDev";
+import { ProjectsShowcase } from "@/components/ProjectsShowcase";
+import { ExperienceDev } from "@/components/ExperienceDev";
+import { ContactDev } from "@/components/ContactDev";
+import { FooterDev } from "@/components/FooterDev";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
 const Index = () => {
   useEffect(() => {
-    // Enforce dark OLED studio theme
+    // Default dark theme
     const root = document.documentElement;
     root.classList.add("dark");
     localStorage.setItem("theme", "dark");
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-950 text-foreground relative selection:bg-primary/30 selection:text-primary">
+    <div className="min-h-screen bg-slate-950 text-slate-100 relative selection:bg-emerald-500/30 selection:text-emerald-300">
       <ScrollProgress />
-      <Navigation3D />
+      <NavigationDev />
       <main>
-        <Hero3D />
-        <ProjectGrid3D />
-        <About3DSection />
-        <Resources3D />
-        <Contact3D />
+        <HeroDev />
+        <AboutDev />
+        <SkillsMatrix />
+        <ServicesDev />
+        <ProjectsShowcase />
+        <ExperienceDev />
+        <ContactDev />
       </main>
-      <Footer3D />
+      <FooterDev />
     </div>
   );
 };
