@@ -16,7 +16,7 @@ const services = [
     icon: Code2,
     badge: "OOP Standards",
     title: "Custom Plugin Development",
-    desc: "Scalable WordPress plugins engineered from scratch using OOP standards, custom post types, hooks/filters, and AJAX interfaces — 100% upgrade-safe without touching core.",
+    desc: "Scalable WordPress plugins engineered from scratch using OOP standards, custom post types, hooks/filters, and AJAX interfaces  -  100% upgrade-safe without touching core.",
   },
   {
     icon: ShoppingCart,

@@ -179,7 +179,7 @@ add_filter('onroute_calc_quote', function($distance, $vehicle, $service) {
               </div>
               <span className="hidden sm:inline-block">&#8226;</span>
               <div>
-                <span className="font-semibold text-slate-900">B.Sc. CSE</span> ? NSU
+                <span className="font-semibold text-slate-900">B.Sc. CSE</span>, North South University
               </div>
             </div>
           </motion.div>

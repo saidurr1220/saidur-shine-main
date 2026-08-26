@@ -8,7 +8,7 @@ const experienceData = [
     icon: Briefcase,
     title: "WordPress Developer",
     company: "FB International BD",
-    period: "01/2026 – Present",
+    period: "01/2026 - Present",
     location: "Dhaka, Bangladesh (US / UK / Australia Clients)",
     description:
       "Deliver 10 to 15 client projects per month across a wide range of scope, from $20 bug fixes to $2,500+ full-stack WordPress builds. Own the entire lifecycle: planning, development, testing, client communication, and deployment.",
@@ -88,7 +88,7 @@ export function ExperienceApple() {
                   </div>
 
                   <span className="self-start sm:self-center px-3 py-1 bg-emerald-50 text-emerald-800 rounded-full text-xs font-semibold">
-                    10–15 Projects/Mo
+                    10-15 Projects/Mo
                   </span>
                 </div>
 

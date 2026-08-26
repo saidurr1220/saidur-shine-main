@@ -78,7 +78,7 @@ export function AboutApple() {
                 Currently delivering <span className="font-semibold text-slate-900">10 to 15 client projects per month</span> through a WordPress agency, ranging from quick $20 fixes to full builds worth $2,500+. Shipped 11 projects last month with <span className="font-semibold text-emerald-700">10 rated 5 stars</span>.
               </p>
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Recently transformed <span className="font-semibold text-slate-900">Vault Labs Research</span> into a full laboratory research commerce platform with 20+ custom modules via hooks and filters only &mdash; preserving future core upgrade safety.
+                Recently transformed <span className="font-semibold text-slate-900">Vault Labs Research</span> into a full laboratory research commerce platform with 20+ custom modules via hooks and filters only, preserving 100% core upgrade safety.
               </p>
             </div>
 
@@ -88,8 +88,8 @@ export function AboutApple() {
                 <div className="text-[11px] text-slate-500 font-medium mt-0.5">Projects / Mo</div>
               </div>
               <div className="p-3 bg-slate-50 rounded-2xl">
-                <div className="text-2xl font-bold text-emerald-700">10 ★</div>
-                <div className="text-[11px] text-slate-500 font-medium mt-0.5">5-Star Rated</div>
+                <div className="text-2xl font-bold text-emerald-700">10 / 11</div>
+                <div className="text-[11px] text-slate-500 font-medium mt-0.5">Rated 5-Star</div>
               </div>
               <div className="p-3 bg-slate-50 rounded-2xl">
                 <div className="text-2xl font-bold text-slate-900">20+</div>
