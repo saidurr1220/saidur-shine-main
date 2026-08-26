@@ -1,53 +1,33 @@
-import React, { useState } from "react";
-import { Star, CheckCircle2, MapPin, Sparkles, Award, ShieldCheck, ExternalLink, BadgeCheck } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import {
+  Star,
+  CheckCircle2,
+  MapPin,
+  Sparkles,
+  ChevronLeft,
+  ChevronRight,
+  BadgeCheck,
+  Play,
+  Pause,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 const reviewsData = [
-  {
-    id: "upwork-1",
-    category: "upwork",
-    client: "Upwork Verified Client",
-    role: "Website Owner",
-    location: "United States",
-    platform: "Upwork Verified",
-    project: "WordPress Backup & Migration",
-    date: "Jun 2026 - Aug 2026",
-    rating: 5,
-    quote:
-      "I was being given the run around trying to migrate a WordPress website. MD Saidur managed to do this and get the website functioning in a few hours. Reliable, committed to quality, and a clear communicator.",
-    endorsements: ["WordPress Migration", "Reliable", "Committed to Quality", "Clear Communicator"],
-    badge: "5.0 Upwork Contract",
-  },
-  {
-    id: "upwork-2",
-    category: "upwork",
-    client: "Upwork Verified Client",
-    role: "Business Client",
-    location: "United Kingdom",
-    platform: "Upwork Verified",
-    project: "WordPress Security & Malware Removal",
-    date: "Nov 2025",
-    rating: 5,
-    quote:
-      "Md Saidur delivered an excellent service from start to finish. My website had been affected by malware and he handled the entire cleanup with real expertise. Accountable for outcomes and solution oriented.",
-    endorsements: ["Malware Removal", "Solution Oriented", "Accountable for Outcomes"],
-    badge: "5.0 Upwork Contract",
-  },
   {
     id: "direct-1",
     category: "direct",
     client: "Nick",
-    role: "Founder / Operations Lead",
+    role: "Founder & Operations Lead",
     company: "Vault Labs Research",
     location: "United States",
-    platform: "Direct Agency Client",
+    platform: "Direct Client",
     project: "20+ WooCommerce Custom Modules & Store Credit Ledger",
     date: "2026",
     rating: 5,
     quote:
       "Transformed WooCommerce into a full laboratory research commerce platform. Built 20+ custom modules via hooks and filters only ? keeping core 100% upgrade-safe. Dual-mode wholesale inventory and store credit checkout work seamlessly.",
-    endorsements: ["WooCommerce Hooks", "Store Credit Ledger", "COA Management", "Upgrade-Safe"],
+    endorsements: ["WooCommerce Hooks", "Store Credit Ledger", "COA Management", "100% Upgrade-Safe"],
     badge: "Vault Labs Research",
   },
   {
@@ -57,7 +37,7 @@ const reviewsData = [
     role: "Managing Director",
     company: "OnRoute Couriers Ltd",
     location: "United Kingdom",
-    platform: "Direct Agency Client",
+    platform: "Direct Client",
     project: "Google Distance Matrix Dynamic Pricing & Stripe",
     date: "2026",
     rating: 5,
@@ -73,7 +53,7 @@ const reviewsData = [
     role: "Executive Lead",
     company: "California Landlords Union",
     location: "United States",
-    platform: "Direct Agency Client",
+    platform: "Direct Client",
     project: "SaaS Member Dashboard & Union AI Assistant",
     date: "2026",
     rating: 5,
@@ -89,7 +69,7 @@ const reviewsData = [
     role: "Founder & Product Lead",
     company: "Welding Leads",
     location: "United States",
-    platform: "Direct Agency Client",
+    platform: "Direct Client",
     project: "SaaS Lead CRM & Database Indexing Optimization",
     date: "2026",
     rating: 5,
@@ -99,10 +79,43 @@ const reviewsData = [
     badge: "Welding Leads",
   },
   {
+    id: "upwork-1",
+    category: "upwork",
+    client: "Upwork Verified Client",
+    role: "Website Owner",
+    company: "WordPress Migration Contract",
+    location: "United States",
+    platform: "Upwork Verified",
+    project: "WordPress Backup & Migration",
+    date: "Aug 2026",
+    rating: 5,
+    quote:
+      "I was being given the run around trying to migrate a WordPress website. MD Saidur managed to do this and get the website functioning in a few hours. Reliable, committed to quality, and a clear communicator.",
+    endorsements: ["WordPress Migration", "Reliable", "Committed to Quality", "Clear Communicator"],
+    badge: "5.0 Upwork Contract",
+  },
+  {
+    id: "upwork-2",
+    category: "upwork",
+    client: "Upwork Verified Client",
+    role: "Business Client",
+    company: "Security & Site Protection",
+    location: "United Kingdom",
+    platform: "Upwork Verified",
+    project: "WordPress Security & Malware Removal",
+    date: "Nov 2025",
+    rating: 5,
+    quote:
+      "Md Saidur delivered an excellent service from start to finish. My website had been affected by malware and he handled the entire cleanup with real expertise. Accountable for outcomes and solution oriented.",
+    endorsements: ["Malware Removal", "Solution Oriented", "Accountable for Outcomes"],
+    badge: "5.0 Upwork Contract",
+  },
+  {
     id: "upwork-3",
     category: "upwork",
     client: "Upwork Verified Client",
     role: "Long-Term Client",
+    company: "Maintenance & Architecture",
     location: "United Kingdom",
     platform: "Upwork Verified",
     project: "Ongoing WordPress Architecture & Maintenance",
@@ -118,6 +131,7 @@ const reviewsData = [
     category: "upwork",
     client: "Upwork Verified Client",
     role: "Business Owner",
+    company: "WordPress Bug Fixes",
     location: "United States",
     platform: "Upwork Verified",
     project: "WordPress Bug Fixes & Architecture",
@@ -130,13 +144,72 @@ const reviewsData = [
   },
 ];
 
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 30 : -30,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      x: { type: "spring", stiffness: 300, damping: 30 },
+      opacity: { duration: 0.25 },
+    },
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -30 : 30,
+    opacity: 0,
+    transition: {
+      x: { type: "spring", stiffness: 300, damping: 30 },
+      opacity: { duration: 0.2 },
+    },
+  }),
+};
+
 export function TestimonialsApple() {
-  const [activeFilter, setActiveFilter] = useState<"all" | "upwork" | "direct">("all");
+  const [activeFilter, setActiveFilter] = useState<"all" | "direct" | "upwork">("all");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const filteredReviews = reviewsData.filter((r) => {
     if (activeFilter === "all") return true;
     return r.category === activeFilter;
   });
+
+  // Calculate pairs for desktop 2-card slider
+  const totalSlides = Math.ceil(filteredReviews.length / 2);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+    setDirection(1);
+  }, [activeFilter]);
+
+  useEffect(() => {
+    if (!isAutoPlaying || totalSlides <= 1) return;
+    const timer = setInterval(() => {
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % totalSlides);
+    }, 8500);
+    return () => clearInterval(timer);
+  }, [isAutoPlaying, totalSlides]);
+
+  const handleNext = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % totalSlides);
+  };
+
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  // Get current pair of reviews
+  const currentPair = [
+    filteredReviews[currentIndex * 2],
+    filteredReviews[currentIndex * 2 + 1],
+  ].filter(Boolean);
 
   return (
     <section id="testimonials" className="py-28 px-4 bg-white border-t border-black/[0.04]">
@@ -151,14 +224,14 @@ export function TestimonialsApple() {
         >
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">
             <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Authentic Client Reviews &amp; Social Proof</span>
+            <span>Verified Client Endorsements</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
             What Clients &amp; Agencies Say
           </h2>
           <p className="text-slate-600 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Real 5.0-star verified client feedback across Upwork contracts and major production platforms (Nick, Shahbaz, Mr. Parvez Manzuri, Kody).
+            Real 5.0-star verified client feedback across Upwork contracts and production platforms (Nick, Shahbaz, Mr. Parvez Manzuri, Kody).
           </p>
 
           {/* Social Proof Stats Bar */}
@@ -226,87 +299,147 @@ export function TestimonialsApple() {
           </div>
         </motion.div>
 
-        {/* Testimonials Bento Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence>
-            {filteredReviews.map((item) => (
+        {/* REVIEWS SLIDER (Smooth Apple-Grade Pair Carousel) */}
+        <div className="relative max-w-5xl mx-auto">
+          <div className="min-h-[380px] flex flex-col justify-center">
+            <AnimatePresence mode="wait" custom={direction}>
               <motion.div
-                key={item.id}
-                layout
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-                className="h-full"
+                key={`${activeFilter}-${currentIndex}`}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
               >
-                <div className="apple-card p-6 sm:p-7 flex flex-col justify-between h-full space-y-5 bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="space-y-4">
-                    {/* Top Platform Badge & Stars */}
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-0.5">
-                        {[...Array(item.rating)].map((_, i) => (
-                          <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                        ))}
-                      </div>
+                {currentPair.map((item) => (
+                  <div
+                    key={item.id}
+                    className="apple-card p-6 sm:p-8 flex flex-col justify-between h-full space-y-6 bg-white border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className="space-y-4">
+                      {/* Top Rating & Project Badge */}
+                      <div className="flex items-center justify-between gap-2 flex-wrap">
+                        <div className="flex items-center gap-0.5">
+                          {[...Array(item.rating)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                          ))}
+                        </div>
 
-                      <span className="px-2.5 py-0.5 bg-slate-100 text-slate-700 rounded-full text-[11px] font-mono font-medium">
-                        {item.badge}
-                      </span>
-                    </div>
-
-                    {/* Project Title */}
-                    <p className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200/80 inline-block">
-                      {item.project}
-                    </p>
-
-                    {/* Quote */}
-                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic">
-                      "{item.quote}"
-                    </p>
-                  </div>
-
-                  {/* Client Info & Endorsements */}
-                  <div className="pt-4 border-t border-slate-100 space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="font-bold text-sm text-slate-900 flex items-center gap-1.5">
-                          <span>{item.client}</span>
-                          {item.category === "upwork" && (
-                            <BadgeCheck className="w-4 h-4 text-emerald-600 inline-block" title="Verified Upwork Client" />
-                          )}
-                        </h3>
-                        <p className="text-xs text-slate-500">
-                          {item.company ? `${item.role} ? ${item.company}` : item.role}
-                        </p>
-                      </div>
-
-                      <div className="text-[11px] text-slate-500 font-mono text-right">
-                        <span className="flex items-center gap-1 justify-end">
-                          <MapPin className="w-3 h-3 text-slate-400" /> {item.location}
+                        <span className="px-3 py-0.5 bg-slate-100 text-slate-700 rounded-full text-[11px] font-mono font-medium">
+                          {item.badge}
                         </span>
-                        <span className="text-[10px] text-slate-400">{item.date}</span>
                       </div>
+
+                      {/* Project Tag */}
+                      <p className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200/80 inline-block">
+                        {item.project}
+                      </p>
+
+                      {/* Quote */}
+                      <p className="text-sm text-slate-700 leading-relaxed italic">
+                        "{item.quote}"
+                      </p>
                     </div>
 
-                    {/* Client Endorsement Tags */}
-                    {item.endorsements && (
-                      <div className="flex flex-wrap gap-1 pt-1">
-                        {item.endorsements.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[10px] font-medium text-slate-600 bg-slate-50 px-2 py-0.5 rounded border border-slate-200/60"
-                          >
-                            {tag}
+                    {/* Clean, Non-Wrapping Responsive Client Footer */}
+                    <div className="pt-4 border-t border-slate-100 space-y-3">
+                      <div className="flex items-center justify-between gap-3 flex-wrap">
+                        {/* Client Name & Role without stray ? */}
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-bold text-sm text-slate-900 flex items-center gap-1.5 truncate">
+                            <span>{item.client}</span>
+                            {item.category === "upwork" && (
+                              <BadgeCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" title="Verified Upwork Client" />
+                            )}
+                          </h3>
+                          <p className="text-xs text-slate-500 truncate mt-0.5">
+                            {item.role} {item.company ? `? ${item.company}` : ""}
+                          </p>
+                        </div>
+
+                        {/* Non-Wrapping Location & Date Badge */}
+                        <div className="flex-shrink-0">
+                          <span className="whitespace-nowrap inline-flex items-center gap-1 text-[11px] font-mono text-slate-600 bg-slate-50 px-2.5 py-1 rounded-full border border-slate-200/80">
+                            <MapPin className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                            <span>{item.location}</span>
+                            <span className="text-slate-300">?</span>
+                            <span className="text-slate-400 text-[10px]">{item.date}</span>
                           </span>
-                        ))}
+                        </div>
                       </div>
-                    )}
+
+                      {/* Endorsement Tags */}
+                      {item.endorsements && (
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {item.endorsements.map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-[10px] font-medium text-slate-600 bg-slate-50 px-2.5 py-0.5 rounded-md border border-slate-200/60"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
+                ))}
               </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Slider Controls */}
+          <div className="flex items-center justify-between mt-8 px-2">
+            <div className="flex items-center gap-2">
+              <Button
+                size="icon"
+                variant="outline"
+                onClick={handlePrev}
+                className="w-10 h-10 rounded-full bg-white border-slate-200 hover:bg-slate-100 text-slate-700 shadow-sm"
+                aria-label="Previous Reviews"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+
+              <Button
+                size="icon"
+                variant="outline"
+                onClick={handleNext}
+                className="w-10 h-10 rounded-full bg-white border-slate-200 hover:bg-slate-100 text-slate-700 shadow-sm"
+                aria-label="Next Reviews"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+
+              <button
+                onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                className="text-xs text-slate-500 hover:text-slate-900 ml-2"
+              >
+                {isAutoPlaying ? "Pause Auto-slide" : "Play Auto-slide"}
+              </button>
+            </div>
+
+            {/* Dot Indicators */}
+            <div className="flex items-center gap-1.5">
+              {[...Array(totalSlides)].map((_, dotIdx) => (
+                <button
+                  key={dotIdx}
+                  onClick={() => {
+                    setDirection(dotIdx > currentIndex ? 1 : -1);
+                    setCurrentIndex(dotIdx);
+                  }}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    currentIndex === dotIdx
+                      ? "w-6 bg-slate-900"
+                      : "w-2 bg-slate-300 hover:bg-slate-400"
+                  }`}
+                  aria-label={`Go to review slide ${dotIdx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
