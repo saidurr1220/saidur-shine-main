@@ -7,8 +7,6 @@ import {
   ChevronLeft,
   ChevronRight,
   BadgeCheck,
-  Play,
-  Pause,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -26,7 +24,7 @@ const reviewsData = [
     date: "2026",
     rating: 5,
     quote:
-      "Transformed WooCommerce into a full laboratory research commerce platform. Built 20+ custom modules via hooks and filters only ? keeping core 100% upgrade-safe. Dual-mode wholesale inventory and store credit checkout work seamlessly.",
+      "Transformed WooCommerce into a full laboratory research commerce platform. Built 20+ custom modules via hooks and filters only - keeping core 100% upgrade-safe. Dual-mode wholesale inventory and store credit checkout work seamlessly.",
     endorsements: ["WooCommerce Hooks", "Store Credit Ledger", "COA Management", "100% Upgrade-Safe"],
     badge: "Vault Labs Research",
   },
@@ -83,7 +81,7 @@ const reviewsData = [
     category: "upwork",
     client: "Upwork Verified Client",
     role: "Website Owner",
-    company: "WordPress Migration Contract",
+    company: "WordPress Migration",
     location: "United States",
     platform: "Upwork Verified",
     project: "WordPress Backup & Migration",
@@ -178,7 +176,6 @@ export function TestimonialsApple() {
     return r.category === activeFilter;
   });
 
-  // Calculate pairs for desktop 2-card slider
   const totalSlides = Math.ceil(filteredReviews.length / 2);
 
   useEffect(() => {
@@ -205,7 +202,6 @@ export function TestimonialsApple() {
     setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
 
-  // Get current pair of reviews
   const currentPair = [
     filteredReviews[currentIndex * 2],
     filteredReviews[currentIndex * 2 + 1],
@@ -287,21 +283,21 @@ export function TestimonialsApple() {
 
             <button
               onClick={() => setActiveFilter("upwork")}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1 ${
+              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
                 activeFilter === "upwork"
                   ? "bg-slate-900 text-white shadow-sm font-semibold"
                   : "bg-slate-100 text-slate-600 hover:text-slate-900"
               }`}
             >
               <BadgeCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Upwork Verified (5.0 ?)</span>
+              <span>Upwork Verified (5.0 Stars)</span>
             </button>
           </div>
         </motion.div>
 
-        {/* REVIEWS SLIDER (Smooth Apple-Grade Pair Carousel) */}
+        {/* REVIEWS SLIDER */}
         <div className="relative max-w-5xl mx-auto">
-          <div className="min-h-[380px] flex flex-col justify-center">
+          <div className="min-h-[360px] flex flex-col justify-center">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={`${activeFilter}-${currentIndex}`}
@@ -315,7 +311,7 @@ export function TestimonialsApple() {
                 {currentPair.map((item) => (
                   <div
                     key={item.id}
-                    className="apple-card p-6 sm:p-8 flex flex-col justify-between h-full space-y-6 bg-white border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300"
+                    className="apple-card p-6 sm:p-8 flex flex-col justify-between h-full space-y-5 bg-white border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300"
                   >
                     <div className="space-y-4">
                       {/* Top Rating & Project Badge */}
@@ -345,7 +341,7 @@ export function TestimonialsApple() {
                     {/* Clean, Non-Wrapping Responsive Client Footer */}
                     <div className="pt-4 border-t border-slate-100 space-y-3">
                       <div className="flex items-center justify-between gap-3 flex-wrap">
-                        {/* Client Name & Role without stray ? */}
+                        {/* Client Name & Role */}
                         <div className="min-w-0 flex-1">
                           <h3 className="font-bold text-sm text-slate-900 flex items-center gap-1.5 truncate">
                             <span>{item.client}</span>
@@ -354,16 +350,17 @@ export function TestimonialsApple() {
                             )}
                           </h3>
                           <p className="text-xs text-slate-500 truncate mt-0.5">
-                            {item.role} {item.company ? `? ${item.company}` : ""}
+                            <span>{item.role}</span>
+                            {item.company && <span> - {item.company}</span>}
                           </p>
                         </div>
 
-                        {/* Non-Wrapping Location & Date Badge */}
+                        {/* Location Pill without any ? */}
                         <div className="flex-shrink-0">
-                          <span className="whitespace-nowrap inline-flex items-center gap-1 text-[11px] font-mono text-slate-600 bg-slate-50 px-2.5 py-1 rounded-full border border-slate-200/80">
+                          <span className="whitespace-nowrap inline-flex items-center gap-1.5 text-[11px] font-mono text-slate-600 bg-slate-50 px-2.5 py-1 rounded-full border border-slate-200/80">
                             <MapPin className="w-3 h-3 text-slate-400 flex-shrink-0" />
                             <span>{item.location}</span>
-                            <span className="text-slate-300">?</span>
+                            <span className="text-slate-300">/</span>
                             <span className="text-slate-400 text-[10px]">{item.date}</span>
                           </span>
                         </div>

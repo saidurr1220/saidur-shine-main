@@ -33,7 +33,7 @@ export const projectsData: ProjectItem[] = [
     problem:
       "Standard WooCommerce could not support wholesale/single-kit purchasing, store credit ledgers, or per-variation compliance documentation (COA) for laboratory research products.",
     solution:
-      "Transformed WooCommerce into a full laboratory platform with 20+ custom modules via hooks and filters only ? keeping WooCommerce core 100% upgrade-safe. Built dual-mode wholesale/single-kit purchasing with shared inventory, a production Store Credit ledger with admin backend and checkout redemption, variation-based COA document management, and a configurable multi-carrier shipping engine.",
+      "Transformed WooCommerce into a full laboratory platform with 20+ custom modules via hooks and filters only - keeping WooCommerce core 100% upgrade-safe. Built dual-mode wholesale/single-kit purchasing with shared inventory, a production Store Credit ledger with admin backend and checkout redemption, variation-based COA document management, and a configurable multi-carrier shipping engine.",
     impact:
       "Enabled complex B2B/B2C purchasing flows and compliance documentation at scale while preserving future WooCommerce core updates.",
     architecture: "WordPress + WooCommerce + PHP (OOP) + ACF Pro + REST API",

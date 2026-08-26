@@ -163,7 +163,7 @@ Sent from your portfolio contact desk.`
               <Clock className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
               <div className="text-xs text-slate-600 leading-relaxed">
                 <span className="font-bold text-slate-900 block mb-0.5">Agency Turnaround Guarantee</span>
-                Fast turnaround within 24?48 hours for scoped tasks. 10 to 15 projects delivered monthly with 100% upgrade safety.
+                Fast turnaround within 24 to 48 hours for scoped tasks. 10 to 15 projects delivered monthly with 100% upgrade safety.
               </div>
             </div>
           </div>
