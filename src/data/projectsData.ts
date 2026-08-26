@@ -13,6 +13,7 @@ export interface ProjectItem {
   tags: string[];
   url: string;
   github: string;
+  screenshot?: string;
   metrics: Record<string, string>;
   workflowSteps: { step: string; detail: string }[];
 }
@@ -48,6 +49,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://vaultlabsresearch.net",
     github: "",
+    screenshot: "/screenshots/vault-labs.png",
     metrics: {
       modules: "20+ custom",
       inventory: "Shared dual-mode",
@@ -89,6 +91,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://www.onroutecouriers.com",
     github: "",
+    screenshot: "/screenshots/onroute.png",
     metrics: {
       pricing: "Dynamic formula",
       tracking: "GTM/GA4 + dedup",
@@ -129,6 +132,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://californialandlordsunion.com",
     github: "",
+    screenshot: "/screenshots/california.png",
     metrics: {
       membership: "3-tier PMPro",
       modules: "6 dashboard tabs",
@@ -169,6 +173,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://labeng.co.uk",
     github: "",
+    screenshot: "/screenshots/labeng.png",
     metrics: {
       theme: "100% Bespoke",
       auth: "Dual customer/business",
@@ -207,6 +212,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://www.weldingleads.com",
     github: "",
+    screenshot: "/screenshots/weldingleads.png",
     metrics: {
       dashboards: "Role-based",
       pricing: "Tiered subscription",

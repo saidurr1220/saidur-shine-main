@@ -5,6 +5,7 @@ import { AboutApple } from "@/components/AboutApple";
 import { SkillsBento } from "@/components/SkillsBento";
 import { ServicesApple } from "@/components/ServicesApple";
 import { ProjectsApple } from "@/components/ProjectsApple";
+import { TestimonialsApple } from "@/components/TestimonialsApple";
 import { ExperienceApple } from "@/components/ExperienceApple";
 import { ContactApple } from "@/components/ContactApple";
 import { FooterApple } from "@/components/FooterApple";
@@ -27,6 +28,7 @@ const Index = () => {
         <SkillsBento />
         <ServicesApple />
         <ProjectsApple />
+        <TestimonialsApple />
         <ExperienceApple />
         <ContactApple />
       </main>

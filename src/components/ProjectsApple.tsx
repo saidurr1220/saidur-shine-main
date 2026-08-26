@@ -13,6 +13,8 @@ import {
   Play,
   Pause,
   Code2,
+  Globe,
+  Maximize2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -47,7 +49,7 @@ export function ProjectsApple() {
     if (!isAutoPlaying || viewMode !== "carousel" || filteredProjects.length <= 1) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
-    }, 7000);
+    }, 8000);
     return () => clearInterval(timer);
   }, [isAutoPlaying, viewMode, filteredProjects.length]);
 
@@ -74,17 +76,17 @@ export function ProjectsApple() {
         >
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">
             <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Featured Case Studies</span>
+            <span>Featured Case Studies & Visual Proof</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
             WordPress Production Case Studies
           </h2>
           <p className="text-slate-600 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Real client platforms engineered for high conversion, real-time dynamic pricing, and 100% upgrade safety.
+            Real client platforms with live website previews, engineered for high conversion, real-time dynamic pricing, and 100% upgrade safety.
           </p>
 
-          {/* Controls Bar: Clean Category Pills & Mode Switcher */}
+          {/* Controls Bar */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-4 border-t border-slate-200/60">
             {/* Category Pills */}
             <div className="flex flex-wrap items-center justify-center gap-1.5">
@@ -135,7 +137,7 @@ export function ProjectsApple() {
         {/* 1. CAROUSEL VIEW MODE */}
         {viewMode === "carousel" && currentProject && (
           <div className="relative">
-            <div className="relative max-w-4xl mx-auto">
+            <div className="relative max-w-5xl mx-auto">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentProject.id}
@@ -146,7 +148,7 @@ export function ProjectsApple() {
                 >
                   <div className="apple-card p-6 sm:p-9 bg-white border border-slate-200">
                     {/* Top Metadata Header with Responsive Counter */}
-                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-5 pb-5 border-b border-slate-100">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6 pb-5 border-b border-slate-100">
                       <div className="space-y-2">
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 rounded-full text-xs font-semibold">
@@ -156,7 +158,7 @@ export function ProjectsApple() {
                             {currentProject.location}
                           </span>
                           <span className="text-xs text-slate-500">
-                            • {currentProject.filterCategory}
+                            ? {currentProject.filterCategory}
                           </span>
                         </div>
 
@@ -165,7 +167,7 @@ export function ProjectsApple() {
                         </h3>
                       </div>
 
-                      {/* FIXED NON-WRAPPING PROJECT COUNTER */}
+                      {/* Fixed Non-Wrapping Project Counter */}
                       <div className="flex-shrink-0 self-start sm:self-center">
                         <div className="whitespace-nowrap inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-slate-100 text-xs font-medium text-slate-700 border border-slate-200/70">
                           <span className="font-bold text-slate-900">{currentIndex + 1}</span>
@@ -175,6 +177,34 @@ export function ProjectsApple() {
                         </div>
                       </div>
                     </div>
+
+                    {/* Visual Screenshot Frame (If Available) */}
+                    {currentProject.screenshot && (
+                      <div className="mb-6 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shadow-sm group">
+                        {/* macOS Browser Bar */}
+                        <div className="bg-slate-100/90 px-4 py-2.5 border-b border-slate-200 flex items-center justify-between">
+                          <div className="flex items-center gap-1.5">
+                            <div className="w-2.5 h-2.5 rounded-full bg-rose-400" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                          </div>
+                          <div className="flex items-center gap-1.5 px-3 py-0.5 bg-white rounded-md text-[11px] font-mono text-slate-500 border border-slate-200/80 truncate max-w-xs">
+                            <Globe className="w-3 h-3 text-slate-400 flex-shrink-0" />
+                            <span className="truncate">{currentProject.url ? currentProject.url.replace("https://", "") : "internal.system"}</span>
+                          </div>
+                          <div className="w-10" />
+                        </div>
+                        {/* Image */}
+                        <div className="relative aspect-[16/9] max-h-[340px] overflow-hidden bg-slate-900 flex items-center justify-center">
+                          <img
+                            src={currentProject.screenshot}
+                            alt={`${currentProject.title} screenshot preview`}
+                            className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                    )}
 
                     {/* Architecture Tag */}
                     <div className="mb-5">
@@ -188,9 +218,8 @@ export function ProjectsApple() {
                       {currentProject.description}
                     </p>
 
-                    {/* 3 Refined Apple Case Study Columns (Subtle Tints) */}
+                    {/* 3 Refined Apple Columns */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 mb-6">
-                      {/* Challenge */}
                       <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
                         <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
@@ -201,7 +230,6 @@ export function ProjectsApple() {
                         </p>
                       </div>
 
-                      {/* Solution */}
                       <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
                         <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
@@ -212,7 +240,6 @@ export function ProjectsApple() {
                         </p>
                       </div>
 
-                      {/* Impact */}
                       <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
                         <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
@@ -242,7 +269,7 @@ export function ProjectsApple() {
                               : "Inspect 4-Step System Architecture & Data Pipeline"}
                           </span>
                           <span className="text-slate-500 font-mono text-[11px]">
-                            {activeWorkflowId === currentProject.id ? "▲ Close" : "▼ View"}
+                            {activeWorkflowId === currentProject.id ? "? Close" : "? View"}
                           </span>
                         </button>
 
@@ -339,7 +366,7 @@ export function ProjectsApple() {
             </div>
 
             {/* Next / Prev Controls & Pagination */}
-            <div className="flex items-center justify-between max-w-4xl mx-auto mt-5 px-2">
+            <div className="flex items-center justify-between max-w-5xl mx-auto mt-5 px-2">
               <div className="flex items-center gap-2">
                 <Button
                   size="icon"
@@ -397,12 +424,24 @@ export function ProjectsApple() {
                 className="apple-card p-6 sm:p-7 flex flex-col justify-between"
               >
                 <div>
+                  {/* Screenshot Thumbnail in Grid */}
+                  {project.screenshot && (
+                    <div className="mb-4 rounded-xl overflow-hidden border border-slate-200 bg-slate-900 aspect-video max-h-48">
+                      <img
+                        src={project.screenshot}
+                        alt={project.title}
+                        className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+
                   <div className="flex items-center gap-2 mb-2.5">
                     <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 rounded-full text-xs font-semibold">
                       {project.highlightBadge}
                     </span>
                     <span className="text-xs text-slate-500">
-                      {project.location} • {project.filterCategory}
+                      {project.location} ? {project.filterCategory}
                     </span>
                   </div>
 

@@ -8,6 +8,7 @@ const navLinks = [
   { name: "Skills", section: "skills" },
   { name: "Services", section: "services" },
   { name: "Case Studies", section: "projects" },
+  { name: "Reviews", section: "testimonials" },
   { name: "Experience", section: "experience" },
   { name: "Contact", section: "contact" },
 ];
@@ -23,7 +24,7 @@ export function NavbarApple() {
       setScrolled(window.scrollY > 20);
 
       if (location.pathname === "/") {
-        const sections = ["contact", "experience", "projects", "services", "skills", "about"];
+        const sections = ["contact", "experience", "testimonials", "projects", "services", "skills", "about"];
         for (const sec of sections) {
           const el = document.getElementById(sec);
           if (el) {
