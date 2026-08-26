@@ -1,6 +1,8 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Contact } from "@/components/Contact";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { useEffect } from "react";
 
 const ContactPage = () => {
@@ -9,18 +11,16 @@ const ContactPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
-      <Navigation />
-      <main className="pt-24">
-        <div className="container mx-auto max-w-6xl px-4 mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Let's Work Together</h1>
-          <p className="text-muted-foreground text-center max-w-2xl mx-auto">
-            Have a project in mind? I'd love to hear about it. Reach out and let's discuss how I can help bring your vision to life.
-          </p>
-        </div>
-        <Contact />
-      </main>
-      <Footer />
+    <div className="min-h-screen relative selection:bg-primary/30 selection:text-primary">
+      <ScrollProgress />
+      <AnimatedBackground />
+      <div className="relative z-10">
+        <Navigation />
+        <main className="pt-16">
+          <Contact />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 };

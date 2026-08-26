@@ -6,7 +6,7 @@ import { projects } from "@/components/Projects";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, ExternalLink, Target, Lightbulb, TrendingUp } from "lucide-react";
+import { ArrowLeft, ExternalLink, Target, Lightbulb, TrendingUp, Layers } from "lucide-react";
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -18,8 +18,8 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center p-8">
           <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
           <Button asChild>
             <Link to="/projects">Back to Projects</Link>
@@ -30,11 +30,10 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navigation />
       <main className="pt-24 pb-16">
         <div className="container mx-auto max-w-4xl px-4">
-          {/* Back Button */}
           <Button variant="ghost" asChild className="mb-8">
             <Link to="/projects">
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -42,110 +41,127 @@ const ProjectDetail = () => {
             </Link>
           </Button>
 
-          {/* Header */}
           <div className="mb-8">
-            <div className="flex items-start justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
               <div>
-                <h1 className="text-4xl md:text-5xl font-bold mb-2">{project.title}</h1>
-                <div className="flex items-center gap-3 text-muted-foreground">
-                  <Badge>{project.location}</Badge>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 text-foreground">
+                  {project.title}
+                </h1>
+                <div className="flex flex-wrap items-center gap-2 text-muted-foreground">
+                  <Badge className="bg-primary/10 text-primary border-primary/30">
+                    {project.location}
+                  </Badge>
                   <Badge variant="outline">{project.category}</Badge>
+                  <span className="text-xs font-mono text-primary/80">
+                    {project.architecture}
+                  </span>
                 </div>
               </div>
-              <Button asChild className="gradient-hero">
-                <a href={project.url} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  View Live
-                </a>
-              </Button>
+
+              {project.url && project.url !== "#" && (
+                <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                  <a href={project.url} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="mr-2 h-4 w-4" />
+                    View Live
+                  </a>
+                </Button>
+              )}
             </div>
           </div>
 
-          {/* Project Image */}
-          <div className="aspect-video bg-muted rounded-lg mb-12 overflow-hidden">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-cover"
-            />
+          <div className="rounded-2xl bg-gradient-to-br from-primary/15 via-card to-card border border-border p-8 mb-8 text-center sm:text-left">
+            <div className="flex items-center gap-2 text-xs font-mono text-primary uppercase tracking-wider mb-2">
+              <Layers className="w-4 h-4" /> Production Architecture
+            </div>
+            <h3 className="text-xl font-bold text-foreground mb-2">
+              {project.architecture}
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              {project.description}
+            </p>
           </div>
 
-          {/* Project Overview */}
-          <div className="space-y-8">
-            <Card className="p-8 bg-card border-border">
-              <h2 className="text-2xl font-bold mb-6">Project Overview</h2>
-              <p className="text-lg text-muted-foreground mb-6">{project.description}</p>
+          <div className="space-y-6">
+            <Card className="p-6 sm:p-8 bg-card border-border rounded-2xl shadow-sm">
+              <h2 className="text-2xl font-bold mb-4 text-foreground">Project Overview</h2>
+              <p className="text-base text-muted-foreground mb-6 leading-relaxed">
+                {project.description}
+              </p>
               
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary">
+                  <Badge key={tag} variant="secondary" className="text-xs">
                     {tag}
                   </Badge>
                 ))}
               </div>
             </Card>
 
-            {/* Challenge */}
-            <Card className="p-8 bg-card border-border">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center">
-                  <Target className="w-5 h-5 text-destructive" />
+            <Card className="p-6 sm:p-8 bg-card border-border rounded-2xl shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-xl bg-destructive/10 flex items-center justify-center text-destructive">
+                  <Target className="w-5 h-5" />
                 </div>
-                <h2 className="text-2xl font-bold">The Challenge</h2>
+                <h2 className="text-xl font-bold text-foreground">The Challenge</h2>
               </div>
-              <p className="text-muted-foreground">{project.problem}</p>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                {project.problem}
+              </p>
             </Card>
 
-            {/* Solution */}
-            <Card className="p-8 bg-card border-border">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Lightbulb className="w-5 h-5 text-primary" />
+            <Card className="p-6 sm:p-8 bg-card border-border rounded-2xl shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                  <Lightbulb className="w-5 h-5" />
                 </div>
-                <h2 className="text-2xl font-bold">The Solution</h2>
+                <h2 className="text-xl font-bold text-foreground">The Engineered Solution</h2>
               </div>
-              <p className="text-muted-foreground">{project.solution}</p>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                {project.solution}
+              </p>
             </Card>
 
-            {/* Impact */}
-            <Card className="p-8 bg-card border-border">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-accent" />
+            <Card className="p-6 sm:p-8 bg-card border-border rounded-2xl shadow-sm">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                  <TrendingUp className="w-5 h-5" />
                 </div>
-                <h2 className="text-2xl font-bold">The Impact</h2>
+                <h2 className="text-xl font-bold text-foreground">Measurable Business Impact</h2>
               </div>
-              <p className="text-muted-foreground">{project.impact}</p>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                {project.impact}
+              </p>
             </Card>
 
-            {/* Key Deliverables */}
-            <Card className="p-8 bg-card border-border">
-              <h2 className="text-2xl font-bold mb-6">Key Deliverables</h2>
-              <ul className="space-y-3">
-                {[
-                  "Custom WordPress theme/plugin development",
-                  "Responsive design across all devices",
-                  "Performance optimization and caching",
-                  "SEO implementation and technical optimization",
-                  "Testing and quality assurance",
-                  "Deployment and post-launch support",
-                ].map((deliverable) => (
-                  <li key={deliverable} className="flex items-start">
-                    <span className="text-primary mr-3 mt-1">✓</span>
-                    <span className="text-muted-foreground">{deliverable}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
+            {project.workflowSteps && (
+              <Card className="p-6 sm:p-8 bg-card border-border rounded-2xl shadow-sm">
+                <h2 className="text-xl font-bold mb-4 text-foreground flex items-center gap-2">
+                  <Layers className="w-5 h-5 text-primary" />
+                  System Request & Data Flow
+                </h2>
+                <div className="grid gap-3">
+                  {project.workflowSteps.map((wf, idx) => (
+                    <div key={idx} className="p-3.5 rounded-xl bg-surface/70 border border-border/70 flex items-start gap-3">
+                      <div className="w-6 h-6 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                        {idx + 1}
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">{wf.step}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{wf.detail}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )}
           </div>
 
-          {/* CTA */}
-          <div className="mt-12 text-center">
-            <h3 className="text-2xl font-bold mb-4">Interested in similar results?</h3>
-            <p className="text-muted-foreground mb-6">
-              Let's discuss how I can help with your project
+          <div className="mt-12 text-center p-8 rounded-2xl bg-card border border-border">
+            <h3 className="text-2xl font-bold mb-2 text-foreground">Interested in similar results?</h3>
+            <p className="text-muted-foreground text-sm mb-6">
+              Let&apos;s discuss how I can help design and engineer your WordPress platform
             </p>
-            <Button asChild size="lg" className="gradient-hero">
+            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
               <Link to="/contact">Get In Touch</Link>
             </Button>
           </div>

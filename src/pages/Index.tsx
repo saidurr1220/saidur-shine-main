@@ -1,44 +1,33 @@
-import { Navigation } from "@/components/Navigation";
-import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { Skills } from "@/components/Skills";
-import { Projects } from "@/components/Projects";
-import { Experience } from "@/components/Experience";
-import { Contact } from "@/components/Contact";
-import { Footer } from "@/components/Footer";
-import { AnimatedBackground } from "@/components/AnimatedBackground";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { Navigation3D } from "@/components/Navigation3D";
+import { Hero3D } from "@/components/Hero3D";
+import { ProjectGrid3D } from "@/components/ProjectGrid3D";
+import { About3DSection } from "@/components/About3DSection";
+import { Resources3D } from "@/components/Resources3D";
+import { Contact3D } from "@/components/Contact3D";
+import { Footer3D } from "@/components/Footer3D";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 const Index = () => {
   useEffect(() => {
-    // ✅ Default DARK theme (Tailwind darkMode: "class")
+    // Enforce dark OLED studio theme
     const root = document.documentElement;
-    const t = localStorage.getItem("theme");
-    if (!t) {
-      root.classList.add("dark"); // default dark
-      localStorage.setItem("theme", "dark");
-    } else if (t === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
+    root.classList.add("dark");
+    localStorage.setItem("theme", "dark");
   }, []);
 
   return (
-    <div className="min-h-screen relative">
-      <AnimatedBackground />
-      <div className="relative z-10">
-        <Navigation />
-        <main>
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Experience />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
+    <div className="min-h-screen bg-gray-950 text-foreground relative selection:bg-primary/30 selection:text-primary">
+      <ScrollProgress />
+      <Navigation3D />
+      <main>
+        <Hero3D />
+        <ProjectGrid3D />
+        <About3DSection />
+        <Resources3D />
+        <Contact3D />
+      </main>
+      <Footer3D />
     </div>
   );
 };
