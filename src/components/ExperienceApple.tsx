@@ -41,8 +41,8 @@ export function ExperienceApple() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6 , ease: [0.25, 0.1, 0.25, 1] }}
           className="text-center mb-16 space-y-3"
         >
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">
@@ -65,8 +65,8 @@ export function ExperienceApple() {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.5 , ease: [0.25, 0.1, 0.25, 1] }}
             >
               <div className="apple-card p-6 sm:p-8">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 pb-5 border-b border-slate-100">

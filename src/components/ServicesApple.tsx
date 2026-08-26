@@ -58,8 +58,8 @@ export function ServicesApple() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6 , ease: [0.25, 0.1, 0.25, 1] }}
           className="text-center mb-16 space-y-3"
         >
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">
@@ -81,8 +81,8 @@ export function ServicesApple() {
               key={service.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.45, delay: idx * 0.06 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.45, delay: idx * 0.06 , ease: [0.25, 0.1, 0.25, 1] }}
               className="h-full"
             >
               <div className="apple-card p-6 flex flex-col justify-between h-full">

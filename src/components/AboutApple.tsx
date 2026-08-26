@@ -44,8 +44,8 @@ export function AboutApple() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6 , ease: [0.25, 0.1, 0.25, 1] }}
           className="text-center mb-16 space-y-3"
         >
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">
@@ -66,8 +66,8 @@ export function AboutApple() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.6 , ease: [0.25, 0.1, 0.25, 1] }}
             className="lg:col-span-6 apple-card p-7 sm:p-8 flex flex-col justify-between"
           >
             <div className="space-y-4">
@@ -105,8 +105,8 @@ export function AboutApple() {
                 key={p.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.5, delay: idx * 0.08 , ease: [0.25, 0.1, 0.25, 1] }}
                 className="apple-card p-5 flex flex-col justify-between"
               >
                 <div>

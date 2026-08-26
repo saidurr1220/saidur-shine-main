@@ -27,9 +27,33 @@ const categories = [
   "Workflow Automation",
 ];
 
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 40 : -40,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      x: { type: "spring", stiffness: 320, damping: 32 },
+      opacity: { duration: 0.28, ease: "easeOut" },
+    },
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -40 : 40,
+    opacity: 0,
+    transition: {
+      x: { type: "spring", stiffness: 320, damping: 32 },
+      opacity: { duration: 0.2, ease: "easeIn" },
+    },
+  }),
+};
+
 export function ProjectsApple() {
   const [selectedCategory, setSelectedCategory] = useState("All Projects");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [viewMode, setViewMode] = useState<"carousel" | "grid">("carousel");
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [activeWorkflowId, setActiveWorkflowId] = useState<string | null>(null);
@@ -39,23 +63,37 @@ export function ProjectsApple() {
       ? projectsData
       : projectsData.filter((p) => p.filterCategory === selectedCategory);
 
+  // Preload all project screenshots into browser cache
+  useEffect(() => {
+    projectsData.forEach((p) => {
+      if (p.screenshot) {
+        const img = new Image();
+        img.src = p.screenshot;
+      }
+    });
+  }, []);
+
   useEffect(() => {
     setCurrentIndex(0);
+    setDirection(1);
   }, [selectedCategory]);
 
   useEffect(() => {
     if (!isAutoPlaying || viewMode !== "carousel" || filteredProjects.length <= 1) return;
     const timer = setInterval(() => {
+      setDirection(1);
       setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
     }, 9000);
     return () => clearInterval(timer);
   }, [isAutoPlaying, viewMode, filteredProjects.length]);
 
   const handleNext = () => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
   };
 
   const handlePrev = () => {
+    setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + filteredProjects.length) % filteredProjects.length);
   };
 
@@ -66,10 +104,10 @@ export function ProjectsApple() {
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-center mb-12 space-y-3"
         >
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">
@@ -132,22 +170,24 @@ export function ProjectsApple() {
           </div>
         </motion.div>
 
-        {/* 1. APPLE-STYLE SPLIT SHOWCASE CAROUSEL */}
+        {/* 1. APPLE-STYLE SPLIT SHOWCASE CAROUSEL (Stable Shell + Smooth Content Slide) */}
         {viewMode === "carousel" && currentProject && (
           <div className="relative">
             <div className="relative max-w-6xl mx-auto">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentProject.id}
-                  initial={{ opacity: 0, scale: 0.98, y: 15 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.98, y: -15 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <div className="apple-card p-6 sm:p-8 lg:p-10 bg-white border border-slate-200 shadow-xl">
+              <div className="apple-card p-6 sm:p-8 lg:p-10 bg-white border border-slate-200 shadow-xl overflow-hidden min-h-[580px] flex flex-col justify-center">
+                <AnimatePresence mode="wait" custom={direction}>
+                  <motion.div
+                    key={currentProject.id}
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    className="w-full"
+                  >
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
                       
-                      {/* LEFT COLUMN: Project Details & Engineered Architecture (6 Cols) */}
+                      {/* LEFT COLUMN: Project Details (6 Cols) */}
                       <div className="lg:col-span-6 space-y-5">
                         {/* Header Badges & Fixed Counter */}
                         <div className="flex items-center justify-between gap-3 flex-wrap">
@@ -280,7 +320,6 @@ export function ProjectsApple() {
                       <div className="lg:col-span-6">
                         {currentProject.screenshot ? (
                           <div className="relative group">
-                            {/* Browser Frame */}
                             <div className="rounded-3xl overflow-hidden border border-slate-200/90 bg-slate-900 shadow-2xl transition-all duration-300 group-hover:border-emerald-500/40">
                               {/* macOS Window Titlebar */}
                               <div className="bg-slate-900/95 backdrop-blur-md px-4 py-3 border-b border-slate-800 flex items-center justify-between">
@@ -308,22 +347,20 @@ export function ProjectsApple() {
                                 )}
                               </div>
 
-                              {/* Screenshot Preview with Smooth Aspect Ratio & Scroll Container */}
+                              {/* Screenshot Preview */}
                               <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
                                 <img
                                   src={currentProject.screenshot}
                                   alt={`${currentProject.title} live screenshot preview`}
                                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-                                  loading="lazy"
                                 />
                                 
-                                {/* Overlay badge */}
                                 {currentProject.url && (
                                   <a
                                     href={currentProject.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-white/10 text-white text-[11px] font-medium flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                                    className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-slate-900/85 backdrop-blur-md border border-white/10 text-white text-[11px] font-medium flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
                                   >
                                     <span>Open Live Site</span>
                                     <ArrowUpRight className="w-3 h-3" />
@@ -375,9 +412,9 @@ export function ProjectsApple() {
                         </div>
                       </motion.div>
                     )}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
 
             {/* Next / Prev Controls & Pagination */}
@@ -416,7 +453,10 @@ export function ProjectsApple() {
                 {filteredProjects.map((_, dotIdx) => (
                   <button
                     key={dotIdx}
-                    onClick={() => setCurrentIndex(dotIdx)}
+                    onClick={() => {
+                      setDirection(dotIdx > currentIndex ? 1 : -1);
+                      setCurrentIndex(dotIdx);
+                    }}
                     className={`h-2 rounded-full transition-all duration-300 ${
                       currentIndex === dotIdx
                         ? "w-6 bg-slate-900"
