@@ -320,39 +320,41 @@ export function ProjectsApple() {
                       <div className="lg:col-span-6">
                         {currentProject.screenshot ? (
                           <div className="relative group">
-                            <div className="rounded-3xl overflow-hidden border border-slate-200/90 bg-slate-900 shadow-2xl transition-all duration-300 group-hover:border-emerald-500/40">
+                            <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-xl transition-all duration-300 group-hover:shadow-2xl">
                               {/* macOS Window Titlebar */}
-                              <div className="bg-slate-900/95 backdrop-blur-md px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                              <div className="bg-slate-100/90 backdrop-blur-sm px-4 py-2.5 border-b border-slate-200/80 flex items-center justify-between">
                                 <div className="flex items-center gap-1.5">
-                                  <div className="w-3 h-3 rounded-full bg-rose-500/80" />
-                                  <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                                  <div className="w-2.5 h-2.5 rounded-full bg-rose-400" />
+                                  <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                                 </div>
-                                <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-800 rounded-full text-[11px] font-mono text-slate-300 border border-slate-700/80 max-w-[220px] truncate">
-                                  <Globe className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                                <div className="flex items-center gap-1.5 px-3 py-0.5 bg-white rounded-lg text-[11px] font-mono text-slate-600 border border-slate-200/80 max-w-[240px] truncate shadow-xs">
+                                  <Globe className="w-3 h-3 text-emerald-600 flex-shrink-0" />
                                   <span className="truncate">
-                                    {currentProject.url ? currentProject.url.replace("https://", "") : "internal-portal"}
+                                    {currentProject.url ? currentProject.url.replace("https://", "") : "internal-system"}
                                   </span>
                                 </div>
-                                {currentProject.url && (
+                                {currentProject.url ? (
                                   <a
                                     href={currentProject.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-slate-400 hover:text-white transition-colors"
+                                    className="text-slate-400 hover:text-slate-900 transition-colors"
                                     title="Open Live Site"
                                   >
                                     <ArrowUpRight className="w-4 h-4" />
                                   </a>
+                                ) : (
+                                  <div className="w-4" />
                                 )}
                               </div>
 
                               {/* Screenshot Preview */}
-                              <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
+                              <div className="relative aspect-[16/10] overflow-hidden bg-slate-50">
                                 <img
                                   src={currentProject.screenshot}
                                   alt={`${currentProject.title} live screenshot preview`}
-                                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                                  className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
                                 />
                                 
                                 {currentProject.url && (
@@ -360,10 +362,10 @@ export function ProjectsApple() {
                                     href={currentProject.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="absolute bottom-3 right-3 px-3 py-1.5 rounded-full bg-slate-900/85 backdrop-blur-md border border-white/10 text-white text-[11px] font-medium flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                                    className="absolute bottom-3 right-3 px-3.5 py-1.5 rounded-full bg-slate-900/90 backdrop-blur-md border border-white/10 text-white text-[11px] font-medium flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
                                   >
                                     <span>Open Live Site</span>
-                                    <ArrowUpRight className="w-3 h-3" />
+                                    <ArrowUpRight className="w-3.5 h-3.5" />
                                   </a>
                                 )}
                               </div>

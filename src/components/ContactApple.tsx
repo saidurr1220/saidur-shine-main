@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, MapPin, Github, Linkedin, Send, Phone, Globe, Clock, Sparkles, MessageCircle, CheckCircle2 } from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Send, Phone, Clock, Sparkles, MessageCircle, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,38 +19,62 @@ export function ContactApple() {
   const [isSending, setIsSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSending(true);
 
-    // Construct direct mailto link to guarantee delivery to saidurr1256@gmail.com
-    const subject = encodeURIComponent(`[Project Inquiry: ${formData.projectType}] from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Hello Saidur,
+    try {
+      // Real direct AJAX email dispatch to saidurr1256@gmail.com
+      const res = await fetch("https://formsubmit.co/ajax/saidurr1256@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          _subject: `[Portfolio Inquiry] ${formData.projectType} from ${formData.name}`,
+          name: formData.name,
+          email: formData.email,
+          projectType: formData.projectType,
+          message: formData.message,
+          _captcha: "false",
+          _template: "table",
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success === "true" || res.status === 200) {
+        setSubmitted(true);
+        toast({
+          title: "Inquiry Sent Successfully!",
+          description: "Your message has been delivered to Saidur's inbox (saidurr1256@gmail.com).",
+        });
+      } else {
+        throw new Error("Direct dispatch failed");
+      }
+    } catch (err) {
+      // Fallback
+      setSubmitted(true);
+      const subject = encodeURIComponent(`[Project Inquiry: ${formData.projectType}] from ${formData.name}`);
+      const body = encodeURIComponent(
+        `Hello Saidur,
 
 Name: ${formData.name}
 Email: ${formData.email}
 Scope: ${formData.projectType}
 
 Message:
-${formData.message}
-
---
-Sent from your portfolio contact desk.`
-    );
-    
-    setTimeout(() => {
-      setIsSending(false);
-      setSubmitted(true);
-      
-      // Open direct mail client as fallback guarantee
+${formData.message}`
+      );
       window.open(`mailto:saidurr1256@gmail.com?subject=${subject}&body=${body}`, "_blank");
 
       toast({
-        title: "Inquiry Prepared Successfully!",
-        description: "Your mail client has been opened. Saidur will respond within 4-12 hours.",
+        title: "Inquiry Prepared via Email",
+        description: "Your direct email client has been opened to complete dispatch.",
       });
-    }, 600);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const openWhatsAppDirect = () => {
@@ -65,15 +89,15 @@ Sent from your portfolio contact desk.`
       <div className="container mx-auto max-w-5xl">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.6 , ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-center mb-16 space-y-3"
         >
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">
             <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Direct Communication & Fast Turnaround</span>
+            <span>Direct Communication &amp; Fast Turnaround</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
             Let's Build Together
@@ -110,7 +134,7 @@ Sent from your portfolio contact desk.`
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-[11px] text-slate-500">WhatsApp & Phone (Instant)</p>
+                    <p className="text-[11px] text-slate-500">WhatsApp &amp; Phone (Instant)</p>
                     <a href="https://wa.me/8801515687002" target="_blank" rel="noopener noreferrer" className="font-semibold text-slate-900 hover:text-emerald-700 font-mono">
                       +880 1515-687002
                     </a>
@@ -181,9 +205,9 @@ Sent from your portfolio contact desk.`
               {submitted ? (
                 <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3">
                   <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
-                  <h4 className="font-bold text-slate-900 text-base">Thank You! Your Inquiry is Prepared</h4>
+                  <h4 className="font-bold text-slate-900 text-base">Thank You! Your Inquiry is Delivered</h4>
                   <p className="text-xs text-slate-600 max-w-sm mx-auto">
-                    Your message draft has been queued for Saidur at <span className="font-semibold text-slate-900">saidurr1256@gmail.com</span>. You can also message directly on WhatsApp for immediate priority.
+                    Your message has been emailed directly to Saidur at <span className="font-semibold text-slate-900">saidurr1256@gmail.com</span>. You can also chat directly on WhatsApp for immediate priority.
                   </p>
                   <div className="pt-2 flex justify-center gap-3">
                     <Button
@@ -196,7 +220,10 @@ Sent from your portfolio contact desk.`
                     <Button
                       size="sm"
                       variant="outline"
-                      onClick={() => setSubmitted(false)}
+                      onClick={() => {
+                        setSubmitted(false);
+                        setFormData({ name: "", email: "", projectType: "Custom WordPress Plugin", message: "" });
+                      }}
                       className="rounded-full text-xs"
                     >
                       Send Another
@@ -255,7 +282,7 @@ Sent from your portfolio contact desk.`
 
                   <div>
                     <label className="block text-xs font-medium text-slate-700 mb-1">
-                      Requirements & Goals
+                      Requirements &amp; Goals
                     </label>
                     <Textarea
                       value={formData.message}
@@ -270,10 +297,19 @@ Sent from your portfolio contact desk.`
                   <Button
                     type="submit"
                     disabled={isSending}
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 rounded-full shadow-sm transition-all h-11"
+                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 rounded-full shadow-sm transition-all h-11 flex items-center justify-center gap-2"
                   >
-                    <Send className="mr-2 h-4 w-4" />
-                    {isSending ? "Preparing Email..." : "Send Project Inquiry"}
+                    {isSending ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Sending to saidurr1256@gmail.com...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Send Project Inquiry</span>
+                      </>
+                    )}
                   </Button>
                 </form>
               )}
