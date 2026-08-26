@@ -13,7 +13,7 @@ const navLinks = [
   { name: "Contact", section: "contact" },
 ];
 
-export function NavigationDev() {
+export function NavbarUnique() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -60,7 +60,7 @@ export function NavigationDev() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-slate-950/90 backdrop-blur-xl border-b border-slate-800 py-3 shadow-xl"
+          ? "bg-[#060813]/90 backdrop-blur-2xl border-b border-white/10 py-3 shadow-2xl"
           : "bg-transparent py-5"
       }`}
     >
@@ -82,7 +82,7 @@ export function NavigationDev() {
           </a>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-1 bg-slate-900/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-slate-800 shadow-inner">
+          <div className="hidden md:flex items-center gap-1 bg-white/[0.03] backdrop-blur-xl px-4 py-1.5 rounded-full border border-white/10 shadow-inner">
             {navLinks.map((link) => {
               const isActive = activeSection === link.section;
 
@@ -93,8 +93,8 @@ export function NavigationDev() {
                   onClick={(e) => handleNavClick(e, link.section)}
                   className={`text-xs font-medium px-3.5 py-1.5 rounded-full transition-all duration-200 ${
                     isActive
-                      ? "bg-emerald-500 text-slate-950 font-bold shadow-sm"
-                      : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+                      ? "bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/25"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
                   }`}
                 >
                   {link.name}
@@ -109,7 +109,7 @@ export function NavigationDev() {
               size="sm"
               variant="outline"
               asChild
-              className="rounded-full text-xs font-mono border-slate-800 hover:border-emerald-500/50 bg-slate-900/80 text-slate-300 hover:text-white h-9 px-4"
+              className="rounded-full text-xs font-mono border-white/10 hover:border-emerald-500/50 bg-white/[0.04] text-slate-300 hover:text-white h-9 px-4"
             >
               <a href="/resume.pdf" download>
                 <Download className="w-3.5 h-3.5 mr-1.5 text-emerald-400" />
@@ -120,7 +120,7 @@ export function NavigationDev() {
             <Button
               size="sm"
               onClick={(e) => handleNavClick(e, "contact")}
-              className="rounded-full text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-md shadow-emerald-500/20 h-9 px-5"
+              className="rounded-full text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg shadow-emerald-500/20 h-9 px-5"
             >
               Hire Me
             </Button>
@@ -132,7 +132,7 @@ export function NavigationDev() {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className="rounded-xl border border-slate-800 text-white"
+              className="rounded-xl border border-white/10 text-white"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -142,7 +142,7 @@ export function NavigationDev() {
 
         {/* Mobile Menu Dropdown */}
         {isOpen && (
-          <div className="md:hidden mt-3 p-4 rounded-3xl bg-slate-950/95 border border-slate-800 backdrop-blur-2xl shadow-2xl space-y-2">
+          <div className="md:hidden mt-3 p-4 rounded-3xl bg-slate-950/95 border border-white/10 backdrop-blur-2xl shadow-2xl space-y-2">
             <div className="flex items-center gap-2 px-3 py-1.5 mb-2 rounded-xl bg-emerald-500/10 text-[11px] font-mono text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Available for Client Projects</span>
@@ -153,14 +153,14 @@ export function NavigationDev() {
                 key={link.name}
                 href={`#${link.section}`}
                 onClick={(e) => handleNavClick(e, link.section)}
-                className="block py-2.5 px-3.5 text-sm font-medium text-slate-200 hover:text-emerald-400 hover:bg-slate-900 rounded-2xl transition-colors"
+                className="block py-2.5 px-3.5 text-sm font-medium text-slate-200 hover:text-emerald-400 hover:bg-white/[0.04] rounded-2xl transition-colors"
               >
                 {link.name}
               </a>
             ))}
 
-            <div className="pt-2 border-t border-slate-800 flex gap-2">
-              <Button size="sm" variant="outline" asChild className="flex-1 text-xs font-mono border-slate-800 text-slate-300">
+            <div className="pt-2 border-t border-white/10 flex gap-2">
+              <Button size="sm" variant="outline" asChild className="flex-1 text-xs font-mono border-white/10 text-slate-300">
                 <a href="/resume.pdf" download>
                   <Download className="w-3.5 h-3.5 mr-1 text-emerald-400" /> Download CV
                 </a>

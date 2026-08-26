@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
 
 const contactInfo = [
   {
@@ -50,7 +51,7 @@ const contactInfo = [
   },
 ];
 
-export function ContactDev() {
+export function ContactUnique() {
   const { toast } = useToast();
 
   const [formData, setFormData] = useState({
@@ -76,29 +77,32 @@ export function ContactDev() {
   };
 
   return (
-    <section
-      id="contact"
-      className="py-24 px-4 bg-slate-950 relative overflow-hidden"
-    >
+    <section id="contact" className="py-28 px-4 bg-[#060813] relative overflow-hidden">
       <div className="container mx-auto max-w-6xl relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-400 mb-3">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-400 mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Direct Communication & Scoping</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
             Let's Build Together
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
             Need a custom WordPress plugin, complex WooCommerce engine, dynamic pricing integration, or high-volume agency support? Let's talk!
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Contact Channels */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="bg-slate-900/85 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 shadow-xl">
+            <div className="bg-slate-900/85 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 shadow-xl shimmer-border">
               <h3 className="text-xl font-bold mb-4 text-white flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
                 Direct Channels
@@ -107,7 +111,7 @@ export function ContactDev() {
                 {contactInfo.map((item) => (
                   <div
                     key={item.label}
-                    className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 hover:border-emerald-500/40 transition-all flex items-start gap-3"
+                    className="p-3 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-emerald-500/40 transition-all flex items-start gap-3"
                   >
                     <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0 text-emerald-400 mt-0.5">
                       <item.icon className="w-4 h-4" />
@@ -140,7 +144,7 @@ export function ContactDev() {
             </div>
 
             {/* Turnaround Guarantee Card */}
-            <Card className="p-5 bg-slate-900/85 backdrop-blur-xl border-slate-800 rounded-3xl">
+            <Card className="p-5 bg-slate-900/85 backdrop-blur-xl border border-white/10 rounded-3xl">
               <div className="flex items-start gap-3">
                 <Clock className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                 <div className="text-xs text-slate-300 leading-relaxed">
@@ -155,7 +159,7 @@ export function ContactDev() {
 
           {/* Right Column: Project Inquiry Form */}
           <div className="lg:col-span-7">
-            <Card className="p-6 sm:p-8 bg-slate-900/90 backdrop-blur-xl border-slate-800 rounded-3xl shadow-xl">
+            <Card className="p-6 sm:p-8 bg-slate-900/90 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-xl shimmer-border">
               <h3 className="text-xl font-bold mb-2 text-white">
                 Start a Conversation
               </h3>
@@ -174,7 +178,7 @@ export function ContactDev() {
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Alex Morgan"
                       required
-                      className="bg-slate-950 border-slate-800 rounded-xl text-sm text-white"
+                      className="bg-white/[0.04] border-white/10 rounded-xl text-sm text-white focus:border-emerald-400"
                     />
                   </div>
 
@@ -188,7 +192,7 @@ export function ContactDev() {
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="alex@company.com"
                       required
-                      className="bg-slate-950 border-slate-800 rounded-xl text-sm text-white"
+                      className="bg-white/[0.04] border-white/10 rounded-xl text-sm text-white focus:border-emerald-400"
                     />
                   </div>
                 </div>
@@ -200,7 +204,7 @@ export function ContactDev() {
                   <select
                     value={formData.projectType}
                     onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                    className="w-full h-10 px-3 py-2 text-xs font-mono rounded-xl border border-slate-800 bg-slate-950 text-white focus:outline-none focus:ring-1 focus:ring-emerald-400"
+                    className="w-full h-10 px-3 py-2 text-xs font-mono rounded-xl border border-white/10 bg-slate-950 text-white focus:outline-none focus:ring-1 focus:ring-emerald-400"
                   >
                     <option value="Custom WordPress Plugin">Custom WordPress Plugin Development (OOP)</option>
                     <option value="WooCommerce Custom Platform">WooCommerce Custom Engine / B2B Wholesale</option>
@@ -222,14 +226,14 @@ export function ContactDev() {
                     placeholder="Describe your platform requirements, timeline, and current WordPress setup..."
                     rows={4}
                     required
-                    className="bg-slate-950 border-slate-800 rounded-xl text-sm text-white resize-none"
+                    className="bg-white/[0.04] border-white/10 rounded-xl text-sm text-white resize-none focus:border-emerald-400"
                   />
                 </div>
 
                 <Button
                   type="submit"
                   disabled={isSending}
-                  className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-2xl shadow-md shadow-emerald-500/20 transition-all h-12"
+                  className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-2xl shadow-xl shadow-emerald-500/25 transition-all h-12"
                 >
                   <Send className="mr-2 h-4 w-4" />
                   {isSending ? "Dispatching Message..." : "Send Project Inquiry"}

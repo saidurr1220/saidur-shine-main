@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -17,7 +18,7 @@ const services = [
     badge: "OOP Architecture",
     title: "Custom Plugin Development",
     description:
-      "Scalable WordPress plugins engineered from scratch using OOP standards, custom post types, hooks/filters, and AJAX interfaces ? 100% upgrade-safe without touching core.",
+      "Scalable WordPress plugins engineered from scratch using OOP standards, custom post types, hooks/filters, and AJAX interfaces — 100% upgrade-safe without touching core.",
     tags: ["Custom Post Types", "Hooks & Filters", "AJAX", "WP REST API"],
   },
   {
@@ -62,66 +63,75 @@ const services = [
   },
 ];
 
-export function ServicesDev() {
+export function ServicesUnique() {
   return (
-    <section
-      id="services"
-      className="py-24 px-4 bg-slate-950/80 relative overflow-hidden"
-    >
+    <section id="services" className="py-28 px-4 bg-[#060813] relative overflow-hidden">
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-400 mb-3">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-14"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-400 mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Tailored WordPress Engineering</span>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
             Specialized Development Services
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
             From single-feature custom plugins to multi-thousand dollar production platforms with full ownership.
           </p>
-        </div>
+        </motion.div>
 
         {/* Services Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service) => (
-            <Card
+          {services.map((service, idx) => (
+            <motion.div
               key={service.title}
-              className="p-6 sm:p-7 bg-slate-900/85 backdrop-blur-xl border-slate-800 hover:border-emerald-500/50 transition-all duration-300 group h-full flex flex-col justify-between rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-emerald-500/5"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              className="h-full"
             >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 group-hover:scale-105 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all duration-300">
-                    <service.icon className="h-6 w-6" />
+              <Card className="p-6 sm:p-7 bg-slate-900/80 backdrop-blur-2xl border border-white/10 hover:border-emerald-500/50 transition-all duration-300 group h-full flex flex-col justify-between rounded-3xl shadow-xl hover:shadow-2xl hover:shadow-emerald-500/5 shimmer-border">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-400 group-hover:scale-105 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all duration-300">
+                      <service.icon className="h-6 w-6" />
+                    </div>
+                    <Badge variant="outline" className="text-[10px] font-mono border-emerald-500/30 text-emerald-400 bg-emerald-500/5">
+                      {service.badge}
+                    </Badge>
                   </div>
-                  <Badge variant="outline" className="text-[10px] font-mono border-emerald-500/30 text-emerald-400 bg-emerald-500/5">
-                    {service.badge}
-                  </Badge>
+
+                  <h3 className="text-lg sm:text-xl font-bold mb-2.5 text-white group-hover:text-emerald-400 transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+                    {service.description}
+                  </p>
                 </div>
 
-                <h3 className="text-lg sm:text-xl font-bold mb-2.5 text-white group-hover:text-emerald-400 transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
-                  {service.description}
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-slate-800">
-                <div className="flex flex-wrap gap-1.5">
-                  {service.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[11px] font-mono text-slate-400 bg-slate-950 px-2.5 py-0.5 rounded-lg border border-slate-800"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <div className="pt-4 border-t border-white/10">
+                  <div className="flex flex-wrap gap-1.5">
+                    {service.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[11px] font-mono text-slate-400 bg-white/[0.03] px-2.5 py-0.5 rounded-lg border border-white/5"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
