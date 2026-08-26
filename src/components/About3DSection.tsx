@@ -33,7 +33,7 @@ export function About3DSection() {
     { label: "Graphics Card (GPU)", value: "NVIDIA GeForce RTX 4090 (24GB GDDR6X VRAM)" },
     { label: "Memory (RAM)", value: "128GB Corsair Vengeance DDR5-6000MHz" },
     { label: "Storage", value: "4TB Samsung 990 Pro PCIe 4.0 NVMe SSD" },
-    { label: "Displays", value: "Dual ASUS ProArt 32" 4K HDR (100% sRGB / 98% DCI-P3)" },
+    { label: "Displays", value: "Dual ASUS ProArt 32-inch 4K HDR (100% sRGB / 98% DCI-P3)" },
     { label: "Drawing Tablet", value: "Wacom Cintiq Pro 27 4K Touch & Pro Pen 3" },
   ];
 
