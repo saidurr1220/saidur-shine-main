@@ -4,6 +4,7 @@ import {
   ArrowRight,
   ExternalLink,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { projectsData } from "@/data/projectsData";
 

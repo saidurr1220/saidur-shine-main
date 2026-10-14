@@ -21,13 +21,15 @@ export function HeroApple() {
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] flex flex-col justify-between pt-28 sm:pt-36 pb-0 px-4 sm:px-6 bg-[#0b101b] text-white overflow-hidden"
+      className="relative pt-28 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 bg-[#0b101b] text-white"
     >
-      {/* Background ambient radial neon emerald glow */}
-      <div className="absolute top-1/4 right-[5%] w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none -z-0" />
-      <div className="absolute bottom-10 left-[10%] w-[400px] h-[400px] bg-emerald-600/5 rounded-full blur-[120px] pointer-events-none -z-0" />
+      {/* Background ambient radial neon emerald glow - constrained overflow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 right-[5%] w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-10 left-[10%] w-[400px] h-[400px] bg-emerald-600/5 rounded-full blur-[120px]" />
+      </div>
 
-      <div className="container mx-auto max-w-6xl relative z-10 my-auto">
+      <div className="container mx-auto max-w-6xl relative z-10">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column */}
           <motion.div
@@ -180,42 +182,42 @@ export function HeroApple() {
             </div>
           </motion.div>
         </div>
-      </div>
 
-      {/* 3-Pillar Experience Bar (Clean White Background strip matching design) */}
-      <div className="w-full bg-white text-slate-900 py-6 border-t border-slate-200 mt-16 relative z-10">
-        <div className="container mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
-            {/* Pillar 1 */}
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#e8f6f0] text-[#087f5b] flex items-center justify-center flex-shrink-0">
-                <Briefcase className="w-5 h-5" />
+        {/* 3-Pillar Experience Bar - Floating Bridge Card */}
+        <div className="relative z-20 mt-12 sm:mt-16 -mb-20 sm:-mb-24">
+          <div className="bg-white text-slate-900 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-xl shadow-slate-950/20 border border-slate-200/90">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
+              {/* Pillar 1 */}
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-[#e8f6f0] text-[#087f5b] flex items-center justify-center flex-shrink-0">
+                  <Briefcase className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-slate-950">2+ Years</div>
+                  <div className="text-xs text-slate-500">Experience</div>
+                </div>
               </div>
-              <div>
-                <div className="text-sm font-bold text-slate-950">2+ Years</div>
-                <div className="text-xs text-slate-500">Experience</div>
-              </div>
-            </div>
 
-            {/* Pillar 2 */}
-            <div className="flex items-center gap-3.5 sm:border-l sm:border-slate-200/80 sm:pl-8">
-              <div className="w-10 h-10 rounded-xl bg-[#e8f6f0] text-[#087f5b] flex items-center justify-center flex-shrink-0">
-                <Star className="w-5 h-5 fill-[#087f5b]/20" />
+              {/* Pillar 2 */}
+              <div className="flex items-center gap-3.5 sm:border-l sm:border-slate-200/80 sm:pl-8">
+                <div className="w-10 h-10 rounded-xl bg-[#e8f6f0] text-[#087f5b] flex items-center justify-center flex-shrink-0">
+                  <Star className="w-5 h-5 fill-[#087f5b]/20" />
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-slate-950">5.0</div>
+                  <div className="text-xs text-slate-500">Client Rating</div>
+                </div>
               </div>
-              <div>
-                <div className="text-sm font-bold text-slate-950">5.0</div>
-                <div className="text-xs text-slate-500">Client Rating</div>
-              </div>
-            </div>
 
-            {/* Pillar 3 */}
-            <div className="flex items-center gap-3.5 sm:border-l sm:border-slate-200/80 sm:pl-8">
-              <div className="w-10 h-10 rounded-xl bg-[#e8f6f0] text-[#087f5b] flex items-center justify-center flex-shrink-0">
-                <Layers className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-sm font-bold text-slate-950">WordPress - WooCommerce - Custom Systems</div>
-                <div className="text-xs text-slate-500">Specialized Expertise</div>
+              {/* Pillar 3 */}
+              <div className="flex items-center gap-3.5 sm:border-l sm:border-slate-200/80 sm:pl-8">
+                <div className="w-10 h-10 rounded-xl bg-[#e8f6f0] text-[#087f5b] flex items-center justify-center flex-shrink-0">
+                  <Layers className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-slate-950">WordPress • WooCommerce • Custom Systems</div>
+                  <div className="text-xs text-slate-500">Specialized Developer</div>
+                </div>
               </div>
             </div>
           </div>

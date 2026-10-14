@@ -29,7 +29,7 @@ export function AboutApple() {
   ];
 
   return (
-    <section id="about" className="py-24 px-4 sm:px-6 bg-white border-b border-slate-100">
+    <section id="about" className="pt-28 sm:pt-36 pb-24 px-4 sm:px-6 bg-white border-b border-slate-100">
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Heading & Large 01 Watermark */}
