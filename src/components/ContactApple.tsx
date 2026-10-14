@@ -270,6 +270,7 @@ ${formData.message}`
                       onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
                       className="w-full h-10 px-3 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
                     >
+                      <option value="FinTech / Trading Infrastructure">FinTech / Real-Time Trading Infrastructure & APIs</option>
                       <option value="Custom WordPress Plugin">Custom WordPress Plugin Development (OOP)</option>
                       <option value="WooCommerce Custom Platform">WooCommerce Custom Platform / B2B Wholesale</option>
                       <option value="Booking & Dynamic Pricing">Booking & Dynamic Pricing Engine (Distance Matrix)</option>

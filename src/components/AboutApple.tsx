@@ -75,10 +75,10 @@ export function AboutApple() {
                 End-to-End Project Ownership
               </h3>
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Currently delivering <span className="font-semibold text-slate-900">10 to 15 client projects per month</span> through a WordPress agency, ranging from quick $20 fixes to full builds worth $2,500+. Shipped 11 projects last month with <span className="font-semibold text-emerald-700">10 rated 5 stars</span>.
+                Currently delivering <span className="font-semibold text-slate-900">10 to 15 client projects per month</span>, ranging from focused bug fixes to enterprise FinTech infrastructure builds worth <span className="font-semibold text-slate-900">$7,000+ USD</span>. Shipped 11 projects last month with <span className="font-semibold text-emerald-700">10 rated 5 stars</span>.
               </p>
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Recently transformed <span className="font-semibold text-slate-900">Vault Labs Research</span> into a full laboratory research commerce platform with 20+ custom modules via hooks and filters only, preserving 100% core upgrade safety.
+                Engineered <span className="font-semibold text-slate-900">Mirror Control</span> (a $7,000 Bybit-to-Bitget trade mirror active 24/7) and transformed <span className="font-semibold text-slate-900">Vault Labs Research</span> into a full laboratory research commerce platform with 20+ custom modules via hooks and filters only, preserving 100% core upgrade safety.
               </p>
             </div>
 

@@ -11,9 +11,10 @@ const experienceData = [
     period: "01/2026 - Present",
     location: "Dhaka, Bangladesh (US / UK / Australia Clients)",
     description:
-      "Deliver 10 to 15 client projects per month across a wide range of scope, from $20 bug fixes to $2,500+ full-stack WordPress builds. Own the entire lifecycle: planning, development, testing, client communication, and deployment.",
+      "Deliver 10 to 15 client projects per month across a wide range of scope, from targeted production bug fixes to high-assurance $7,000+ FinTech and WordPress builds. Own the entire lifecycle: architecture, development, rigorous testing, client communication, and deployment.",
     achievements: [
       "Delivered 11 projects last month with 10 rated 5 stars, consistently ahead of monthly targets and generating $3,000+ solo project value",
+      "Delivered and operating an active $7,000 Bybit-to-Bitget trade mirror engine (Node.js / TypeScript / PostgreSQL) with 24/7 ops dashboard and $500k+ margin tracking",
       "Build custom WordPress plugins from scratch for booking systems, CRM integrations, WooCommerce workflows, and subscription platforms",
       "Integrate Stripe payments, Google Distance Matrix API, Zoho / Bitrix24 CRMs, and asynchronous SMTP email pipelines",
       "Implement GTM, GA4, and Google Ads conversion tracking with transaction-aware deduplication and production rollback preparation",
@@ -22,12 +23,14 @@ const experienceData = [
     techStack: [
       "WordPress Core",
       "PHP (OOP)",
+      "Node.js / TS",
+      "PostgreSQL",
+      "WebSockets",
       "WooCommerce",
       "MySQL",
       "GTM / GA4",
       "Stripe API",
       "Google Maps API",
-      "Elementor Pro",
       "Claude Code",
     ],
   },

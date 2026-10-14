@@ -21,6 +21,50 @@ export interface ProjectItem {
 
 export const projectsData: ProjectItem[] = [
   {
+    id: "bybit-bitget-mirror-engine",
+    title: "Mirror Control - Bybit to Bitget Real-Time Trade Mirror & Ops Engine",
+    location: "US / International Trading Desk",
+    category: "FinTech & Trading",
+    filterCategory: "FinTech & Trading",
+    highlightBadge: "$7,000 USD Production Build - Active 24/7",
+    clientName: "Proprietary Trading Desk",
+    description:
+      "Enterprise Bybit-to-Bitget real-time trade mirroring engine, automated position parity reconciliation, and low-latency operational dashboard controlling over $500k+ USDT margin.",
+    problem:
+      "A high-volume crypto trading desk executed live manual strategies on Bybit UTA and required automated, sub-second 1:1 trade replication to Bitget UTA in hedge mode with isolated margin. The workflow demanded strict per-symbol quantity multipliers, zero duplicate execution risk, deterministic client order IDs, and failsafe operator control without risking position desynchronization during network latency or exchange restarts.",
+    solution:
+      "Architected and deployed a production-grade Node.js / TypeScript trading infrastructure service with PostgreSQL persistence. Engineered WebSocket real-time fill ingestion on Bybit (strictly read-only), deterministic Bitget clientOid generation, multi-stage idempotency fencing, per-symbol dynamic quantity multipliers (multiplier_epochs), and automatic position reconciliation. Developed the Mirror Control real-time ops dashboard with live margin monitoring, per-instrument status, and instant emergency stop drills.",
+    impact:
+      "Successfully delivered and running 24/7 in live production ($7,000 USD contract). Maintains 100% position parity across all active instruments (BTC, ETH, SOL, BNB, NEAR, HYPE, SUI) with zero execution drift, protecting over $500,000+ USDT in trading margin.",
+    architecture: "Node.js (TypeScript) + PostgreSQL + WebSockets + Bybit UTA + Bitget UTA REST/WS API",
+    tags: [
+      "TypeScript",
+      "Node.js",
+      "PostgreSQL",
+      "FinTech",
+      "Crypto Trading",
+      "WebSockets",
+      "Bybit API",
+      "Bitget UTA",
+      "High Availability",
+      "Real-Time Mirroring",
+    ],
+    url: "",
+    github: "",
+    screenshot: "/screenshots/mirror-control.png",
+    metrics: {
+      contract: "$7,000 USD",
+      status: "Running 24/7 Live",
+      margin: "$500k+ USDT",
+    },
+    workflowSteps: [
+      { step: "1. Real-Time Fill Ingestion", detail: "Bybit WebSocket stream captures executed fills with sub-50ms latency under strict read-only enforcement" },
+      { step: "2. Idempotency & Fencing", detail: "Deterministic clientOid generation and state fencing prevent double execution or race conditions" },
+      { step: "3. Multiplier & Order Dispatch", detail: "Per-symbol position multipliers (multiplier_epochs) calculate exact quantity before Bitget UTA market dispatch" },
+      { step: "4. Parity Reconciliation & Ops", detail: "Continuous position matching and Mirror Control dashboard with 1-click failsafe emergency stop" },
+    ],
+  },
+  {
     id: "vault-labs-research",
     title: "Vault Labs Research - Laboratory Research Commerce Platform",
     location: "US Client",

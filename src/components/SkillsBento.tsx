@@ -147,11 +147,11 @@ export function SkillsBento() {
                 <h3 className="font-bold text-sm text-slate-900">Backend & Database</h3>
               </div>
               <p className="text-xs text-slate-600 mb-3 leading-relaxed">
-                PHP (OOP), MySQL Database Indexing, Query Optimization (fixing slow LIKE queries with lookup tables), Laravel, and Filament.
+                PHP (OOP), Node.js (TypeScript), PostgreSQL, MySQL Database Indexing, Query Optimization, and WebSockets.
               </p>
             </div>
             <div className="flex flex-wrap gap-1 pt-2 border-t border-slate-100">
-              {["PHP (OOP)", "MySQL Indexing", "Query Optimization", "Laravel", "Filament"].map((t) => (
+              {["TypeScript", "Node.js", "PostgreSQL", "PHP (OOP)", "MySQL Indexing", "WebSockets"].map((t) => (
                 <span key={t} className="px-2 py-0.5 bg-slate-50 text-slate-600 rounded text-[11px]">
                   {t}
                 </span>

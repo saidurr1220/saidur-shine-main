@@ -8,7 +8,7 @@ const testimonials = [
     role: "Business Owner",
     company: "DipMyRyde UK",
     content:
-      "Saidur delivered exactly what we needed — a smooth booking system and a beautifully optimized site. Our online bookings increased significantly!",
+      "Saidur delivered exactly what we needed: a smooth booking system and a beautifully optimized site. Our online bookings increased significantly!",
     rating: 5,
     initials: "JW",
   },

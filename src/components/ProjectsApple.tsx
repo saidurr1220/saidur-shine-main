@@ -20,6 +20,7 @@ import { projectsData, ProjectItem } from "@/data/projectsData";
 
 const categories = [
   "All Projects",
+  "FinTech & Trading",
   "WooCommerce",
   "Booking & Dynamic Pricing",
   "Membership & LMS",
@@ -199,7 +200,7 @@ export function ProjectsApple() {
                               {currentProject.location}
                             </span>
                             <span className="text-xs text-slate-500 font-medium">
-                              ? {currentProject.filterCategory}
+                              • {currentProject.filterCategory}
                             </span>
                           </div>
 
@@ -331,7 +332,7 @@ export function ProjectsApple() {
                                 <div className="flex items-center gap-1.5 px-3 py-0.5 bg-white rounded-lg text-[11px] font-mono text-slate-600 border border-slate-200/80 max-w-[240px] truncate shadow-xs">
                                   <Globe className="w-3 h-3 text-emerald-600 flex-shrink-0" />
                                   <span className="truncate">
-                                    {currentProject.url ? currentProject.url.replace("https://", "") : "internal-system"}
+                                    {currentProject.url ? currentProject.url.replace("https://", "") : (currentProject.id === "bybit-bitget-mirror-engine" ? "mirror-control.live" : "internal-system")}
                                   </span>
                                 </div>
                                 {currentProject.url ? (
@@ -497,7 +498,7 @@ export function ProjectsApple() {
                       {project.highlightBadge}
                     </span>
                     <span className="text-xs text-slate-500">
-                      {project.location} ? {project.filterCategory}
+                      {project.location} • {project.filterCategory}
                     </span>
                   </div>
 
