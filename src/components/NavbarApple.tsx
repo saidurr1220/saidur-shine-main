@@ -57,14 +57,14 @@ export function NavbarApple() {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/80 backdrop-blur-2xl border-b border-black/[0.06] py-3.5 shadow-sm"
-          : "bg-transparent py-5"
-      }`}
-    >
-      <div className="container mx-auto px-4 max-w-6xl">
+    <nav className="fixed top-3 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-4 pointer-events-none">
+      <div
+        className={`w-full max-w-5xl rounded-full transition-all duration-300 pointer-events-auto border ${
+          scrolled
+            ? "bg-white/90 backdrop-blur-2xl border-slate-200/90 shadow-md shadow-slate-900/5 py-2.5 px-4 sm:px-6"
+            : "bg-white/80 backdrop-blur-xl border-slate-200/70 shadow-sm py-3 px-4 sm:px-6"
+        }`}
+      >
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a

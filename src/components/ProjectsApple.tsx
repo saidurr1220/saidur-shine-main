@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  ChevronLeft,
-  ChevronRight,
   ExternalLink,
   Workflow,
   Sparkles,
@@ -9,7 +7,7 @@ import {
   Layers,
   ShieldCheck,
   LayoutGrid,
-  SlidersHorizontal,
+  LayoutList,
   Code2,
   Globe,
   ArrowUpRight,
@@ -28,35 +26,9 @@ const categories = [
   "Workflow Automation",
 ];
 
-const slideVariants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? 40 : -40,
-    opacity: 0,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      x: { type: "spring", stiffness: 320, damping: 32 },
-      opacity: { duration: 0.28, ease: "easeOut" },
-    },
-  },
-  exit: (direction: number) => ({
-    x: direction > 0 ? -40 : 40,
-    opacity: 0,
-    transition: {
-      x: { type: "spring", stiffness: 320, damping: 32 },
-      opacity: { duration: 0.2, ease: "easeIn" },
-    },
-  }),
-};
-
 export function ProjectsApple() {
   const [selectedCategory, setSelectedCategory] = useState("All Projects");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const [viewMode, setViewMode] = useState<"carousel" | "grid">("carousel");
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [viewMode, setViewMode] = useState<"stacked" | "grid">("stacked");
   const [activeWorkflowId, setActiveWorkflowId] = useState<string | null>(null);
 
   const filteredProjects =
@@ -74,32 +46,6 @@ export function ProjectsApple() {
     });
   }, []);
 
-  useEffect(() => {
-    setCurrentIndex(0);
-    setDirection(1);
-  }, [selectedCategory]);
-
-  useEffect(() => {
-    if (!isAutoPlaying || viewMode !== "carousel" || filteredProjects.length <= 1) return;
-    const timer = setInterval(() => {
-      setDirection(1);
-      setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
-    }, 9000);
-    return () => clearInterval(timer);
-  }, [isAutoPlaying, viewMode, filteredProjects.length]);
-
-  const handleNext = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
-  };
-
-  const handlePrev = () => {
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + filteredProjects.length) % filteredProjects.length);
-  };
-
-  const currentProject = filteredProjects[currentIndex] || filteredProjects[0];
-
   return (
     <section id="projects" className="py-28 px-4 apple-canvas border-t border-black/[0.04]">
       <div className="container mx-auto max-w-6xl">
@@ -107,34 +53,33 @@ export function ProjectsApple() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-center mb-12 space-y-3"
+          className="text-center mb-14 space-y-3"
         >
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 text-xs font-semibold text-slate-700">
             <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Production Case Studies & Visual Proof</span>
+            <span>Production Portfolio</span>
           </div>
-
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-            Featured WordPress Case Studies
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
+            Engineered Case Studies
           </h2>
-          <p className="text-slate-600 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Real production builds with live platform previews, engineered for conversion, real-time dynamic pricing, and 100% upgrade safety.
+          <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+            Real client systems shipped to production across crypto financial infrastructure, custom WooCommerce platforms, dynamic distance booking engines, and conversion analytics.
           </p>
 
-          {/* Controls Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-4 border-t border-slate-200/60">
-            {/* Category Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5">
+          {/* Category Filter Pills & View Toggle */}
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 max-w-5xl mx-auto">
+            {/* Filter Pills */}
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
                     selectedCategory === cat
-                      ? "bg-slate-900 text-white font-semibold shadow-sm"
-                      : "bg-white border border-slate-200/80 text-slate-600 hover:text-slate-900 hover:border-slate-300"
+                      ? "bg-slate-900 text-white shadow-sm font-semibold"
+                      : "bg-white text-slate-600 hover:text-slate-900 border border-slate-200/80 hover:bg-slate-50"
                   }`}
                 >
                   {cat}
@@ -142,346 +87,292 @@ export function ProjectsApple() {
               ))}
             </div>
 
-            {/* View Mode Switcher */}
-            <div className="flex items-center gap-1 bg-white p-1 rounded-full border border-slate-200 shadow-sm text-xs">
+            {/* View Mode Toggle */}
+            <div className="flex items-center gap-1 bg-white p-1 rounded-full border border-slate-200 shadow-xs flex-shrink-0">
               <button
-                onClick={() => setViewMode("carousel")}
-                className={`flex items-center gap-1 px-3 py-1 rounded-full font-medium transition-all ${
-                  viewMode === "carousel"
-                    ? "bg-slate-900 text-white shadow-sm"
+                onClick={() => setViewMode("stacked")}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                  viewMode === "stacked"
+                    ? "bg-slate-900 text-white font-semibold shadow-xs"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
+                title="Stacked Showcase View"
               >
-                <SlidersHorizontal className="w-3 h-3" />
-                Showcase
+                <LayoutList className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Showcase</span>
               </button>
-
               <button
                 onClick={() => setViewMode("grid")}
-                className={`flex items-center gap-1 px-3 py-1 rounded-full font-medium transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                   viewMode === "grid"
-                    ? "bg-slate-900 text-white shadow-sm"
+                    ? "bg-slate-900 text-white font-semibold shadow-xs"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
+                title="Compact Grid View"
               >
-                <LayoutGrid className="w-3 h-3" />
-                Grid
+                <LayoutGrid className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Grid</span>
               </button>
             </div>
           </div>
         </motion.div>
 
-        {/* 1. APPLE-STYLE SPLIT SHOWCASE CAROUSEL (Stable Shell + Smooth Content Slide) */}
-        {viewMode === "carousel" && currentProject && (
-          <div className="relative">
-            <div className="relative max-w-6xl mx-auto">
-              <div className="apple-card p-6 sm:p-8 lg:p-10 bg-white border border-slate-200 shadow-xl overflow-hidden min-h-[820px] lg:min-h-[640px] flex flex-col justify-center">
-                <AnimatePresence mode="wait" custom={direction}>
-                  <motion.div
-                    key={currentProject.id}
-                    custom={direction}
-                    variants={slideVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    className="w-full"
-                  >
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-                      
-                      {/* LEFT COLUMN: Project Details (6 Cols) */}
-                      <div className="lg:col-span-6 space-y-5">
-                        {/* Header Badges & Fixed Counter */}
-                        <div className="flex items-center justify-between gap-3 flex-wrap">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 rounded-full text-xs font-semibold">
-                              {currentProject.highlightBadge}
-                            </span>
-                            <span className="px-2.5 py-0.5 bg-slate-100 text-slate-700 rounded-full text-xs font-medium">
-                              {currentProject.location}
-                            </span>
-                            <span className="text-xs text-slate-500 font-medium">
-                              • {currentProject.filterCategory}
-                            </span>
-                          </div>
-
-                          {/* Fixed Non-Wrapping Counter */}
-                          <div className="whitespace-nowrap inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700 border border-slate-200/70">
-                            <span className="font-bold text-slate-900">{currentIndex + 1}</span>
-                            <span className="text-slate-400">of</span>
-                            <span className="font-semibold text-slate-900">{filteredProjects.length}</span>
-                          </div>
-                        </div>
-
-                        {/* Title */}
-                        <div>
-                          <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight leading-tight">
-                            {currentProject.title}
-                          </h3>
-                          <p className="text-xs font-mono text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200 inline-flex items-center gap-1.5 mt-2.5">
-                            <Code2 className="w-3.5 h-3.5 text-emerald-600" />
-                            {currentProject.architecture}
-                          </p>
-                        </div>
-
-                        {/* Description */}
-                        <p className="text-sm text-slate-600 leading-relaxed line-clamp-2">
-                          {currentProject.description}
-                        </p>
-
-                        {/* 3 Apple Pillar Cards */}
-                        <div className="space-y-2.5">
-                          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
-                            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
-                              The Challenge
-                            </h4>
-                            <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">
-                              {currentProject.problem}
-                            </p>
-                          </div>
-
-                          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
-                            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                              Engineered Solution
-                            </h4>
-                            <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">
-                              {currentProject.solution}
-                            </p>
-                          </div>
-
-                          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
-                            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                              Measurable Impact
-                            </h4>
-                            <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
-                              {currentProject.impact}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Metrics Bar */}
-                        <div className="grid grid-cols-3 gap-2 pt-2">
-                          {Object.entries(currentProject.metrics).map(([key, value]) => (
-                            <div
-                              key={key}
-                              className="p-2 bg-slate-50 rounded-xl text-center border border-slate-100"
-                            >
-                              <div className="text-xs font-bold text-slate-900 truncate" title={value}>
-                                {value}
-                              </div>
-                              <div className="text-[9px] text-slate-500 capitalize mt-0.5 truncate">
-                                {key}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* Actions */}
-                        <div className="pt-2 flex flex-wrap items-center gap-3">
-                          {currentProject.url && currentProject.url !== "" ? (
-                            <Button
-                              size="sm"
-                              asChild
-                              className="bg-slate-900 hover:bg-slate-800 text-white font-medium px-5 rounded-full shadow-sm h-10 text-xs"
-                            >
-                              <a
-                                href={currentProject.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <ExternalLink className="mr-1.5 h-3.5 w-3.5 text-emerald-400" />
-                                Visit Live Website
-                              </a>
-                            </Button>
-                          ) : (
-                            <span className="text-xs text-slate-400 flex items-center gap-1 font-mono">
-                              <ShieldCheck className="w-3.5 h-3.5 text-slate-400" /> Internal System
-                            </span>
-                          )}
-
-                          {currentProject.workflowSteps && (
-                            <button
-                              onClick={() =>
-                                setActiveWorkflowId(
-                                  activeWorkflowId === currentProject.id ? null : currentProject.id
-                                )
-                              }
-                              className="text-xs font-medium text-slate-600 hover:text-slate-900 flex items-center gap-1.5 px-3 py-2 rounded-full hover:bg-slate-100 transition-colors"
-                            >
-                              <Workflow className="w-3.5 h-3.5 text-emerald-600" />
-                              {activeWorkflowId === currentProject.id ? "Hide Pipeline" : "View Data Flow"}
-                            </button>
-                          )}
-                        </div>
+        {/* 1. STACKED VERTICAL SHOWCASE (Zero CLS - Natural Scrolling) */}
+        {viewMode === "stacked" && (
+          <div className="space-y-12">
+            {filteredProjects.map((project, idx) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.5, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="apple-card p-6 sm:p-8 lg:p-10 bg-white border border-slate-200 shadow-xl overflow-hidden"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+                  {/* LEFT COLUMN: Project Details (6 Cols) */}
+                  <div className="lg:col-span-6 space-y-4">
+                    {/* Header Badges */}
+                    <div className="flex items-center justify-between gap-3 flex-wrap">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 rounded-full text-xs font-semibold">
+                          {project.highlightBadge}
+                        </span>
+                        <span className="px-2.5 py-0.5 bg-slate-100 text-slate-700 rounded-full text-xs font-medium">
+                          {project.location}
+                        </span>
+                        <span className="text-xs text-slate-500 font-medium">
+                          • {project.filterCategory}
+                        </span>
                       </div>
 
-                      {/* RIGHT COLUMN: Apple Glass Browser Mockup (6 Cols) */}
-                      <div className="lg:col-span-6">
-                        {currentProject.screenshot ? (
-                          <div className="relative group">
-                            <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-xl transition-all duration-300 group-hover:shadow-2xl">
-                              {/* macOS Window Titlebar */}
-                              <div className="bg-slate-100/90 backdrop-blur-sm px-4 py-2.5 border-b border-slate-200/80 flex items-center justify-between">
-                                <div className="flex items-center gap-1.5">
-                                  <div className="w-2.5 h-2.5 rounded-full bg-rose-400" />
-                                  <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
-                                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-                                </div>
-                                <div className="flex items-center gap-1.5 px-3 py-0.5 bg-white rounded-lg text-[11px] font-mono text-slate-600 border border-slate-200/80 max-w-[240px] truncate shadow-xs">
-                                  <Globe className="w-3 h-3 text-emerald-600 flex-shrink-0" />
-                                  <span className="truncate">
-                                    {currentProject.url ? currentProject.url.replace("https://", "") : (currentProject.id === "bybit-bitget-mirror-engine" ? "mirror-control.live" : "internal-system")}
-                                  </span>
-                                </div>
-                                {currentProject.url ? (
-                                  <a
-                                    href={currentProject.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-slate-400 hover:text-slate-900 transition-colors"
-                                    title="Open Live Site"
-                                  >
-                                    <ArrowUpRight className="w-4 h-4" />
-                                  </a>
-                                ) : (
-                                  <div className="w-4" />
-                                )}
-                              </div>
-
-                              {/* Screenshot Preview */}
-                              <div className="relative aspect-[16/10] overflow-hidden bg-slate-50">
-                                <img
-                                  src={currentProject.screenshot}
-                                  alt={`${currentProject.title} live screenshot preview`}
-                                  width={800}
-                                  height={500}
-                                  className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
-                                />
-                                
-                                {currentProject.url && (
-                                  <a
-                                    href={currentProject.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="absolute bottom-3 right-3 px-3.5 py-1.5 rounded-full bg-slate-900/90 backdrop-blur-md border border-white/10 text-white text-[11px] font-medium flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
-                                  >
-                                    <span>Open Live Site</span>
-                                    <ArrowUpRight className="w-3.5 h-3.5" />
-                                  </a>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 text-center space-y-3">
-                            <ShieldCheck className="w-10 h-10 text-slate-400 mx-auto" />
-                            <h4 className="font-bold text-slate-900 text-sm">Internal Enterprise Platform</h4>
-                            <p className="text-xs text-slate-500 max-w-xs mx-auto">
-                              Proprietary financial banking workflow and backend approval logic under NDA.
-                            </p>
-                          </div>
-                        )}
-                      </div>
-
+                      <span className="text-xs font-mono font-bold text-slate-400">
+                        #{idx + 1} of {filteredProjects.length}
+                      </span>
                     </div>
 
-                    {/* Expandable Architecture Drawer */}
-                    {activeWorkflowId === currentProject.id && currentProject.workflowSteps && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="overflow-hidden mt-6 pt-6 border-t border-slate-100"
-                      >
-                        <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 text-white space-y-3">
-                          <p className="text-[11px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                            <Layers className="w-3.5 h-3.5 text-emerald-400" /> 4-Step System Architecture & Data Pipeline
-                          </p>
-                          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                            {currentProject.workflowSteps.map((wf, idx) => (
-                              <div
-                                key={idx}
-                                className="p-3 rounded-xl bg-white/[0.05] border border-white/10"
-                              >
-                                <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold flex items-center justify-center mb-1.5">
-                                  {idx + 1}
-                                </div>
-                                <p className="text-xs font-bold text-white mb-0.5">{wf.step}</p>
-                                <p className="text-[11px] text-slate-300 leading-relaxed">{wf.detail}</p>
-                              </div>
-                            ))}
+                    {/* Title & Architecture */}
+                    <div>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight leading-tight">
+                        {project.title}
+                      </h3>
+                      <p className="text-xs font-mono text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200 inline-flex items-center gap-1.5 mt-2.5">
+                        <Code2 className="w-3.5 h-3.5 text-emerald-600" />
+                        {project.architecture}
+                      </p>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {project.description}
+                    </p>
+
+                    {/* 3 Apple Pillar Cards */}
+                    <div className="space-y-2.5 pt-1">
+                      <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                        <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                          The Challenge
+                        </h4>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          {project.problem}
+                        </p>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                        <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                          Engineered Solution
+                        </h4>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          {project.solution}
+                        </p>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                        <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                          Measurable Impact
+                        </h4>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          {project.impact}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Metrics Bar */}
+                    <div className="grid grid-cols-3 gap-2 pt-1">
+                      {Object.entries(project.metrics).map(([key, value]) => (
+                        <div
+                          key={key}
+                          className="p-2 bg-slate-50 rounded-xl text-center border border-slate-100"
+                        >
+                          <div className="text-xs font-bold text-slate-900 truncate" title={value}>
+                            {value}
+                          </div>
+                          <div className="text-[9px] text-slate-500 capitalize mt-0.5 truncate">
+                            {key}
                           </div>
                         </div>
-                      </motion.div>
+                      ))}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="pt-2 flex flex-wrap items-center gap-3">
+                      {project.url && project.url !== "" ? (
+                        <Button
+                          size="sm"
+                          asChild
+                          className="bg-slate-900 hover:bg-slate-800 text-white rounded-full text-xs h-9 px-4 shadow-xs"
+                        >
+                          <a
+                            href={project.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5"
+                          >
+                            <span>Live Site</span>
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </a>
+                        </Button>
+                      ) : (
+                        <span className="text-xs font-mono text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200/60 flex items-center gap-1.5 font-semibold">
+                          <ShieldCheck className="w-3.5 h-3.5" />
+                          Active Production Platform
+                        </span>
+                      )}
+
+                      {project.workflowSteps && (
+                        <button
+                          onClick={() =>
+                            setActiveWorkflowId(
+                              activeWorkflowId === project.id ? null : project.id
+                            )
+                          }
+                          className="text-xs font-medium text-slate-600 hover:text-slate-900 flex items-center gap-1.5 px-3 py-2 rounded-full hover:bg-slate-100 transition-colors"
+                        >
+                          <Workflow className="w-3.5 h-3.5 text-emerald-600" />
+                          {activeWorkflowId === project.id ? "Hide Pipeline" : "View Data Flow"}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* RIGHT COLUMN: macOS Safari Browser Mockup (6 Cols) */}
+                  <div className="lg:col-span-6">
+                    {project.screenshot ? (
+                      <div className="relative group">
+                        <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-xl transition-all duration-300 group-hover:shadow-2xl">
+                          {/* macOS Window Titlebar */}
+                          <div className="bg-slate-100/90 backdrop-blur-sm px-4 py-2.5 border-b border-slate-200/80 flex items-center justify-between">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-2.5 h-2.5 rounded-full bg-rose-400" />
+                              <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                              <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                            </div>
+                            <div className="flex items-center gap-1.5 px-3 py-0.5 bg-white rounded-lg text-[11px] font-mono text-slate-600 border border-slate-200/80 max-w-[240px] truncate shadow-xs">
+                              <Globe className="w-3 h-3 text-emerald-600 flex-shrink-0" />
+                              <span className="truncate">
+                                {project.url ? project.url.replace("https://", "") : (project.id === "bybit-bitget-mirror-engine" ? "mirror-control.live" : "internal-system")}
+                              </span>
+                            </div>
+                            {project.url ? (
+                              <a
+                                href={project.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-slate-400 hover:text-slate-900 transition-colors"
+                                title="Open Live Site"
+                              >
+                                <ArrowUpRight className="w-4 h-4" />
+                              </a>
+                            ) : (
+                              <div className="w-4" />
+                            )}
+                          </div>
+
+                          {/* Screenshot Preview */}
+                          <div className="relative aspect-[16/10] overflow-hidden bg-slate-50">
+                            <img
+                              src={project.screenshot}
+                              alt={`${project.title} live screenshot preview`}
+                              width={800}
+                              height={500}
+                              className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
+                            />
+                            
+                            {project.url && (
+                              <a
+                                href={project.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="absolute bottom-3 right-3 px-3.5 py-1.5 rounded-full bg-slate-900/90 backdrop-blur-md border border-white/10 text-white text-[11px] font-medium flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                              >
+                                <span>Open Live Site</span>
+                                <ArrowUpRight className="w-3.5 h-3.5" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8 text-center space-y-3">
+                        <ShieldCheck className="w-10 h-10 text-slate-400 mx-auto" />
+                        <h4 className="font-bold text-slate-900 text-sm">Internal Enterprise Platform</h4>
+                        <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                          Proprietary internal architecture and private enterprise automation systems are under NDA.
+                        </p>
+                      </div>
                     )}
+                  </div>
+                </div>
+
+                {/* Expandable Data Pipeline Workflow */}
+                {activeWorkflowId === project.id && project.workflowSteps && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-8 pt-6 border-t border-slate-100"
+                  >
+                    <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                      <Layers className="w-3.5 h-3.5 text-emerald-600" />
+                      Production Pipeline &amp; Data Flow
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                      {project.workflowSteps.map((wf, sIdx) => (
+                        <div
+                          key={sIdx}
+                          className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold flex items-center justify-center font-mono">
+                              {sIdx + 1}
+                            </span>
+                            <span className="text-xs font-bold text-slate-900 truncate">
+                              {wf.step}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-slate-600 leading-relaxed">
+                            {wf.detail}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
-
-            {/* Next / Prev Controls & Pagination */}
-            <div className="flex items-center justify-between max-w-6xl mx-auto mt-6 px-2">
-              <div className="flex items-center gap-2">
-                <Button
-                  size="icon"
-                  variant="outline"
-                  onClick={handlePrev}
-                  className="w-10 h-10 rounded-full bg-white border-slate-200 hover:bg-slate-100 text-slate-700 shadow-sm"
-                  aria-label="Previous Case Study"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </Button>
-
-                <Button
-                  size="icon"
-                  variant="outline"
-                  onClick={handleNext}
-                  className="w-10 h-10 rounded-full bg-white border-slate-200 hover:bg-slate-100 text-slate-700 shadow-sm"
-                  aria-label="Next Case Study"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </Button>
-
-                <button
-                  onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                  className="text-xs text-slate-500 hover:text-slate-900 ml-2"
-                >
-                  {isAutoPlaying ? "Pause Auto-slide" : "Play Auto-slide"}
-                </button>
-              </div>
-
-              {/* Dot Indicators */}
-              <div className="flex items-center gap-1.5">
-                {filteredProjects.map((_, dotIdx) => (
-                  <button
-                    key={dotIdx}
-                    onClick={() => {
-                      setDirection(dotIdx > currentIndex ? 1 : -1);
-                      setCurrentIndex(dotIdx);
-                    }}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      currentIndex === dotIdx
-                        ? "w-6 bg-slate-900"
-                        : "w-2 bg-slate-300 hover:bg-slate-400"
-                    }`}
-                    aria-label={`Go to slide ${dotIdx + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
+                )}
+              </motion.div>
+            ))}
           </div>
         )}
 
-        {/* 2. GRID VIEW MODE */}
+        {/* 2. COMPACT GRID VIEW (Optional Fast Scanning) */}
         {viewMode === "grid" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProjects.map((project) => (
               <div
                 key={project.id}
-                className="apple-card p-6 sm:p-7 flex flex-col justify-between"
+                className="apple-card p-6 flex flex-col justify-between space-y-4"
               >
                 <div>
                   {project.screenshot && (
@@ -506,12 +397,12 @@ export function ProjectsApple() {
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">{project.title}</h3>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2 leading-snug">{project.title}</h3>
                   <p className="text-xs font-mono text-slate-600 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200 mb-3 inline-block">
                     {project.architecture}
                   </p>
 
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">{project.description}</p>
+                  <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">{project.description}</p>
                 </div>
 
                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
@@ -519,12 +410,21 @@ export function ProjectsApple() {
                     {Object.values(project.metrics)[0]}
                   </div>
 
-                  {project.url && (
-                    <Button size="sm" asChild className="bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-full text-xs h-8 px-4">
+                  {project.url && project.url !== "" ? (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      asChild
+                      className="rounded-full text-xs font-medium border-slate-200 bg-white"
+                    >
                       <a href={project.url} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-3 h-3 mr-1" /> Live Site
+                        <ExternalLink className="w-3.5 h-3.5 mr-1" /> Live Site
                       </a>
                     </Button>
+                  ) : (
+                    <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 font-semibold">
+                      Production Active
+                    </span>
                   )}
                 </div>
               </div>
