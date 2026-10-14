@@ -295,9 +295,9 @@ export function TestimonialsApple() {
           </div>
         </motion.div>
 
-        {/* REVIEWS SLIDER */}
+        {/* REVIEWS SLIDER - ZERO CLS STABLE SHELL */}
         <div className="relative max-w-5xl mx-auto">
-          <div className="min-h-[360px] flex flex-col justify-center">
+          <div className="min-h-[420px] sm:min-h-[360px] flex flex-col justify-center">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={`${activeFilter}-${currentIndex}`}
@@ -311,7 +311,7 @@ export function TestimonialsApple() {
                 {currentPair.map((item) => (
                   <div
                     key={item.id}
-                    className="apple-card p-6 sm:p-8 flex flex-col justify-between h-full space-y-5 bg-white border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300"
+                    className="apple-card p-6 sm:p-8 flex flex-col justify-between h-full min-h-[340px] sm:min-h-[320px] space-y-5 bg-white border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300"
                   >
                     <div className="space-y-4">
                       {/* Top Rating & Project Badge */}
@@ -332,10 +332,12 @@ export function TestimonialsApple() {
                         {item.project}
                       </p>
 
-                      {/* Quote */}
-                      <p className="text-sm text-slate-700 leading-relaxed italic">
-                        "{item.quote}"
-                      </p>
+                      {/* Quote with fixed height wrapper to prevent jumping */}
+                      <div className="min-h-[85px] flex items-start">
+                        <p className="text-sm text-slate-700 leading-relaxed italic line-clamp-4">
+                          "{item.quote}"
+                        </p>
+                      </div>
                     </div>
 
                     {/* Clean, Non-Wrapping Responsive Client Footer */}

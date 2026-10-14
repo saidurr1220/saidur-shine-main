@@ -175,7 +175,7 @@ export function ProjectsApple() {
         {viewMode === "carousel" && currentProject && (
           <div className="relative">
             <div className="relative max-w-6xl mx-auto">
-              <div className="apple-card p-6 sm:p-8 lg:p-10 bg-white border border-slate-200 shadow-xl overflow-hidden min-h-[580px] flex flex-col justify-center">
+              <div className="apple-card p-6 sm:p-8 lg:p-10 bg-white border border-slate-200 shadow-xl overflow-hidden min-h-[820px] lg:min-h-[640px] flex flex-col justify-center">
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={currentProject.id}
@@ -224,7 +224,7 @@ export function ProjectsApple() {
                         </div>
 
                         {/* Description */}
-                        <p className="text-sm text-slate-600 leading-relaxed">
+                        <p className="text-sm text-slate-600 leading-relaxed line-clamp-2">
                           {currentProject.description}
                         </p>
 
@@ -235,7 +235,7 @@ export function ProjectsApple() {
                               <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
                               The Challenge
                             </h4>
-                            <p className="text-xs text-slate-600 leading-relaxed">
+                            <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">
                               {currentProject.problem}
                             </p>
                           </div>
@@ -245,7 +245,7 @@ export function ProjectsApple() {
                               <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                               Engineered Solution
                             </h4>
-                            <p className="text-xs text-slate-600 leading-relaxed">
+                            <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">
                               {currentProject.solution}
                             </p>
                           </div>
@@ -255,7 +255,7 @@ export function ProjectsApple() {
                               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                               Measurable Impact
                             </h4>
-                            <p className="text-xs text-slate-600 leading-relaxed">
+                            <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
                               {currentProject.impact}
                             </p>
                           </div>
@@ -355,6 +355,8 @@ export function ProjectsApple() {
                                 <img
                                   src={currentProject.screenshot}
                                   alt={`${currentProject.title} live screenshot preview`}
+                                  width={800}
+                                  height={500}
                                   className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
                                 />
                                 
@@ -487,6 +489,8 @@ export function ProjectsApple() {
                       <img
                         src={project.screenshot}
                         alt={project.title}
+                        width={800}
+                        height={450}
                         className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />

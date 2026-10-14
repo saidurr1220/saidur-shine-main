@@ -208,7 +208,7 @@ add_filter('onroute_calc_quote', function($distance, $vehicle, $service) {
                 </Badge>
               </div>
 
-              {/* Tab Switcher ? using Lucide icons, no emojis */}
+              {/* Tab Switcher - using Lucide icons, no emojis */}
               <div className="grid grid-cols-4 gap-1 bg-slate-100 p-1 rounded-xl">
                 {tabs.map((tab) => (
                   <button
@@ -226,8 +226,10 @@ add_filter('onroute_calc_quote', function($distance, $vehicle, $service) {
                 ))}
               </div>
 
-              {/* TAB 1: DYNAMIC PRICING SIMULATOR */}
-              {activeInspectorTab === "pricing" && (
+              {/* FIXED HEIGHT TAB CONTAINER TO ELIMINATE CLS */}
+              <div className="min-h-[355px] flex flex-col justify-between">
+                {/* TAB 1: DYNAMIC PRICING SIMULATOR */}
+                {activeInspectorTab === "pricing" && (
                 <div className="space-y-4">
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-slate-600 font-medium">Road Distance:</span>
@@ -339,7 +341,7 @@ add_filter('onroute_calc_quote', function($distance, $vehicle, $service) {
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
                       <div>
                         <p className="font-bold">Purchase event pushed to dataLayer</p>
-                        <p className="text-[11px] text-emerald-700 mt-0.5 font-mono">{currentTxId} tracked ? sessionStorage lock set</p>
+                        <p className="text-[11px] text-emerald-700 mt-0.5 font-mono">{currentTxId} tracked - sessionStorage lock active</p>
                       </div>
                     </div>
                   )}
@@ -348,8 +350,8 @@ add_filter('onroute_calc_quote', function($distance, $vehicle, $service) {
                     <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-900 flex items-start gap-2">
                       <ShieldCheck className="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-bold">Duplicate blocked ? ad spend protected</p>
-                        <p className="text-[11px] text-rose-700 mt-0.5 font-mono">{currentTxId} already tracked ? Google Ads event suppressed</p>
+                        <p className="font-bold">Duplicate blocked - ad spend protected</p>
+                        <p className="text-[11px] text-rose-700 mt-0.5 font-mono">{currentTxId} already tracked - Google Ads event suppressed</p>
                       </div>
                     </div>
                   )}
@@ -431,10 +433,11 @@ add_filter('onroute_calc_quote', function($distance, $vehicle, $service) {
                     </pre>
                   </div>
                   <p className="text-[10px] font-mono text-slate-400 text-center">
-                    OOP hook ? 100% upgrade-safe, no core modifications
+                    OOP hook - 100% upgrade-safe, zero core modifications
                   </p>
                 </div>
               )}
+              </div>
 
               {/* Bottom Metrics */}
               <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
