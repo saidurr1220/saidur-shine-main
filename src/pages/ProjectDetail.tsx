@@ -103,20 +103,37 @@ const ProjectDetail = () => {
 
             {/* Request Flow */}
             {project.workflowSteps && (
-              <div className="apple-card p-6 bg-slate-900 text-white">
-                <h2 className="text-base font-bold mb-3 text-white flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-emerald-400" />
-                  System Request & Data Flow
-                </h2>
-                <div className="grid gap-2.5">
+              <div className="apple-card p-6 sm:p-8 bg-white border border-slate-200/90 shadow-lg">
+                <div className="flex items-center gap-2.5 mb-4">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-200/60">
+                    <Layers className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h2 className="text-base font-bold text-slate-900">
+                      System Request & Data Flow
+                    </h2>
+                    <p className="text-xs text-slate-500">
+                      Step-by-step production execution and data pipeline
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid gap-3 pt-2">
                   {project.workflowSteps.map((wf, idx) => (
-                    <div key={idx} className="p-3.5 rounded-xl bg-white/[0.05] border border-white/10 flex items-start gap-2.5">
-                      <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div
+                      key={idx}
+                      className="p-4 rounded-2xl bg-slate-50/90 border border-slate-200/80 flex items-start gap-3.5 transition-all hover:bg-slate-100/80 hover:border-slate-300"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-emerald-600 text-white font-mono text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5 shadow-xs">
                         {idx + 1}
                       </div>
-                      <div>
-                        <p className="text-xs font-bold text-white mb-0.5">{wf.step}</p>
-                        <p className="text-xs text-slate-300 leading-relaxed">{wf.detail}</p>
+                      <div className="space-y-1">
+                        <p className="text-sm font-bold text-slate-900 leading-snug">
+                          {wf.step}
+                        </p>
+                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                          {wf.detail}
+                        </p>
                       </div>
                     </div>
                   ))}
