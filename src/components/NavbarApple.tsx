@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { name: "Projects", section: "projects" },
-  { name: "Services", section: "services" },
   { name: "About", section: "about" },
+  { name: "Services", section: "services" },
+  { name: "Projects", section: "projects" },
+  { name: "Reviews", section: "testimonials" },
   { name: "Contact", section: "contact" },
 ];
 
@@ -46,13 +47,13 @@ export function NavbarApple() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#fbfbfd]/90 backdrop-blur-md border-b border-black/[0.04] py-3.5 shadow-2xs"
-          : "bg-transparent py-5"
+          ? "bg-[#0b101b]/90 backdrop-blur-md border-b border-white/[0.08] py-4 shadow-lg"
+          : "bg-[#0b101b] py-5 border-b border-white/[0.05]"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         <div className="flex items-center justify-between">
-          {/* Logo Brand: Rounded square SR with emerald dot + Bold Name */}
+          {/* Logo Brand: Rounded square SR + Name & Subtitle */}
           <a
             href="/#home"
             onClick={(e) => {
@@ -63,27 +64,27 @@ export function NavbarApple() {
             }}
             className="flex items-center gap-3 group"
           >
-            <div className="relative">
-              <div className="w-10 h-10 rounded-xl bg-slate-950 text-white flex items-center justify-center font-mono font-bold text-xs tracking-wider shadow-sm">
-                SR
-              </div>
-              <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-[#10b981] border-2 border-white"></span>
+            <div className="w-10 h-10 rounded-xl bg-slate-900 border border-white/10 text-white flex items-center justify-center font-mono font-bold text-xs tracking-wider shadow-sm">
+              SR
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm font-bold text-white tracking-tight leading-none">
+                Md. Saidur Rahman
+              </span>
+              <span className="text-[10px] text-slate-400 font-medium mt-1">
+                Full-Stack WordPress Engineer
               </span>
             </div>
-            <span className="text-base font-bold text-slate-900 tracking-tight">
-              Md. Saidur Rahman
-            </span>
           </a>
 
           {/* Clean Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-7">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={`#${link.section}`}
                 onClick={(e) => handleNavClick(e, link.section)}
-                className="text-sm font-medium text-slate-700 hover:text-slate-950 transition-colors"
+                className="text-xs font-medium text-slate-300 hover:text-white transition-colors"
               >
                 {link.name}
               </a>
@@ -95,7 +96,7 @@ export function NavbarApple() {
             <Button
               size="sm"
               onClick={(e) => handleNavClick(e, "contact")}
-              className="rounded-full text-xs font-semibold bg-[#05513a] hover:bg-[#033b2a] text-white shadow-xs h-10 px-5 flex items-center gap-2"
+              className="rounded-full text-xs font-semibold bg-[#05513a] hover:bg-[#033b2a] text-white border border-[#10b981]/40 shadow-sm h-9 px-5 flex items-center gap-2"
             >
               <span>Let's Talk</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -108,7 +109,7 @@ export function NavbarApple() {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className="rounded-xl border border-slate-200 text-slate-700 bg-white"
+              className="rounded-xl border border-white/10 text-slate-200 bg-slate-900"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -118,19 +119,19 @@ export function NavbarApple() {
 
         {/* Mobile Dropdown Menu */}
         {isOpen && (
-          <div className="md:hidden mt-3 p-4 rounded-3xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-xl space-y-2">
+          <div className="md:hidden mt-3 p-4 rounded-3xl bg-[#0f172a] border border-white/10 shadow-2xl space-y-2">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={`#${link.section}`}
                 onClick={(e) => handleNavClick(e, link.section)}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-emerald-700 hover:bg-slate-50 rounded-xl transition-colors"
+                className="block py-2 px-3 text-sm font-medium text-slate-200 hover:text-emerald-400 hover:bg-slate-800 rounded-xl transition-colors"
               >
                 {link.name}
               </a>
             ))}
 
-            <div className="pt-2 border-t border-slate-100">
+            <div className="pt-2 border-t border-slate-800">
               <Button
                 size="sm"
                 className="w-full text-xs font-semibold bg-[#05513a] hover:bg-[#033b2a] text-white rounded-full h-10 flex items-center justify-center gap-2"

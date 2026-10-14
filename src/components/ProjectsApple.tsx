@@ -2,99 +2,81 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
-  Lock,
   ExternalLink,
+  Lock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 const projectCategories = [
-  "All Projects",
+  "All",
   "WordPress",
   "E-commerce",
   "Custom Systems",
 ];
 
 export function ProjectsApple() {
-  const [selectedFilter, setSelectedFilter] = useState("All Projects");
+  const [selectedFilter, setSelectedFilter] = useState("All");
 
   return (
-    <section id="projects" className="py-24 px-4 sm:px-6 bg-[#fbfbfd] border-t border-slate-200/60">
+    <section id="projects" className="py-24 px-4 sm:px-6 bg-[#0b101b] text-white">
       <div className="container mx-auto max-w-6xl">
-        {/* Section Header matching uploaded design */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          {/* Left Title */}
+        {/* Section Header: Dark Header matching design */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12">
           <div>
-            <span className="text-[11px] font-bold tracking-widest text-[#087f5b] uppercase block mb-2">
-              SELECTED WORK
+            <span className="text-[11px] font-mono font-bold tracking-widest text-[#10b981] uppercase block mb-1">
+              FEATURED PROJECTS
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight leading-tight">
-              Built with purpose.
-            </h2>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#087f5b] tracking-tight leading-tight">
-              Engineered to perform.
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Selected work.
             </h2>
           </div>
 
-          {/* Right Subtitle & Category Filter Buttons */}
-          <div className="space-y-4 md:text-right max-w-md">
-            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-              A selection of projects that showcase real-world problem solving with WordPress, WooCommerce, and custom systems.
-            </p>
-
-            {/* Filter Pills */}
-            <div className="flex flex-wrap items-center md:justify-end gap-2">
-              {projectCategories.map((cat) => {
-                const isActive = selectedFilter === cat;
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setSelectedFilter(cat)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                      isActive
-                        ? "bg-[#05513a] text-white font-semibold shadow-xs"
-                        : "bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
-            </div>
+          {/* Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            {projectCategories.map((cat) => {
+              const isActive = selectedFilter === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedFilter(cat)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                    isActive
+                      ? "bg-[#10b981] text-slate-950 font-bold shadow-sm"
+                      : "bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10"
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* 1. TOP FEATURED PROJECT CARD: Real-Time Trade Mirror Engine */}
+        {/* 1. TOP FEATURED PROJECT CARD: Dark Real-Time Trade Mirror Engine */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="rounded-3xl bg-[#f4f6f8] border border-slate-200/80 p-6 sm:p-10 mb-10 shadow-sm"
+          className="rounded-3xl bg-[#111927] border border-white/10 p-6 sm:p-8 mb-8 shadow-2xl relative overflow-hidden group"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Column: Browser Mockup with Mirror Control */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left: Terminal Trading Mockup Frame */}
             <div className="lg:col-span-7">
-              <div className="rounded-2xl sm:rounded-3xl bg-[#0f172a] border border-slate-800 shadow-2xl overflow-hidden">
-                {/* Browser Titlebar */}
-                <div className="bg-[#1e293b]/90 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+              <div className="rounded-2xl bg-[#090d16] border border-white/10 overflow-hidden shadow-2xl">
+                <div className="bg-[#131c2d] px-4 py-2 border-b border-white/10 flex items-center justify-between text-xs text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    <span className="font-mono text-[11px] text-white">Trade Mirror</span>
                   </div>
-                  <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-slate-900/60 text-[11px] font-mono text-slate-400 border border-slate-700/50">
-                    <Lock className="w-2.5 h-2.5 text-emerald-400" />
-                    <span>mirror-control.live</span>
-                  </div>
-                  <div className="w-4" />
+                  <div className="text-[10px] font-mono text-slate-400">mirror-control.live</div>
                 </div>
 
-                {/* Screenshot */}
-                <div className="aspect-[16/10] bg-[#0b0f17] overflow-hidden">
+                <div className="aspect-[16/10] overflow-hidden bg-slate-950">
                   <img
                     src="/screenshots/mirror-control.png"
-                    alt="Mirror Control production dashboard"
+                    alt="Mirror Control Trading Engine"
                     width={800}
                     height={500}
                     className="w-full h-full object-cover object-top block"
@@ -103,159 +85,132 @@ export function ProjectsApple() {
               </div>
             </div>
 
-            {/* Right Column: Project Intel & CTA */}
-            <div className="lg:col-span-5 space-y-5">
-              <span className="text-[11px] font-mono font-bold text-[#087f5b] tracking-wider uppercase block">
-                01 / FEATURED PROJECT
+            {/* Right: Intel & Meta */}
+            <div className="lg:col-span-5 space-y-4">
+              <span className="text-[11px] font-mono font-bold text-[#10b981] tracking-wider uppercase block">
+                CUSTOM SYSTEM
               </span>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight leading-snug">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
                 Real-Time Trade Mirror Engine
               </h3>
 
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Bybit to Bitget UTA trade mirroring with a custom monitoring dashboard.
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                A high-performance trade mirroring platform with real-time data processing, automated execution, and advanced risk management.
               </p>
 
               {/* Tech Badges */}
               <div className="flex flex-wrap items-center gap-2 pt-1">
-                <span className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-800 shadow-2xs flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-200">
                   Node.js
                 </span>
-                <span className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-800 shadow-2xs flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-sky-500" />
+                <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-200">
                   TypeScript
                 </span>
-                <span className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-800 shadow-2xs flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-indigo-500" />
+                <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-200">
                   PostgreSQL
                 </span>
               </div>
 
-              {/* Action Button */}
+              {/* View Case Study CTA */}
               <div className="pt-2">
-                <Button
-                  size="lg"
-                  asChild
-                  className="rounded-full bg-[#0f172a] hover:bg-[#1e293b] text-white font-semibold text-xs h-11 px-6 shadow-sm"
+                <Link
+                  to="/project/bybit-bitget-mirror-engine"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-[#10b981] hover:text-[#34d399] transition-colors group/link"
                 >
-                  <Link to="/project/bybit-bitget-mirror-engine" className="flex items-center gap-2">
-                    <span>View Case Study</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </Button>
+                  <span>View Case Study</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
+                </Link>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* 2. TWO-COLUMN GRID BELOW FEATURED PROJECT */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Card 1: WordPress Architecture / Vault Labs */}
-          <div className="space-y-4">
-            <div className="rounded-2xl sm:rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden p-3 group">
-              {/* Browser mockup header */}
-              <div className="bg-slate-50 px-3 py-2 border-b border-slate-100 rounded-t-xl flex items-center justify-between mb-2">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-slate-300" />
-                  <div className="w-2 h-2 rounded-full bg-slate-300" />
-                  <div className="w-2 h-2 rounded-full bg-slate-300" />
-                </div>
-                <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-white text-[10px] font-mono text-slate-500 border border-slate-200/60">
-                  <Lock className="w-2.5 h-2.5 text-slate-400" />
-                  <span>Project preview</span>
-                </div>
-                <div className="w-3" />
-              </div>
-
-              {/* Image Frame */}
-              <div className="aspect-[16/10] bg-slate-100 rounded-xl overflow-hidden">
+        {/* 2. TWO-COLUMN PROJECT CARDS (White/Clean style matching design) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-slate-900">
+          {/* Card 1: WordPress Platform / Vault Labs */}
+          <div className="rounded-3xl bg-white border border-slate-200 shadow-xl overflow-hidden p-6 space-y-4 flex flex-col justify-between group">
+            <div className="space-y-4">
+              {/* Image Preview with browser frame */}
+              <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-950 aspect-[16/10]">
                 <img
                   src="/screenshots/vault-labs.png"
-                  alt="Vault Labs Research Laboratory Platform"
+                  alt="Laboratory Commerce Platform"
                   width={600}
                   height={375}
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                 />
               </div>
+
+              <div>
+                <span className="text-[10px] font-mono font-bold text-[#087f5b] tracking-wider uppercase block mb-1">
+                  WORDPRESS PLATFORM
+                </span>
+                <h4 className="text-xl font-bold text-slate-950 leading-snug">
+                  Laboratory Research Commerce Platform
+                </h4>
+              </div>
+
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                A custom WordPress and WooCommerce platform with 20+ bespoke modules, wholesale pricing, and automated store credit redemption.
+              </p>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="pt-2 flex items-center justify-between border-t border-slate-100">
               <Link
                 to="/project/vault-labs-research"
-                className="group flex items-center gap-2 text-base sm:text-lg font-bold text-slate-950 hover:text-[#087f5b] transition-colors"
+                className="text-xs font-bold text-[#087f5b] hover:text-[#05513a] flex items-center gap-1.5"
               >
-                <span>WordPress Platform &amp; Custom Modules</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <span>View Project</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
-              <span className="text-[11px] font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
-                Project preview
-              </span>
+              <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 group-hover:bg-[#087f5b] group-hover:text-white transition-colors">
+                <ArrowRight className="w-4 h-4" />
+              </div>
             </div>
-
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Transformed WooCommerce into a full laboratory platform with 20+ custom modules, dual-mode wholesale inventory, and store credit ledger.
-            </p>
           </div>
 
-          {/* Card 2: WooCommerce Store / OnRoute Couriers */}
-          <div className="space-y-4">
-            <div className="rounded-2xl sm:rounded-3xl bg-white border border-slate-200 shadow-md overflow-hidden p-3 group">
-              {/* Browser mockup header */}
-              <div className="bg-slate-50 px-3 py-2 border-b border-slate-100 rounded-t-xl flex items-center justify-between mb-2">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-rose-400" />
-                  <div className="w-2 h-2 rounded-full bg-amber-400" />
-                  <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                </div>
-                <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-white text-[10px] font-mono text-slate-500 border border-slate-200/60">
-                  <Lock className="w-2.5 h-2.5 text-slate-400" />
-                  <span>Project preview</span>
-                </div>
-                <div className="w-3" />
-              </div>
-
-              {/* Image Frame */}
-              <div className="aspect-[16/10] bg-slate-100 rounded-xl overflow-hidden">
+          {/* Card 2: WooCommerce Website / OnRoute Couriers */}
+          <div className="rounded-3xl bg-white border border-slate-200 shadow-xl overflow-hidden p-6 space-y-4 flex flex-col justify-between group">
+            <div className="space-y-4">
+              {/* Image Preview with browser frame */}
+              <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-950 aspect-[16/10]">
                 <img
                   src="/screenshots/onroute.png"
-                  alt="OnRoute Couriers dynamic pricing engine"
+                  alt="Industrial Dynamic Pricing Engine"
                   width={600}
                   height={375}
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                 />
               </div>
+
+              <div>
+                <span className="text-[10px] font-mono font-bold text-[#087f5b] tracking-wider uppercase block mb-1">
+                  WOOCOMMERCE WEBSITE
+                </span>
+                <h4 className="text-xl font-bold text-slate-950 leading-snug">
+                  Dynamic Logistics &amp; Booking Store
+                </h4>
+              </div>
+
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                A professional e-commerce platform with real-time distance calculations, Stripe webhooks, and streamlined order booking.
+              </p>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="pt-2 flex items-center justify-between border-t border-slate-100">
               <Link
                 to="/project/onroute-couriers"
-                className="group flex items-center gap-2 text-base sm:text-lg font-bold text-slate-950 hover:text-[#087f5b] transition-colors"
+                className="text-xs font-bold text-[#087f5b] hover:text-[#05513a] flex items-center gap-1.5"
               >
-                <span>WooCommerce Dynamic Booking Store</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <span>View Project</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
-              <span className="text-[11px] font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
-                Project preview
-              </span>
+              <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 group-hover:bg-[#087f5b] group-hover:text-white transition-colors">
+                <ArrowRight className="w-4 h-4" />
+              </div>
             </div>
-
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Google Distance Matrix dynamic pricing calculations with Stripe checkout integration and GA4 deduplicated conversion tracking.
-            </p>
           </div>
-        </div>
-
-        {/* View All Projects Link at bottom */}
-        <div className="mt-12 text-center">
-          <Link
-            to="/project/bybit-bitget-mirror-engine"
-            className="inline-flex items-center gap-2 text-sm font-bold text-slate-950 hover:text-[#087f5b] transition-colors group"
-          >
-            <span>View All Projects</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 text-[#087f5b]" />
-          </Link>
         </div>
       </div>
     </section>

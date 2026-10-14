@@ -1,146 +1,106 @@
 import React from "react";
 import {
   Code2,
-  Database,
-  Server,
-  Zap,
-  Target,
-  Shield,
-  GraduationCap,
-  Globe2,
-  Sparkles,
+  MessageSquare,
+  Users,
 } from "lucide-react";
-import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 
 export function AboutApple() {
-  const pillars = [
+  const steps = [
     {
-      icon: Server,
-      title: "Custom Plugin Architecture (OOP)",
-      desc: "Developing custom post types, taxonomies, AJAX endpoints, and upgrade-safe hooks that never touch core files.",
-    },
-    {
-      icon: Database,
-      title: "WooCommerce Custom Platforms",
-      desc: "Engineering complex B2B/B2C purchasing, shared dual-mode inventory, and store credit ledgers.",
-    },
-    {
+      num: "01",
       icon: Code2,
-      title: "Dynamic Distance Pricing & Booking",
-      desc: "Building multi-step instant quotes via Google Distance Matrix API with formula-based dynamic rates.",
+      title: "Clean architecture",
+      desc: "Well-structured, maintainable code that's built for performance and scalability.",
     },
     {
-      icon: Shield,
-      title: "GTM/GA4 Conversion Deduplication",
-      desc: "Transaction-ID bound tracking setups that prevent duplicate conversion counts from Stripe checkouts.",
+      num: "02",
+      icon: MessageSquare,
+      title: "Reliable communication",
+      desc: "Clear updates, realistic timelines, and a proactive approach throughout the project.",
+    },
+    {
+      num: "03",
+      icon: Users,
+      title: "Ongoing support",
+      desc: "Continued assistance after launch to keep your website running smoothly.",
     },
   ];
 
   return (
-    <section id="about" className="py-28 px-4 bg-white border-y border-black/[0.04]">
+    <section id="about" className="py-24 px-4 sm:px-6 bg-white border-b border-slate-100">
       <div className="container mx-auto max-w-6xl">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.6 , ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-center mb-16 space-y-3"
-        >
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 text-xs font-medium text-slate-700">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Engineering Track Record</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-            About Me & Agency Delivery
-          </h2>
-          <p className="text-slate-600 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Full stack WordPress developer with 2+ years of experience building custom, production-grade platforms with high delivery velocity.
-          </p>
-        </motion.div>
-
-        {/* 2-Column Bento Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
-          {/* Left Card: Bio & Core Metrics */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Heading & Large 01 Watermark */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.6 , ease: [0.25, 0.1, 0.25, 1] }}
-            className="lg:col-span-6 apple-card p-7 sm:p-8 flex flex-col justify-between"
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 relative"
           >
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-slate-900">
-                End-to-End Project Ownership
-              </h3>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Currently delivering <span className="font-semibold text-slate-900">10 to 15 client projects per month</span>, ranging from focused bug fixes to enterprise FinTech infrastructure builds worth <span className="font-semibold text-slate-900">$7,000+ USD</span>. Shipped 11 projects last month with <span className="font-semibold text-emerald-700">10 rated 5 stars</span>.
-              </p>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Engineered <span className="font-semibold text-slate-900">Mirror Control</span> (a $7,000 Bybit-to-Bitget trade mirror active 24/7) and transformed <span className="font-semibold text-slate-900">Vault Labs Research</span> into a full laboratory research commerce platform with 20+ custom modules via hooks and filters only, preserving 100% core upgrade safety.
-              </p>
-            </div>
+            {/* Subtle "01" Watermark */}
+            <span
+              className="absolute right-0 top-1/2 -translate-y-1/2 text-[140px] sm:text-[180px] font-extrabold text-slate-100 select-none pointer-events-none -z-0 opacity-70"
+              aria-hidden="true"
+            >
+              01
+            </span>
 
-            <div className="grid grid-cols-3 gap-3 pt-6 mt-6 border-t border-slate-100 text-center">
-              <div className="p-3 bg-slate-50 rounded-2xl">
-                <div className="text-2xl font-bold text-slate-900">10-15</div>
-                <div className="text-[11px] text-slate-500 font-medium mt-0.5">Projects / Mo</div>
+            <div className="relative z-10 space-y-4">
+              <span className="text-[11px] font-bold tracking-widest text-[#087f5b] uppercase block">
+                ABOUT ME
+              </span>
+
+              <div className="space-y-1">
+                <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-slate-950 tracking-tight leading-[1.15]">
+                  A development partner. From idea to{" "}
+                  <span className="text-[#087f5b]">impact.</span>
+                </h2>
               </div>
-              <div className="p-3 bg-slate-50 rounded-2xl">
-                <div className="text-2xl font-bold text-emerald-700">10 / 11</div>
-                <div className="text-[11px] text-slate-500 font-medium mt-0.5">Rated 5-Star</div>
-              </div>
-              <div className="p-3 bg-slate-50 rounded-2xl">
-                <div className="text-2xl font-bold text-slate-900">20+</div>
-                <div className="text-[11px] text-slate-500 font-medium mt-0.5">Custom Modules</div>
-              </div>
+
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-lg pt-2">
+                I'm a Full-Stack WordPress Engineer who helps clients and agencies turn ideas into reliable, high-performing websites and web systems. I care about clean code, clear communication, and long-term value.
+              </p>
             </div>
           </motion.div>
 
-          {/* Right Column: 4 Architectural Strength Pillars */}
-          <div className="lg:col-span-6 grid sm:grid-cols-2 gap-4">
-            {pillars.map((p, idx) => (
-              <motion.div
-                key={p.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.5, delay: idx * 0.08 , ease: [0.25, 0.1, 0.25, 1] }}
-                className="apple-card p-5 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-3">
-                    <p.icon className="w-5 h-5" />
+          {/* Right Column: 3 Pillars with 01, 02, 03 Badges */}
+          <div className="lg:col-span-6 space-y-6">
+            {steps.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.num}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex items-start gap-4 p-4 sm:p-5 rounded-2xl bg-white border border-slate-100 hover:border-slate-200 hover:shadow-xs transition-all"
+                >
+                  {/* Number Badge */}
+                  <span className="text-xs font-mono font-bold text-[#087f5b] bg-[#e8f6f0] px-2.5 py-1 rounded-lg flex-shrink-0 mt-0.5">
+                    {item.num}
+                  </span>
+
+                  {/* Icon */}
+                  <div className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-4 h-4" />
                   </div>
-                  <h4 className="font-bold text-sm text-slate-900 mb-1.5">{p.title}</h4>
-                  <p className="text-xs text-slate-600 leading-relaxed">{p.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
 
-        {/* Education & Clients Card */}
-        <div className="grid sm:grid-cols-2 gap-4">
-          <div className="apple-card p-5 flex items-center gap-4">
-            <div className="w-11 h-11 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-900 flex-shrink-0">
-              <GraduationCap className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-bold text-sm text-slate-900">B.Sc. in Computer Science & Engineering</h4>
-              <p className="text-xs text-slate-500">North South University, Dhaka</p>
-            </div>
-          </div>
-
-          <div className="apple-card p-5 flex items-center gap-4">
-            <div className="w-11 h-11 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-900 flex-shrink-0">
-              <Globe2 className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-bold text-sm text-slate-900">International Delivery Experience</h4>
-              <p className="text-xs text-slate-500">Clients across US, UK, and Australia</p>
-            </div>
+                  {/* Text */}
+                  <div className="space-y-0.5">
+                    <h3 className="text-sm sm:text-base font-bold text-slate-950">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>
