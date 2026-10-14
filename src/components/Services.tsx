@@ -18,7 +18,7 @@ const services = [
     badge: "OOP Architecture",
     title: "Custom Plugin Development",
     description:
-      "Scalable WordPress plugins engineered from scratch using OOP standards, custom post types, hooks/filters, and AJAX interfaces ? 100% upgrade-safe without touching core.",
+      "Scalable WordPress plugins engineered from scratch using OOP standards, custom post types, hooks/filters, and AJAX interfaces - 100% upgrade-safe without touching core.",
     tags: ["Custom Post Types", "Hooks & Filters", "AJAX", "WP REST API"],
   },
   {

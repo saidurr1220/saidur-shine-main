@@ -22,7 +22,7 @@ const Resume = () => {
             <div className="text-center mb-10">
               <h1 className="text-4xl md:text-5xl font-extrabold mb-3 text-foreground">Resume / Curriculum Vitae</h1>
               <p className="text-muted-foreground text-base max-w-xl mx-auto mb-6">
-                Md. Saidur Rahman ? Full Stack WordPress Developer with 2+ years of production experience
+                Md. Saidur Rahman - Full Stack WordPress Developer with 2+ years of production experience
               </p>
               <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md shadow-primary/20 rounded-xl">
                 <a href="/resume.pdf" download>
