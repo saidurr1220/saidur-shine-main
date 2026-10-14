@@ -49,7 +49,7 @@ export function ServicesApple() {
           </p>
         </div>
 
-        {/* 3 Horizontal Service Cards with Green Tint Background matching design */}
+        {/* 3 Horizontal Service Cards with Soft Mint Hover State */}
         <div className="space-y-4">
           {serviceList.map((item, idx) => {
             const Icon = item.icon;
@@ -60,14 +60,14 @@ export function ServicesApple() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.45, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="p-5 sm:p-6 rounded-2xl bg-[#f2faf7] border border-[#d1ede1] flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-[#10b981]/50 transition-all group"
+                className="p-5 sm:p-6 rounded-2xl bg-[#f8fbf9] hover:bg-[#eff8f4] border border-[#d1ede1]/70 hover:border-[#10b981]/50 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-200 group cursor-default"
               >
                 {/* Left: Number + Icon + Title */}
                 <div className="flex items-center gap-4 md:w-1/3">
-                  <span className="text-xs font-mono font-bold text-[#087f5b] bg-white px-2.5 py-1 rounded-lg border border-[#d1ede1]">
+                  <span className="text-xs font-mono font-bold text-[#087f5b] bg-white px-2.5 py-1 rounded-lg border border-[#d1ede1] shadow-2xs">
                     {item.num}
                   </span>
-                  <div className="w-10 h-10 rounded-xl bg-white border border-[#d1ede1] text-[#087f5b] flex items-center justify-center flex-shrink-0 shadow-2xs">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-[#d1ede1] text-[#087f5b] flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
                     <Icon className="w-5 h-5" />
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-slate-950">
@@ -82,7 +82,7 @@ export function ServicesApple() {
 
                 {/* Right: Circular Arrow Button */}
                 <div className="flex justify-end md:w-12">
-                  <div className="w-9 h-9 rounded-full bg-white border border-[#d1ede1] text-slate-700 group-hover:text-[#087f5b] group-hover:border-[#087f5b] flex items-center justify-center transition-colors">
+                  <div className="w-9 h-9 rounded-full bg-white border border-[#d1ede1] text-slate-600 group-hover:text-[#087f5b] group-hover:border-[#087f5b] flex items-center justify-center transition-all duration-200 shadow-2xs">
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                   </div>
                 </div>

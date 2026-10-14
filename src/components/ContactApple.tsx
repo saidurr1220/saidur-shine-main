@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { ArrowRight, Send, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { motion } from "framer-motion";
 
 export function ContactApple() {
   const { toast } = useToast();
@@ -72,7 +71,10 @@ export function ContactApple() {
 
             <div className="space-y-1">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                Let's build something
+                Let's build
+              </h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                something
               </h2>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#10b981] tracking-tight leading-tight">
                 exceptional.
@@ -89,9 +91,9 @@ export function ContactApple() {
             </div>
           </div>
 
-          {/* Right Column: Clean White Form Card matching design */}
+          {/* Right Column: Clean White Form Card matching screenshot */}
           <div className="lg:col-span-7">
-            <div className="p-6 sm:p-8 rounded-3xl bg-white text-slate-900 shadow-2xl border border-white/10">
+            <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white text-slate-900 shadow-2xl border border-white/10">
               {submitted ? (
                 <div className="py-12 text-center space-y-3">
                   <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
@@ -114,7 +116,7 @@ export function ContactApple() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="rounded-xl border-slate-200 bg-slate-50 text-xs h-10"
+                        className="rounded-xl border-slate-200 bg-slate-50 text-xs h-11 focus-visible:ring-[#10b981]"
                       />
                     </div>
                     <div className="space-y-1.5">
@@ -125,7 +127,7 @@ export function ContactApple() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="rounded-xl border-slate-200 bg-slate-50 text-xs h-10"
+                        className="rounded-xl border-slate-200 bg-slate-50 text-xs h-11 focus-visible:ring-[#10b981]"
                       />
                     </div>
                   </div>
@@ -136,7 +138,7 @@ export function ContactApple() {
                     <select
                       value={formData.projectType}
                       onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50 text-xs h-10 px-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#10b981]"
+                      className="w-full rounded-xl border border-slate-200 bg-slate-50 text-xs h-11 px-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#10b981]"
                     >
                       <option>Select a project type</option>
                       <option>Custom WordPress Plugin</option>
@@ -155,15 +157,15 @@ export function ContactApple() {
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="rounded-xl border-slate-200 bg-slate-50 text-xs leading-relaxed resize-none"
+                      className="rounded-xl border-slate-200 bg-slate-50 text-xs leading-relaxed resize-none focus-visible:ring-[#10b981]"
                     />
                   </div>
 
-                  {/* Submit Button */}
+                  {/* Full-width Submit Button matching screenshot */}
                   <Button
                     type="submit"
                     disabled={isSending}
-                    className="w-full rounded-xl bg-[#087f5b] hover:bg-[#066347] text-white font-semibold text-xs h-11 flex items-center justify-center gap-2 shadow-sm"
+                    className="w-full rounded-xl bg-[#087f5b] hover:bg-[#066347] text-white font-semibold text-xs h-11 flex items-center justify-center gap-2 shadow-sm transition-colors duration-150"
                   >
                     <span>{isSending ? "Sending..." : "Send Inquiry"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />

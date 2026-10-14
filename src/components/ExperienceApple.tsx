@@ -1,6 +1,5 @@
 import React from "react";
 import { Briefcase, GraduationCap } from "lucide-react";
-import { motion } from "framer-motion";
 
 export function ExperienceApple() {
   return (
@@ -23,15 +22,15 @@ export function ExperienceApple() {
           </p>
         </div>
 
-        {/* Clean Timeline List matching design */}
+        {/* Clean Timeline List matching screenshot */}
         <div className="space-y-4 max-w-5xl mx-auto">
           {/* Item 1: WordPress Developer */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-[#fbfbfd] border border-slate-200/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-5 sm:p-6 rounded-2xl bg-[#fbfbfd] border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-slate-300 transition-colors">
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center flex-shrink-0">
-                <Briefcase className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center flex-shrink-0 shadow-2xs">
+                <Briefcase className="w-5 h-5 text-slate-700" />
               </div>
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 <h3 className="text-base font-bold text-slate-950">
                   WordPress Developer
                 </h3>
@@ -41,20 +40,20 @@ export function ExperienceApple() {
               </div>
             </div>
 
-            <div className="sm:self-center">
-              <span className="text-xs font-semibold text-[#087f5b] bg-[#e8f6f0] border border-[#d1ede1] px-3.5 py-1.5 rounded-full whitespace-nowrap">
+            <div className="sm:self-center flex-shrink-0">
+              <span className="text-xs font-semibold text-[#087f5b] bg-[#e8f6f0] border border-[#d1ede1] px-3.5 py-1.5 rounded-full whitespace-nowrap shadow-2xs">
                 Professional Experience
               </span>
             </div>
           </div>
 
           {/* Item 2: Education */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-[#fbfbfd] border border-slate-200/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-5 sm:p-6 rounded-2xl bg-[#fbfbfd] border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-slate-300 transition-colors">
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center flex-shrink-0">
-                <GraduationCap className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center flex-shrink-0 shadow-2xs">
+                <GraduationCap className="w-5 h-5 text-slate-700" />
               </div>
-              <div className="space-y-1">
+              <div className="space-y-0.5">
                 <h3 className="text-base font-bold text-slate-950">
                   B.Sc. in Computer Science &amp; Engineering
                 </h3>
@@ -64,8 +63,8 @@ export function ExperienceApple() {
               </div>
             </div>
 
-            <div className="sm:self-center">
-              <span className="text-xs font-semibold text-[#0284c7] bg-[#f0f9ff] border border-[#bae6fd] px-3.5 py-1.5 rounded-full whitespace-nowrap">
+            <div className="sm:self-center flex-shrink-0">
+              <span className="text-xs font-semibold text-[#0284c7] bg-[#f0f9ff] border border-[#bae6fd] px-3.5 py-1.5 rounded-full whitespace-nowrap shadow-2xs">
                 Education
               </span>
             </div>
