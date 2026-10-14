@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import {
   Mail,
   Download,
@@ -6,19 +6,12 @@ import {
   Star,
   Activity,
   Lock,
-  Layers,
   Sparkles,
-  ExternalLink,
-  ShieldCheck,
-  Cpu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Hero3DScene } from "@/components/Hero3DScene";
+import { motion } from "framer-motion";
 
 export function HeroApple() {
-  const [activeView, setActiveView] = useState<"mirror" | "spatial">("mirror");
-
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -27,45 +20,13 @@ export function HeroApple() {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Interactive 3D Card Tilt on Mouse Move
-  const cardRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Smooth springs for high-end organic feel
-  const springConfig = { damping: 25, stiffness: 200 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), springConfig);
-  const brightness = useSpring(useTransform(mouseY, [-0.5, 0.5], [1.05, 0.95]), springConfig);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
   return (
     <section
       id="home"
-      className="relative min-h-[94vh] flex items-center justify-center pt-28 sm:pt-32 pb-16 px-4 sm:px-6 apple-canvas overflow-hidden"
+      className="relative min-h-[88vh] flex items-center justify-center pt-28 sm:pt-32 pb-16 px-4 sm:px-6 bg-[#fbfbfd]"
     >
-      {/* 3D Interactive Three.js Orbital Background */}
-      <Hero3DScene interactive={true} />
-
-      {/* Ambient Radial Glows */}
-      <div className="absolute top-16 left-1/4 w-96 h-96 bg-emerald-100/35 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-slate-200/40 rounded-full blur-3xl pointer-events-none -z-10" />
-
       <div className="container mx-auto max-w-6xl relative z-10">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left Column: Authoritative Editorial Copy */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -74,7 +35,7 @@ export function HeroApple() {
             className="lg:col-span-6 space-y-6"
           >
             {/* Live Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 border border-emerald-200/80 rounded-full text-xs text-emerald-800 shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 border border-emerald-200/80 rounded-full text-xs text-emerald-800">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="font-semibold tracking-tight">Available for Client Builds &amp; Agency Roles</span>
             </div>
@@ -127,8 +88,8 @@ export function HeroApple() {
               </Button>
             </div>
 
-            {/* Clean Inline Stats Strip (Unified Single Card with Full Names) */}
-            <div className="p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-xs grid grid-cols-2 sm:grid-cols-4 gap-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 text-center">
+            {/* Clean Inline Stats Strip (Unified Single Card with Full Clean Typography) */}
+            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs grid grid-cols-2 sm:grid-cols-4 gap-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 text-center">
               <div className="pt-2 sm:pt-0">
                 <div className="text-xl font-bold text-slate-900">$7,000</div>
                 <div className="text-[11px] text-slate-500 font-medium mt-0.5">Top Single Build</div>
@@ -150,55 +111,15 @@ export function HeroApple() {
             </div>
           </motion.div>
 
-          {/* Right Column: 3D Interactive Parallax Glass Window */}
+          {/* Right Column: Premium macOS Production Window (Clean, Sharp, High Contrast) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.98, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 space-y-3 perspective-1000"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 space-y-3"
           >
-            {/* View Toggle Pill on top of 3D window */}
-            <div className="flex items-center justify-between px-1">
-              <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Interactive 3D Stage</span>
-              </div>
-              <div className="flex items-center gap-1 bg-white p-1 rounded-full border border-slate-200/80 shadow-2xs">
-                <button
-                  onClick={() => setActiveView("mirror")}
-                  className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
-                    activeView === "mirror"
-                      ? "bg-slate-900 text-white font-semibold shadow-xs"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  Live Ops Dashboard
-                </button>
-                <button
-                  onClick={() => setActiveView("spatial")}
-                  className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
-                    activeView === "spatial"
-                      ? "bg-slate-900 text-white font-semibold shadow-xs"
-                      : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  3D Spatial Workstation
-                </button>
-              </div>
-            </div>
-
-            {/* 3D Tilted Interactive Card */}
-            <motion.div
-              ref={cardRef}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              style={{
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d",
-              }}
-              className="apple-card p-5 sm:p-6 bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-2xl space-y-4 rounded-3xl transition-shadow duration-300 hover:shadow-emerald-950/10 cursor-pointer"
-            >
+            {/* Flagship Production Window */}
+            <div className="p-5 sm:p-6 bg-white border border-slate-200/90 shadow-xl space-y-4 rounded-3xl">
               {/* Window Header */}
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div className="flex items-center gap-2">
@@ -209,69 +130,47 @@ export function HeroApple() {
                   </div>
                   <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-100 text-[11px] font-mono text-slate-700 border border-slate-200/70">
                     <Lock className="w-2.5 h-2.5 text-emerald-600" />
-                    <span>
-                      {activeView === "mirror" ? "mirror-control.live" : "spatial-workstation.3d"}
-                    </span>
+                    <span>mirror-control.live</span>
                   </div>
                 </div>
 
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/80 text-[10px] font-semibold">
                   <Activity className="w-3 h-3 text-emerald-600 animate-pulse" />
-                  <span>{activeView === "mirror" ? "24/7 LIVE PLATFORM" : "3D ENGINE ACTIVE"}</span>
+                  <span>24/7 LIVE PLATFORM</span>
                 </div>
               </div>
 
-              {/* View Switch: Mirror Control Dashboard vs 3D Spatial Workstation */}
-              <div className="relative rounded-2xl overflow-hidden border border-slate-200 aspect-[16/9] bg-slate-950 group">
-                {activeView === "mirror" ? (
-                  <>
-                    <img
-                      src="/screenshots/mirror-control.png"
-                      alt="Mirror Control production trading dashboard"
-                      width={800}
-                      height={450}
-                      className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute bottom-2.5 left-3 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-white text-[11px] font-mono flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>$7,000 USD Production Delivery</span>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <img
-                      src="/images/hero-3d-tech.png"
-                      alt="3D Holographic Developer Workstation"
-                      width={800}
-                      height={450}
-                      className="w-full h-full object-cover block transition-transform duration-500 group-hover:scale-[1.04]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute bottom-2.5 left-3 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-white text-[11px] font-mono flex items-center gap-1.5">
-                      <Cpu className="w-3 h-3 text-emerald-400" />
-                      <span>Glass Cube Holographic System Architecture</span>
-                    </div>
-                  </>
-                )}
+              {/* High-Res Dashboard Screenshot */}
+              <div className="relative rounded-2xl overflow-hidden border border-slate-200 aspect-[16/9] bg-slate-950 group shadow-inner">
+                <img
+                  src="/screenshots/mirror-control.png"
+                  alt="Mirror Control production trading dashboard"
+                  width={800}
+                  height={450}
+                  className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+                <div className="absolute bottom-2.5 left-3 px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md border border-white/10 text-white text-[11px] font-mono flex items-center gap-1.5 shadow-md">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>$7,000 USD Production Delivery</span>
+                </div>
               </div>
 
               {/* Integrated Telemetry Bar */}
               <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-100">
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xs font-mono font-bold text-slate-900">$538k+ USDT</div>
                   <div className="text-[9px] text-slate-500 uppercase tracking-wider mt-0.5">Bitget Margin</div>
                 </div>
-                <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-100">
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xs font-mono font-bold text-emerald-700">1:1 Strict Parity</div>
                   <div className="text-[9px] text-slate-500 uppercase tracking-wider mt-0.5">Position Match</div>
                 </div>
-                <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-100">
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
                   <div className="text-xs font-mono font-bold text-slate-900">$7,000 USD</div>
                   <div className="text-[9px] text-slate-500 uppercase tracking-wider mt-0.5">Contract Value</div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Clean Client Trust Note */}
             <p className="text-center text-xs text-slate-500 font-medium">
