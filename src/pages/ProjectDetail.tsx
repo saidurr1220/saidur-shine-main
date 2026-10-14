@@ -129,7 +129,7 @@ const ProjectDetail = () => {
                       </div>
                       <div className="space-y-1">
                         <p className="text-sm font-bold text-slate-900 leading-snug">
-                          {wf.step}
+                          {wf.step.replace(/^\d+\.\s*/, "")}
                         </p>
                         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                           {wf.detail}
