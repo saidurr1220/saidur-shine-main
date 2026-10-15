@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Quote,
   ChevronLeft,
@@ -8,21 +8,9 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { appleEase } from "@/lib/motion";
+import { reviews, ReviewItem } from "@/data/reviews";
 
-const clientReviews = [
-  {
-    quote: "Very professional and highly skilled developer. The work was completed quickly and accurately, communication was excellent, and he was always responsive. He understood the requirements perfectly and delivered exactly what I needed. I'm very satisfied with the result and would definitely work with him again. Highly recommended!",
-    name: "Tamas (tamscservenk)",
-    title: "Client • Hungary • $7,000 milestone project (via FB International BD)",
-    platform: "5.0 Fiverr review",
-  },
-  {
-    quote: "Highly professional, responsive, and committed throughout the project. He worked hard to solve complex technical issues and delivered a strong final result. Highly recommended.",
-    name: "Tamas (tamscservenk)",
-    title: "Client • Hungary • Phase 1 delivery (via FB International BD)",
-    platform: "5.0 Fiverr review",
-  },
-];
+type PlatformFilter = "All" | "Upwork" | "Fiverr";
 
 function UpworkIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
   return (
@@ -41,30 +29,65 @@ function UpworkIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
 export function TestimonialsApple() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
-  const [isMobile, setIsMobile] = useState(false);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [selectedFilter, setSelectedFilter] = useState<PlatformFilter>("All");
+  const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({});
+  const [isPaused, setIsPaused] = useState(false);
+  const [userInteracted, setUserInteracted] = useState(false);
   const shouldReduce = useReducedMotion();
 
-  React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+  // Responsive items per page: 1 on mobile (<768), 2 on tablet (<1024), 3 on desktop (>=1024)
+  useEffect(() => {
+    const updateItems = () => {
+      const w = window.innerWidth;
+      if (w < 768) {
+        setItemsPerPage(1);
+      } else if (w < 1024) {
+        setItemsPerPage(2);
+      } else {
+        setItemsPerPage(3);
+      }
     };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    updateItems();
+    window.addEventListener("resize", updateItems);
+    return () => window.removeEventListener("resize", updateItems);
   }, []);
 
-  const itemsPerPage = isMobile ? 1 : 2;
-  const totalPages = Math.ceil(clientReviews.length / itemsPerPage);
-  const currentPage = Math.floor(index / itemsPerPage);
+  // Filter tabs: show tab only if it has at least 1 review
+  const hasUpwork = reviews.some((r) => r.platform === "Upwork");
+  const hasFiverr = reviews.some((r) => r.platform === "Fiverr (agency)");
+
+  const filterTabs: { id: PlatformFilter; label: string }[] = [
+    { id: "All", label: "All" },
+    ...(hasUpwork ? [{ id: "Upwork" as const, label: "Upwork" }] : []),
+    ...(hasFiverr ? [{ id: "Fiverr" as const, label: "Fiverr" }] : []),
+  ];
+
+  const filteredReviews = reviews.filter((r) => {
+    if (selectedFilter === "All") return true;
+    if (selectedFilter === "Upwork") return r.platform === "Upwork";
+    if (selectedFilter === "Fiverr") return r.platform === "Fiverr (agency)";
+    return true;
+  });
+
+  const totalPages = Math.ceil(filteredReviews.length / itemsPerPage);
+  const currentPage = Math.min(
+    Math.floor(index / itemsPerPage),
+    Math.max(0, totalPages - 1)
+  );
 
   const prevReview = () => {
+    setUserInteracted(true);
     setDirection(-1);
     setIndex((prev) =>
-      prev === 0 ? Math.max(0, (totalPages - 1) * itemsPerPage) : Math.max(0, prev - itemsPerPage)
+      prev === 0
+        ? Math.max(0, (totalPages - 1) * itemsPerPage)
+        : Math.max(0, prev - itemsPerPage)
     );
   };
 
   const nextReview = () => {
+    setUserInteracted(true);
     setDirection(1);
     setIndex((prev) =>
       prev >= (totalPages - 1) * itemsPerPage ? 0 : prev + itemsPerPage
@@ -73,6 +96,7 @@ export function TestimonialsApple() {
 
   const handleDragEnd = (_e: any, { offset }: { offset: { x: number } }) => {
     if (totalPages <= 1) return;
+    setUserInteracted(true);
     if (offset.x < -40) {
       nextReview();
     } else if (offset.x > 40) {
@@ -80,10 +104,27 @@ export function TestimonialsApple() {
     }
   };
 
+  const toggleExpanded = (id: string) => {
+    setUserInteracted(true);
+    setExpandedIds((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  // Autoplay every 6s: pauses on hover, stops on user interaction, disabled for reduced motion
+  useEffect(() => {
+    if (shouldReduce || userInteracted || isPaused || totalPages <= 1) return;
+    const timer = setInterval(() => {
+      setDirection(1);
+      setIndex((prev) =>
+        prev >= (totalPages - 1) * itemsPerPage ? 0 : prev + itemsPerPage
+      );
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [shouldReduce, userInteracted, isPaused, totalPages, itemsPerPage]);
+
   return (
     <section id="testimonials" className="py-24 px-4 sm:px-6 bg-[#fbfbfd] border-b border-slate-100 overflow-hidden">
       <div className="container mx-auto max-w-6xl">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           {/* Left Title */}
           <div>
             <span className="text-[11px] font-bold tracking-widest text-[#087f5b] uppercase block mb-1">
@@ -112,11 +153,47 @@ export function TestimonialsApple() {
           </p>
         </div>
 
-        {/* Reviews 2-Card Row with AnimatePresence, 3D rotateY, and touch swipe */}
-        <div style={{ perspective: 1200 }} className="relative overflow-hidden">
+        {/* Optional platform filter tabs: show only if more than 1 tab available */}
+        {filterTabs.length > 1 && (
+          <div className="flex items-center gap-1.5 p-1 rounded-full bg-slate-100 border border-slate-200/80 w-fit mb-8">
+            {filterTabs.map((tab) => {
+              const isActive = selectedFilter === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setSelectedFilter(tab.id);
+                    setIndex(0);
+                    setUserInteracted(true);
+                  }}
+                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors cursor-pointer ${
+                    isActive ? "text-slate-950 font-bold" : "text-slate-500 hover:text-slate-800"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="reviewFilterPill"
+                      className="absolute inset-0 rounded-full bg-white shadow-xs border border-slate-200/60"
+                      transition={{ type: "spring", stiffness: 380, damping: 28 }}
+                    />
+                  )}
+                  <span className="relative z-10">{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Reviews Slider with AnimatePresence, 3D rotateY, and touch swipe */}
+        <div
+          style={{ perspective: 1200 }}
+          className="relative overflow-hidden"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
-              key={index}
+              key={`${selectedFilter}-${index}-${itemsPerPage}`}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.2}
@@ -141,55 +218,101 @@ export function TestimonialsApple() {
                   : { opacity: 0 }
               }
               transition={{ duration: 0.45, ease: appleEase }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 cursor-grab active:cursor-grabbing"
+              className={`grid grid-cols-1 ${
+                itemsPerPage === 1
+                  ? "grid-cols-1 max-w-lg mx-auto"
+                  : itemsPerPage === 2
+                  ? "md:grid-cols-2"
+                  : "md:grid-cols-2 lg:grid-cols-3"
+              } gap-6 sm:gap-8 cursor-grab active:cursor-grabbing items-stretch`}
             >
-              {clientReviews.slice(index, index + itemsPerPage).map((rev, i) => (
-                <div
-                  key={rev.name + i + rev.title}
-                  className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-6 min-h-[260px] relative overflow-hidden group"
-                >
-                  <div className="space-y-4 relative z-10">
-                    <div className="flex items-center justify-between">
-                      {/* Big subtle parallax quote mark */}
-                      <Quote className="w-8 h-8 fill-emerald-500/15 text-emerald-600 stroke-[1.5] transition-transform duration-300 group-hover:scale-110" />
-                      <div className="flex items-center gap-1.5">
-                        <div className="flex text-amber-400">
-                          {[...Array(5)].map((_, sIdx) => (
-                            <Star key={sIdx} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                          ))}
+              {filteredReviews
+                .slice(index, index + itemsPerPage)
+                .map((rev: ReviewItem) => {
+                  const isExpanded = !!expandedIds[rev.id];
+                  const badgeText =
+                    rev.platform === "Upwork"
+                      ? `${rev.rating.toFixed(1)} Upwork review`
+                      : `${rev.rating.toFixed(1)} Fiverr review`;
+
+                  return (
+                    <div
+                      key={rev.id}
+                      className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-6 h-full relative overflow-hidden group"
+                    >
+                      <div className="space-y-4 relative z-10">
+                        <div className="flex items-center justify-between gap-3">
+                          {/* Quote icon */}
+                          <Quote className="w-8 h-8 fill-emerald-500/15 text-emerald-600 stroke-[1.5] transition-transform duration-300 group-hover:scale-110 flex-shrink-0" />
+                          <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                            <div className="flex text-amber-400">
+                              {[...Array(5)].map((_, sIdx) => (
+                                <Star
+                                  key={sIdx}
+                                  className="w-3.5 h-3.5 fill-amber-400 text-amber-400"
+                                />
+                              ))}
+                            </div>
+                            <span className="text-[11px] font-semibold text-slate-500 ml-1 whitespace-nowrap">
+                              {badgeText}
+                            </span>
+                          </div>
                         </div>
-                        <span className="text-[11px] font-semibold text-slate-500 ml-1">
-                          {rev.platform}
-                        </span>
+
+                        {/* Quote body clamped to 6 lines with Read More toggle */}
+                        <div className="relative">
+                          <p
+                            className={`text-sm text-slate-700 leading-relaxed font-normal ${
+                              isExpanded ? "" : "line-clamp-6"
+                            }`}
+                          >
+                            "{rev.quote}"
+                          </p>
+                          {rev.quote.length > 200 && (
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleExpanded(rev.id);
+                              }}
+                              className="inline-block text-xs font-semibold text-[#087f5b] hover:text-[#066347] transition-colors mt-2 focus:outline-hidden cursor-pointer"
+                            >
+                              {isExpanded ? "Show less" : "Read more"}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Client Attribution Meta */}
+                      <div className="flex items-center gap-3 pt-4 border-t border-slate-100 relative z-10">
+                        <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs flex-shrink-0">
+                          <User className="w-4 h-4 text-slate-400" />
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="text-sm font-bold text-slate-950 truncate">
+                            {rev.name}
+                          </h4>
+                          <p className="text-xs text-slate-500 leading-normal">
+                            Client &bull; {rev.country}
+                            {rev.project ? ` \u2022 ${rev.project}` : ""}
+                            {rev.platform === "Fiverr (agency)"
+                              ? " (via FB International BD)"
+                              : ""}
+                          </p>
+                        </div>
                       </div>
                     </div>
-
-                    <p className="text-sm text-slate-700 leading-relaxed font-normal">
-                      "{rev.quote}"
-                    </p>
-                  </div>
-
-                  {/* Client Meta */}
-                  <div className="flex items-center gap-3 pt-4 border-t border-slate-100 relative z-10">
-                    <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs flex-shrink-0">
-                      <User className="w-4 h-4 text-slate-400" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-950">{rev.name}</h4>
-                      <p className="text-xs text-slate-500">{rev.title}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                  );
+                })}
             </motion.div>
           </AnimatePresence>
 
-          {/* Nav Buttons & Dots beneath - hidden when all reviews fit on one page */}
+          {/* Navigation Buttons & Dots: hidden if there is only 1 page */}
           {totalPages > 1 && (
             <div className="flex items-center justify-center gap-4 mt-8">
               <button
                 onClick={prevReview}
-                className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-2xs active:scale-95"
+                className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-2xs active:scale-95 cursor-pointer"
                 aria-label="Previous reviews"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -200,10 +323,11 @@ export function TestimonialsApple() {
                   <button
                     key={pageIdx}
                     onClick={() => {
+                      setUserInteracted(true);
                       setDirection(pageIdx > currentPage ? 1 : -1);
                       setIndex(pageIdx * itemsPerPage);
                     }}
-                    className={`h-2 rounded-full transition-all duration-300 ${
+                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                       currentPage === pageIdx ? "w-6 bg-[#087f5b]" : "w-2 bg-slate-300"
                     }`}
                     aria-label={`Go to slide ${pageIdx + 1}`}
@@ -213,7 +337,7 @@ export function TestimonialsApple() {
 
               <button
                 onClick={nextReview}
-                className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-2xs active:scale-95"
+                className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-2xs active:scale-95 cursor-pointer"
                 aria-label="Next reviews"
               >
                 <ChevronRight className="w-4 h-4" />
