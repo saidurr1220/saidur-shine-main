@@ -121,7 +121,7 @@ export function ContactApple() {
   return (
     <section id="contact" data-dark="true" className="py-24 px-4 sm:px-6 bg-[#0b101b] text-white overflow-hidden">
       <div className="container mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start lg:items-stretch">
           {/* Left Column: Heading, Contact Cards, Timeline, Availability */}
           <div className="lg:col-span-5 space-y-6">
             <span className="text-[11px] font-mono font-bold tracking-widest text-[#10b981] uppercase block">
@@ -301,16 +301,16 @@ export function ContactApple() {
           </div>
 
           {/* Right Column: Dark Form Card */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 flex flex-col">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.55, ease: appleEase }}
-              className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#0f1724] text-white shadow-2xl border border-white/10"
+              className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#0f1724] text-white shadow-2xl border border-white/10 h-full flex flex-col"
             >
               {submitted ? (
-                <div className="py-12 text-center space-y-3">
+                <div className="py-12 my-auto text-center space-y-3">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
@@ -325,7 +325,7 @@ export function ContactApple() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 flex-1 flex flex-col">
                   {/* Name and Email in 2 columns */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
@@ -376,7 +376,7 @@ export function ContactApple() {
                   </div>
 
                   {/* Project Details Textarea */}
-                  <div className="space-y-1.5">
+                  <div className="space-y-1.5 flex-1 flex flex-col">
                     <label className="text-xs font-semibold text-slate-300 block">
                       Project Details
                     </label>
@@ -386,7 +386,7 @@ export function ContactApple() {
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="rounded-xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500 text-xs leading-relaxed resize-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#10b981] focus-visible:border-[#10b981]"
+                      className="rounded-xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500 text-xs leading-relaxed resize-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#10b981] focus-visible:border-[#10b981] min-h-[140px] lg:min-h-[160px] flex-1"
                     />
                   </div>
 
@@ -394,7 +394,7 @@ export function ContactApple() {
                   <Button
                     type="submit"
                     disabled={isSending}
-                    className="relative w-full rounded-xl bg-[#087f5b] hover:bg-[#066347] text-white font-semibold text-xs h-11 flex items-center justify-center gap-2 shadow-sm transition-all duration-200 overflow-hidden group active:scale-[0.99] cursor-pointer"
+                    className="relative w-full rounded-xl bg-[#087f5b] hover:bg-[#066347] text-white font-semibold text-xs h-11 flex items-center justify-center gap-2 shadow-sm transition-all duration-200 overflow-hidden group active:scale-[0.99] cursor-pointer mt-auto"
                   >
                     {/* Shimmer sweep effect */}
                     <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent" />
