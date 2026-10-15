@@ -9,38 +9,30 @@ import {
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
-const recentOrders = [
+const recentWork = [
   {
-    id: "#001",
-    name: "Glen Johnson",
-    service: "Custom Website",
-    status: "Completed",
+    name: "Mirror Control",
+    desc: "Node.js trading engine",
+    status: "Live 24/7",
     statusStyle: "text-emerald-400 bg-emerald-950/60 border-emerald-500/30",
-    amount: "$1,200",
   },
   {
-    id: "#002",
-    name: "Christina Mayer",
-    service: "WooCommerce Store",
-    status: "Processing",
-    statusStyle: "text-sky-400 bg-sky-950/60 border-sky-500/30",
-    amount: "$900",
+    name: "Vault Labs Research",
+    desc: "WooCommerce platform",
+    status: "Live",
+    statusStyle: "text-emerald-400 bg-emerald-950/60 border-emerald-500/30",
   },
   {
-    id: "#003",
-    name: "Michael Liu",
-    service: "Plugin Development",
-    status: "Completed",
+    name: "WeldingLeads",
+    desc: "Subscription CRM plugin",
+    status: "Live",
     statusStyle: "text-emerald-400 bg-emerald-950/60 border-emerald-500/30",
-    amount: "$1,500",
   },
   {
-    id: "#004",
-    name: "Sarah Kipu",
-    service: "System Integration",
-    status: "Completed",
+    name: "OnRoute Couriers",
+    desc: "Booking & pricing plugin",
+    status: "Live",
     statusStyle: "text-emerald-400 bg-emerald-950/60 border-emerald-500/30",
-    amount: "$1,320",
   },
 ];
 
@@ -127,7 +119,7 @@ export function HeroApple() {
             </div>
           </motion.div>
 
-          {/* Right Column: Custom Perspective Analytics Dashboard Window */}
+          {/* Right Column: Delivery snapshot Frame */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -142,78 +134,68 @@ export function HeroApple() {
                   <div className="w-8 h-8 rounded-lg bg-[#05513a] text-[#34d399] flex items-center justify-center font-bold text-xs font-mono">
                     SR
                   </div>
-                  <span className="text-xs font-bold text-white tracking-wide">Overview</span>
+                  <span className="text-xs font-bold text-white tracking-wide">Delivery snapshot</span>
                 </div>
 
-                <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] text-slate-300">
-                  <span>Last 30 days</span>
-                  <ChevronDown className="w-3 h-3 text-slate-400" />
+                <div className="flex items-center px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] text-slate-300 font-medium">
+                  <span>Last month</span>
                 </div>
               </div>
 
               {/* 3 Metrics Cards Row */}
               <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
                 <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">Total Revenue</div>
-                  <div className="text-sm sm:text-lg font-bold text-white mt-1">$12,458</div>
-                  <div className="text-[9px] sm:text-[10px] text-emerald-400 font-semibold mt-0.5">↑ 15%</div>
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">Projects delivered</div>
+                  <div className="text-base sm:text-xl font-bold text-white mt-1">11</div>
                 </div>
 
                 <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">Orders</div>
-                  <div className="text-sm sm:text-lg font-bold text-white mt-1">284</div>
-                  <div className="text-[9px] sm:text-[10px] text-emerald-400 font-semibold mt-0.5">↑ 8%</div>
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">5-star ratings</div>
+                  <div className="text-base sm:text-xl font-bold text-white mt-1">10</div>
                 </div>
 
                 <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">Conversion Rate</div>
-                  <div className="text-sm sm:text-lg font-bold text-white mt-1">3.5%</div>
-                  <div className="text-[9px] sm:text-[10px] text-emerald-400 font-semibold mt-0.5">↑ 1.2%</div>
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">Projects per month</div>
+                  <div className="text-base sm:text-xl font-bold text-white mt-1">10-15</div>
                 </div>
               </div>
 
-              {/* Recent Orders Table */}
+              {/* Recent Work Table */}
               <div className="space-y-2">
-                <div className="text-xs font-bold text-slate-300 mb-2">Recent Orders</div>
+                <div className="text-xs font-bold text-slate-300 mb-2">Recent work</div>
                 
-                {/* Mobile View (< sm): 2-line layout without any text clipping or collision */}
+                {/* Mobile View (< sm) */}
                 <div className="sm:hidden space-y-2">
-                  {recentOrders.map((order) => (
+                  {recentWork.map((item) => (
                     <div
-                      key={order.id}
-                      className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 space-y-1.5"
+                      key={item.name}
+                      className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 flex items-center justify-between gap-2"
                     >
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-1.5 min-w-0">
-                          <span className="text-[10px] text-slate-500 font-mono flex-shrink-0">{order.id}</span>
-                          <span className="text-white font-sans font-medium text-xs truncate">{order.name}</span>
-                        </div>
-                        <span className="font-bold text-white text-xs font-mono flex-shrink-0">{order.amount}</span>
+                      <div className="min-w-0 pr-2">
+                        <div className="text-white font-sans font-medium text-xs truncate">{item.name}</div>
+                        <div className="text-slate-400 text-[10px] font-sans truncate">{item.desc}</div>
                       </div>
-                      <div className="flex items-center justify-between gap-2 pt-0.5">
-                        <span className="text-slate-400 text-[10px] font-sans truncate">{order.service}</span>
-                        <span className={`text-[10px] px-2 py-0.5 rounded font-mono border ${order.statusStyle} flex-shrink-0`}>
-                          {order.status}
-                        </span>
-                      </div>
+                      <span className={`text-[10px] px-2.5 py-0.5 rounded font-mono border ${item.statusStyle} flex-shrink-0`}>
+                        {item.status}
+                      </span>
                     </div>
                   ))}
                 </div>
 
-                {/* Desktop View (sm+): Exact 12-column table grid */}
-                <div className="hidden sm:block space-y-1.5 text-[11px] font-mono">
-                  {recentOrders.map((order) => (
+                {/* Desktop View (sm+) */}
+                <div className="hidden sm:block space-y-1.5 text-[11px]">
+                  {recentWork.map((item) => (
                     <div
-                      key={order.id}
+                      key={item.name}
                       className="grid grid-cols-12 gap-2 items-center p-2 rounded-lg bg-white/[0.02] border border-white/5 text-slate-300"
                     >
-                      <span className="col-span-1 text-slate-500">{order.id}</span>
-                      <span className="col-span-3 text-white font-sans font-medium truncate">{order.name}</span>
-                      <span className="col-span-4 text-slate-400 truncate">{order.service}</span>
-                      <span className={`col-span-2 text-center text-[10px] rounded py-0.5 border ${order.statusStyle}`}>
-                        {order.status}
-                      </span>
-                      <span className="col-span-2 text-right font-bold text-white">{order.amount}</span>
+                      <span className="col-span-5 text-white font-sans font-medium truncate">{item.name}</span>
+                      <span className="col-span-4 text-slate-400 truncate">{item.desc}</span>
+                      <div className="col-span-3 text-right">
+                        <span className={`inline-block text-[10px] px-2.5 py-0.5 rounded font-mono border ${item.statusStyle}`}>
+                          {item.status}
+                        </span>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -244,7 +226,7 @@ export function HeroApple() {
                 </div>
                 <div>
                   <div className="text-sm font-bold text-slate-950">5.0</div>
-                  <div className="text-xs text-slate-500">Client Rating</div>
+                  <div className="text-xs text-slate-500">Fiverr Rating</div>
                 </div>
               </div>
 

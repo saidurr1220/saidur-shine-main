@@ -45,17 +45,50 @@ const clientReviews = [
     title: "Founder & Product Lead • Welding Leads (US)",
     platform: "5.0 Direct Client",
   },
+  /*
+  // [TODO: paste review from Fiverr/Upwork] - Slot 1
+  {
+    quote: "[TODO: paste review text from Fiverr/Upwork]",
+    name: "[TODO: Client Name]",
+    title: "[TODO: Client Role / Company / Country]",
+    platform: "5.0 on Fiverr",
+  },
+  // [TODO: paste review from Fiverr/Upwork] - Slot 2
+  {
+    quote: "[TODO: paste review text from Fiverr/Upwork]",
+    name: "[TODO: Client Name]",
+    title: "[TODO: Client Role / Company / Country]",
+    platform: "5.0 on Upwork",
+  },
+  */
 ];
+
+function UpworkIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
+  return (
+    <svg
+      role="img"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z" />
+    </svg>
+  );
+}
 
 export function TestimonialsApple() {
   const [index, setIndex] = useState(0);
+  const itemsPerPage = 2;
+  const totalPages = Math.ceil(clientReviews.length / itemsPerPage);
+  const currentPage = Math.floor(index / itemsPerPage);
 
   const prevReview = () => {
-    setIndex((prev) => (prev === 0 ? Math.max(0, clientReviews.length - 2) : prev - 2));
+    setIndex((prev) => (prev === 0 ? Math.max(0, (totalPages - 1) * itemsPerPage) : prev - itemsPerPage));
   };
 
   const nextReview = () => {
-    setIndex((prev) => (prev >= clientReviews.length - 2 ? 0 : prev + 2));
+    setIndex((prev) => (prev >= (totalPages - 1) * itemsPerPage ? 0 : prev + itemsPerPage));
   };
 
   return (
@@ -67,9 +100,21 @@ export function TestimonialsApple() {
             <span className="text-[11px] font-bold tracking-widest text-[#087f5b] uppercase block mb-1">
               CLIENT REVIEWS
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight leading-tight">
-              Built on trust.
-            </h2>
+            <div className="flex flex-wrap items-center gap-3">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight leading-tight">
+                Built on trust.
+              </h2>
+              <a
+                href="https://www.upwork.com/freelancers/~01fe77731f3b62869f"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#e8f6f0] text-[#087f5b] border border-[#d1ede1] hover:bg-[#d8f0e5] transition-colors shadow-2xs"
+                title="View Upwork Profile"
+              >
+                <UpworkIcon className="w-3.5 h-3.5 text-[#087f5b]" />
+                <span>100% Job Success on Upwork</span>
+              </a>
+            </div>
           </div>
 
           {/* Right Subtitle */}
@@ -135,14 +180,14 @@ export function TestimonialsApple() {
             </button>
 
             <div className="flex items-center gap-1.5">
-              {[0, 2, 4].map((stepIdx) => (
+              {[...Array(totalPages)].map((_, pageIdx) => (
                 <button
-                  key={stepIdx}
-                  onClick={() => setIndex(stepIdx)}
-                  className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                    index === stepIdx ? "w-6 bg-[#087f5b]" : "bg-slate-300"
+                  key={pageIdx}
+                  onClick={() => setIndex(pageIdx * itemsPerPage)}
+                  className={`h-2 rounded-full transition-all duration-200 ${
+                    currentPage === pageIdx ? "w-6 bg-[#087f5b]" : "w-2 bg-slate-300"
                   }`}
-                  aria-label={`Go to slide ${stepIdx / 2 + 1}`}
+                  aria-label={`Go to slide ${pageIdx + 1}`}
                 />
               ))}
             </div>

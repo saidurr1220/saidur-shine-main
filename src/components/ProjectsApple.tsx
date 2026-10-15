@@ -124,7 +124,7 @@ export function ProjectsApple() {
                 </span>
 
                 <h3 className="text-2xl sm:text-[1.75rem] font-extrabold text-white tracking-tight leading-snug">
-                  Mirror Control — Bybit to Bitget Real-Time Trade Mirror &amp; Ops Engine
+                  Mirror Control - Bybit to Bitget Real-Time Trade Mirror &amp; Ops Engine
                 </h3>
 
                 <p className="text-sm text-slate-300 leading-relaxed font-normal">
@@ -141,6 +141,9 @@ export function ProjectsApple() {
                   </span>
                   <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-200">
                     PostgreSQL
+                  </span>
+                  <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-200">
+                    WebSockets
                   </span>
                 </div>
 
@@ -197,6 +200,18 @@ export function ProjectsApple() {
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
                   {project.description}
                 </p>
+
+                {/* Tech Tags (3-4 items) */}
+                <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                  {project.tags.slice(0, 4).map((tag, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="px-2.5 py-0.5 rounded-md bg-slate-100 border border-slate-200/80 text-[11px] font-mono text-slate-700"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               {/* Bottom Actions: View Case Study on left, Live Site on right */}

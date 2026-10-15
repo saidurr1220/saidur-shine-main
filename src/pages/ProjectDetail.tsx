@@ -15,7 +15,14 @@ const ProjectDetail = () => {
     const root = document.documentElement;
     root.classList.remove("dark");
     window.scrollTo(0, 0);
-  }, [id]);
+
+    // Dynamic SEO title & meta description
+    document.title = `${project.title} | Saidur Rahman`;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", project.description);
+    }
+  }, [id, project]);
 
   return (
     <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] selection:bg-emerald-100 selection:text-emerald-900">
@@ -29,7 +36,7 @@ const ProjectDetail = () => {
             </Link>
           </Button>
 
-          <div className="mb-10">
+          <div className="mb-8">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
               <div>
                 <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-3">
@@ -41,9 +48,6 @@ const ProjectDetail = () => {
                   </span>
                   <span className="px-2.5 py-0.5 bg-slate-100 text-slate-700 rounded-full text-xs font-medium">
                     {project.filterCategory}
-                  </span>
-                  <span className="text-xs font-mono text-slate-700 bg-slate-50 px-2.5 py-1 rounded-md border border-slate-200">
-                    {project.architecture}
                   </span>
                 </div>
               </div>
@@ -59,6 +63,18 @@ const ProjectDetail = () => {
             </div>
           </div>
 
+          {/* Optional Project Hero Screenshot */}
+          {(project.image || project.screenshot) && (
+            <div className="mb-8 rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 shadow-md bg-slate-950 aspect-[16/10]">
+              <img
+                src={project.image || project.screenshot}
+                alt={project.title}
+                className="w-full h-full object-cover object-top"
+              />
+            </div>
+          )}
+
+          {/* Production Architecture Card */}
           <div className="apple-card p-6 sm:p-8 mb-6">
             <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 uppercase tracking-wider mb-2">
               <Layers className="w-4 h-4" /> Production Architecture
@@ -70,6 +86,30 @@ const ProjectDetail = () => {
               {project.description}
             </p>
           </div>
+
+          {/* Key Metrics Grid */}
+          {project.metrics && Object.keys(project.metrics).length > 0 && (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
+              {Object.entries(project.metrics).map(([key, val]) => (
+                <div key={key} className="apple-card p-4 text-center">
+                  <div className="text-xl sm:text-2xl font-black text-slate-950 font-mono tracking-tight">
+                    {val}
+                  </div>
+                  <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mt-1">
+                    {key === "latencyDrop"
+                      ? "Query Latency Drop"
+                      : key === "renewalRate"
+                      ? "Renewal Delivery Rate"
+                      : key === "throughput"
+                      ? "Database Throughput"
+                      : key === "failedWebhooks"
+                      ? "Failed Webhooks"
+                      : key.replace(/([A-Z])/g, " $1")}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="space-y-4">
             <div className="apple-card p-6">
@@ -111,7 +151,7 @@ const ProjectDetail = () => {
                   </div>
                   <div>
                     <h2 className="text-base font-bold text-slate-900">
-                      System Request & Data Flow
+                      System Request &amp; Data Flow
                     </h2>
                     <p className="text-xs text-slate-500">
                       Step-by-step production execution and data pipeline
@@ -146,10 +186,10 @@ const ProjectDetail = () => {
           <div className="mt-10 text-center p-8 rounded-3xl apple-card">
             <h3 className="text-xl font-bold mb-1.5 text-slate-900">Interested in similar results?</h3>
             <p className="text-slate-600 text-sm mb-5">
-              Let's discuss how I can help design and engineer your custom WordPress platform.
+              Let's discuss how I can help design and engineer your custom system or platform.
             </p>
-            <Button asChild size="lg" className="bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-full shadow-sm">
-              <a href="/#contact">Get In Touch</a>
+            <Button asChild size="lg" className="bg-[#087f5b] hover:bg-[#066347] text-white font-medium rounded-full shadow-sm">
+              <a href="/#contact">{project.ctaText || "Get In Touch"}</a>
             </Button>
           </div>
         </div>

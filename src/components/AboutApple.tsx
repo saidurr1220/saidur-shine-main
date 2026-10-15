@@ -60,9 +60,14 @@ export function AboutApple() {
                 </h2>
               </div>
 
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-lg pt-2">
-                I'm a Full-Stack WordPress Engineer who helps clients and agencies turn ideas into reliable, high-performing websites and web systems. I care about clean code, clear communication, and long-term value.
-              </p>
+              <div className="space-y-3 pt-2 text-sm sm:text-[15px] text-slate-600 leading-relaxed max-w-lg">
+                <p>
+                  I'm a Full-Stack WordPress Engineer with <strong className="text-slate-950 font-semibold">2+ years</strong> of experience building custom plugins, WooCommerce platforms, booking engines and subscription systems for clients in the US, UK and Europe. Most of my work is custom logic, not theme setup: hooks and filters, Stripe webhooks, REST API integrations and conversion tracking.
+                </p>
+                <p>
+                  I currently work at <strong className="text-slate-950 font-semibold">FB International BD</strong>, a WordPress development agency, delivering <strong className="text-slate-950 font-semibold">10 to 15 client projects a month</strong>. I've also been freelancing on Upwork since 2018, with a 100% Job Success score. Last month I shipped 11 projects and <strong className="text-slate-950 font-semibold">10 were rated 5 stars</strong>. Outside WordPress I also build Node.js and TypeScript systems, like a real-time trading engine running 24/7 in production.
+                </p>
+              </div>
             </div>
           </motion.div>
 

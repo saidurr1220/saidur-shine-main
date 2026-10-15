@@ -7,6 +7,7 @@ const navLinks = [
   { name: "About", section: "about" },
   { name: "Services", section: "services" },
   { name: "Projects", section: "projects" },
+  { name: "Experience", section: "experience" },
   { name: "Reviews", section: "testimonials" },
   { name: "Contact", section: "contact" },
 ];
@@ -89,6 +90,14 @@ export function NavbarApple() {
                 {link.name}
               </a>
             ))}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-slate-300 hover:text-white transition-colors"
+            >
+              CV
+            </a>
           </nav>
 
           {/* Desktop Primary CTA: Let's Talk button */}
@@ -130,6 +139,15 @@ export function NavbarApple() {
                 {link.name}
               </a>
             ))}
+
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block py-2 px-3 text-sm font-medium text-slate-200 hover:text-emerald-400 hover:bg-slate-800 rounded-xl transition-colors"
+            >
+              CV (PDF)
+            </a>
 
             <div className="pt-3 border-t border-slate-800 space-y-2">
               <Button

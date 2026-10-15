@@ -15,6 +15,8 @@ export interface ProjectItem {
   url: string;
   github: string;
   screenshot?: string;
+  image?: string;
+  ctaText?: string;
   metrics: Record<string, string>;
   workflowSteps: { step: string; detail: string }[];
 }
@@ -52,6 +54,7 @@ export const projectsData: ProjectItem[] = [
     url: "",
     github: "",
     screenshot: "/screenshots/mirror-control.png",
+    ctaText: "Discuss High-Frequency / Trading Systems",
     metrics: {
       contract: "$7,000 USD",
       status: "Running 24/7 Live",
@@ -96,6 +99,7 @@ export const projectsData: ProjectItem[] = [
     url: "https://vaultlabsresearch.net",
     github: "",
     screenshot: "/screenshots/vault-labs.png",
+    ctaText: "Discuss Custom WooCommerce Platform",
     metrics: {
       modules: "20+ custom",
       inventory: "Shared dual-mode",
@@ -139,6 +143,7 @@ export const projectsData: ProjectItem[] = [
     url: "https://www.onroutecouriers.com",
     github: "",
     screenshot: "/screenshots/onroute.png",
+    ctaText: "Discuss Dynamic Pricing & Booking Engines",
     metrics: {
       pricing: "Dynamic formula",
       tracking: "GTM/GA4 + dedup",
@@ -181,6 +186,7 @@ export const projectsData: ProjectItem[] = [
     url: "https://californialandlordsunion.com",
     github: "",
     screenshot: "/screenshots/california-ai.png",
+    ctaText: "Discuss Membership & SaaS Portals",
     metrics: {
       membership: "3-tier PMPro",
       aiIntegration: "Union AI Assistant",
@@ -197,8 +203,8 @@ export const projectsData: ProjectItem[] = [
     id: "labeng",
     title: "LaBeng - Local Business Discovery & Booking Platform",
     location: "UK Client",
-    category: "WordPress",
-    filterCategory: "Booking & Dynamic Pricing",
+    category: "Booking & Custom Theme",
+    filterCategory: "Booking & Custom Theme",
     highlightBadge: "Async Email Pipeline Bugfix",
     clientName: "UK Client",
     description:
@@ -223,6 +229,7 @@ export const projectsData: ProjectItem[] = [
     url: "https://labeng.co.uk",
     github: "",
     screenshot: "/screenshots/labeng.png",
+    ctaText: "Discuss Custom WordPress & Booking Builds",
     metrics: {
       theme: "100% Bespoke",
       auth: "Dual customer/business",
@@ -246,9 +253,9 @@ export const projectsData: ProjectItem[] = [
     description:
       "Subscription-based lead distribution CRM built from scratch on WordPress.",
     problem:
-      "Needed a subscription-based lead distribution system with role-based dashboards, fair weighted lead assignment, and fast query execution under high lead volume.",
+      "The client's custom CRM plugin was running unindexed SQL queries across hundreds of subscriber rows, causing admin page load times of 6+ seconds and random checkout timeouts on renewal.",
     solution:
-      "Designed and built a subscription-based lead distribution CRM from scratch with role-based user/admin dashboards, tiered pricing, and weighted lead distribution logic. Resolved a production performance bottleneck caused by inefficient SQL LIKE queries by engineering an indexed lookup table.",
+      "Rebuilt the query layer with custom indexed database tables, refactored subscription state handling into an OOP service class, added transactional safeguards for Stripe webhook renewals, and optimized the admin dashboard with async data fetching.",
     impact:
       "Fixed a production performance bottleneck (10x faster queries) and shipped a reliable lead distribution system.",
     architecture: "WordPress + PHP (OOP) + MySQL Indexing + Custom Plugin Architecture",
@@ -263,16 +270,18 @@ export const projectsData: ProjectItem[] = [
     url: "https://www.weldingleads.com",
     github: "",
     screenshot: "/screenshots/weldingleads.png",
+    ctaText: "Discuss Custom CRM & Database Optimization",
     metrics: {
-      dashboards: "Role-based",
-      pricing: "Tiered subscription",
-      perf: "Indexed SQL lookup fix",
+      latencyDrop: "94%",
+      renewalRate: "100%",
+      throughput: "10x",
+      failedWebhooks: "0",
     },
     workflowSteps: [
-      { step: "1. Lead Intake API", detail: "Sanitized webhook intake parsing high-volume lead parameters" },
-      { step: "2. Weighted Distribution", detail: "Algorithmic assignment engine balancing lead count by contractor tier" },
-      { step: "3. Indexed Lookup Fix", detail: "Replaced slow SQL LIKE queries with indexed hash map table (10x faster)" },
-      { step: "4. Contractor Portal", detail: "Real-time lead inbox with instant SMS/Email notification delivery" },
+      { step: "1. Stripe Webhook Renewal", detail: "Stripe webhook receives recurring renewal invoice event" },
+      { step: "2. Signature & Transaction Lock", detail: "Custom service validates signature and acquires database transaction lock" },
+      { step: "3. Fast Indexed SQL Update", detail: "Fast indexed SQL table records renewal and advances subscriber tier" },
+      { step: "4. Async Notification & Sync", detail: "Async job dispatches confirmation email and syncs CRM contact state" },
     ],
   },
   {
@@ -302,6 +311,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "",
     github: "",
+    ctaText: "Discuss Workflow Automation & Custom Systems",
     metrics: {
       workflow: "Automated routing",
       steps: "Multi-stage onboarding",

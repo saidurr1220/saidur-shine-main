@@ -17,6 +17,16 @@ const Index = () => {
     const root = document.documentElement;
     root.classList.remove("dark");
     localStorage.setItem("theme", "light");
+
+    if (window.location.hash) {
+      const id = window.location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 150);
+      }
+    }
   }, []);
 
   return (
