@@ -23,7 +23,7 @@ const Resume = () => {
                 Md. Saidur Rahman - Full Stack WordPress Developer with 2+ years of production experience
               </p>
               <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md shadow-primary/20 rounded-xl">
-                <a href="/resume.pdf" download>
+                <a href="/resume.pdf" download="Md_Saidur_Rahman_WordPress_Developer_CV.pdf">
                   <Download className="mr-2 h-5 w-5" />
                   Download PDF Copy
                 </a>
