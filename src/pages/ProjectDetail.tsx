@@ -10,14 +10,43 @@ import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion
 import { appleEase } from "@/lib/motion";
 import { useCountUp } from "@/components/motion/useCountUp";
 
+const METRIC_LABELS: Record<string, string> = {
+  leadsRecovered: "Preferred-state leads recovered",
+  securityTests: "Staff-role security tests passed",
+  bulkEmails: "Bulk emails, no known bounces",
+  filesVerified: "Plugin files hash-verified",
+  modules: "Custom modules",
+  inventory: "Shared inventory",
+  compliance: "Compliance COA",
+  contract: "Contract value",
+  status: "System status",
+  margin: "Margin controlled",
+  pricing: "Pricing engine",
+  tracking: "Conversion tracking",
+  payments: "Payment webhooks",
+  membership: "Membership tiers",
+  aiIntegration: "AI integration",
+  dashboard: "Portal modules",
+  theme: "Theme architecture",
+  auth: "Auth pipelines",
+  bugfix: "Core bugfix",
+  workflow: "Workflow routing",
+  steps: "Onboarding steps",
+  efficiency: "Processing time",
+};
+
 function MetricTile({ label, value }: { label: string; value: string }) {
-  const numericMatch = value.match(/^([0-9\.]+)(.*)$/);
+  // Only count up pure percentages like 100% or clean numbers without slashes or plus
+  const shouldCount = value.endsWith("%") && !value.includes("/");
+  const numericMatch = shouldCount ? value.match(/^([0-9\.]+)(.*)$/) : null;
   const isNumeric = !!numericMatch;
   const numValue = isNumeric ? parseFloat(numericMatch[1]) : 0;
   const suffix = isNumeric ? numericMatch[2] : "";
   const decimals = numericMatch && numericMatch[1].includes(".") ? 1 : 0;
 
-  const count = useCountUp(numValue, true, { duration: 1000, decimals });
+  const count = useCountUp(numValue, isNumeric, { duration: 800, decimals });
+
+  const displayLabel = METRIC_LABELS[label] || label.replace(/([A-Z])/g, " $1");
 
   return (
     <div className="apple-card p-4 text-center">
@@ -25,15 +54,7 @@ function MetricTile({ label, value }: { label: string; value: string }) {
         {isNumeric ? `${count}${suffix}` : value}
       </div>
       <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mt-1">
-        {label === "latencyDrop"
-          ? "Query Latency Drop"
-          : label === "renewalRate"
-          ? "Renewal Delivery Rate"
-          : label === "throughput"
-          ? "Database Throughput"
-          : label === "failedWebhooks"
-          ? "Failed Webhooks"
-          : label.replace(/([A-Z])/g, " $1")}
+        {displayLabel}
       </div>
     </div>
   );
@@ -157,12 +178,12 @@ const ProjectDetail = () => {
             </div>
           )}
 
-          {/* Challenge, Solution, Impact Cards (revealed one by one) */}
+          {/* Challenge, Solution, Impact Cards (revealed promptly) */}
           <div className="space-y-4">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.05, margin: "0px 0px -5% 0px" }}
               transition={{ duration: 0.45, ease: appleEase }}
               className="apple-card p-6"
             >
@@ -178,8 +199,8 @@ const ProjectDetail = () => {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.1, ease: appleEase }}
+              viewport={{ once: true, amount: 0.05, margin: "0px 0px -5% 0px" }}
+              transition={{ duration: 0.45, delay: 0.05, ease: appleEase }}
               className="apple-card p-6"
             >
               <div className="flex items-center gap-2.5 mb-2">
@@ -194,8 +215,8 @@ const ProjectDetail = () => {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.2, ease: appleEase }}
+              viewport={{ once: true, amount: 0.05, margin: "0px 0px -5% 0px" }}
+              transition={{ duration: 0.45, delay: 0.1, ease: appleEase }}
               className="apple-card p-6"
             >
               <div className="flex items-center gap-2.5 mb-2">
@@ -212,8 +233,8 @@ const ProjectDetail = () => {
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: 0.25, ease: appleEase }}
+                viewport={{ once: true, amount: 0.05, margin: "0px 0px -5% 0px" }}
+                transition={{ duration: 0.45, delay: 0.12, ease: appleEase }}
                 className="apple-card p-6 sm:p-8 bg-white border border-slate-200/90 shadow-lg relative overflow-hidden"
               >
                 <div className="flex items-center gap-2.5 mb-4">
@@ -239,8 +260,8 @@ const ProjectDetail = () => {
                       key={idx}
                       initial={{ opacity: 0, x: 16 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: 0.4, delay: idx * 0.1, ease: appleEase }}
+                      viewport={{ once: true, amount: 0.05, margin: "0px 0px -5% 0px" }}
+                      transition={{ duration: 0.35, delay: idx * 0.06, ease: appleEase }}
                       className="p-4 rounded-2xl bg-slate-50/90 border border-slate-200/80 flex items-start gap-3.5 transition-all hover:bg-slate-100/80 hover:border-slate-300 relative z-10"
                     >
                       <div className="w-6 h-6 rounded-full bg-[#087f5b] text-white font-mono text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5 shadow-xs">
@@ -267,7 +288,7 @@ const ProjectDetail = () => {
               Let's discuss how I can help design and engineer your custom system or platform.
             </p>
             <Button asChild size="lg" className="bg-[#087f5b] hover:bg-[#066347] text-white font-medium rounded-full shadow-sm">
-              <a href="/#contact">{project.ctaText || "Get In Touch"}</a>
+              <a href="/#contact">{project.ctaText || "Discuss a similar project"}</a>
             </Button>
           </div>
         </div>

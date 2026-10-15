@@ -90,13 +90,8 @@ export function HeroApple() {
     setGlarePos({ x: 50, y: 50 });
   };
 
-  // Count up stats (H4)
-  const countDelivered = useCountUp(11, isInView);
-  const countRatings = useCountUp(10, isInView);
-  const countMinProjects = useCountUp(10, isInView);
-  const countMaxProjects = useCountUp(15, isInView);
-  const countYears = useCountUp(2, isInView);
-  const countJobSuccess = useCountUp(100, isInView);
+  // Count up stats - only 100% counts up (Task 5)
+  const countJobSuccess = useCountUp(100, isInView, { duration: 900 });
 
   const scrollToContact = () => {
     if ((window as any).__lenis) {
@@ -188,8 +183,8 @@ export function HeroApple() {
                       initial={{ y: "115%", opacity: 0 }}
                       animate={{ y: "0%", opacity: 1 }}
                       transition={{
-                        duration: 0.65,
-                        delay: 0.15 + wIdx * 0.08,
+                        duration: 0.35,
+                        delay: 0.08 + wIdx * 0.06,
                         ease: appleEase,
                       }}
                       className="inline-block"
@@ -208,8 +203,8 @@ export function HeroApple() {
                       initial={{ y: "115%", opacity: 0 }}
                       animate={{ y: "0%", opacity: 1 }}
                       transition={{
-                        duration: 0.65,
-                        delay: 0.35 + wIdx * 0.08,
+                        duration: 0.35,
+                        delay: 0.22 + wIdx * 0.06,
                         ease: appleEase,
                       }}
                       className="inline-block"
@@ -225,7 +220,7 @@ export function HeroApple() {
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6, ease: appleEase }}
+              transition={{ duration: 0.35, delay: 0.45, ease: appleEase }}
               className="text-sm sm:text-lg font-semibold text-slate-200 tracking-tight"
             >
               Full-Stack WordPress Engineer &amp; System Architect
@@ -235,7 +230,7 @@ export function HeroApple() {
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7, ease: appleEase }}
+              transition={{ duration: 0.35, delay: 0.55, ease: appleEase }}
               className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal max-w-xl"
             >
               I help businesses and agencies plan, build, and scale high-performing websites and custom systems. From WordPress and WooCommerce to bespoke web applications, I focus on clean architecture, reliable performance, and long-term support.
@@ -245,7 +240,7 @@ export function HeroApple() {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8, ease: appleEase }}
+              transition={{ duration: 0.35, delay: 0.65, ease: appleEase }}
               className="flex flex-wrap items-center gap-3 pt-2"
             >
               <Magnetic strength={8}>
@@ -302,7 +297,7 @@ export function HeroApple() {
                     }
                   : { opacity: 1, scale: 1 }
               }
-              transition={{ duration: 0.7, delay: 0.2, ease: appleEase }}
+              transition={{ duration: 0.55, delay: 0.15, ease: appleEase }}
               className="rounded-2xl sm:rounded-3xl bg-[#111927]/95 border border-white/10 shadow-2xl p-4 sm:p-6 backdrop-blur-md relative overflow-hidden group"
             >
               {/* Moving glare highlight overlay (H2) */}
@@ -325,12 +320,8 @@ export function HeroApple() {
                     SR
                   </div>
                   <span className="text-xs font-bold text-white tracking-wide">
-                    Delivery snapshot
+                    Track record
                   </span>
-                </div>
-
-                <div className="flex items-center px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] text-slate-300 font-medium">
-                  <span>Last month</span>
                 </div>
               </div>
 
@@ -340,29 +331,29 @@ export function HeroApple() {
                 className="grid grid-cols-3 gap-2 sm:gap-3 mb-5 relative z-10"
               >
                 <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">
-                    Projects delivered
-                  </div>
-                  <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
-                    {countDelivered}
-                  </div>
-                </div>
-
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">
-                    5-star ratings
-                  </div>
-                  <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
-                    {countRatings}
-                  </div>
-                </div>
-
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium leading-tight">
                     Projects per month
                   </div>
                   <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
-                    {countMinProjects}-{countMaxProjects}
+                    10-15
+                  </div>
+                </div>
+
+                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium leading-tight">
+                    Freelancing since
+                  </div>
+                  <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
+                    2018
+                  </div>
+                </div>
+
+                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium leading-tight">
+                    Upwork Job Success
+                  </div>
+                  <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
+                    {countJobSuccess}%
                   </div>
                 </div>
               </div>
@@ -437,7 +428,7 @@ export function HeroApple() {
                 </div>
                 <div>
                   <div className="text-sm sm:text-base font-bold text-slate-950">
-                    {countYears}+ Years
+                    2+ Years
                   </div>
                   <div className="text-xs text-slate-500">Experience</div>
                 </div>
@@ -450,9 +441,9 @@ export function HeroApple() {
                 </div>
                 <div>
                   <div className="text-sm sm:text-base font-bold text-slate-950">
-                    {countJobSuccess}%
+                    5.0
                   </div>
-                  <div className="text-xs text-slate-500">Upwork Job Success</div>
+                  <div className="text-xs text-slate-500">Upwork rating</div>
                 </div>
               </div>
 

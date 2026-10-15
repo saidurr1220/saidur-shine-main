@@ -112,7 +112,7 @@ const skillCategories = [
     accent: "text-amber-400",
     skills: [
       "Core Web Vitals (LCP, CLS, INP)",
-      "LiteSpeed Cache & Redis Tuning",
+      "LiteSpeed Cache Tuning",
       "Image & Asset Optimization",
       "PageSpeed 90+ Optimization",
       "Schema Markup & JSON-LD",

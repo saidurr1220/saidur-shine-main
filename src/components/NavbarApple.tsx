@@ -42,12 +42,19 @@ export function NavbarApple() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Track active section with IntersectionObserver
+  // Track active section with IntersectionObserver and bottom threshold
   useEffect(() => {
     if (location.pathname !== "/") return;
 
     const sectionIds = ["about", "services", "projects", "experience", "testimonials", "contact"];
     const observers: IntersectionObserver[] = [];
+
+    const handleBottomCheck = () => {
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60) {
+        setActiveSection("contact");
+      }
+    };
+    window.addEventListener("scroll", handleBottomCheck, { passive: true });
 
     sectionIds.forEach((id) => {
       const el = document.getElementById(id);
@@ -56,16 +63,20 @@ export function NavbarApple() {
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            setActiveSection(id);
+            // Only update if not already pinned to contact at bottom of page
+            if (window.innerHeight + window.scrollY < document.documentElement.scrollHeight - 60) {
+              setActiveSection(id);
+            }
           }
         },
-        { rootMargin: "-30% 0px -60% 0px", threshold: 0 }
+        { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
       );
       observer.observe(el);
       observers.push(observer);
     });
 
     return () => {
+      window.removeEventListener("scroll", handleBottomCheck);
       observers.forEach((obs) => obs.disconnect());
     };
   }, [location.pathname]);

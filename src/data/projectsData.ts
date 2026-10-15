@@ -54,7 +54,7 @@ export const projectsData: ProjectItem[] = [
     url: "",
     github: "",
     screenshot: "/screenshots/mirror-control.png",
-    ctaText: "Discuss High-Frequency / Trading Systems",
+    ctaText: "Discuss a similar project",
     metrics: {
       contract: "$7,000 USD",
       status: "Running 24/7 Live",
@@ -99,9 +99,9 @@ export const projectsData: ProjectItem[] = [
     url: "https://vaultlabsresearch.net",
     github: "",
     screenshot: "/screenshots/vault-labs.png",
-    ctaText: "Discuss Custom WooCommerce Platform",
+    ctaText: "Discuss a similar project",
     metrics: {
-      modules: "20+ custom",
+      modules: "20+",
       inventory: "Shared dual-mode",
       compliance: "Variation COA PDFs",
     },
@@ -143,7 +143,7 @@ export const projectsData: ProjectItem[] = [
     url: "https://www.onroutecouriers.com",
     github: "",
     screenshot: "/screenshots/onroute.png",
-    ctaText: "Discuss Dynamic Pricing & Booking Engines",
+    ctaText: "Discuss a similar project",
     metrics: {
       pricing: "Dynamic formula",
       tracking: "GTM/GA4 + dedup",
@@ -186,7 +186,7 @@ export const projectsData: ProjectItem[] = [
     url: "https://californialandlordsunion.com",
     github: "",
     screenshot: "/screenshots/california-ai.png",
-    ctaText: "Discuss Membership & SaaS Portals",
+    ctaText: "Discuss a similar project",
     metrics: {
       membership: "3-tier PMPro",
       aiIntegration: "Union AI Assistant",
@@ -229,7 +229,7 @@ export const projectsData: ProjectItem[] = [
     url: "https://labeng.co.uk",
     github: "",
     screenshot: "/screenshots/labeng.png",
-    ctaText: "Discuss Custom WordPress & Booking Builds",
+    ctaText: "Discuss a similar project",
     metrics: {
       theme: "100% Bespoke",
       auth: "Dual customer/business",
@@ -253,11 +253,11 @@ export const projectsData: ProjectItem[] = [
     description:
       "Subscription-based lead distribution CRM built from scratch on WordPress.",
     problem:
-      "The client's custom CRM plugin was running unindexed SQL queries across hundreds of subscriber rows, causing admin page load times of 6+ seconds and random checkout timeouts on renewal.",
+      "Manage the full member lifecycle (apply, approve, subscribe, allocate leads, notify, renew) on a live system with paying Stripe subscribers and thousands of lead records. Every change touched billing or lead delivery, so accuracy and safe deployment mattered more than speed.",
     solution:
-      "Rebuilt the query layer with custom indexed database tables, refactored subscription state handling into an OOP service class, added transactional safeguards for Stripe webhook renewals, and optimized the admin dashboard with async data fetching.",
+      "Built a custom membership system, a Stripe subscription engine with webhook handling and invoice-level idempotency, and a multi-factor lead allocation engine that prevents double-allocation under race conditions. Maintained separate dev, staging and production environments, deployed via staged zip builds with file hash verification, and ran a 53-point security test suite covering staff and member roles.",
     impact:
-      "Fixed a production performance bottleneck (10x faster queries) and shipped a reliable lead distribution system.",
+      "Ran on live production for months with zero lost subscriber records, zero billing double-charges, and zero unauthorized data exposure across staff, member and applicant roles.",
     architecture: "WordPress + PHP (OOP) + MySQL Indexing + Custom Plugin Architecture",
     tags: [
       "WordPress",
@@ -270,18 +270,18 @@ export const projectsData: ProjectItem[] = [
     url: "https://www.weldingleads.com",
     github: "",
     screenshot: "/screenshots/weldingleads.png",
-    ctaText: "Discuss Custom CRM & Database Optimization",
+    ctaText: "Discuss a similar project",
     metrics: {
-      latencyDrop: "94%",
-      renewalRate: "100%",
-      throughput: "10x",
-      failedWebhooks: "0",
+      leadsRecovered: "98",
+      securityTests: "53/53",
+      bulkEmails: "167",
+      filesVerified: "83",
     },
     workflowSteps: [
-      { step: "1. Stripe Webhook Renewal", detail: "Stripe webhook receives recurring renewal invoice event" },
-      { step: "2. Signature & Transaction Lock", detail: "Custom service validates signature and acquires database transaction lock" },
-      { step: "3. Fast Indexed SQL Update", detail: "Fast indexed SQL table records renewal and advances subscriber tier" },
-      { step: "4. Async Notification & Sync", detail: "Async job dispatches confirmation email and syncs CRM contact state" },
+      { step: "1. Lead Ingestion", detail: "Lead submitted via form or CSV import -> validated -> inserted into custom lead table with pending status" },
+      { step: "2. Idempotency & Lock", detail: "Allocation engine acquires exclusive lock on the lead row -> checks member quota and tier balance" },
+      { step: "3. Multi-Factor Allocation", detail: "Lead assigned to member based on state preference, remaining allocation and tier priority -> marked delivered" },
+      { step: "4. Notification & Delivery", detail: "Async notification sent to member dashboard -> email dispatched with lead details -> audit log entry recorded" },
     ],
   },
   {
@@ -311,7 +311,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "",
     github: "",
-    ctaText: "Discuss Workflow Automation & Custom Systems",
+    ctaText: "Discuss a similar project",
     metrics: {
       workflow: "Automated routing",
       steps: "Multi-stage onboarding",

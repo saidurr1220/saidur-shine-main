@@ -261,10 +261,10 @@ export function ProjectsApple() {
                     }
                   : undefined
               }
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: isTouch ? 1 : 0, y: isTouch ? 0 : 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.6, ease: appleEase }}
+              viewport={{ once: true, amount: 0.1, margin: "0px 0px -10% 0px" }}
+              transition={{ duration: 0.45, ease: appleEase }}
               className="rounded-2xl sm:rounded-3xl bg-[#111927] border border-white/10 p-6 sm:p-8 mb-8 shadow-2xl relative overflow-hidden group hover:border-[#10b981]/30 transition-colors"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -358,34 +358,22 @@ export function ProjectsApple() {
 
         {/* View All Projects Pill with smooth layout animation */}
         {otherProjects.length > 2 && (
-          <motion.div layout className="mt-12 text-center space-y-3">
-            <div>
-              <button
-                onClick={() => setShowAll(!showAll)}
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-200 bg-white/5 hover:bg-white/10 px-6 py-2.5 rounded-full border border-white/15 transition-all shadow-sm active:scale-95"
-              >
-                <span>
-                  {showAll
-                    ? "Show Less Projects"
-                    : `View All Projects (${projectsData.length})`}
-                </span>
-                <ArrowRight
-                  className={`w-3.5 h-3.5 transition-transform text-[#10b981] ${
-                    showAll ? "-rotate-90" : "rotate-90"
-                  }`}
-                />
-              </button>
-            </div>
-
-            <div>
-              <Link
-                to="/projects"
-                className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-[#34d399] transition-colors"
-              >
-                <span>Or explore dedicated projects gallery page</span>
-                <ArrowRight className="w-3 h-3 text-[#10b981]" />
-              </Link>
-            </div>
+          <motion.div layout className="mt-12 text-center">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-200 bg-white/5 hover:bg-white/10 px-6 py-2.5 rounded-full border border-white/15 transition-all shadow-sm active:scale-95 cursor-pointer"
+            >
+              <span>
+                {showAll
+                  ? "Show Less Projects"
+                  : `View All Projects (${projectsData.length})`}
+              </span>
+              <ArrowRight
+                className={`w-3.5 h-3.5 transition-transform text-[#10b981] ${
+                  showAll ? "-rotate-90" : "rotate-90"
+                }`}
+              />
+            </button>
           </motion.div>
         )}
       </div>

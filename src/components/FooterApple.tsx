@@ -200,17 +200,17 @@ export function FooterApple() {
               <span className="font-medium text-slate-300">Available for agency roles</span>
             </span>
 
-            <span className="text-slate-600">·</span>
+            <span className="hidden md:inline text-slate-600">·</span>
 
             {/* Dhaka Live Time */}
             <span className="text-slate-400">
-              Dhaka, Bangladesh ·{" "}
+              Dhaka, Bangladesh <span className="hidden md:inline">·</span>{" "}
               <span className="text-slate-300 font-mono">
                 {dhakaTime || "Live"}
               </span>
             </span>
 
-            <span className="text-slate-600">·</span>
+            <span className="hidden md:inline text-slate-600">·</span>
 
             {/* Back to Top */}
             <button

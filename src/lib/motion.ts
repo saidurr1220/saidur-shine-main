@@ -5,18 +5,18 @@ export const gentleSpring = { type: "spring", stiffness: 260, damping: 25 } as c
 export const tightSpring = { type: "spring", stiffness: 400, damping: 30 } as const;
 
 export const fadeInRise: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.45,
       ease: appleEase,
     },
   },
 };
 
-export const staggerContainer = (staggerChildren = 0.06, delayChildren = 0): Variants => ({
+export const staggerContainer = (staggerChildren = 0.05, delayChildren = 0): Variants => ({
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,

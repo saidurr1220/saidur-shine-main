@@ -55,7 +55,6 @@ const skills = [
     items: [
       "MySQL (schema design, indexes, WP query optimization)",
       "PostgreSQL",
-      "Redis",
     ],
   },
   {
@@ -63,10 +62,9 @@ const skills = [
     icon: Layers,
     color: "bg-[#0284c7]/10 text-[#0284c7]",
     items: [
-      "Stripe / PayPal / Bybit APIs",
+      "Stripe API",
       "Webhooks",
       "REST & cURL",
-      "3rd-party auth",
     ],
   },
   {
@@ -75,7 +73,7 @@ const skills = [
     color: "bg-[#06b6d4]/15 text-[#0891b2]",
     items: [
       "Tailwind CSS",
-      "Modern CSS / SCSS",
+      "Modern CSS",
       "Responsive UI",
       "Core Web Vitals",
       "Framer Motion",
@@ -87,7 +85,6 @@ const skills = [
     color: "bg-slate-100 text-slate-700",
     items: [
       "Git / GitHub",
-      "Docker & CI/CD",
       "WP-CLI & Composer",
       "npm & Vercel",
     ],
@@ -97,10 +94,9 @@ const skills = [
     icon: ShieldCheck,
     color: "bg-[#10b981]/15 text-[#059669]",
     items: [
-      "Caching (Redis / Object Cache)",
-      "Query optimization",
+      "SQL index optimization",
       "Nonce / sanitized input",
-      "Rate limiting",
+      "Role / capability checks",
     ],
   },
   {
@@ -108,10 +104,9 @@ const skills = [
     icon: Cpu,
     color: "bg-[#8b5cf6]/15 text-[#7c3aed]",
     items: [
-      "Headless WordPress",
-      "Microservices",
-      "Event-driven logic",
       "Clean OOP patterns",
+      "Staged deployments",
+      "Environment isolation (dev / staging / prod)",
     ],
   },
 ];
@@ -121,13 +116,12 @@ const marqueeRow1 = [
   "WooCommerce",
   "PHP (OOP)",
   "MySQL",
-  "Stripe",
+  "Stripe API",
   "GTM",
   "GA4",
   "Node.js",
   "TypeScript",
   "React",
-  "Laravel",
   "Elementor",
 ];
 
@@ -135,15 +129,13 @@ const marqueeRow2 = [
   "REST APIs",
   "WebSockets",
   "PostgreSQL",
-  "Redis",
-  "Docker",
   "Tailwind CSS",
   "Framer Motion",
   "Core Web Vitals",
   "WP-CLI",
+  "Composer",
   "ACF Pro",
-  "High Availability",
-  "PayPal API",
+  "Git / GitHub",
 ];
 
 function SkillTiltCard({

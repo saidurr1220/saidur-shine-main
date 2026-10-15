@@ -9,7 +9,7 @@ interface RevealProps {
   y?: number;
 }
 
-export function Reveal({ children, className = "", delay = 0, y = 24 }: RevealProps) {
+export function Reveal({ children, className = "", delay = 0, y = 16 }: RevealProps) {
   const shouldReduceMotion = useReducedMotion();
 
   if (shouldReduceMotion) {
@@ -20,8 +20,8 @@ export function Reveal({ children, className = "", delay = 0, y = 24 }: RevealPr
     <motion.div
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, amount: 0.1, margin: "0px 0px -10% 0px" }}
+      transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -36,7 +36,7 @@ interface StaggerProps {
   delay?: number;
 }
 
-export function Stagger({ children, className = "", stagger = 0.06, delay = 0 }: StaggerProps) {
+export function Stagger({ children, className = "", stagger = 0.05, delay = 0 }: StaggerProps) {
   const shouldReduceMotion = useReducedMotion();
 
   if (shouldReduceMotion) {
@@ -47,7 +47,7 @@ export function Stagger({ children, className = "", stagger = 0.06, delay = 0 }:
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: true, amount: 0.1, margin: "0px 0px -10% 0px" }}
       variants={staggerContainer(stagger, delay)}
       className={className}
     >
