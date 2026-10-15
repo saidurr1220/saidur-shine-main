@@ -10,7 +10,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { appleEase } from "@/lib/motion";
 import { reviews, ReviewItem } from "@/data/reviews";
 
-type PlatformFilter = "All" | "Upwork" | "Fiverr";
+type PlatformFilter = "All" | "Upwork" | "Direct Client" | "Fiverr";
 
 function UpworkIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
   return (
@@ -55,17 +55,20 @@ export function TestimonialsApple() {
 
   // Filter tabs: show tab only if it has at least 1 review
   const hasUpwork = reviews.some((r) => r.platform === "Upwork");
+  const hasDirect = reviews.some((r) => r.platform === "Direct Client");
   const hasFiverr = reviews.some((r) => r.platform === "Fiverr (agency)");
 
   const filterTabs: { id: PlatformFilter; label: string }[] = [
     { id: "All", label: "All" },
     ...(hasUpwork ? [{ id: "Upwork" as const, label: "Upwork" }] : []),
+    ...(hasDirect ? [{ id: "Direct Client" as const, label: "Direct Clients" }] : []),
     ...(hasFiverr ? [{ id: "Fiverr" as const, label: "Fiverr" }] : []),
   ];
 
   const filteredReviews = reviews.filter((r) => {
     if (selectedFilter === "All") return true;
     if (selectedFilter === "Upwork") return r.platform === "Upwork";
+    if (selectedFilter === "Direct Client") return r.platform === "Direct Client";
     if (selectedFilter === "Fiverr") return r.platform === "Fiverr (agency)";
     return true;
   });
@@ -233,7 +236,9 @@ export function TestimonialsApple() {
                   const badgeText =
                     rev.platform === "Upwork"
                       ? `${rev.rating.toFixed(1)} Upwork review`
-                      : `${rev.rating.toFixed(1)} Fiverr review`;
+                      : rev.platform === "Fiverr (agency)"
+                      ? `${rev.rating.toFixed(1)} Fiverr review`
+                      : `${rev.rating.toFixed(1)} Client review`;
 
                   return (
                     <div
@@ -293,11 +298,11 @@ export function TestimonialsApple() {
                             {rev.name}
                           </h4>
                           <p className="text-xs text-slate-500 leading-normal">
-                            Client &bull; {rev.country}
-                            {rev.project ? ` \u2022 ${rev.project}` : ""}
-                            {rev.platform === "Fiverr (agency)"
-                              ? " (via FB International BD)"
-                              : ""}
+                            {rev.platform === "Direct Client"
+                              ? `${rev.project ? `${rev.project} \u2022 ` : ""}${rev.country}`
+                              : `Client \u2022 ${rev.country}${rev.project ? ` \u2022 ${rev.project}` : ""}${
+                                  rev.platform === "Fiverr (agency)" ? " (via FB International BD)" : ""
+                                }`}
                           </p>
                         </div>
                       </div>
