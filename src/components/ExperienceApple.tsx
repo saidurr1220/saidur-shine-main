@@ -43,9 +43,9 @@ export function ExperienceApple() {
         </div>
 
         {/* Timeline Container with self-drawing line on desktop */}
-        <div className="relative max-w-5xl mx-auto pl-0 md:pl-8">
-          {/* Vertical self-drawing timeline line */}
-          <div className="hidden md:block absolute left-3 top-4 bottom-4 w-[2px] bg-slate-200">
+        <div className="relative max-w-5xl mx-auto pl-0 md:pl-12">
+          {/* Vertical self-drawing timeline line mathematically centered on dots */}
+          <div className="hidden md:block absolute left-[22px] -translate-x-1/2 top-[47px] bottom-[47px] w-[2px] bg-slate-200">
             <motion.div
               style={{ scaleY, transformOrigin: "top" }}
               className="w-full h-full bg-gradient-to-b from-[#10b981] via-[#087f5b] to-[#05513a]"
@@ -61,7 +61,7 @@ export function ExperienceApple() {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ type: "spring", stiffness: 350, damping: 20 }}
-                className="hidden md:flex absolute -left-[27px] top-6 w-5 h-5 rounded-full bg-white border-2 border-[#10b981] items-center justify-center shadow-xs z-10"
+                className="hidden md:flex absolute -left-[36px] top-[37px] w-5 h-5 rounded-full bg-white border-2 border-[#10b981] items-center justify-center shadow-xs z-10"
               >
                 <div className="w-2 h-2 rounded-full bg-[#10b981]" />
               </motion.div>
@@ -120,7 +120,7 @@ export function ExperienceApple() {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ type: "spring", stiffness: 350, damping: 20 }}
-                className="hidden md:flex absolute -left-[27px] top-6 w-5 h-5 rounded-full bg-white border-2 border-[#0284c7] items-center justify-center shadow-xs z-10"
+                className="hidden md:flex absolute -left-[36px] top-[37px] w-5 h-5 rounded-full bg-white border-2 border-[#0284c7] items-center justify-center shadow-xs z-10"
               >
                 <div className="w-2 h-2 rounded-full bg-[#0284c7]" />
               </motion.div>
@@ -180,7 +180,7 @@ export function ExperienceApple() {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ type: "spring", stiffness: 350, damping: 20 }}
-                className="hidden md:flex absolute -left-[27px] top-6 w-5 h-5 rounded-full bg-white border-2 border-purple-500 items-center justify-center shadow-xs z-10"
+                className="hidden md:flex absolute -left-[36px] top-[37px] w-5 h-5 rounded-full bg-white border-2 border-purple-500 items-center justify-center shadow-xs z-10"
               >
                 <div className="w-2 h-2 rounded-full bg-purple-500" />
               </motion.div>

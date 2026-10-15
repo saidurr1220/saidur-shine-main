@@ -13,6 +13,7 @@ export interface ProjectItem {
   architecture: string;
   tags: string[];
   url: string;
+  configuratorUrl?: string;
   github: string;
   screenshot?: string;
   image?: string;
@@ -286,20 +287,20 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "financial-application-automation",
-    title: "Financial Application Automation System",
+    title: "White Horse Financing - Business Funding & Application System",
     location: "US Client",
     category: "WordPress",
     filterCategory: "Workflow Automation",
-    highlightBadge: "-70% Processing Time",
-    clientName: "US Financial Client",
+    highlightBadge: "Bank Verification & Routing",
+    clientName: "White Horse Capital LLC",
     description:
-      "Multi-step financial onboarding platform with automated bank routing and approval tracking.",
+      "Multi-step commercial funding application platform with conditional applicant branching, bank routing validation, and automated underwriting pipelines.",
     problem:
-      "Manual financial application workflows caused slow turnaround times, routing errors, and lack of applicant status transparency.",
+      "Manual financial application intake created processing bottlenecks, bank routing data errors, and lack of applicant status visibility for small-to-medium business funding.",
     solution:
-      "Engineered an automated multi-step application system with conditional branching, secure bank routing verification, automated email notifications, and administrative approval pipelines.",
+      "Engineered an automated multi-step business funding application platform with conditional branching, secure bank routing number validation, document upload pipelines, and administrative review workflows.",
     impact:
-      "Streamlined applicant intake, reduced manual processing time by over 70%, and eliminated routing errors.",
+      "Streamlined applicant intake, improved routing data accuracy, and automated notifications across the funding evaluation lifecycle.",
     architecture: "WordPress + PHP + Fluent Forms Pro + REST API + Bank Verification",
     tags: [
       "WordPress",
@@ -308,20 +309,112 @@ export const projectsData: ProjectItem[] = [
       "REST API",
       "Bank Routing API",
       "Workflow Automation",
+      "Application Pipeline",
     ],
-    url: "",
+    url: "https://www.whitehorsefinancing.com",
     github: "",
+    screenshot: "/screenshots/whitehorse-financing.png",
     ctaText: "Discuss a similar project",
     metrics: {
-      workflow: "Automated routing",
-      steps: "Multi-stage onboarding",
-      efficiency: "-70% manual time",
+      fundingTime: "4-6 hrs",
+      approvalRate: "80%",
+      creditScore: "500+ Min",
+      amounts: "Custom",
     },
     workflowSteps: [
-      { step: "1. Multi-Step Form", detail: "Dynamic conditional fields adapting based on applicant business structure" },
-      { step: "2. Routing Verification", detail: "Instant bank routing number validation via financial REST API" },
-      { step: "3. Document Uploads", detail: "Secure encrypted PDF and tax document upload pipeline" },
-      { step: "4. Approval Tracking", detail: "Multi-stage admin workflow status with automated client email triggers" },
+      { step: "1. Multi-Step Form", detail: "Dynamic conditional fields adapting based on applicant business structure and capital requirements" },
+      { step: "2. Routing Verification", detail: "Instant bank routing number validation via financial REST API before submission" },
+      { step: "3. Document Uploads", detail: "Secure encrypted financial document and bank statement upload pipeline" },
+      { step: "4. Approval Tracking", detail: "Multi-stage administrative review status with automated status notifications" },
+    ],
+  },
+  {
+    id: "emuwing-warehouse-pick-sheet",
+    title: "Emuwing - Custom WooCommerce Warehouse Pick Sheet Automation System",
+    location: "Australian Client",
+    category: "WordPress",
+    filterCategory: "WooCommerce",
+    highlightBadge: "BOM & PDF Automation",
+    clientName: "Emuwing",
+    description:
+      "Custom WooCommerce warehouse fulfillment plugin that automates pick sheet generation, BOM expansion, and email notifications based on order status.",
+    problem:
+      "Manual warehouse fulfillment workflows caused processing delays, component mapping errors for complex product Bill of Materials (BOM), and duplicate email notifications during concurrent status changes.",
+    solution:
+      "Developed a custom WooCommerce warehouse fulfillment plugin that expands variation-specific BOMs into structured, warehouse-ready multi-page PDF pick sheets. Implemented execution guards, job deduplication via Action Scheduler, database locking, and email-sent checks to eliminate race conditions and repeated processing.",
+    impact:
+      "Automated warehouse pick sheet delivery for eligible paid orders, eliminated manual BOM lookup errors, and ensured zero duplicate PDF generations or emails across production fulfillment.",
+    architecture: "WordPress + WooCommerce + PHP (OOP) + Action Scheduler + PDF Generation Engine",
+    tags: [
+      "WordPress",
+      "WooCommerce",
+      "PHP (OOP)",
+      "Custom Plugin",
+      "PDF Generation",
+      "Action Scheduler",
+      "BOM Management",
+      "Email Automation",
+    ],
+    url: "https://www.emuwing.com.au/",
+    github: "",
+    screenshot: "/screenshots/emuwing.png",
+    ctaText: "Discuss a similar project",
+    metrics: {
+      bom: "Multi-Kit BOM",
+      pdf: "Automated Multi-Page",
+      scheduler: "Action Scheduler Lock",
+      dispatch: "Zero Duplicate Sends",
+    },
+    workflowSteps: [
+      { step: "1. Order Status Qualification", detail: "Listens for eligible paid orders while strictly excluding cancelled or pending orders" },
+      { step: "2. BOM Expansion Engine", detail: "Traverses variation-specific Bill of Materials, mapping component SKUs and multi-kit packaging" },
+      { step: "3. Structured PDF Generation", detail: "Generates warehouse-ready pick sheets preserving approved layout with individual pages per kit" },
+      { step: "4. Deduplication & Dispatch", detail: "Database locks and sent-status flags prevent duplicate runs before automated warehouse dispatch" },
+    ],
+  },
+  {
+    id: "xo-sweden-boat-configurator",
+    title: "XO Sweden Boat Configurator - Interactive Marine Configuration Engine",
+    location: "Swedish Client",
+    category: "WordPress",
+    filterCategory: "Custom Systems",
+    highlightBadge: "Interactive Configurator",
+    clientName: "XO Sweden",
+    description:
+      "Step-by-step interactive boat configurator for XO Sweden, enabling prospective marine buyers to configure models, select equipment options, and submit dealer inquiries.",
+    problem:
+      "Prospective marine buyers needed an intuitive way to explore boat models and available equipment options before contacting the Swedish dealer. The reference site rendered visual assets dynamically through JavaScript, limiting direct access to raw image files. Furthermore, public product pricing had to remain concealed per dealer requirements, and equipment options required manageable configuration within WordPress.",
+    solution:
+      "Engineered a dedicated XO Configurator WordPress plugin with an interactive multi-step selection interface, dynamic live 'YOUR CHOICES' summary tray, and dealer inquiry submission pipeline. Built full WP-Admin management for boat models, option categories (engines, comfort, exterior, interior, safety, navigation), standard equipment lists, and submission tracking across desktop, tablet, and mobile.",
+    impact:
+      "Delivered a structured, intuitive configuration journey that organizes complex marine equipment options, hides public pricing per dealer policy, and routes qualified build specifications directly to sales staff without relying on external SaaS tools.",
+    architecture: "WordPress + Custom Plugin + PHP (OOP) + JavaScript + AJAX + WP-Admin Management",
+    tags: [
+      "WordPress",
+      "Custom Plugin",
+      "JavaScript",
+      "PHP (OOP)",
+      "Interactive Configurator",
+      "AJAX",
+      "WP-Admin",
+      "Responsive UI",
+    ],
+    url: "https://xosweden.se/",
+    configuratorUrl: "https://xosweden.se/configurator/",
+    github: "",
+    screenshot: "/screenshots/xo-sweden.png",
+    ctaText: "Discuss a similar project",
+    metrics: {
+      modelFlow: "Step-by-Step Models",
+      categories: "Engines to Avionics",
+      pricing: "Hidden Dealer Pricing",
+      adminControl: "Full WP-Admin",
+    },
+    workflowSteps: [
+      { step: "1. Interactive Model Selection", detail: "Prospective buyers explore available XO boat models and select their base hull" },
+      { step: "2. Step-by-Step Configuration", detail: "Guided selection across engines, comfort, exterior, interior, safety, and navigation categories" },
+      { step: "3. Live 'YOUR CHOICES' Summary", detail: "Dynamic tray tracks and updates active configuration selections in real time without page reload" },
+      { step: "4. Dealer Inquiry Submissions", detail: "Direct submission of buyer preferences and specifications to the dealer inbox without public price disclosure" },
     ],
   },
 ];

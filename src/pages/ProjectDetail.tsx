@@ -33,6 +33,17 @@ const METRIC_LABELS: Record<string, string> = {
   workflow: "Workflow routing",
   steps: "Onboarding steps",
   efficiency: "Processing time",
+  fundingTime: "Average funding",
+  approvalRate: "Approval rate",
+  creditScore: "Min credit score",
+  amounts: "Funding limits",
+  bom: "BOM management",
+  pdf: "Pick sheet PDFs",
+  scheduler: "Job deduplication",
+  dispatch: "Duplicate prevention",
+  modelFlow: "Boat models",
+  categories: "Option categories",
+  adminControl: "WP-Admin control",
 };
 
 function MetricTile({ label, value }: { label: string; value: string }) {
@@ -130,14 +141,24 @@ const ProjectDetail = () => {
                 </div>
               </div>
 
-              {project.url && project.url !== "" && (
-                <Button asChild className="bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-full h-10 px-5 shadow-sm">
-                  <a href={project.url} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    Live Website
-                  </a>
-                </Button>
-              )}
+              <div className="flex flex-wrap items-center gap-2.5">
+                {project.url && project.url !== "" && (
+                  <Button asChild className="bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-full h-10 px-5 shadow-sm">
+                    <a href={project.url} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      Live Website
+                    </a>
+                  </Button>
+                )}
+                {project.configuratorUrl && (
+                  <Button asChild className="bg-[#087f5b] hover:bg-[#066347] text-white font-medium rounded-full h-10 px-5 shadow-sm">
+                    <a href={project.configuratorUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      Explore Configurator
+                    </a>
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
 
