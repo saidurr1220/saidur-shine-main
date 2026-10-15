@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { ArrowRight, CheckCircle2, MessageCircle, Github, Mail, Linkedin } from "lucide-react";
+import { ArrowRight, CheckCircle2, MessageCircle, Github, Mail, Linkedin, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { motion, useReducedMotion } from "framer-motion";
+import { appleEase } from "@/lib/motion";
 
 // [TODO: LinkedIn URL] - Set to your profile URL when ready (e.g. "https://linkedin.com/in/saidur")
 const LINKEDIN_URL = "";
@@ -24,6 +26,7 @@ function UpworkIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
 
 export function ContactApple() {
   const { toast } = useToast();
+  const shouldReduce = useReducedMotion();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -76,26 +79,69 @@ export function ContactApple() {
     }
   };
 
+  const line1Words = ["Let's", "build"];
+  const line2Words = ["something"];
+  const line3Words = ["exceptional."];
+
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 bg-[#0b101b] text-white">
+    <section id="contact" data-dark="true" className="py-24 px-4 sm:px-6 bg-[#0b101b] text-white overflow-hidden">
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Heading & Availability Pill */}
+          {/* Left Column: Heading with Word Reveal & Availability Pill */}
           <div className="lg:col-span-5 space-y-6">
             <span className="text-[11px] font-mono font-bold tracking-widest text-[#10b981] uppercase block">
               GET IN TOUCH
             </span>
 
-            <div className="space-y-1">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                Let's build
-              </h2>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                something
-              </h2>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#10b981] tracking-tight leading-tight">
-                exceptional.
-              </h2>
+            {/* Word Reveal Heading */}
+            <div className="space-y-0.5">
+              <div className="flex flex-wrap gap-x-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                {line1Words.map((word, wIdx) => (
+                  <span key={wIdx} className="overflow-hidden inline-block py-0.5">
+                    <motion.span
+                      initial={{ y: "115%", opacity: 0 }}
+                      whileInView={{ y: "0%", opacity: 1 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.6, delay: wIdx * 0.08, ease: appleEase }}
+                      className="inline-block"
+                    >
+                      {word}
+                    </motion.span>
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-x-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                {line2Words.map((word, wIdx) => (
+                  <span key={wIdx} className="overflow-hidden inline-block py-0.5">
+                    <motion.span
+                      initial={{ y: "115%", opacity: 0 }}
+                      whileInView={{ y: "0%", opacity: 1 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.6, delay: 0.16 + wIdx * 0.08, ease: appleEase }}
+                      className="inline-block"
+                    >
+                      {word}
+                    </motion.span>
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-x-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#10b981] tracking-tight leading-tight">
+                {line3Words.map((word, wIdx) => (
+                  <span key={wIdx} className="overflow-hidden inline-block py-0.5">
+                    <motion.span
+                      initial={{ y: "115%", opacity: 0 }}
+                      whileInView={{ y: "0%", opacity: 1 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.6, delay: 0.32 + wIdx * 0.08, ease: appleEase }}
+                      className="inline-block"
+                    >
+                      {word}
+                    </motion.span>
+                  </span>
+                ))}
+              </div>
             </div>
 
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal pt-2">
@@ -103,19 +149,30 @@ export function ContactApple() {
             </p>
 
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#0e2a22] border border-[#10b981]/30 rounded-full text-xs text-[#34d399] font-medium pt-1">
-              <span className="w-2 h-2 rounded-full bg-[#10b981]" />
+              <span className="w-2 h-2 rounded-full bg-[#10b981] animate-ping opacity-75" />
               <span>Available for client builds &amp; agency roles</span>
             </div>
           </div>
 
-          {/* Right Column: Clean White Form Card matching screenshot */}
+          {/* Right Column: Clean White Form Card with Animated Focus Rings & Shimmer Button */}
           <div className="lg:col-span-7">
-            <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white text-slate-900 shadow-2xl border border-white/10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.55, ease: appleEase }}
+              className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white text-slate-900 shadow-2xl border border-white/10"
+            >
               {submitted ? (
                 <div className="py-12 text-center space-y-3">
-                  <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 350, damping: 20 }}
+                    className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto"
+                  >
                     <CheckCircle2 className="w-6 h-6" />
-                  </div>
+                  </motion.div>
                   <h3 className="text-lg font-bold text-slate-950">Message Delivered!</h3>
                   <p className="text-xs text-slate-600">
                     Thank you! Saidur will get back to your email shortly.
@@ -126,25 +183,29 @@ export function ContactApple() {
                   {/* Name and Email in 2 columns */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-slate-700 block">Name</label>
+                      <label className="text-xs font-semibold text-slate-700 block transition-transform duration-200">
+                        Name
+                      </label>
                       <Input
                         type="text"
                         placeholder="Your Name"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="rounded-xl border-slate-200 bg-slate-50 text-xs h-11 focus-visible:ring-[#10b981]"
+                        className="rounded-xl border-slate-200 bg-slate-50 text-xs h-11 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#10b981] focus-visible:border-[#10b981]"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-xs font-semibold text-slate-700 block">Email</label>
+                      <label className="text-xs font-semibold text-slate-700 block transition-transform duration-200">
+                        Email
+                      </label>
                       <Input
                         type="email"
                         placeholder="you@example.com"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="rounded-xl border-slate-200 bg-slate-50 text-xs h-11 focus-visible:ring-[#10b981]"
+                        className="rounded-xl border-slate-200 bg-slate-50 text-xs h-11 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#10b981] focus-visible:border-[#10b981]"
                       />
                     </div>
                   </div>
@@ -155,7 +216,7 @@ export function ContactApple() {
                     <select
                       value={formData.projectType}
                       onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                      className="w-full rounded-xl border border-slate-200 bg-slate-50 text-xs h-11 px-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#10b981]"
+                      className="w-full rounded-xl border border-slate-200 bg-slate-50 text-xs h-11 px-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#10b981] transition-all duration-200"
                     >
                       <option>Select a project type</option>
                       <option>Custom WordPress Plugin</option>
@@ -174,21 +235,33 @@ export function ContactApple() {
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="rounded-xl border-slate-200 bg-slate-50 text-xs leading-relaxed resize-none focus-visible:ring-[#10b981]"
+                      className="rounded-xl border-slate-200 bg-slate-50 text-xs leading-relaxed resize-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#10b981] focus-visible:border-[#10b981]"
                     />
                   </div>
 
-                  {/* Full-width Submit Button matching screenshot */}
+                  {/* Full-width Submit Button with Shimmer Sweep & Loading Spinner State */}
                   <Button
                     type="submit"
                     disabled={isSending}
-                    className="w-full rounded-xl bg-[#087f5b] hover:bg-[#066347] text-white font-semibold text-xs h-11 flex items-center justify-center gap-2 shadow-sm transition-colors duration-150"
+                    className="relative w-full rounded-xl bg-[#087f5b] hover:bg-[#066347] text-white font-semibold text-xs h-11 flex items-center justify-center gap-2 shadow-sm transition-all duration-200 overflow-hidden group active:scale-[0.99]"
                   >
-                    <span>{isSending ? "Sending..." : "Send Inquiry"}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    {/* Shimmer sweep effect */}
+                    <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+                    {isSending ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-white" />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Inquiry</span>
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                      </>
+                    )}
                   </Button>
 
-                  {/* Direct Channels: WhatsApp, Email, GitHub */}
+                  {/* Direct Channels: WhatsApp, Email, GitHub, Upwork */}
                   <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs text-slate-600">
                     <a
                       href="https://wa.me/8801515687002?text=Hi%20Saidur,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
@@ -244,7 +317,7 @@ export function ContactApple() {
                   </div>
                 </form>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

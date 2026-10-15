@@ -1,20 +1,59 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { NavbarApple } from "@/components/NavbarApple";
 import { FooterApple } from "@/components/FooterApple";
 import { WhatsAppChatButton } from "@/components/WhatsAppChatButton";
-import { projectsData, ProjectItem } from "@/data/projectsData";
+import { projectsData } from "@/data/projectsData";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, Target, Lightbulb, TrendingUp, Layers } from "lucide-react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { appleEase } from "@/lib/motion";
+import { useCountUp } from "@/components/motion/useCountUp";
+
+function MetricTile({ label, value }: { label: string; value: string }) {
+  const numericMatch = value.match(/^([0-9\.]+)(.*)$/);
+  const isNumeric = !!numericMatch;
+  const numValue = isNumeric ? parseFloat(numericMatch[1]) : 0;
+  const suffix = isNumeric ? numericMatch[2] : "";
+  const decimals = numericMatch && numericMatch[1].includes(".") ? 1 : 0;
+
+  const count = useCountUp(numValue, true, { duration: 1000, decimals });
+
+  return (
+    <div className="apple-card p-4 text-center">
+      <div className="text-xl sm:text-2xl font-black text-slate-950 font-mono tracking-tight">
+        {isNumeric ? `${count}${suffix}` : value}
+      </div>
+      <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mt-1">
+        {label === "latencyDrop"
+          ? "Query Latency Drop"
+          : label === "renewalRate"
+          ? "Renewal Delivery Rate"
+          : label === "throughput"
+          ? "Database Throughput"
+          : label === "failedWebhooks"
+          ? "Failed Webhooks"
+          : label.replace(/([A-Z])/g, " $1")}
+      </div>
+    </div>
+  );
+}
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
   const project = projectsData.find((p) => p.id === id) || projectsData[0];
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const shouldReduce = useReducedMotion();
 
+  // Scroll to top instantly and reset Lenis
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("dark");
     window.scrollTo(0, 0);
+
+    if ((window as any).__lenis) {
+      (window as any).__lenis.scrollTo(0, { immediate: true });
+    }
 
     // Dynamic SEO title & meta description
     document.title = `${project.title} | Saidur Rahman`;
@@ -24,12 +63,30 @@ const ProjectDetail = () => {
     }
   }, [id, project]);
 
+  // Image scroll parallax (0.85x speed)
+  const { scrollYProgress } = useScroll({
+    target: imageContainerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const imageParallaxY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+
   return (
-    <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] selection:bg-emerald-100 selection:text-emerald-900">
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -16 }}
+      transition={{ duration: 0.45, ease: appleEase }}
+      className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] selection:bg-emerald-100 selection:text-emerald-900"
+    >
       <NavbarApple />
       <main className="pt-32 pb-20 px-4">
         <div className="container mx-auto max-w-4xl">
-          <Button variant="ghost" asChild className="mb-8 rounded-full text-xs text-slate-600 hover:text-slate-900 border border-slate-200 bg-white shadow-sm">
+          <Button
+            variant="ghost"
+            asChild
+            className="mb-8 rounded-full text-xs text-slate-600 hover:text-slate-900 border border-slate-200 bg-white shadow-sm"
+          >
             <Link to="/#projects">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Case Studies
@@ -63,13 +120,17 @@ const ProjectDetail = () => {
             </div>
           </div>
 
-          {/* Optional Project Hero Screenshot */}
+          {/* Optional Project Hero Screenshot with Scroll Parallax */}
           {(project.image || project.screenshot) && (
-            <div className="mb-8 rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 shadow-md bg-slate-950 aspect-[16/10]">
-              <img
+            <div
+              ref={imageContainerRef}
+              className="mb-8 rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 shadow-md bg-slate-950 aspect-[16/10] relative"
+            >
+              <motion.img
+                style={!shouldReduce ? { y: imageParallaxY } : undefined}
                 src={project.image || project.screenshot}
                 alt={project.title}
-                className="w-full h-full object-cover object-top"
+                className="w-full h-[115%] object-cover object-top -mt-[5%]"
               />
             </div>
           )}
@@ -87,32 +148,24 @@ const ProjectDetail = () => {
             </p>
           </div>
 
-          {/* Key Metrics Grid */}
+          {/* Key Metrics Grid with Count-up */}
           {project.metrics && Object.keys(project.metrics).length > 0 && (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
               {Object.entries(project.metrics).map(([key, val]) => (
-                <div key={key} className="apple-card p-4 text-center">
-                  <div className="text-xl sm:text-2xl font-black text-slate-950 font-mono tracking-tight">
-                    {val}
-                  </div>
-                  <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mt-1">
-                    {key === "latencyDrop"
-                      ? "Query Latency Drop"
-                      : key === "renewalRate"
-                      ? "Renewal Delivery Rate"
-                      : key === "throughput"
-                      ? "Database Throughput"
-                      : key === "failedWebhooks"
-                      ? "Failed Webhooks"
-                      : key.replace(/([A-Z])/g, " $1")}
-                  </div>
-                </div>
+                <MetricTile key={key} label={key} value={val} />
               ))}
             </div>
           )}
 
+          {/* Challenge, Solution, Impact Cards (revealed one by one) */}
           <div className="space-y-4">
-            <div className="apple-card p-6">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, ease: appleEase }}
+              className="apple-card p-6"
+            >
               <div className="flex items-center gap-2.5 mb-2">
                 <Target className="w-5 h-5 text-rose-600" />
                 <h2 className="text-base font-bold text-slate-900">The Challenge</h2>
@@ -120,9 +173,15 @@ const ProjectDetail = () => {
               <p className="text-slate-600 text-sm leading-relaxed">
                 {project.problem}
               </p>
-            </div>
+            </motion.div>
 
-            <div className="apple-card p-6">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.1, ease: appleEase }}
+              className="apple-card p-6"
+            >
               <div className="flex items-center gap-2.5 mb-2">
                 <Lightbulb className="w-5 h-5 text-emerald-600" />
                 <h2 className="text-base font-bold text-slate-900">Engineered Solution</h2>
@@ -130,9 +189,15 @@ const ProjectDetail = () => {
               <p className="text-slate-600 text-sm leading-relaxed">
                 {project.solution}
               </p>
-            </div>
+            </motion.div>
 
-            <div className="apple-card p-6">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.2, ease: appleEase }}
+              className="apple-card p-6"
+            >
               <div className="flex items-center gap-2.5 mb-2">
                 <TrendingUp className="w-5 h-5 text-emerald-600" />
                 <h2 className="text-base font-bold text-slate-900">Measurable Business Impact</h2>
@@ -140,11 +205,17 @@ const ProjectDetail = () => {
               <p className="text-slate-600 text-sm leading-relaxed">
                 {project.impact}
               </p>
-            </div>
+            </motion.div>
 
-            {/* Request Flow */}
+            {/* Request Flow with sequential steps & drawing connector line */}
             {project.workflowSteps && (
-              <div className="apple-card p-6 sm:p-8 bg-white border border-slate-200/90 shadow-lg">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: 0.25, ease: appleEase }}
+                className="apple-card p-6 sm:p-8 bg-white border border-slate-200/90 shadow-lg relative overflow-hidden"
+              >
                 <div className="flex items-center gap-2.5 mb-4">
                   <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-200/60">
                     <Layers className="w-4 h-4" />
@@ -159,13 +230,20 @@ const ProjectDetail = () => {
                   </div>
                 </div>
 
-                <div className="grid gap-3 pt-2">
+                <div className="relative grid gap-3 pt-2">
+                  {/* Subtle connecting vertical line on desktop */}
+                  <div className="hidden sm:block absolute left-[27px] top-6 bottom-6 w-[2px] bg-emerald-200/60 -z-0" />
+
                   {project.workflowSteps.map((wf, idx) => (
-                    <div
+                    <motion.div
                       key={idx}
-                      className="p-4 rounded-2xl bg-slate-50/90 border border-slate-200/80 flex items-start gap-3.5 transition-all hover:bg-slate-100/80 hover:border-slate-300"
+                      initial={{ opacity: 0, x: 16 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.4, delay: idx * 0.1, ease: appleEase }}
+                      className="p-4 rounded-2xl bg-slate-50/90 border border-slate-200/80 flex items-start gap-3.5 transition-all hover:bg-slate-100/80 hover:border-slate-300 relative z-10"
                     >
-                      <div className="w-6 h-6 rounded-full bg-emerald-600 text-white font-mono text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5 shadow-xs">
+                      <div className="w-6 h-6 rounded-full bg-[#087f5b] text-white font-mono text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5 shadow-xs">
                         {idx + 1}
                       </div>
                       <div className="space-y-1">
@@ -176,10 +254,10 @@ const ProjectDetail = () => {
                           {wf.detail}
                         </p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             )}
           </div>
 
@@ -196,7 +274,7 @@ const ProjectDetail = () => {
       </main>
       <FooterApple />
       <WhatsAppChatButton />
-    </div>
+    </motion.div>
   );
 };
 

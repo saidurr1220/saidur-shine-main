@@ -6,61 +6,22 @@ import {
   User,
   Star,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { appleEase } from "@/lib/motion";
 
 const clientReviews = [
   {
     quote: "Very professional and highly skilled developer. The work was completed quickly and accurately, communication was excellent, and he was always responsive. He understood the requirements perfectly and delivered exactly what I needed. I'm very satisfied with the result and would definitely work with him again. Highly recommended!",
     name: "Tamas (tamscservenk)",
-    title: "Client • Hungary ($7,000 Milestone Contract)",
-    platform: "5.0 on Fiverr",
+    title: "Client • Hungary • $7,000 milestone project (via FB International BD)",
+    platform: "5.0 Fiverr review",
   },
   {
     quote: "Highly professional, responsive, and committed throughout the project. He worked hard to solve complex technical issues and delivered a strong final result. Highly recommended.",
     name: "Tamas (tamscservenk)",
-    title: "Client • Hungary (Phase 1 Delivery)",
-    platform: "5.0 on Fiverr",
+    title: "Client • Hungary • Phase 1 delivery (via FB International BD)",
+    platform: "5.0 Fiverr review",
   },
-  {
-    quote: "Saidur built our multi-step courier quote calculator and Stripe checkout from scratch. The dynamic pricing formula is fast (0.3ms), and the GTM conversion tracking with deduplication solved our ad spend reporting completely.",
-    name: "Shahbaz",
-    title: "Managing Director • OnRoute Couriers (UK)",
-    platform: "5.0 Direct Client",
-  },
-  {
-    quote: "Transformed WooCommerce into a full laboratory research commerce platform. Built 20+ custom modules via hooks and filters only - keeping core 100% upgrade-safe. Dual-mode wholesale inventory and store credit checkout work seamlessly.",
-    name: "Nick",
-    title: "Founder & Operations Lead • Vault Labs (US)",
-    platform: "5.0 Direct Client",
-  },
-  {
-    quote: "Saidur engineered our complete 6-module SaaS member dashboard and integrated the custom Union AI Assistant for landlord legal assistance. Shipped with precision under a strict live launch deadline.",
-    name: "Mr. Parvez Manzuri",
-    title: "Executive Lead • California Landlords Union (US)",
-    platform: "5.0 Direct Client",
-  },
-  {
-    quote: "Resolved our database query performance bottleneck by engineering an indexed SQL lookup table (10x faster) and built our subscription CRM logic from scratch. Deep WordPress expertise and fast turnaround.",
-    name: "Kody",
-    title: "Founder & Product Lead • Welding Leads (US)",
-    platform: "5.0 Direct Client",
-  },
-  /*
-  // [TODO: paste review from Fiverr/Upwork] - Slot 1
-  {
-    quote: "[TODO: paste review text from Fiverr/Upwork]",
-    name: "[TODO: Client Name]",
-    title: "[TODO: Client Role / Company / Country]",
-    platform: "5.0 on Fiverr",
-  },
-  // [TODO: paste review from Fiverr/Upwork] - Slot 2
-  {
-    quote: "[TODO: paste review text from Fiverr/Upwork]",
-    name: "[TODO: Client Name]",
-    title: "[TODO: Client Role / Company / Country]",
-    platform: "5.0 on Upwork",
-  },
-  */
 ];
 
 function UpworkIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
@@ -79,20 +40,48 @@ function UpworkIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
 
 export function TestimonialsApple() {
   const [index, setIndex] = useState(0);
-  const itemsPerPage = 2;
+  const [direction, setDirection] = useState<1 | -1>(1);
+  const [isMobile, setIsMobile] = useState(false);
+  const shouldReduce = useReducedMotion();
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const itemsPerPage = isMobile ? 1 : 2;
   const totalPages = Math.ceil(clientReviews.length / itemsPerPage);
   const currentPage = Math.floor(index / itemsPerPage);
 
   const prevReview = () => {
-    setIndex((prev) => (prev === 0 ? Math.max(0, (totalPages - 1) * itemsPerPage) : prev - itemsPerPage));
+    setDirection(-1);
+    setIndex((prev) =>
+      prev === 0 ? Math.max(0, (totalPages - 1) * itemsPerPage) : Math.max(0, prev - itemsPerPage)
+    );
   };
 
   const nextReview = () => {
-    setIndex((prev) => (prev >= (totalPages - 1) * itemsPerPage ? 0 : prev + itemsPerPage));
+    setDirection(1);
+    setIndex((prev) =>
+      prev >= (totalPages - 1) * itemsPerPage ? 0 : prev + itemsPerPage
+    );
+  };
+
+  const handleDragEnd = (_e: any, { offset }: { offset: { x: number } }) => {
+    if (totalPages <= 1) return;
+    if (offset.x < -40) {
+      nextReview();
+    } else if (offset.x > 40) {
+      prevReview();
+    }
   };
 
   return (
-    <section id="testimonials" className="py-24 px-4 sm:px-6 bg-[#fbfbfd] border-b border-slate-100">
+    <section id="testimonials" className="py-24 px-4 sm:px-6 bg-[#fbfbfd] border-b border-slate-100 overflow-hidden">
       <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           {/* Left Title */}
@@ -123,83 +112,114 @@ export function TestimonialsApple() {
           </p>
         </div>
 
-        {/* Reviews 2-Card Row matching design with Quote Icon & Pagination */}
-        <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {clientReviews.slice(index, index + 2).map((rev, i) => (
-              <motion.div
-                key={rev.name + i + rev.title}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-6 min-h-[260px]"
-              >
-                <div className="space-y-4">
-                  {/* Subtle Emerald Quote Icon + 5-Star Rating matching screenshot */}
-                  <div className="flex items-center justify-between">
-                    <Quote className="w-8 h-8 fill-emerald-500/15 text-emerald-600 stroke-[1.5]" />
-                    <div className="flex items-center gap-1.5">
-                      <div className="flex text-amber-400">
-                        {[...Array(5)].map((_, sIdx) => (
-                          <Star key={sIdx} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                        ))}
+        {/* Reviews 2-Card Row with AnimatePresence, 3D rotateY, and touch swipe */}
+        <div style={{ perspective: 1200 }} className="relative overflow-hidden">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={index}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={handleDragEnd}
+              initial={
+                !shouldReduce
+                  ? {
+                      opacity: 0,
+                      rotateY: direction > 0 ? 8 : -8,
+                      x: direction > 0 ? 30 : -30,
+                    }
+                  : { opacity: 0 }
+              }
+              animate={{ opacity: 1, rotateY: 0, x: 0 }}
+              exit={
+                !shouldReduce
+                  ? {
+                      opacity: 0,
+                      rotateY: direction > 0 ? -8 : 8,
+                      x: direction > 0 ? -30 : 30,
+                    }
+                  : { opacity: 0 }
+              }
+              transition={{ duration: 0.45, ease: appleEase }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 cursor-grab active:cursor-grabbing"
+            >
+              {clientReviews.slice(index, index + itemsPerPage).map((rev, i) => (
+                <div
+                  key={rev.name + i + rev.title}
+                  className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-6 min-h-[260px] relative overflow-hidden group"
+                >
+                  <div className="space-y-4 relative z-10">
+                    <div className="flex items-center justify-between">
+                      {/* Big subtle parallax quote mark */}
+                      <Quote className="w-8 h-8 fill-emerald-500/15 text-emerald-600 stroke-[1.5] transition-transform duration-300 group-hover:scale-110" />
+                      <div className="flex items-center gap-1.5">
+                        <div className="flex text-amber-400">
+                          {[...Array(5)].map((_, sIdx) => (
+                            <Star key={sIdx} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                          ))}
+                        </div>
+                        <span className="text-[11px] font-semibold text-slate-500 ml-1">
+                          {rev.platform}
+                        </span>
                       </div>
-                      <span className="text-[11px] font-semibold text-slate-500 ml-1">
-                        {rev.platform}
-                      </span>
+                    </div>
+
+                    <p className="text-sm text-slate-700 leading-relaxed font-normal">
+                      "{rev.quote}"
+                    </p>
+                  </div>
+
+                  {/* Client Meta */}
+                  <div className="flex items-center gap-3 pt-4 border-t border-slate-100 relative z-10">
+                    <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs flex-shrink-0">
+                      <User className="w-4 h-4 text-slate-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-950">{rev.name}</h4>
+                      <p className="text-xs text-slate-500">{rev.title}</p>
                     </div>
                   </div>
-
-                  <p className="text-sm text-slate-700 leading-relaxed font-normal">
-                    "{rev.quote}"
-                  </p>
                 </div>
-
-                {/* Client Meta */}
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
-                  <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs flex-shrink-0">
-                    <User className="w-4 h-4 text-slate-400" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-950">{rev.name}</h4>
-                    <p className="text-xs text-slate-500">{rev.title}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Nav Buttons & Dots beneath */}
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <button
-              onClick={prevReview}
-              className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-2xs"
-              aria-label="Previous reviews"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-
-            <div className="flex items-center gap-1.5">
-              {[...Array(totalPages)].map((_, pageIdx) => (
-                <button
-                  key={pageIdx}
-                  onClick={() => setIndex(pageIdx * itemsPerPage)}
-                  className={`h-2 rounded-full transition-all duration-200 ${
-                    currentPage === pageIdx ? "w-6 bg-[#087f5b]" : "w-2 bg-slate-300"
-                  }`}
-                  aria-label={`Go to slide ${pageIdx + 1}`}
-                />
               ))}
-            </div>
+            </motion.div>
+          </AnimatePresence>
 
-            <button
-              onClick={nextReview}
-              className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-2xs"
-              aria-label="Next reviews"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
+          {/* Nav Buttons & Dots beneath - hidden when all reviews fit on one page */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <button
+                onClick={prevReview}
+                className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-2xs active:scale-95"
+                aria-label="Previous reviews"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+
+              <div className="flex items-center gap-1.5">
+                {[...Array(totalPages)].map((_, pageIdx) => (
+                  <button
+                    key={pageIdx}
+                    onClick={() => {
+                      setDirection(pageIdx > currentPage ? 1 : -1);
+                      setIndex(pageIdx * itemsPerPage);
+                    }}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      currentPage === pageIdx ? "w-6 bg-[#087f5b]" : "w-2 bg-slate-300"
+                    }`}
+                    aria-label={`Go to slide ${pageIdx + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={nextReview}
+                className="w-8 h-8 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors shadow-2xs active:scale-95"
+                aria-label="Next reviews"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>

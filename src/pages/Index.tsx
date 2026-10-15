@@ -23,7 +23,12 @@ const Index = () => {
       const el = document.getElementById(id);
       if (el) {
         setTimeout(() => {
-          el.scrollIntoView({ behavior: "smooth" });
+          const lenis = (window as any).__lenis;
+          if (lenis && typeof lenis.scrollTo === "function") {
+            lenis.scrollTo(el, { offset: -70 });
+          } else {
+            el.scrollIntoView({ behavior: "smooth" });
+          }
         }, 150);
       }
     }

@@ -4,14 +4,36 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export function WhatsAppChatButton() {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [footerInView, setFooterInView] = useState(false);
   const phoneNumber = "8801515687002";
   const defaultMessage = encodeURIComponent(
     "Hi Saidur, I visited your portfolio and would like to discuss a project."
   );
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${defaultMessage}`;
 
+  React.useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setFooterInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3">
+    <div
+      className={`fixed bottom-6 right-6 z-40 flex items-center gap-3 transition-all duration-300 ${
+        footerInView
+          ? "opacity-0 pointer-events-none translate-y-4"
+          : "opacity-100 pointer-events-auto translate-y-0"
+      }`}
+    >
       {/* Interactive Tooltip / Mini Prompt */}
       <AnimatePresence>
         {showTooltip && (

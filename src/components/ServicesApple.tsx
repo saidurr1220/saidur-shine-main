@@ -5,7 +5,8 @@ import {
   Layers,
   ArrowRight,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { appleEase } from "@/lib/motion";
 
 const serviceList = [
   {
@@ -29,6 +30,8 @@ const serviceList = [
 ];
 
 export function ServicesApple() {
+  const shouldReduce = useReducedMotion();
+
   return (
     <section id="services" className="py-24 px-4 sm:px-6 bg-white border-b border-slate-100">
       <div className="container mx-auto max-w-6xl">
@@ -49,25 +52,33 @@ export function ServicesApple() {
           </p>
         </div>
 
-        {/* 3 Horizontal Service Cards with Soft Mint Hover State */}
+        {/* 3 Horizontal Service Cards revealed one by one with hover animations */}
         <div className="space-y-4">
           {serviceList.map((item, idx) => {
             const Icon = item.icon;
             return (
               <motion.div
                 key={item.num}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.45, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="p-5 sm:p-6 rounded-2xl bg-[#f8fbf9] hover:bg-[#eff8f4] border border-[#d1ede1]/70 hover:border-[#10b981]/50 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-200 group cursor-default"
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: appleEase }}
+                whileHover={
+                  !shouldReduce
+                    ? {
+                        y: -2,
+                        transition: { duration: 0.2, ease: "easeOut" },
+                      }
+                    : undefined
+                }
+                className="p-5 sm:p-6 rounded-2xl bg-[#f8fbf9] hover:bg-[#ebf8f2] border border-[#d1ede1]/70 hover:border-[#10b981]/50 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors duration-250 group cursor-default shadow-xs hover:shadow-sm"
               >
                 {/* Left: Number + Icon + Title */}
                 <div className="flex items-center gap-4 md:w-1/3">
                   <span className="text-xs font-mono font-bold text-[#087f5b] bg-white px-2.5 py-1 rounded-lg border border-[#d1ede1] shadow-2xs">
                     {item.num}
                   </span>
-                  <div className="w-10 h-10 rounded-xl bg-white border border-[#d1ede1] text-[#087f5b] flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-[#d1ede1] text-[#087f5b] flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform duration-250">
                     <Icon className="w-5 h-5" />
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-slate-950">
@@ -80,10 +91,10 @@ export function ServicesApple() {
                   {item.desc}
                 </p>
 
-                {/* Right: Circular Arrow Button */}
+                {/* Right: Circular Arrow Button that slides right on hover */}
                 <div className="flex justify-end md:w-12">
-                  <div className="w-9 h-9 rounded-full bg-white border border-[#d1ede1] text-slate-600 group-hover:text-[#087f5b] group-hover:border-[#087f5b] flex items-center justify-center transition-all duration-200 shadow-2xs">
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                  <div className="w-9 h-9 rounded-full bg-white border border-[#d1ede1] text-slate-600 group-hover:text-[#087f5b] group-hover:border-[#087f5b] flex items-center justify-center transition-all duration-250 shadow-2xs">
+                    <ArrowRight className="w-4 h-4 transition-transform duration-250 group-hover:translate-x-1" />
                   </div>
                 </div>
               </motion.div>

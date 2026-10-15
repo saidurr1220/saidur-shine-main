@@ -25,7 +25,7 @@ export const projectsData: ProjectItem[] = [
   {
     id: "bybit-bitget-mirror-engine",
     title: "Mirror Control - Bybit to Bitget Real-Time Trade Mirror & Ops Engine",
-    location: "US / International Trading Desk",
+    location: "International Trading Desk",
     category: "FinTech & Trading",
     filterCategory: "FinTech & Trading",
     highlightBadge: "$7,000 USD Production Build - Active 24/7",
@@ -37,7 +37,7 @@ export const projectsData: ProjectItem[] = [
     solution:
       "Architected and deployed a production-grade Node.js / TypeScript trading infrastructure service with PostgreSQL persistence. Engineered WebSocket real-time fill ingestion on Bybit (strictly read-only), deterministic Bitget clientOid generation, multi-stage idempotency fencing, per-symbol dynamic quantity multipliers (multiplier_epochs), and automatic position reconciliation. Developed the Mirror Control real-time ops dashboard with live margin monitoring, per-instrument status, and instant emergency stop drills.",
     impact:
-      "Successfully delivered and running 24/7 in live production ($7,000 USD contract). Maintains 100% position parity across all active instruments (BTC, ETH, SOL, BNB, NEAR, HYPE, SUI) with zero execution drift, protecting over $500,000+ USDT in trading margin.",
+      "Successfully delivered and running 24/7 in live production ($7,000 milestone project delivered through FB International BD). Maintains 100% position parity across all active instruments (BTC, ETH, SOL, BNB, NEAR, HYPE, SUI) with zero execution drift, protecting over $500,000+ USDT in trading margin.",
     architecture: "Node.js (TypeScript) + PostgreSQL + WebSockets + Bybit UTA + Bitget UTA REST/WS API",
     tags: [
       "TypeScript",
