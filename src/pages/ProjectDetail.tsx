@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { NavbarApple } from "@/components/NavbarApple";
 import { FooterApple } from "@/components/FooterApple";
+import { WhatsAppChatButton } from "@/components/WhatsAppChatButton";
 import { projectsData, ProjectItem } from "@/data/projectsData";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, Target, Lightbulb, TrendingUp, Layers } from "lucide-react";
@@ -154,6 +155,7 @@ const ProjectDetail = () => {
         </div>
       </main>
       <FooterApple />
+      <WhatsAppChatButton />
     </div>
   );
 };

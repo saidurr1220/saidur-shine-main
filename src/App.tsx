@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { MouseGlow } from "@/components/MouseGlow";
 import Index from "./pages/Index";
 import ProjectDetail from "./pages/ProjectDetail";
+import ProjectsPage from "./pages/ProjectsPage";
+import Resume from "./pages/Resume";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,8 +21,11 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/cv" element={<Resume />} />
           {/* CATCH-ALL ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

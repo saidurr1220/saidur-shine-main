@@ -1,9 +1,9 @@
-import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
+import { NavbarApple } from "@/components/NavbarApple";
+import { FooterApple } from "@/components/FooterApple";
+import { WhatsAppChatButton } from "@/components/WhatsAppChatButton";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollProgress } from "@/components/ScrollProgress";
-import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { useEffect } from "react";
 
 const Resume = () => {
@@ -12,13 +12,11 @@ const Resume = () => {
   }, []);
 
   return (
-    <div className="min-h-screen relative selection:bg-primary/30 selection:text-primary">
+    <div className="min-h-screen bg-[#0b101b] text-white selection:bg-emerald-500/20 selection:text-emerald-300">
       <ScrollProgress />
-      <AnimatedBackground />
-      <div className="relative z-10">
-        <Navigation />
-        <main className="pt-28 pb-16">
-          <div className="container mx-auto max-w-5xl px-4">
+      <NavbarApple />
+      <main className="pt-28 sm:pt-36 pb-20 px-4 sm:px-6 relative">
+        <div className="container mx-auto max-w-5xl">
             <div className="text-center mb-10">
               <h1 className="text-4xl md:text-5xl font-extrabold mb-3 text-foreground">Resume / Curriculum Vitae</h1>
               <p className="text-muted-foreground text-base max-w-xl mx-auto mb-6">
@@ -40,9 +38,9 @@ const Resume = () => {
               />
             </div>
           </div>
-        </main>
-        <Footer />
-      </div>
+      </main>
+      <FooterApple />
+      <WhatsAppChatButton />
     </div>
   );
 };
