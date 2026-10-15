@@ -25,6 +25,14 @@ export function FooterApple() {
             <a href="#projects" className="hover:text-white transition-colors">Projects</a>
             <a href="#testimonials" className="hover:text-white transition-colors">Reviews</a>
             <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+            <a
+              href="https://wa.me/8801515687002?text=Hi%20Saidur,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#25D366] hover:text-[#25D366]/80 font-medium transition-colors"
+            >
+              WhatsApp
+            </a>
           </nav>
 
           {/* Copyright */}

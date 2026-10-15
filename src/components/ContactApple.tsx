@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -170,6 +170,22 @@ export function ContactApple() {
                     <span>{isSending ? "Sending..." : "Send Inquiry"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Button>
+
+                  {/* Direct WhatsApp Instant Chat Trigger */}
+                  <div className="pt-2 text-center">
+                    <p className="text-[11px] text-slate-500">
+                      Prefer instant messaging?{" "}
+                      <a
+                        href="https://wa.me/8801515687002?text=Hi%20Saidur,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 font-semibold text-[#087f5b] hover:text-[#066347] hover:underline transition-colors"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5" />
+                        <span>Chat on WhatsApp (+880 1515-687002)</span>
+                      </a>
+                    </p>
+                  </div>
                 </form>
               )}
             </div>

@@ -10,6 +10,7 @@ import { ExperienceApple } from "@/components/ExperienceApple";
 import { ContactApple } from "@/components/ContactApple";
 import { FooterApple } from "@/components/FooterApple";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { WhatsAppChatButton } from "@/components/WhatsAppChatButton";
 
 const Index = () => {
   useEffect(() => {
@@ -33,6 +34,7 @@ const Index = () => {
         <ContactApple />
       </main>
       <FooterApple />
+      <WhatsAppChatButton />
     </div>
   );
 };

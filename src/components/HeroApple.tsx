@@ -9,6 +9,41 @@ import {
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
+const recentOrders = [
+  {
+    id: "#001",
+    name: "Glen Johnson",
+    service: "Custom Website",
+    status: "Completed",
+    statusStyle: "text-emerald-400 bg-emerald-950/60 border-emerald-500/30",
+    amount: "$1,200",
+  },
+  {
+    id: "#002",
+    name: "Christina Mayer",
+    service: "WooCommerce Store",
+    status: "Processing",
+    statusStyle: "text-sky-400 bg-sky-950/60 border-sky-500/30",
+    amount: "$900",
+  },
+  {
+    id: "#003",
+    name: "Michael Liu",
+    service: "Plugin Development",
+    status: "Completed",
+    statusStyle: "text-emerald-400 bg-emerald-950/60 border-emerald-500/30",
+    amount: "$1,500",
+  },
+  {
+    id: "#004",
+    name: "Sarah Kipu",
+    service: "System Integration",
+    status: "Completed",
+    statusStyle: "text-emerald-400 bg-emerald-950/60 border-emerald-500/30",
+    amount: "$1,320",
+  },
+];
+
 export function HeroApple() {
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
@@ -21,7 +56,7 @@ export function HeroApple() {
   return (
     <section
       id="home"
-      className="relative pt-28 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 bg-[#0b101b] text-white"
+      className="relative pt-24 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 bg-[#0b101b] text-white"
     >
       {/* Background ambient radial neon emerald glow - constrained overflow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -36,12 +71,12 @@ export function HeroApple() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 space-y-6"
+            className="lg:col-span-6 space-y-5 sm:space-y-6"
           >
             {/* Pill: Available for client builds & agency roles */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#0e2a22] border border-[#10b981]/30 rounded-full text-xs text-[#34d399] font-medium shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#10b981]" />
-              <span>Available for client builds &amp; agency roles</span>
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 bg-[#0e2a22] border border-[#10b981]/30 rounded-full text-[11px] sm:text-xs text-[#34d399] font-medium shadow-sm max-w-full">
+              <span className="w-2 h-2 rounded-full bg-[#10b981] flex-shrink-0" />
+              <span className="truncate">Available for client builds &amp; agency roles</span>
             </div>
 
             {/* Small Name Intro */}
@@ -50,17 +85,17 @@ export function HeroApple() {
             </p>
 
             {/* Main Punchy Dual-Tone Headline */}
-            <div className="space-y-1">
-              <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-white leading-[1.1]">
+            <div className="space-y-0.5 sm:space-y-1">
+              <h1 className="text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-white leading-[1.15] sm:leading-[1.1]">
                 Engineering websites.
               </h1>
-              <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-[#10b981] leading-[1.1]">
+              <h1 className="text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-[#10b981] leading-[1.15] sm:leading-[1.1]">
                 Building reliable systems.
               </h1>
             </div>
 
             {/* Subheading */}
-            <p className="text-base sm:text-lg font-semibold text-slate-200 tracking-tight">
+            <p className="text-sm sm:text-lg font-semibold text-slate-200 tracking-tight">
               Full-Stack WordPress Engineer &amp; System Architect
             </p>
 
@@ -117,23 +152,23 @@ export function HeroApple() {
               </div>
 
               {/* 3 Metrics Cards Row */}
-              <div className="grid grid-cols-3 gap-3 mb-5">
-                <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[10px] text-slate-400 font-medium">Total Revenue</div>
-                  <div className="text-base sm:text-lg font-bold text-white mt-1">$12,458</div>
-                  <div className="text-[10px] text-emerald-400 font-semibold mt-0.5">↑ 15%</div>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
+                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">Total Revenue</div>
+                  <div className="text-sm sm:text-lg font-bold text-white mt-1">$12,458</div>
+                  <div className="text-[9px] sm:text-[10px] text-emerald-400 font-semibold mt-0.5">↑ 15%</div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[10px] text-slate-400 font-medium">Orders</div>
-                  <div className="text-base sm:text-lg font-bold text-white mt-1">284</div>
-                  <div className="text-[10px] text-emerald-400 font-semibold mt-0.5">↑ 8%</div>
+                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">Orders</div>
+                  <div className="text-sm sm:text-lg font-bold text-white mt-1">284</div>
+                  <div className="text-[9px] sm:text-[10px] text-emerald-400 font-semibold mt-0.5">↑ 8%</div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[10px] text-slate-400 font-medium">Conversion Rate</div>
-                  <div className="text-base sm:text-lg font-bold text-white mt-1">3.5%</div>
-                  <div className="text-[10px] text-emerald-400 font-semibold mt-0.5">↑ 1.2%</div>
+                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium truncate">Conversion Rate</div>
+                  <div className="text-sm sm:text-lg font-bold text-white mt-1">3.5%</div>
+                  <div className="text-[9px] sm:text-[10px] text-emerald-400 font-semibold mt-0.5">↑ 1.2%</div>
                 </div>
               </div>
 
@@ -141,42 +176,46 @@ export function HeroApple() {
               <div className="space-y-2">
                 <div className="text-xs font-bold text-slate-300 mb-2">Recent Orders</div>
                 
-                <div className="space-y-1.5 text-[11px] font-mono">
-                  {/* Row 1 */}
-                  <div className="grid grid-cols-12 gap-2 items-center p-2 rounded-lg bg-white/[0.02] border border-white/5 text-slate-300">
-                    <span className="col-span-1 text-slate-500">#001</span>
-                    <span className="col-span-3 text-white font-sans font-medium truncate">Glen Johnson</span>
-                    <span className="col-span-4 text-slate-400 truncate">Custom Website</span>
-                    <span className="col-span-2 text-center text-emerald-400 text-[10px] bg-emerald-950/60 border border-emerald-500/30 rounded py-0.5">Completed</span>
-                    <span className="col-span-2 text-right font-bold text-white">$1,200</span>
-                  </div>
+                {/* Mobile View (< sm): 2-line layout without any text clipping or collision */}
+                <div className="sm:hidden space-y-2">
+                  {recentOrders.map((order) => (
+                    <div
+                      key={order.id}
+                      className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 space-y-1.5"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <span className="text-[10px] text-slate-500 font-mono flex-shrink-0">{order.id}</span>
+                          <span className="text-white font-sans font-medium text-xs truncate">{order.name}</span>
+                        </div>
+                        <span className="font-bold text-white text-xs font-mono flex-shrink-0">{order.amount}</span>
+                      </div>
+                      <div className="flex items-center justify-between gap-2 pt-0.5">
+                        <span className="text-slate-400 text-[10px] font-sans truncate">{order.service}</span>
+                        <span className={`text-[10px] px-2 py-0.5 rounded font-mono border ${order.statusStyle} flex-shrink-0`}>
+                          {order.status}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
-                  {/* Row 2 */}
-                  <div className="grid grid-cols-12 gap-2 items-center p-2 rounded-lg bg-white/[0.02] border border-white/5 text-slate-300">
-                    <span className="col-span-1 text-slate-500">#002</span>
-                    <span className="col-span-3 text-white font-sans font-medium truncate">Christina Mayer</span>
-                    <span className="col-span-4 text-slate-400 truncate">WooCommerce Store</span>
-                    <span className="col-span-2 text-center text-sky-400 text-[10px] bg-sky-950/60 border border-sky-500/30 rounded py-0.5">Processing</span>
-                    <span className="col-span-2 text-right font-bold text-white">$900</span>
-                  </div>
-
-                  {/* Row 3 */}
-                  <div className="grid grid-cols-12 gap-2 items-center p-2 rounded-lg bg-white/[0.02] border border-white/5 text-slate-300">
-                    <span className="col-span-1 text-slate-500">#003</span>
-                    <span className="col-span-3 text-white font-sans font-medium truncate">Michael Liu</span>
-                    <span className="col-span-4 text-slate-400 truncate">Plugin Development</span>
-                    <span className="col-span-2 text-center text-emerald-400 text-[10px] bg-emerald-950/60 border border-emerald-500/30 rounded py-0.5">Completed</span>
-                    <span className="col-span-2 text-right font-bold text-white">$1,500</span>
-                  </div>
-
-                  {/* Row 4 */}
-                  <div className="grid grid-cols-12 gap-2 items-center p-2 rounded-lg bg-white/[0.02] border border-white/5 text-slate-300">
-                    <span className="col-span-1 text-slate-500">#004</span>
-                    <span className="col-span-3 text-white font-sans font-medium truncate">Sarah Kipu</span>
-                    <span className="col-span-4 text-slate-400 truncate">System Integration</span>
-                    <span className="col-span-2 text-center text-emerald-400 text-[10px] bg-emerald-950/60 border border-emerald-500/30 rounded py-0.5">Completed</span>
-                    <span className="col-span-2 text-right font-bold text-white">$1,320</span>
-                  </div>
+                {/* Desktop View (sm+): Exact 12-column table grid */}
+                <div className="hidden sm:block space-y-1.5 text-[11px] font-mono">
+                  {recentOrders.map((order) => (
+                    <div
+                      key={order.id}
+                      className="grid grid-cols-12 gap-2 items-center p-2 rounded-lg bg-white/[0.02] border border-white/5 text-slate-300"
+                    >
+                      <span className="col-span-1 text-slate-500">{order.id}</span>
+                      <span className="col-span-3 text-white font-sans font-medium truncate">{order.name}</span>
+                      <span className="col-span-4 text-slate-400 truncate">{order.service}</span>
+                      <span className={`col-span-2 text-center text-[10px] rounded py-0.5 border ${order.statusStyle}`}>
+                        {order.status}
+                      </span>
+                      <span className="col-span-2 text-right font-bold text-white">{order.amount}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -184,9 +223,9 @@ export function HeroApple() {
         </div>
 
         {/* 3-Pillar Experience Bar - Floating Bridge Card */}
-        <div className="relative z-20 mt-12 sm:mt-16 -mb-20 sm:-mb-24">
+        <div className="relative z-20 mt-10 sm:mt-16 -mb-16 sm:-mb-24">
           <div className="bg-white text-slate-900 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-xl shadow-slate-950/20 border border-slate-200/90">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 items-center">
               {/* Pillar 1 */}
               <div className="flex items-center gap-3.5">
                 <div className="w-10 h-10 rounded-xl bg-[#e8f6f0] text-[#087f5b] flex items-center justify-center flex-shrink-0">
@@ -215,8 +254,10 @@ export function HeroApple() {
                   <Layers className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-sm font-bold text-slate-950">WordPress • WooCommerce • Custom Systems</div>
-                  <div className="text-xs text-slate-500">Specialized Developer</div>
+                  <div className="text-xs sm:text-sm font-bold text-slate-950 leading-snug">
+                    WordPress • WooCommerce • Custom Systems
+                  </div>
+                  <div className="text-[11px] sm:text-xs text-slate-500 mt-0.5">Specialized Developer</div>
                 </div>
               </div>
             </div>

@@ -39,7 +39,7 @@ export function ScrollProgress() {
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
-          className="fixed bottom-6 right-6 z-40 flex items-center gap-2"
+          className="fixed bottom-[84px] sm:bottom-[92px] right-6 z-40 flex items-center gap-2"
         >
           <button
             onClick={scrollToTop}

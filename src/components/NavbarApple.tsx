@@ -67,11 +67,11 @@ export function NavbarApple() {
             <div className="w-10 h-10 rounded-xl bg-slate-900 border border-white/10 text-white flex items-center justify-center font-mono font-bold text-xs tracking-wider shadow-sm">
               SR
             </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-bold text-white tracking-tight leading-none">
+            <div className="flex flex-col min-w-0">
+              <span className="text-xs sm:text-sm font-bold text-white tracking-tight leading-none truncate">
                 Md. Saidur Rahman
               </span>
-              <span className="text-[10px] text-slate-400 font-medium mt-1">
+              <span className="text-[9px] sm:text-[10px] text-slate-400 font-medium mt-1 truncate">
                 Full-Stack WordPress Engineer
               </span>
             </div>
@@ -131,7 +131,7 @@ export function NavbarApple() {
               </a>
             ))}
 
-            <div className="pt-2 border-t border-slate-800">
+            <div className="pt-3 border-t border-slate-800 space-y-2">
               <Button
                 size="sm"
                 className="w-full text-xs font-semibold bg-[#05513a] hover:bg-[#033b2a] text-white rounded-full h-10 flex items-center justify-center gap-2"
@@ -140,6 +140,15 @@ export function NavbarApple() {
                 <span>Let's Talk</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Button>
+
+              <a
+                href="https://wa.me/8801515687002?text=Hi%20Saidur,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-xs font-semibold bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#25D366] border border-[#25D366]/30 rounded-full h-10 flex items-center justify-center gap-2 transition-colors"
+              >
+                <span>Chat on WhatsApp</span>
+              </a>
             </div>
           </div>
         )}
