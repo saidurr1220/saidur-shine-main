@@ -187,23 +187,50 @@ export function ProjectsApple() {
   // Map category filter to projectsData
   const filteredProjects = projectsData.filter((p) => {
     if (selectedFilter === "All") return true;
-    if (selectedFilter === "WordPress") return p.category === "WordPress";
-    if (selectedFilter === "E-commerce") return p.filterCategory === "WooCommerce";
-    if (selectedFilter === "Custom Systems")
+    if (selectedFilter === "WordPress") {
+      return (
+        p.category === "WordPress" ||
+        p.tags.includes("WordPress") ||
+        p.tags.includes("WooCommerce")
+      );
+    }
+    if (selectedFilter === "E-commerce") {
+      return (
+        p.filterCategory === "WooCommerce" ||
+        p.category === "E-commerce" ||
+        p.tags.includes("WooCommerce")
+      );
+    }
+    if (selectedFilter === "Custom Systems") {
       return (
         p.category === "FinTech & Trading" ||
         p.filterCategory === "Workflow Automation" ||
-        p.filterCategory === "Lead CRM & SaaS"
+        p.filterCategory === "Lead CRM & SaaS" ||
+        p.filterCategory === "Custom Systems" ||
+        p.id === "xo-sweden-boat-configurator"
       );
+    }
     return true;
   });
 
-  // Featured Project is always Mirror Control (or first filtered project)
-  const featured =
-    filteredProjects.find((p) => p.id === "bybit-bitget-mirror-engine") ||
-    filteredProjects[0];
-  const otherProjects = filteredProjects.filter((p) => p.id !== featured?.id);
-  const displayedProjects = showAll ? otherProjects : otherProjects.slice(0, 2);
+  // Trade Mirror is featured hero ONLY if it matches the active filter (All or Custom Systems)
+  const isTradeMirrorFeatured = filteredProjects.some(
+    (p) => p.id === "bybit-bitget-mirror-engine"
+  );
+  const featured = isTradeMirrorFeatured
+    ? filteredProjects.find((p) => p.id === "bybit-bitget-mirror-engine")
+    : null;
+
+  const otherProjects = featured
+    ? filteredProjects.filter((p) => p.id !== featured.id)
+    : filteredProjects;
+
+  // In "All" view with Trade Mirror on top, show first 4 other projects (or all if showAll)
+  // When filtering by specific category (WordPress, E-commerce, Custom Systems), show all matching projects directly
+  const displayedProjects =
+    showAll || selectedFilter !== "All"
+      ? otherProjects
+      : otherProjects.slice(0, 4);
 
   return (
     <section id="projects" data-dark="true" className="py-24 px-4 sm:px-6 bg-[#0b101b] text-white overflow-hidden">
@@ -219,8 +246,8 @@ export function ProjectsApple() {
             </h2>
           </div>
 
-          {/* Filter Pills with layoutId active pill */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-full bg-white/[0.04] border border-white/10">
+          {/* Filter Pills with horizontal scroll on mobile to prevent multi-line wrap glitch */}
+          <div className="flex items-center gap-1.5 p-1 rounded-full bg-white/[0.04] border border-white/10 overflow-x-auto no-scrollbar max-w-full">
             {projectCategories.map((cat) => {
               const isActive = selectedFilter === cat;
               return (
@@ -230,7 +257,7 @@ export function ProjectsApple() {
                     setSelectedFilter(cat);
                     setShowAll(false);
                   }}
-                  className={`relative px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+                  className={`relative px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
                     isActive ? "text-slate-950 font-bold" : "text-slate-300 hover:text-white"
                   }`}
                 >
@@ -357,7 +384,7 @@ export function ProjectsApple() {
         </motion.div>
 
         {/* View All Projects Pill with smooth layout animation */}
-        {otherProjects.length > 2 && (
+        {selectedFilter === "All" && otherProjects.length > 4 && (
           <motion.div layout className="mt-12 text-center">
             <button
               onClick={() => setShowAll(!showAll)}

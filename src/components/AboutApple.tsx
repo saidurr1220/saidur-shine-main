@@ -44,7 +44,7 @@ export function AboutApple() {
     <section
       ref={sectionRef}
       id="about"
-      className="pt-28 sm:pt-36 pb-24 px-4 sm:px-6 bg-white border-b border-slate-100 overflow-hidden"
+      className="pt-20 sm:pt-28 pb-20 sm:pb-24 px-4 sm:px-6 bg-white border-b border-slate-100 overflow-hidden"
     >
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">

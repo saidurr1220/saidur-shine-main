@@ -204,7 +204,7 @@ export const projectsData: ProjectItem[] = [
     id: "labeng",
     title: "LaBeng - Local Business Discovery & Booking Platform",
     location: "UK Client",
-    category: "Booking & Custom Theme",
+    category: "WordPress",
     filterCategory: "Booking & Custom Theme",
     highlightBadge: "Async Email Pipeline Bugfix",
     clientName: "UK Client",

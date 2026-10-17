@@ -118,7 +118,7 @@ export function HeroApple() {
       ref={heroRef}
       id="home"
       data-dark="true"
-      className="relative z-10 pt-24 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 bg-[#0b101b] text-white"
+      className="relative z-10 pt-24 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-6 bg-[#0b101b] text-white border-b border-white/5"
     >
       {/* Background: Drifting emerald gradient blob & faint grid (H5) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -417,46 +417,46 @@ export function HeroApple() {
           </div>
         </div>
 
-        {/* 3-Pillar Experience Bar - Floating Bridge Card with Count-up (H4) */}
-        <div className="relative z-20 mt-10 sm:mt-16 -mb-16 sm:-mb-24">
-          <div className="bg-white text-slate-900 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-xl shadow-slate-950/20 border border-slate-200/90">
+        {/* 3-Pillar Experience Bar - Cohesive Dark Luxury Theme inside Hero */}
+        <div className="relative z-20 mt-12 sm:mt-16 mb-0">
+          <div className="bg-[#111927]/90 backdrop-blur-md text-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl border border-white/10">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 items-center">
               {/* Pillar 1 */}
               <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-[#e8f6f0] text-[#087f5b] flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-[#10b981] flex items-center justify-center flex-shrink-0">
                   <Briefcase className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-sm sm:text-base font-bold text-slate-950">
+                  <div className="text-sm sm:text-base font-bold text-white">
                     2+ Years
                   </div>
-                  <div className="text-xs text-slate-500">Experience</div>
+                  <div className="text-xs text-slate-400">Experience</div>
                 </div>
               </div>
 
               {/* Pillar 2 */}
-              <div className="flex items-center gap-3.5 sm:border-l sm:border-slate-200/80 sm:pl-8">
-                <div className="w-10 h-10 rounded-xl bg-[#e8f6f0] text-[#087f5b] flex items-center justify-center flex-shrink-0">
-                  <Star className="w-5 h-5 fill-[#087f5b]/20" />
+              <div className="flex items-center gap-3.5 sm:border-l sm:border-white/10 sm:pl-8 border-t border-white/5 pt-4 sm:pt-0 sm:border-t-0">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-[#10b981] flex items-center justify-center flex-shrink-0">
+                  <Star className="w-5 h-5 fill-[#10b981]/20" />
                 </div>
                 <div>
-                  <div className="text-sm sm:text-base font-bold text-slate-950">
+                  <div className="text-sm sm:text-base font-bold text-white">
                     5.0
                   </div>
-                  <div className="text-xs text-slate-500">Upwork rating</div>
+                  <div className="text-xs text-slate-400">Upwork rating</div>
                 </div>
               </div>
 
               {/* Pillar 3 */}
-              <div className="flex items-center gap-3.5 sm:border-l sm:border-slate-200/80 sm:pl-8">
-                <div className="w-10 h-10 rounded-xl bg-[#e8f6f0] text-[#087f5b] flex items-center justify-center flex-shrink-0">
+              <div className="flex items-center gap-3.5 sm:border-l sm:border-white/10 sm:pl-8 border-t border-white/5 pt-4 sm:pt-0 sm:border-t-0">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-[#10b981] flex items-center justify-center flex-shrink-0">
                   <Layers className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-sm sm:text-base font-bold text-slate-950 whitespace-nowrap">
+                  <div className="text-sm sm:text-base font-bold text-white whitespace-nowrap">
                     WordPress & WooCommerce
                   </div>
-                  <div className="text-xs text-slate-500">
+                  <div className="text-xs text-slate-400">
                     Custom plugins & systems
                   </div>
                 </div>

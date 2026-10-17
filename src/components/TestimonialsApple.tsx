@@ -158,7 +158,7 @@ export function TestimonialsApple() {
 
         {/* Optional platform filter tabs: show only if more than 1 tab available */}
         {filterTabs.length > 1 && (
-          <div className="flex items-center gap-1.5 p-1 rounded-full bg-slate-100 border border-slate-200/80 w-fit mb-8">
+          <div className="flex items-center gap-1.5 p-1 rounded-full bg-slate-100 border border-slate-200/80 max-w-full overflow-x-auto no-scrollbar mb-8">
             {filterTabs.map((tab) => {
               const isActive = selectedFilter === tab.id;
               return (
@@ -169,7 +169,7 @@ export function TestimonialsApple() {
                     setIndex(0);
                     setUserInteracted(true);
                   }}
-                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors cursor-pointer ${
+                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
                     isActive ? "text-slate-950 font-bold" : "text-slate-500 hover:text-slate-800"
                   }`}
                 >
