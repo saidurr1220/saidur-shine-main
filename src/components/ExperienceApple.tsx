@@ -123,13 +123,20 @@ export function ExperienceApple() {
                         2026 journey
                       </div>
                       <ol className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
-                        {journey2026.map((step) => (
-                          <li key={step.date} className="flex items-start gap-3 text-xs sm:text-sm">
-                            <span className="font-mono font-semibold text-slate-400 whitespace-nowrap w-16 flex-shrink-0">
+                        {journey2026.map((step, idx) => (
+                          <motion.li
+                            key={step.date}
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.6 }}
+                            transition={{ duration: 0.4, delay: idx * 0.07, ease: appleEase }}
+                            className="group flex items-start gap-3 text-xs sm:text-sm"
+                          >
+                            <span className="font-mono font-semibold text-slate-400 whitespace-nowrap w-16 flex-shrink-0 transition-colors group-hover:text-[#087f5b]">
                               {step.date}
                             </span>
                             <span className="text-slate-600 leading-snug">{step.text}</span>
-                          </li>
+                          </motion.li>
                         ))}
                       </ol>
                     </div>

@@ -43,6 +43,15 @@ const recentWork = [
   },
 ];
 
+function LiveDot() {
+  return (
+    <span className="relative flex w-1.5 h-1.5" aria-hidden="true">
+      <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-75 animate-ping motion-reduce:animate-none" />
+      <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-emerald-400" />
+    </span>
+  );
+}
+
 export function HeroApple() {
   const heroRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -81,6 +90,7 @@ export function HeroApple() {
 
   // Count up stats - only 100% counts up (Task 5)
   const countJobSuccess = useCountUp(100, isInView, { duration: 900 });
+  const countDeliverables = useCountUp(59, isInView, { duration: 1100 });
 
   const scrollToContact = () => {
     if (window.__lenis) {
@@ -278,8 +288,18 @@ export function HeroApple() {
                   : { opacity: 1, y: 0 }
               }
               transition={{ duration: 0.55, delay: 0.15, ease: appleEase }}
-              className="rounded-2xl sm:rounded-3xl bg-[#111927]/95 border border-white/10 shadow-2xl p-4 sm:p-6 relative overflow-hidden group"
+              className="rounded-2xl sm:rounded-3xl bg-white/10 shadow-2xl p-4 sm:p-6 relative overflow-hidden group"
             >
+              {/* Rotating emerald light that traces the card border */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-[75%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_250deg,rgba(16,185,129,0.9)_320deg,transparent_360deg)] animate-[spin_7s_linear_infinite] motion-reduce:animate-none"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-px rounded-[15px] sm:rounded-[23px] bg-[#111927]"
+              />
+
               {/* Moving glare highlight overlay (H2) */}
               {!isTouch && !shouldReduce && (
                 <div
@@ -305,44 +325,44 @@ export function HeroApple() {
               </div>
 
               {/* 3 Metrics Cards Row */}
-              <div
-                className="grid grid-cols-3 gap-2 sm:gap-3 mb-5 relative z-10"
-              >
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-base sm:text-2xl font-bold text-white font-mono leading-none">
-                    59
-                  </div>
-                  <div className="text-[11px] sm:text-xs text-white font-semibold leading-tight mt-2">
-                    Projects delivered
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] text-slate-300 leading-tight mt-0.5">
-                    FB International, 2026
-                  </div>
-                </div>
-
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-base sm:text-2xl font-bold text-white font-mono leading-none">
-                    #1
-                  </div>
-                  <div className="text-[11px] sm:text-xs text-white font-semibold leading-tight mt-2">
-                    All-time top performer
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] text-slate-300 leading-tight mt-0.5">
-                    of 17 agency developers
-                  </div>
-                </div>
-
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-base sm:text-2xl font-bold text-white font-mono leading-none">
-                    {countJobSuccess}%
-                  </div>
-                  <div className="text-[11px] sm:text-xs text-white font-semibold leading-tight mt-2">
-                    Upwork Job Success
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] text-slate-300 leading-tight mt-0.5">
-                    Freelancing since 2018
-                  </div>
-                </div>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5 relative z-10">
+                {[
+                  { value: `${countDeliverables}`, label: "Projects delivered", caption: "FB International, 2026" },
+                  { value: "#1", label: "All-time top performer", caption: "of 17 agency developers", highlight: true },
+                  { value: `${countJobSuccess}%`, label: "Upwork Job Success", caption: "Freelancing since 2018" },
+                ].map((stat, idx) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: 0.45 + idx * 0.12, ease: appleEase }}
+                    className={`relative overflow-hidden p-2.5 sm:p-3 rounded-xl border transition-colors duration-300 hover:border-emerald-400/40 ${
+                      stat.highlight ? "bg-emerald-500/[0.08] border-emerald-400/25" : "bg-white/[0.04] border-white/5"
+                    }`}
+                  >
+                    {stat.highlight && !shouldReduce && (
+                      <motion.div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-emerald-300/15 to-transparent skew-x-[-20deg]"
+                        animate={{ x: ["0%", "400%"] }}
+                        transition={{ duration: 1.6, delay: 1.4, repeat: Infinity, repeatDelay: 3.2, ease: "easeInOut" }}
+                      />
+                    )}
+                    <div
+                      className={`relative text-base sm:text-2xl font-bold font-mono leading-none ${
+                        stat.highlight ? "text-[#34d399]" : "text-white"
+                      }`}
+                    >
+                      {stat.value}
+                    </div>
+                    <div className="relative text-[11px] sm:text-xs text-white font-semibold leading-tight mt-2">
+                      {stat.label}
+                    </div>
+                    <div className="relative text-[10px] sm:text-[11px] text-slate-300 leading-tight mt-0.5">
+                      {stat.caption}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
 
               {/* Recent Work Table */}
@@ -353,9 +373,12 @@ export function HeroApple() {
 
                 {/* Mobile View (< sm) */}
                 <div className="sm:hidden space-y-2">
-                  {recentWork.map((item) => (
-                    <div
+                  {recentWork.map((item, idx) => (
+                    <motion.div
                       key={item.name}
+                      initial={{ opacity: 0, x: 16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.8 + idx * 0.08, ease: appleEase }}
                       className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 flex items-center justify-between gap-2"
                     >
                       <div className="min-w-0 pr-2">
@@ -367,19 +390,23 @@ export function HeroApple() {
                         </div>
                       </div>
                       <span
-                        className={`text-[10px] px-2.5 py-0.5 rounded font-mono border ${item.statusStyle} flex-shrink-0`}
+                        className={`inline-flex items-center gap-1.5 text-[10px] px-2.5 py-0.5 rounded font-mono border ${item.statusStyle} flex-shrink-0`}
                       >
+                        <LiveDot />
                         {item.status}
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 
                 {/* Desktop View (sm+) */}
                 <div className="hidden sm:block space-y-1.5 text-[11px]">
-                  {recentWork.map((item) => (
-                    <div
+                  {recentWork.map((item, idx) => (
+                    <motion.div
                       key={item.name}
+                      initial={{ opacity: 0, x: 16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.8 + idx * 0.08, ease: appleEase }}
                       className="grid grid-cols-12 gap-2 items-center p-2 rounded-lg bg-white/[0.02] border border-white/5 text-slate-300 transition-colors hover:bg-white/[0.04]"
                     >
                       <span className="col-span-5 text-white font-sans font-medium truncate">
@@ -390,12 +417,13 @@ export function HeroApple() {
                       </span>
                       <div className="col-span-3 text-right">
                         <span
-                          className={`inline-block text-[10px] px-2.5 py-0.5 rounded font-mono border ${item.statusStyle}`}
+                          className={`inline-flex items-center gap-1.5 text-[10px] px-2.5 py-0.5 rounded font-mono border ${item.statusStyle}`}
                         >
+                          <LiveDot />
                           {item.status}
                         </span>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
