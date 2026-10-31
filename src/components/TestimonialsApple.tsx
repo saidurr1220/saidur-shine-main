@@ -97,7 +97,7 @@ export function TestimonialsApple() {
     );
   };
 
-  const handleDragEnd = (_e: any, { offset }: { offset: { x: number } }) => {
+  const handleDragEnd = (_e: unknown, { offset }: { offset: { x: number } }) => {
     if (totalPages <= 1) return;
     setUserInteracted(true);
     if (offset.x < -40) {

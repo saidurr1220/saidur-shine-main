@@ -94,16 +94,16 @@ export function HeroApple() {
   const countJobSuccess = useCountUp(100, isInView, { duration: 900 });
 
   const scrollToContact = () => {
-    if ((window as any).__lenis) {
-      (window as any).__lenis.scrollTo("#contact", { offset: -70 });
+    if (window.__lenis) {
+      window.__lenis.scrollTo("#contact", { offset: -70 });
     } else {
       document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const scrollToProjects = () => {
-    if ((window as any).__lenis) {
-      (window as any).__lenis.scrollTo("#projects", { offset: -70 });
+    if (window.__lenis) {
+      window.__lenis.scrollTo("#projects", { offset: -70 });
     } else {
       document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
     }
@@ -174,9 +174,10 @@ export function HeroApple() {
             </motion.p>
 
             {/* Main Punchy Dual-Tone Headline with Word Mask Reveal (H1) */}
-            <div className="space-y-1">
+            <h1 className="space-y-1">
+              <span className="sr-only">Md. Saidur Rahman, Full-Stack WordPress Engineer: </span>
               {/* Line 1: White words */}
-              <div className="flex flex-wrap gap-x-3 text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-white leading-[1.12]">
+              <span className="flex flex-wrap gap-x-3 text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-white leading-[1.12]">
                 {line1Words.map((word, wIdx) => (
                   <span key={wIdx} className="overflow-hidden inline-block py-0.5">
                     <motion.span
@@ -193,10 +194,10 @@ export function HeroApple() {
                     </motion.span>
                   </span>
                 ))}
-              </div>
+              </span>
 
               {/* Line 2: Emerald words (comes in last) */}
-              <div className="flex flex-wrap gap-x-3 text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-[#10b981] leading-[1.12]">
+              <span className="flex flex-wrap gap-x-3 text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-[#10b981] leading-[1.12]">
                 {line2Words.map((word, wIdx) => (
                   <span key={wIdx} className="overflow-hidden inline-block py-0.5">
                     <motion.span
@@ -213,8 +214,8 @@ export function HeroApple() {
                     </motion.span>
                   </span>
                 ))}
-              </div>
-            </div>
+              </span>
+            </h1>
 
             {/* Subheading */}
             <motion.p
@@ -332,10 +333,10 @@ export function HeroApple() {
               >
                 <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
                   <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium leading-tight">
-                    Projects per month
+                    Deliverables in 2026
                   </div>
                   <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
-                    10-15
+                    59
                   </div>
                 </div>
 
@@ -428,9 +429,9 @@ export function HeroApple() {
                 </div>
                 <div>
                   <div className="text-sm sm:text-base font-bold text-white">
-                    2+ Years
+                    33 five-star reviews
                   </div>
-                  <div className="text-xs text-slate-400">Experience</div>
+                  <div className="text-xs text-slate-400">Agency clients, 2026</div>
                 </div>
               </div>
 

@@ -54,7 +54,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "",
     github: "",
-    screenshot: "/screenshots/mirror-control.png",
+    screenshot: "/screenshots/mirror-control.webp",
     ctaText: "Discuss a similar project",
     metrics: {
       contract: "$7,000 USD",
@@ -99,7 +99,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://vaultlabsresearch.net",
     github: "",
-    screenshot: "/screenshots/vault-labs.png",
+    screenshot: "/screenshots/vault-labs.webp",
     ctaText: "Discuss a similar project",
     metrics: {
       modules: "20+",
@@ -143,7 +143,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://www.onroutecouriers.com",
     github: "",
-    screenshot: "/screenshots/onroute.png",
+    screenshot: "/screenshots/onroute.webp",
     ctaText: "Discuss a similar project",
     metrics: {
       pricing: "Dynamic formula",
@@ -186,7 +186,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://californialandlordsunion.com",
     github: "",
-    screenshot: "/screenshots/california-ai.png",
+    screenshot: "/screenshots/california-ai.webp",
     ctaText: "Discuss a similar project",
     metrics: {
       membership: "3-tier PMPro",
@@ -229,7 +229,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://labeng.co.uk",
     github: "",
-    screenshot: "/screenshots/labeng.png",
+    screenshot: "/screenshots/labeng.webp",
     ctaText: "Discuss a similar project",
     metrics: {
       theme: "100% Bespoke",
@@ -270,7 +270,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://www.weldingleads.com",
     github: "",
-    screenshot: "/screenshots/weldingleads.png",
+    screenshot: "/screenshots/weldingleads.webp",
     ctaText: "Discuss a similar project",
     metrics: {
       leadsRecovered: "98",
@@ -313,7 +313,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://www.whitehorsefinancing.com",
     github: "",
-    screenshot: "/screenshots/whitehorse-financing.png",
+    screenshot: "/screenshots/whitehorse-financing.webp",
     ctaText: "Discuss a similar project",
     metrics: {
       fundingTime: "4-6 hrs",
@@ -357,7 +357,7 @@ export const projectsData: ProjectItem[] = [
     ],
     url: "https://www.emuwing.com.au/",
     github: "",
-    screenshot: "/screenshots/emuwing.png",
+    screenshot: "/screenshots/emuwing.webp",
     ctaText: "Discuss a similar project",
     metrics: {
       bom: "Multi-Kit BOM",
@@ -402,7 +402,7 @@ export const projectsData: ProjectItem[] = [
     url: "https://xosweden.se/",
     configuratorUrl: "https://xosweden.se/configurator/",
     github: "",
-    screenshot: "/screenshots/xo-sweden.png",
+    screenshot: "/screenshots/xo-sweden.webp",
     ctaText: "Discuss a similar project",
     metrics: {
       modelFlow: "Step-by-Step Models",

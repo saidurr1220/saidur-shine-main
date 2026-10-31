@@ -314,7 +314,7 @@ export function ProjectsApple() {
                     {/* Screenshot with fixed ratio */}
                     <div className="aspect-[16/10] overflow-hidden bg-slate-950">
                       <img
-                        src={featured.screenshot || "/screenshots/mirror-control.png"}
+                        src={featured.screenshot || "/screenshots/mirror-control.webp"}
                         alt={featured.title}
                         width={800}
                         height={500}

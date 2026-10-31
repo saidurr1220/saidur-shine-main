@@ -89,8 +89,8 @@ export function NavbarApple() {
     }
     const element = document.getElementById(section);
     if (element) {
-      if ((window as any).__lenis) {
-        (window as any).__lenis.scrollTo(element, { offset: -70 });
+      if (window.__lenis) {
+        window.__lenis.scrollTo(element, { offset: -70 });
       } else {
         const offset = 70;
         const elementPosition = element.getBoundingClientRect().top;
@@ -122,8 +122,8 @@ export function NavbarApple() {
             onClick={(e) => {
               if (location.pathname === "/") {
                 e.preventDefault();
-                if ((window as any).__lenis) {
-                  (window as any).__lenis.scrollTo(0);
+                if (window.__lenis) {
+                  window.__lenis.scrollTo(0);
                 } else {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }

@@ -94,8 +94,10 @@ export function ContactApple() {
         }),
       });
 
-      const data = await res.json();
-      if ((res.ok && data.success === "true") || res.status === 200) {
+      const data = await res.json().catch(() => ({}));
+      // FormSubmit returns 200 with success "false" when the inbox isn't activated,
+      // so only a success flag counts as delivered.
+      if (res.ok && String(data.success) === "true") {
         setSubmitted(true);
         toast({
           title: "Inquiry Sent Successfully!",
@@ -104,11 +106,13 @@ export function ContactApple() {
       } else {
         throw new Error("Direct dispatch failed");
       }
-    } catch (err) {
-      setSubmitted(true);
-      window.location.href = `mailto:saidurr1256@gmail.com?subject=Project Inquiry&body=${encodeURIComponent(
-        formData.message
-      )}`;
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Message not sent",
+        description:
+          "Something went wrong on our side. Please email saidurr1256@gmail.com or message me on WhatsApp instead.",
+      });
     } finally {
       setIsSending(false);
     }
