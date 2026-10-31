@@ -10,8 +10,6 @@ import {
   motion,
   useScroll,
   useTransform,
-  useMotionValue,
-  useSpring,
   useReducedMotion,
 } from "framer-motion";
 import { useCountUp } from "@/components/motion/useCountUp";
@@ -64,11 +62,9 @@ export function HeroApple() {
 
   const textParallaxY = useTransform(scrollYProgress, [0, 1], [0, -60]);
   const cardParallaxY = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const cardParallaxRotateX = useTransform(scrollYProgress, [0, 1], [0, 6]);
 
-  // 3D Card Tilt (H2)
-  const rotateX = useSpring(useMotionValue(0), { stiffness: 220, damping: 20 });
-  const rotateY = useSpring(useMotionValue(0), { stiffness: 220, damping: 20 });
+  // Card glare follows the cursor. No 3D tilt: perspective/translateZ makes Chrome
+  // rasterize the card text, which renders it blurry.
   const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
 
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -76,17 +72,10 @@ export function HeroApple() {
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    rotateX.set(-((y - centerY) / centerY) * 8);
-    rotateY.set(((x - centerX) / centerX) * 8);
     setGlarePos({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
   };
 
   const handleCardMouseLeave = () => {
-    rotateX.set(0);
-    rotateY.set(0);
     setGlarePos({ x: 50, y: 50 });
   };
 
@@ -269,37 +258,27 @@ export function HeroApple() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: 3D "Track record" card (H2 + H3) */}
-          <div style={{ perspective: 1200 }} className="lg:col-span-6 relative">
+          {/* Right Column: "Track record" card */}
+          <div className="lg:col-span-6 relative">
             <motion.div
               ref={cardRef}
-              style={
-                !shouldReduce
-                  ? {
-                      y: cardParallaxY,
-                      rotateX: isTouch ? undefined : rotateX,
-                      rotateY: isTouch ? undefined : rotateY,
-                      transformStyle: "preserve-3d",
-                    }
-                  : undefined
-              }
+              style={!shouldReduce ? { y: cardParallaxY } : undefined}
               onMouseMove={handleCardMouseMove}
               onMouseLeave={handleCardMouseLeave}
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={
                 isTouch && !shouldReduce
                   ? {
                       opacity: 1,
-                      scale: 1,
                       y: [0, -6, 0],
                       transition: {
                         y: { repeat: Infinity, duration: 4, ease: "easeInOut" },
                       },
                     }
-                  : { opacity: 1, scale: 1 }
+                  : { opacity: 1, y: 0 }
               }
               transition={{ duration: 0.55, delay: 0.15, ease: appleEase }}
-              className="rounded-2xl sm:rounded-3xl bg-[#111927]/95 border border-white/10 shadow-2xl p-4 sm:p-6 backdrop-blur-md relative overflow-hidden group"
+              className="rounded-2xl sm:rounded-3xl bg-[#111927]/95 border border-white/10 shadow-2xl p-4 sm:p-6 relative overflow-hidden group"
             >
               {/* Moving glare highlight overlay (H2) */}
               {!isTouch && !shouldReduce && (
@@ -311,9 +290,8 @@ export function HeroApple() {
                 />
               )}
 
-              {/* Window Top Controls (translateZ: 40px) */}
+              {/* Window Top Controls */}
               <div
-                style={{ transform: "translateZ(40px)" }}
                 className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5 relative z-10"
               >
                 <div className="flex items-center gap-3">
@@ -326,19 +304,18 @@ export function HeroApple() {
                 </div>
               </div>
 
-              {/* 3 Metrics Cards Row (translateZ: 30px) */}
+              {/* 3 Metrics Cards Row */}
               <div
-                style={{ transform: "translateZ(30px)" }}
                 className="grid grid-cols-3 gap-2 sm:gap-3 mb-5 relative z-10"
               >
                 <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
                   <div className="text-base sm:text-2xl font-bold text-white font-mono leading-none">
                     59
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-slate-200 font-semibold leading-tight mt-2">
+                  <div className="text-[11px] sm:text-xs text-white font-semibold leading-tight mt-2">
                     Projects delivered
                   </div>
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 leading-tight mt-0.5">
+                  <div className="text-[10px] sm:text-[11px] text-slate-300 leading-tight mt-0.5">
                     FB International, 2026
                   </div>
                 </div>
@@ -347,10 +324,10 @@ export function HeroApple() {
                   <div className="text-base sm:text-2xl font-bold text-white font-mono leading-none">
                     #1
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-slate-200 font-semibold leading-tight mt-2">
+                  <div className="text-[11px] sm:text-xs text-white font-semibold leading-tight mt-2">
                     All-time top performer
                   </div>
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 leading-tight mt-0.5">
+                  <div className="text-[10px] sm:text-[11px] text-slate-300 leading-tight mt-0.5">
                     of 17 agency developers
                   </div>
                 </div>
@@ -359,21 +336,20 @@ export function HeroApple() {
                   <div className="text-base sm:text-2xl font-bold text-white font-mono leading-none">
                     {countJobSuccess}%
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-slate-200 font-semibold leading-tight mt-2">
+                  <div className="text-[11px] sm:text-xs text-white font-semibold leading-tight mt-2">
                     Upwork Job Success
                   </div>
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 leading-tight mt-0.5">
+                  <div className="text-[10px] sm:text-[11px] text-slate-300 leading-tight mt-0.5">
                     Freelancing since 2018
                   </div>
                 </div>
               </div>
 
-              {/* Recent Work Table (translateZ: 20px) */}
+              {/* Recent Work Table */}
               <div
-                style={{ transform: "translateZ(20px)" }}
                 className="space-y-2 relative z-10"
               >
-                <div className="text-xs font-bold text-slate-300 mb-2">Recent work</div>
+                <div className="text-xs font-bold text-slate-200 mb-2">Recent work</div>
 
                 {/* Mobile View (< sm) */}
                 <div className="sm:hidden space-y-2">
@@ -386,7 +362,7 @@ export function HeroApple() {
                         <div className="text-white font-sans font-medium text-xs truncate">
                           {item.name}
                         </div>
-                        <div className="text-slate-400 text-[10px] font-sans truncate">
+                        <div className="text-slate-300 text-[11px] font-sans truncate">
                           {item.desc}
                         </div>
                       </div>
@@ -409,7 +385,7 @@ export function HeroApple() {
                       <span className="col-span-5 text-white font-sans font-medium truncate">
                         {item.name}
                       </span>
-                      <span className="col-span-4 text-slate-400 truncate">
+                      <span className="col-span-4 text-slate-300 truncate">
                         {item.desc}
                       </span>
                       <div className="col-span-3 text-right">
