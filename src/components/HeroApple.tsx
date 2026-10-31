@@ -332,29 +332,38 @@ export function HeroApple() {
                 className="grid grid-cols-3 gap-2 sm:gap-3 mb-5 relative z-10"
               >
                 <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium leading-tight">
-                    Deliverables in 2026
-                  </div>
-                  <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
+                  <div className="text-base sm:text-2xl font-bold text-white font-mono leading-none">
                     59
                   </div>
-                </div>
-
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium leading-tight">
-                    Freelancing since
+                  <div className="text-[10px] sm:text-[11px] text-slate-200 font-semibold leading-tight mt-2">
+                    Projects delivered
                   </div>
-                  <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
-                    2018
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 leading-tight mt-0.5">
+                    FB International, 2026
                   </div>
                 </div>
 
                 <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium leading-tight">
+                  <div className="text-base sm:text-2xl font-bold text-white font-mono leading-none">
+                    #1
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] text-slate-200 font-semibold leading-tight mt-2">
+                    All-time top performer
+                  </div>
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 leading-tight mt-0.5">
+                    of 17 agency developers
+                  </div>
+                </div>
+
+                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
+                  <div className="text-base sm:text-2xl font-bold text-white font-mono leading-none">
+                    {countJobSuccess}%
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] text-slate-200 font-semibold leading-tight mt-2">
                     Upwork Job Success
                   </div>
-                  <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
-                    {countJobSuccess}%
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 leading-tight mt-0.5">
+                    Freelancing since 2018
                   </div>
                 </div>
               </div>
@@ -429,9 +438,9 @@ export function HeroApple() {
                 </div>
                 <div>
                   <div className="text-sm sm:text-base font-bold text-white">
-                    33 five-star reviews
+                    #1 all-time
                   </div>
-                  <div className="text-xs text-slate-400">Agency clients, 2026</div>
+                  <div className="text-xs text-slate-400">FB International leaderboard</div>
                 </div>
               </div>
 

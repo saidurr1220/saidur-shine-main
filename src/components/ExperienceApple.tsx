@@ -4,7 +4,8 @@ import { motion, useScroll, useSpring, useReducedMotion } from "framer-motion";
 import { appleEase } from "@/lib/motion";
 
 const fbHighlights = [
-  "59 client deliverables shipped from January to October 2026, with 33 five-star reviews and a 5.0 average client rating",
+  "Ranked #1 of 17 developers on the agency's all-time performance leaderboard (October 2026)",
+  "59 client deliverables shipped from January to October 2026; 33 of 34 client reviews are five stars",
   "Build custom themes, bespoke plugins (OOP), WooCommerce customizations, payment gateways (PayNow, Stripe) and REST API integrations",
   "Recent builds: an OpenAI GPT-4.1-mini reading engine with server-side caching and session-isolated results, a referral commission system with QR partner links, a partner dashboard and PDF payout reports, and Twilio SMS alerts for a construction and cabinetry site",
   "Delivered a $7,000 milestone project for an agency client: a real-time Bybit to Bitget trade mirroring engine (Node.js, TypeScript, PostgreSQL)",
@@ -18,7 +19,7 @@ const journey2026 = [
   { date: "Jul 2026", text: "13 orders completed, 10 five-star reviews in one month" },
   { date: "Aug 2026", text: "Rejoined WpCraft for complex custom builds" },
   { date: "Sep 2026", text: "Highest delivered revenue in the agency for the month" },
-  { date: "Oct 2026", text: "Passed 50 deliverables, reaching 59 by 31 Oct" },
+  { date: "Oct 2026", text: "#1 on the all-time leaderboard, 59 deliverables by 31 Oct" },
 ];
 
 export function ExperienceApple() {
