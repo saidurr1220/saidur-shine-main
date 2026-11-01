@@ -10,8 +10,6 @@ import {
   motion,
   useScroll,
   useTransform,
-  useMotionValue,
-  useSpring,
   useReducedMotion,
 } from "framer-motion";
 import { useCountUp } from "@/components/motion/useCountUp";
@@ -45,6 +43,15 @@ const recentWork = [
   },
 ];
 
+function LiveDot() {
+  return (
+    <span className="relative flex w-1.5 h-1.5" aria-hidden="true">
+      <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-75 animate-ping motion-reduce:animate-none" />
+      <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-emerald-400" />
+    </span>
+  );
+}
+
 export function HeroApple() {
   const heroRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -64,11 +71,9 @@ export function HeroApple() {
 
   const textParallaxY = useTransform(scrollYProgress, [0, 1], [0, -60]);
   const cardParallaxY = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const cardParallaxRotateX = useTransform(scrollYProgress, [0, 1], [0, 6]);
 
-  // 3D Card Tilt (H2)
-  const rotateX = useSpring(useMotionValue(0), { stiffness: 220, damping: 20 });
-  const rotateY = useSpring(useMotionValue(0), { stiffness: 220, damping: 20 });
+  // Card glare follows the cursor. No 3D tilt: perspective/translateZ makes Chrome
+  // rasterize the card text, which renders it blurry.
   const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
 
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -76,34 +81,28 @@ export function HeroApple() {
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    rotateX.set(-((y - centerY) / centerY) * 8);
-    rotateY.set(((x - centerX) / centerX) * 8);
     setGlarePos({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
   };
 
   const handleCardMouseLeave = () => {
-    rotateX.set(0);
-    rotateY.set(0);
     setGlarePos({ x: 50, y: 50 });
   };
 
   // Count up stats - only 100% counts up (Task 5)
   const countJobSuccess = useCountUp(100, isInView, { duration: 900 });
+  const countDeliverables = useCountUp(59, isInView, { duration: 1100 });
 
   const scrollToContact = () => {
-    if ((window as any).__lenis) {
-      (window as any).__lenis.scrollTo("#contact", { offset: -70 });
+    if (window.__lenis) {
+      window.__lenis.scrollTo("#contact", { offset: -70 });
     } else {
       document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const scrollToProjects = () => {
-    if ((window as any).__lenis) {
-      (window as any).__lenis.scrollTo("#projects", { offset: -70 });
+    if (window.__lenis) {
+      window.__lenis.scrollTo("#projects", { offset: -70 });
     } else {
       document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
     }
@@ -174,9 +173,10 @@ export function HeroApple() {
             </motion.p>
 
             {/* Main Punchy Dual-Tone Headline with Word Mask Reveal (H1) */}
-            <div className="space-y-1">
+            <h1 className="space-y-1">
+              <span className="sr-only">Md. Saidur Rahman, Full-Stack WordPress Engineer: </span>
               {/* Line 1: White words */}
-              <div className="flex flex-wrap gap-x-3 text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-white leading-[1.12]">
+              <span className="flex flex-wrap gap-x-3 text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-white leading-[1.12]">
                 {line1Words.map((word, wIdx) => (
                   <span key={wIdx} className="overflow-hidden inline-block py-0.5">
                     <motion.span
@@ -193,10 +193,10 @@ export function HeroApple() {
                     </motion.span>
                   </span>
                 ))}
-              </div>
+              </span>
 
               {/* Line 2: Emerald words (comes in last) */}
-              <div className="flex flex-wrap gap-x-3 text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-[#10b981] leading-[1.12]">
+              <span className="flex flex-wrap gap-x-3 text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-[#10b981] leading-[1.12]">
                 {line2Words.map((word, wIdx) => (
                   <span key={wIdx} className="overflow-hidden inline-block py-0.5">
                     <motion.span
@@ -213,8 +213,8 @@ export function HeroApple() {
                     </motion.span>
                   </span>
                 ))}
-              </div>
-            </div>
+              </span>
+            </h1>
 
             {/* Subheading */}
             <motion.p
@@ -268,38 +268,38 @@ export function HeroApple() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: 3D "Track record" card (H2 + H3) */}
-          <div style={{ perspective: 1200 }} className="lg:col-span-6 relative">
+          {/* Right Column: "Track record" card */}
+          <div className="lg:col-span-6 relative">
             <motion.div
               ref={cardRef}
-              style={
-                !shouldReduce
-                  ? {
-                      y: cardParallaxY,
-                      rotateX: isTouch ? undefined : rotateX,
-                      rotateY: isTouch ? undefined : rotateY,
-                      transformStyle: "preserve-3d",
-                    }
-                  : undefined
-              }
+              style={!shouldReduce ? { y: cardParallaxY } : undefined}
               onMouseMove={handleCardMouseMove}
               onMouseLeave={handleCardMouseLeave}
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={
                 isTouch && !shouldReduce
                   ? {
                       opacity: 1,
-                      scale: 1,
                       y: [0, -6, 0],
                       transition: {
                         y: { repeat: Infinity, duration: 4, ease: "easeInOut" },
                       },
                     }
-                  : { opacity: 1, scale: 1 }
+                  : { opacity: 1, y: 0 }
               }
               transition={{ duration: 0.55, delay: 0.15, ease: appleEase }}
-              className="rounded-2xl sm:rounded-3xl bg-[#111927]/95 border border-white/10 shadow-2xl p-4 sm:p-6 backdrop-blur-md relative overflow-hidden group"
+              className="rounded-2xl sm:rounded-3xl bg-white/10 shadow-2xl p-4 sm:p-6 relative overflow-hidden group"
             >
+              {/* Rotating emerald light that traces the card border */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-[75%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_250deg,rgba(16,185,129,0.9)_320deg,transparent_360deg)] animate-[spin_7s_linear_infinite] motion-reduce:animate-none"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-px rounded-[15px] sm:rounded-[23px] bg-[#111927]"
+              />
+
               {/* Moving glare highlight overlay (H2) */}
               {!isTouch && !shouldReduce && (
                 <div
@@ -310,9 +310,8 @@ export function HeroApple() {
                 />
               )}
 
-              {/* Window Top Controls (translateZ: 40px) */}
+              {/* Window Top Controls */}
               <div
-                style={{ transform: "translateZ(40px)" }}
                 className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5 relative z-10"
               >
                 <div className="flex items-center gap-3">
@@ -325,91 +324,106 @@ export function HeroApple() {
                 </div>
               </div>
 
-              {/* 3 Metrics Cards Row (translateZ: 30px) */}
-              <div
-                style={{ transform: "translateZ(30px)" }}
-                className="grid grid-cols-3 gap-2 sm:gap-3 mb-5 relative z-10"
-              >
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium leading-tight">
-                    Projects per month
-                  </div>
-                  <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
-                    10-15
-                  </div>
-                </div>
-
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium leading-tight">
-                    Freelancing since
-                  </div>
-                  <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
-                    2018
-                  </div>
-                </div>
-
-                <div className="p-2.5 sm:p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium leading-tight">
-                    Upwork Job Success
-                  </div>
-                  <div className="text-base sm:text-xl font-bold text-white mt-1 font-mono">
-                    {countJobSuccess}%
-                  </div>
-                </div>
+              {/* 3 Metrics Cards Row */}
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5 relative z-10">
+                {[
+                  { value: `${countDeliverables}`, label: "Projects delivered", caption: "FB International, 2026" },
+                  { value: "#1", label: "All-time top performer", caption: "of 17 agency developers", highlight: true },
+                  { value: `${countJobSuccess}%`, label: "Upwork Job Success", caption: "Freelancing since 2018" },
+                ].map((stat, idx) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.45, delay: 0.45 + idx * 0.12, ease: appleEase }}
+                    className={`relative overflow-hidden p-2.5 sm:p-3 rounded-xl border transition-colors duration-300 hover:border-emerald-400/40 ${
+                      stat.highlight ? "bg-emerald-500/[0.08] border-emerald-400/25" : "bg-white/[0.04] border-white/5"
+                    }`}
+                  >
+                    {stat.highlight && !shouldReduce && (
+                      <motion.div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-emerald-300/15 to-transparent skew-x-[-20deg]"
+                        animate={{ x: ["0%", "400%"] }}
+                        transition={{ duration: 1.6, delay: 1.4, repeat: Infinity, repeatDelay: 3.2, ease: "easeInOut" }}
+                      />
+                    )}
+                    <div
+                      className={`relative text-base sm:text-2xl font-bold font-mono leading-none ${
+                        stat.highlight ? "text-[#34d399]" : "text-white"
+                      }`}
+                    >
+                      {stat.value}
+                    </div>
+                    <div className="relative text-[11px] sm:text-xs text-white font-semibold leading-tight mt-2">
+                      {stat.label}
+                    </div>
+                    <div className="relative text-[10px] sm:text-[11px] text-slate-300 leading-tight mt-0.5">
+                      {stat.caption}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
 
-              {/* Recent Work Table (translateZ: 20px) */}
+              {/* Recent Work Table */}
               <div
-                style={{ transform: "translateZ(20px)" }}
                 className="space-y-2 relative z-10"
               >
-                <div className="text-xs font-bold text-slate-300 mb-2">Recent work</div>
+                <div className="text-xs font-bold text-slate-200 mb-2">Recent work</div>
 
                 {/* Mobile View (< sm) */}
                 <div className="sm:hidden space-y-2">
-                  {recentWork.map((item) => (
-                    <div
+                  {recentWork.map((item, idx) => (
+                    <motion.div
                       key={item.name}
+                      initial={{ opacity: 0, x: 16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.8 + idx * 0.08, ease: appleEase }}
                       className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 flex items-center justify-between gap-2"
                     >
                       <div className="min-w-0 pr-2">
                         <div className="text-white font-sans font-medium text-xs truncate">
                           {item.name}
                         </div>
-                        <div className="text-slate-400 text-[10px] font-sans truncate">
+                        <div className="text-slate-300 text-[11px] font-sans truncate">
                           {item.desc}
                         </div>
                       </div>
                       <span
-                        className={`text-[10px] px-2.5 py-0.5 rounded font-mono border ${item.statusStyle} flex-shrink-0`}
+                        className={`inline-flex items-center gap-1.5 text-[10px] px-2.5 py-0.5 rounded font-mono border ${item.statusStyle} flex-shrink-0`}
                       >
+                        <LiveDot />
                         {item.status}
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 
                 {/* Desktop View (sm+) */}
                 <div className="hidden sm:block space-y-1.5 text-[11px]">
-                  {recentWork.map((item) => (
-                    <div
+                  {recentWork.map((item, idx) => (
+                    <motion.div
                       key={item.name}
+                      initial={{ opacity: 0, x: 16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.8 + idx * 0.08, ease: appleEase }}
                       className="grid grid-cols-12 gap-2 items-center p-2 rounded-lg bg-white/[0.02] border border-white/5 text-slate-300 transition-colors hover:bg-white/[0.04]"
                     >
                       <span className="col-span-5 text-white font-sans font-medium truncate">
                         {item.name}
                       </span>
-                      <span className="col-span-4 text-slate-400 truncate">
+                      <span className="col-span-4 text-slate-300 truncate">
                         {item.desc}
                       </span>
                       <div className="col-span-3 text-right">
                         <span
-                          className={`inline-block text-[10px] px-2.5 py-0.5 rounded font-mono border ${item.statusStyle}`}
+                          className={`inline-flex items-center gap-1.5 text-[10px] px-2.5 py-0.5 rounded font-mono border ${item.statusStyle}`}
                         >
+                          <LiveDot />
                           {item.status}
                         </span>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -428,9 +442,9 @@ export function HeroApple() {
                 </div>
                 <div>
                   <div className="text-sm sm:text-base font-bold text-white">
-                    2+ Years
+                    #1 all-time
                   </div>
-                  <div className="text-xs text-slate-400">Experience</div>
+                  <div className="text-xs text-slate-400">FB International leaderboard</div>
                 </div>
               </div>
 

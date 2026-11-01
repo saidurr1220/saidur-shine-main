@@ -3,6 +3,25 @@ import { Briefcase, GraduationCap } from "lucide-react";
 import { motion, useScroll, useSpring, useReducedMotion } from "framer-motion";
 import { appleEase } from "@/lib/motion";
 
+const fbHighlights = [
+  "Ranked #1 of 17 developers on the agency's all-time performance leaderboard (October 2026)",
+  "59 client deliverables shipped from January to October 2026; 33 of 34 client reviews are five stars",
+  "Build custom themes, bespoke plugins (OOP), WooCommerce customizations, payment gateways (PayNow, Stripe) and REST API integrations",
+  "Recent builds: an OpenAI GPT-4.1-mini reading engine with server-side caching and session-isolated results, a referral commission system with QR partner links, a partner dashboard and PDF payout reports, and Twilio SMS alerts for a construction and cabinetry site",
+  "Delivered a $7,000 milestone project for an agency client: a real-time Bybit to Bitget trade mirroring engine (Node.js, TypeScript, PostgreSQL)",
+];
+
+const journey2026 = [
+  { date: "Jan 2026", text: "Joined FB International, WpCraft team" },
+  { date: "Feb 2026", text: "First client deliveries, both rated 5 stars" },
+  { date: "Mar 2026", text: "Moved to the WpTitans production team" },
+  { date: "Apr 2026", text: "#1 Top Performer of the month, all 5 deliveries on time" },
+  { date: "Jul 2026", text: "13 orders completed, 10 five-star reviews in one month" },
+  { date: "Aug 2026", text: "Rejoined WpCraft for complex custom builds" },
+  { date: "Sep 2026", text: "Highest delivered revenue in the agency for the month" },
+  { date: "Oct 2026", text: "#1 on the all-time leaderboard, 59 deliverables by 31 Oct" },
+];
+
 export function ExperienceApple() {
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduce = useReducedMotion();
@@ -86,21 +105,41 @@ export function ExperienceApple() {
                         at FB International BD
                       </span>
                     </div>
+                    <p className="text-xs text-slate-500">
+                      Custom themes &amp; plugin development · WpCraft team (WpTitans, Mar to Jul 2026)
+                    </p>
 
                     <ul className="pt-1.5 space-y-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      <li className="flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#087f5b] flex-shrink-0 mt-2" />
-                        <span>Deliver 10 to 15 client projects a month for the agency's international clients</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#087f5b] flex-shrink-0 mt-2" />
-                        <span>Build custom plugins (OOP), WooCommerce platforms, dynamic pricing engines, Stripe webhooks and REST API integrations</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#087f5b] flex-shrink-0 mt-2" />
-                        <span>Delivered a $7,000 milestone project for an agency client: a real-time Bybit to Bitget trade mirroring engine (Node.js, TypeScript, PostgreSQL)</span>
-                      </li>
+                      {fbHighlights.map((item) => (
+                        <li key={item} className="flex items-start gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#087f5b] flex-shrink-0 mt-2" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
                     </ul>
+
+                    <div className="pt-4">
+                      <div className="text-[11px] font-bold tracking-widest text-[#087f5b] uppercase mb-2">
+                        2026 journey
+                      </div>
+                      <ol className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+                        {journey2026.map((step, idx) => (
+                          <motion.li
+                            key={step.date}
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.6 }}
+                            transition={{ duration: 0.4, delay: idx * 0.07, ease: appleEase }}
+                            className="group flex items-start gap-3 text-xs sm:text-sm"
+                          >
+                            <span className="font-mono font-semibold text-slate-400 whitespace-nowrap w-16 flex-shrink-0 transition-colors group-hover:text-[#087f5b]">
+                              {step.date}
+                            </span>
+                            <span className="text-slate-600 leading-snug">{step.text}</span>
+                          </motion.li>
+                        ))}
+                      </ol>
+                    </div>
                   </div>
                 </div>
 

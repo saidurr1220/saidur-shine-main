@@ -49,7 +49,7 @@ const METRIC_LABELS: Record<string, string> = {
 function MetricTile({ label, value }: { label: string; value: string }) {
   // Only count up pure percentages like 100% or clean numbers without slashes or plus
   const shouldCount = value.endsWith("%") && !value.includes("/");
-  const numericMatch = shouldCount ? value.match(/^([0-9\.]+)(.*)$/) : null;
+  const numericMatch = shouldCount ? value.match(/^([0-9.]+)(.*)$/) : null;
   const isNumeric = !!numericMatch;
   const numValue = isNumeric ? parseFloat(numericMatch[1]) : 0;
   const suffix = isNumeric ? numericMatch[2] : "";
@@ -83,8 +83,8 @@ const ProjectDetail = () => {
     root.classList.remove("dark");
     window.scrollTo(0, 0);
 
-    if ((window as any).__lenis) {
-      (window as any).__lenis.scrollTo(0, { immediate: true });
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true });
     }
 
     // Dynamic SEO title & meta description

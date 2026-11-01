@@ -79,10 +79,10 @@ export function AboutApple() {
 
               <div className="space-y-3 pt-2 text-sm sm:text-[15px] text-slate-600 leading-relaxed max-w-lg">
                 <p>
-                  I'm a Full-Stack WordPress Engineer with <strong className="text-slate-950 font-semibold">2+ years</strong> of experience building custom plugins, WooCommerce platforms, booking engines and subscription systems for clients in the US, UK and Europe. Most of my work is custom logic, not theme setup: hooks and filters, Stripe webhooks, REST API integrations and conversion tracking.
+                  I'm a Full-Stack WordPress Engineer building custom plugins, WooCommerce platforms, booking engines and subscription systems for clients in the US, UK and Europe. I started freelancing on Upwork in <strong className="text-slate-950 font-semibold">2018</strong> and have worked full-time at a WordPress agency since <strong className="text-slate-950 font-semibold">January 2026</strong>. Most of my work is custom logic, not theme setup: hooks and filters, payment gateways, REST API integrations and AI features.
                 </p>
                 <p>
-                  I currently work at <strong className="text-slate-950 font-semibold">FB International BD</strong>, a WordPress development agency, delivering <strong className="text-slate-950 font-semibold">10 to 15 client projects a month</strong>. Last month I shipped 11 projects there and <strong className="text-slate-950 font-semibold">10 were rated 5 stars</strong>. I've also been freelancing on Upwork since 2018 with a <strong className="text-slate-950 font-semibold">100% Job Success</strong> score. Outside WordPress I build Node.js and TypeScript systems, like a real-time trading engine running 24/7 in production.
+                  At <strong className="text-slate-950 font-semibold">FB International BD</strong> I shipped <strong className="text-slate-950 font-semibold">59 client deliverables</strong> between January and October 2026, and 33 of my 34 client reviews are five stars. As of October 2026 I rank <strong className="text-slate-950 font-semibold">#1 of 17 developers</strong> on the agency's all-time performance leaderboard. On Upwork I hold a <strong className="text-slate-950 font-semibold">100% Job Success</strong> score. Outside WordPress I build Node.js and TypeScript systems, like a real-time trading engine running 24/7 in production.
                 </p>
               </div>
             </div>

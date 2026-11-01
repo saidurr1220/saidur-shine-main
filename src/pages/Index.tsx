@@ -16,14 +16,13 @@ const Index = () => {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove("dark");
-    localStorage.setItem("theme", "light");
 
     if (window.location.hash) {
       const id = window.location.hash.replace("#", "");
       const el = document.getElementById(id);
       if (el) {
         setTimeout(() => {
-          const lenis = (window as any).__lenis;
+          const lenis = window.__lenis;
           if (lenis && typeof lenis.scrollTo === "function") {
             lenis.scrollTo(el, { offset: -70 });
           } else {

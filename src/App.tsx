@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,9 +7,11 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 import { MotionConfig, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
 import Index from "./pages/Index";
-import ProjectDetail from "./pages/ProjectDetail";
-import Resume from "./pages/Resume";
-import NotFound from "./pages/NotFound";
+
+// Secondary routes load on demand to keep the homepage bundle small
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
+const Resume = lazy(() => import("./pages/Resume"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 import { CursorSpotlight } from "@/components/motion/CursorSpotlight";
 
 const queryClient = new QueryClient();
@@ -19,6 +21,7 @@ function AnimatedRoutes() {
 
   return (
     <AnimatePresence mode="wait">
+      <Suspense fallback={<div className="min-h-screen bg-[#fbfbfd]" />}>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Index />} />
         <Route path="/projects" element={<Navigate to="/#projects" replace />} />
@@ -29,6 +32,7 @@ function AnimatedRoutes() {
         {/* CATCH-ALL ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 }
@@ -47,7 +51,7 @@ function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
       smoothWheel: true,
     });
 
-    (window as any).__lenis = lenis;
+    window.__lenis = lenis;
 
     function raf(time: number) {
       lenis.raf(time);
@@ -59,7 +63,7 @@ function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
-      delete (window as any).__lenis;
+      delete window.__lenis;
     };
   }, []);
 

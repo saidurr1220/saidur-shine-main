@@ -56,8 +56,8 @@ export function FooterApple() {
   };
 
   const handleScrollToTop = () => {
-    if ((window as any).__lenis) {
-      (window as any).__lenis.scrollTo(0);
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0);
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
