@@ -136,10 +136,10 @@ const ProjectGridCard = React.forwardRef<HTMLDivElement, { project: ProjectItem 
         </div>
 
         {/* Bottom Actions */}
-        <div className="pt-3 flex items-center justify-between border-t border-slate-100 text-xs relative z-10">
+        <div className="pt-1 flex items-center justify-between border-t border-slate-100 text-xs relative z-10">
           <Link
             to={`/project/${project.id}`}
-            className="font-bold text-[#087f5b] hover:text-[#05513a] flex items-center gap-1.5 transition-colors"
+            className="py-2.5 font-bold text-[#087f5b] hover:text-[#05513a] flex items-center gap-1.5 transition-colors"
           >
             <span>View Case Study</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -150,7 +150,7 @@ const ProjectGridCard = React.forwardRef<HTMLDivElement, { project: ProjectItem 
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-500 hover:text-slate-900 flex items-center gap-1 transition-colors font-medium"
+              className="py-2.5 text-slate-500 hover:text-slate-900 flex items-center gap-1 transition-colors font-medium"
               title="Open Live Site"
             >
               <span>Live Site</span>
@@ -257,7 +257,7 @@ export function ProjectsApple() {
                     setSelectedFilter(cat);
                     setShowAll(false);
                   }}
-                  className={`relative px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
+                  className={`relative px-4 py-2 sm:py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
                     isActive ? "text-slate-950 font-bold" : "text-slate-300 hover:text-white"
                   }`}
                 >

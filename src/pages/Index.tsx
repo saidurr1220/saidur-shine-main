@@ -8,6 +8,8 @@ import { ProjectsApple } from "@/components/ProjectsApple";
 import { TestimonialsApple } from "@/components/TestimonialsApple";
 import { ExperienceApple } from "@/components/ExperienceApple";
 import { ContactApple } from "@/components/ContactApple";
+import { ProcessApple } from "@/components/ProcessApple";
+import { FaqApple } from "@/components/FaqApple";
 import { FooterApple } from "@/components/FooterApple";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { WhatsAppChatButton } from "@/components/WhatsAppChatButton";
@@ -39,12 +41,14 @@ const Index = () => {
       <NavbarApple />
       <main>
         <HeroApple />
-        <AboutApple />
-        <SkillsBento />
-        <ServicesApple />
         <ProjectsApple />
         <TestimonialsApple />
+        <ProcessApple />
+        <ServicesApple />
+        <AboutApple />
         <ExperienceApple />
+        <SkillsBento />
+        <FaqApple />
         <ContactApple />
       </main>
       <FooterApple />

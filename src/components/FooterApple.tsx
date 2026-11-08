@@ -90,30 +90,33 @@ export function FooterApple() {
           </div>
 
           {/* Center: Page Nav on ONE line on desktop, wrapping cleanly on mobile */}
-          <nav className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 text-xs text-slate-400 font-medium">
-            <a href="#about" className="hover:text-white transition-colors">
-              About
+          <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 sm:gap-x-6 text-xs text-slate-400 font-medium">
+            <a href="#projects" className="py-2 hover:text-white transition-colors">
+              Work
             </a>
-            <a href="#services" className="hover:text-white transition-colors">
-              Services
-            </a>
-            <a href="#projects" className="hover:text-white transition-colors">
-              Projects
-            </a>
-            <a href="#experience" className="hover:text-white transition-colors">
-              Experience
-            </a>
-            <a href="#testimonials" className="hover:text-white transition-colors">
+            <a href="#testimonials" className="py-2 hover:text-white transition-colors">
               Reviews
             </a>
-            <a href="#contact" className="hover:text-white transition-colors">
+            <a href="#process" className="py-2 hover:text-white transition-colors">
+              Process
+            </a>
+            <a href="#about" className="py-2 hover:text-white transition-colors">
+              About
+            </a>
+            <a href="#experience" className="py-2 hover:text-white transition-colors">
+              Experience
+            </a>
+            <a href="#faq" className="py-2 hover:text-white transition-colors">
+              FAQ
+            </a>
+            <a href="#contact" className="py-2 hover:text-white transition-colors">
               Contact
             </a>
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
+              className="py-2 hover:text-white transition-colors"
             >
               CV
             </a>

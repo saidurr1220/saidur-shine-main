@@ -169,7 +169,7 @@ export function TestimonialsApple() {
                     setIndex(0);
                     setUserInteracted(true);
                   }}
-                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
+                  className={`relative px-3.5 py-2 sm:py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
                     isActive ? "text-slate-950 font-bold" : "text-slate-500 hover:text-slate-800"
                   }`}
                 >
@@ -280,7 +280,7 @@ export function TestimonialsApple() {
                                 e.stopPropagation();
                                 toggleExpanded(rev.id);
                               }}
-                              className="inline-block text-xs font-semibold text-[#087f5b] hover:text-[#066347] transition-colors mt-2 focus:outline-hidden cursor-pointer"
+                              className="inline-block py-1.5 text-xs font-semibold text-[#087f5b] hover:text-[#066347] transition-colors mt-1 focus:outline-hidden cursor-pointer"
                             >
                               {isExpanded ? "Show less" : "Read more"}
                             </button>
@@ -323,7 +323,7 @@ export function TestimonialsApple() {
                 <ChevronLeft className="w-4 h-4" />
               </button>
 
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-0.5">
                 {[...Array(totalPages)].map((_, pageIdx) => (
                   <button
                     key={pageIdx}
@@ -332,11 +332,15 @@ export function TestimonialsApple() {
                       setDirection(pageIdx > currentPage ? 1 : -1);
                       setIndex(pageIdx * itemsPerPage);
                     }}
-                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                      currentPage === pageIdx ? "w-6 bg-[#087f5b]" : "w-2 bg-slate-300"
-                    }`}
+                    className="h-8 px-0.5 flex items-center cursor-pointer"
                     aria-label={`Go to slide ${pageIdx + 1}`}
-                  />
+                  >
+                    <span
+                      className={`block h-2 rounded-full transition-all duration-300 ${
+                        currentPage === pageIdx ? "w-6 bg-[#087f5b]" : "w-2 bg-slate-300"
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
 

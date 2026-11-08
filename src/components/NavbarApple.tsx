@@ -6,11 +6,12 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Magnetic } from "@/components/motion/Magnetic";
 
 const navLinks = [
-  { name: "About", section: "about" },
-  { name: "Services", section: "services" },
-  { name: "Projects", section: "projects" },
-  { name: "Experience", section: "experience" },
+  { name: "Work", section: "projects" },
   { name: "Reviews", section: "testimonials" },
+  { name: "Process", section: "process" },
+  { name: "About", section: "about" },
+  { name: "Experience", section: "experience" },
+  { name: "FAQ", section: "faq" },
   { name: "Contact", section: "contact" },
 ];
 
@@ -46,7 +47,7 @@ export function NavbarApple() {
   useEffect(() => {
     if (location.pathname !== "/") return;
 
-    const sectionIds = ["about", "services", "projects", "experience", "testimonials", "contact"];
+    const sectionIds = navLinks.map((link) => link.section);
     const observers: IntersectionObserver[] = [];
 
     const handleBottomCheck = () => {
