@@ -65,6 +65,7 @@ const ProjectGridCard = React.forwardRef<HTMLDivElement, { project: ProjectItem 
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4, ease: appleEase }}
       style={{ perspective: 1000 }}
+      className="w-[84%] shrink-0 snap-center md:w-auto md:shrink"
     >
       <motion.div
         ref={cardRef}
@@ -375,7 +376,11 @@ export function ProjectsApple() {
         )}
 
         {/* 2. TWO-COLUMN PROJECT CARDS with AnimatePresence & layout */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8 text-slate-900">
+        <p className="md:hidden mb-3 text-[11px] font-mono text-slate-400">Swipe to see more →</p>
+        <motion.div
+          layout
+          className="flex md:grid md:grid-cols-2 gap-4 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 pb-2 text-slate-900"
+        >
           <AnimatePresence mode="popLayout">
             {displayedProjects.map((project) => (
               <ProjectGridCard key={project.id} project={project} />

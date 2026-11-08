@@ -112,3 +112,11 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Horizontal swipe rows on mobile: hide the scrollbar but keep scrolling */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
