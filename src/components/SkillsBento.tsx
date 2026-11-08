@@ -222,7 +222,7 @@ function SkillTiltCard({
           </h3>
         </div>
 
-        <ul className="mt-1 flex flex-wrap gap-1.5 sm:block sm:space-y-1.5 text-xs text-slate-600 leading-relaxed flex-1 relative z-10">
+        <ul className="mt-1 flex flex-wrap content-start items-start gap-1.5 sm:block sm:space-y-1.5 text-xs text-slate-600 leading-relaxed flex-1 relative z-10">
           {skill.items.map((item, i) => (
             <li
               key={i}

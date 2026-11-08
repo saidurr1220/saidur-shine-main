@@ -164,10 +164,11 @@ export function TestimonialsApple() {
               return (
                 <button
                   key={tab.id}
-                  onClick={() => {
+                  onClick={(e) => {
                     setSelectedFilter(tab.id);
                     setIndex(0);
                     setUserInteracted(true);
+                    e.currentTarget.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
                   }}
                   className={`relative px-3.5 py-2 sm:py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
                     isActive ? "text-slate-950 font-bold" : "text-slate-500 hover:text-slate-800"
