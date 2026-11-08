@@ -197,7 +197,7 @@ function SkillTiltCard({
               }
             : undefined
         }
-        className="relative p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-md hover:border-slate-300 transition-shadow duration-300 flex flex-col group overflow-hidden"
+        className="relative p-4 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-md hover:border-slate-300 transition-shadow duration-300 flex flex-col group overflow-hidden"
       >
         {/* Inner spotlight that follows cursor inside card */}
         {!isTouch && !shouldReduce && (
@@ -211,7 +211,7 @@ function SkillTiltCard({
           />
         )}
 
-        <div className="flex items-center gap-3.5 mb-3.5 relative z-10">
+        <div className="flex flex-col items-start sm:flex-row sm:items-center gap-2 sm:gap-3.5 mb-3 sm:mb-3.5 relative z-10">
           <div
             className={`w-10 h-10 rounded-xl flex items-center justify-center ${skill.color} transition-transform duration-300 group-hover:scale-110 shadow-2xs flex-shrink-0`}
           >
@@ -257,7 +257,7 @@ export function SkillsBento() {
         </div>
 
         {/* 9 Uniform Cards in 3x3 Grid with 3D Tilt & Inner Spotlight */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {skills.map((skill, idx) => (
             <SkillTiltCard key={skill.name} skill={skill} idx={idx} />
           ))}

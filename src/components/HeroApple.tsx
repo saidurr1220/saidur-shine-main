@@ -340,7 +340,7 @@ export function HeroApple() {
               </div>
 
               {/* 3 Metrics Cards Row */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5 relative z-10">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mb-5 relative z-10">
                 {[
                   { value: `${countDeliverables}`, label: "Projects delivered", caption: "FB International, 2026" },
                   { value: "#1", label: "All-time top performer", caption: "of 17 agency developers", highlight: true },
@@ -351,7 +351,7 @@ export function HeroApple() {
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.45, delay: 0.45 + idx * 0.12, ease: appleEase }}
-                    className={`relative overflow-hidden p-2.5 sm:p-3 rounded-xl border transition-colors duration-300 hover:border-emerald-400/40 ${
+                    className={`relative overflow-hidden flex items-center gap-3 sm:block p-3 rounded-xl border transition-colors duration-300 hover:border-emerald-400/40 ${
                       stat.highlight ? "bg-emerald-500/[0.08] border-emerald-400/25" : "bg-white/[0.04] border-white/5"
                     }`}
                   >
@@ -364,17 +364,19 @@ export function HeroApple() {
                       />
                     )}
                     <div
-                      className={`relative text-base sm:text-2xl font-bold font-mono leading-none ${
+                      className={`relative w-16 sm:w-auto flex-shrink-0 text-xl sm:text-2xl font-bold font-mono leading-none ${
                         stat.highlight ? "text-[#34d399]" : "text-white"
                       }`}
                     >
                       {stat.value}
                     </div>
-                    <div className="relative text-[11px] sm:text-xs text-white font-semibold leading-tight mt-2">
-                      {stat.label}
-                    </div>
-                    <div className="relative text-[10px] sm:text-[11px] text-slate-300 leading-tight mt-0.5">
-                      {stat.caption}
+                    <div className="relative min-w-0">
+                      <div className="text-xs text-white font-semibold leading-tight sm:mt-2">
+                        {stat.label}
+                      </div>
+                      <div className="text-[11px] text-slate-300 leading-tight mt-0.5">
+                        {stat.caption}
+                      </div>
                     </div>
                   </motion.div>
                 ))}

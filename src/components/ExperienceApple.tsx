@@ -93,7 +93,7 @@ export function ExperienceApple() {
                 className="p-5 sm:p-6 rounded-2xl bg-[#fbfbfd] border border-slate-200/80 flex flex-col sm:flex-row sm:items-start justify-between gap-4 hover:border-slate-300 hover:shadow-xs transition-all"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center flex-shrink-0 shadow-2xs mt-0.5">
+                  <div className="hidden sm:flex w-10 h-10 rounded-xl bg-slate-100 text-slate-700 items-center justify-center flex-shrink-0 shadow-2xs mt-0.5">
                     <Briefcase className="w-5 h-5 text-slate-700" />
                   </div>
                   <div className="space-y-1 max-w-2xl">
@@ -143,7 +143,7 @@ export function ExperienceApple() {
                   </div>
                 </div>
 
-                <div className="sm:self-start flex-shrink-0">
+                <div className="order-first sm:order-none sm:self-start flex-shrink-0">
                   <span className="text-xs font-mono font-semibold text-[#087f5b] bg-[#e8f6f0] border border-[#d1ede1] px-3.5 py-1.5 rounded-full whitespace-nowrap shadow-2xs">
                     Jan 2026 - Present
                   </span>
@@ -172,7 +172,7 @@ export function ExperienceApple() {
                 className="p-5 sm:p-6 rounded-2xl bg-[#fbfbfd] border border-slate-200/80 flex flex-col sm:flex-row sm:items-start justify-between gap-4 hover:border-slate-300 hover:shadow-xs transition-all"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center flex-shrink-0 shadow-2xs mt-0.5">
+                  <div className="hidden sm:flex w-10 h-10 rounded-xl bg-slate-100 text-slate-700 items-center justify-center flex-shrink-0 shadow-2xs mt-0.5">
                     <Briefcase className="w-5 h-5 text-slate-700" />
                   </div>
                   <div className="space-y-1 max-w-2xl">
@@ -203,7 +203,7 @@ export function ExperienceApple() {
                   </div>
                 </div>
 
-                <div className="sm:self-start flex-shrink-0">
+                <div className="order-first sm:order-none sm:self-start flex-shrink-0">
                   <span className="text-xs font-mono font-semibold text-[#0284c7] bg-[#f0f9ff] border border-[#bae6fd] px-3.5 py-1.5 rounded-full whitespace-nowrap shadow-2xs">
                     2018 - Present
                   </span>
@@ -232,7 +232,7 @@ export function ExperienceApple() {
                 className="p-5 sm:p-6 rounded-2xl bg-[#fbfbfd] border border-slate-200/80 flex flex-col sm:flex-row sm:items-start justify-between gap-4 hover:border-slate-300 hover:shadow-xs transition-all"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center flex-shrink-0 shadow-2xs mt-0.5">
+                  <div className="hidden sm:flex w-10 h-10 rounded-xl bg-slate-100 text-slate-700 items-center justify-center flex-shrink-0 shadow-2xs mt-0.5">
                     <GraduationCap className="w-5 h-5 text-slate-700" />
                   </div>
                   <div className="space-y-1">
@@ -247,7 +247,7 @@ export function ExperienceApple() {
                   </div>
                 </div>
 
-                <div className="sm:self-start flex-shrink-0">
+                <div className="order-first sm:order-none sm:self-start flex-shrink-0">
                   <span className="text-xs font-mono font-semibold text-purple-700 bg-purple-50 border border-purple-200 px-3.5 py-1.5 rounded-full whitespace-nowrap shadow-2xs">
                     2021
                   </span>

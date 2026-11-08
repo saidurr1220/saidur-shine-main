@@ -28,7 +28,7 @@ export function WhatsAppChatButton() {
 
   return (
     <div
-      className={`fixed bottom-6 right-6 z-40 flex items-center gap-3 transition-all duration-300 ${
+      className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-3 transition-all duration-300 ${
         footerInView
           ? "opacity-0 pointer-events-none translate-y-4"
           : "opacity-100 pointer-events-auto translate-y-0"
@@ -71,7 +71,7 @@ export function WhatsAppChatButton() {
         onMouseEnter={() => setShowTooltip(true)}
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.95 }}
-        className="relative group w-14 h-14 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-lg shadow-[#25D366]/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 focus:ring-offset-[#0b101b]"
+        className="relative group w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-lg shadow-[#25D366]/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 focus:ring-offset-[#0b101b]"
       >
         {/* Subtle ripple / ping animation ring */}
         <span className="absolute -inset-1 rounded-full bg-[#25D366]/20 animate-ping pointer-events-none" />
@@ -81,7 +81,7 @@ export function WhatsAppChatButton() {
 
         {/* WhatsApp Icon */}
         <svg
-          className="w-7 h-7 sm:w-7 sm:h-7 fill-white"
+          className="w-6 h-6 sm:w-7 sm:h-7 fill-white"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
