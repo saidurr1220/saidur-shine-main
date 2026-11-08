@@ -112,7 +112,7 @@ export function NavbarApple() {
       } ${
         // Once scrolled, the bar floats as a rounded pill so it sits lightly over light sections
         scrolled
-          ? "top-2 inset-x-2 sm:inset-x-4 lg:inset-x-0 lg:mx-auto lg:max-w-6xl rounded-2xl bg-[#0b101b]/92 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/10 py-2 sm:py-2.5"
+          ? "top-2 inset-x-2 sm:inset-x-4 lg:inset-x-0 lg:mx-auto lg:max-w-6xl rounded-2xl bg-[#0b101b]/90 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/10 py-2 sm:py-2.5"
           : "top-0 inset-x-0 bg-[#0b101b] py-4 sm:py-5 border-b border-white/[0.05]"
       }`}
     >

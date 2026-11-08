@@ -254,9 +254,11 @@ export function ProjectsApple() {
               return (
                 <button
                   key={cat}
-                  onClick={() => {
+                  onClick={(e) => {
                     setSelectedFilter(cat);
                     setShowAll(false);
+                    // Bring a pill that was cut off at the edge fully into view
+                    e.currentTarget.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
                   }}
                   className={`relative px-4 py-2 sm:py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
                     isActive ? "text-slate-950 font-bold" : "text-slate-300 hover:text-white"
