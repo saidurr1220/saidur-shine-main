@@ -50,7 +50,7 @@ export function ProcessApple() {
           </p>
         </div>
 
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="relative flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 pb-2">
           {/* Connector line that draws across the steps on desktop */}
           <motion.div
             aria-hidden="true"
@@ -69,10 +69,10 @@ export function ProcessApple() {
                 key={step.num}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.05 }}
                 transition={{ duration: 0.5, delay: idx * 0.12, ease: appleEase }}
                 whileHover={!shouldReduce ? { y: -4, transition: { duration: 0.2 } } : undefined}
-                className="relative p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md hover:border-[#10b981]/40 transition-[box-shadow,border-color] duration-300 group"
+                className="relative w-[78%] shrink-0 snap-center sm:w-auto sm:shrink p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md hover:border-[#10b981]/40 transition-[box-shadow,border-color] duration-300 group"
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="relative z-10 w-12 h-12 rounded-2xl bg-[#e8f6f0] border border-[#d1ede1] text-[#087f5b] flex items-center justify-center group-hover:bg-[#087f5b] group-hover:text-white transition-colors duration-300">

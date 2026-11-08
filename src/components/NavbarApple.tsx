@@ -107,12 +107,13 @@ export function NavbarApple() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        hidden ? "-translate-y-full" : "translate-y-0"
+      className={`fixed z-40 transition-all duration-300 ${
+        hidden ? "-translate-y-[130%]" : "translate-y-0"
       } ${
+        // Once scrolled, the bar floats as a rounded pill so it sits lightly over light sections
         scrolled
-          ? "bg-[#0b101b]/90 backdrop-blur-xl border-b border-white/[0.08] py-3 sm:py-3.5 shadow-xl shadow-black/20"
-          : "bg-[#0b101b] py-4 sm:py-5 border-b border-white/[0.05]"
+          ? "top-2 inset-x-2 sm:inset-x-4 lg:inset-x-0 lg:mx-auto lg:max-w-6xl rounded-2xl bg-[#0b101b]/92 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/10 py-2 sm:py-2.5"
+          : "top-0 inset-x-0 bg-[#0b101b] py-4 sm:py-5 border-b border-white/[0.05]"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">

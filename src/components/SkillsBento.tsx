@@ -179,7 +179,7 @@ function SkillTiltCard({
   const Icon = skill.icon;
 
   return (
-    <div style={{ perspective: 1000 }}>
+    <div style={{ perspective: 1000 }} className="w-[78%] shrink-0 snap-center sm:w-auto sm:shrink flex">
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
@@ -197,7 +197,7 @@ function SkillTiltCard({
               }
             : undefined
         }
-        className="relative p-4 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-md hover:border-slate-300 transition-shadow duration-300 flex flex-col group overflow-hidden"
+        className="relative w-full p-4 sm:p-6 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-md hover:border-slate-300 transition-shadow duration-300 flex flex-col group overflow-hidden"
       >
         {/* Inner spotlight that follows cursor inside card */}
         {!isTouch && !shouldReduce && (
@@ -211,7 +211,7 @@ function SkillTiltCard({
           />
         )}
 
-        <div className="flex flex-col items-start sm:flex-row sm:items-center gap-2 sm:gap-3.5 mb-3 sm:mb-3.5 relative z-10">
+        <div className="flex items-center gap-3 sm:gap-3.5 mb-3 sm:mb-3.5 relative z-10">
           <div
             className={`w-10 h-10 rounded-xl flex items-center justify-center ${skill.color} transition-transform duration-300 group-hover:scale-110 shadow-2xs flex-shrink-0`}
           >
@@ -222,10 +222,13 @@ function SkillTiltCard({
           </h3>
         </div>
 
-        <ul className="mt-1 space-y-1.5 text-xs text-slate-600 leading-relaxed flex-1 relative z-10">
+        <ul className="mt-1 flex flex-wrap gap-1.5 sm:block sm:space-y-1.5 text-xs text-slate-600 leading-relaxed flex-1 relative z-10">
           {skill.items.map((item, i) => (
-            <li key={i} className="flex items-start gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#087f5b] flex-shrink-0 mt-1.5" />
+            <li
+              key={i}
+              className="rounded-md bg-slate-50 border border-slate-200/80 px-2 py-0.5 text-[11px] sm:flex sm:items-start sm:gap-2 sm:rounded-none sm:bg-transparent sm:border-0 sm:p-0 sm:text-xs"
+            >
+              <span className="hidden sm:block w-1.5 h-1.5 rounded-full bg-[#087f5b] flex-shrink-0 mt-1.5" />
               <span>{item}</span>
             </li>
           ))}
@@ -257,7 +260,8 @@ export function SkillsBento() {
         </div>
 
         {/* 9 Uniform Cards in 3x3 Grid with 3D Tilt & Inner Spotlight */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+        <p className="sm:hidden mb-3 text-[11px] font-mono text-slate-400">Swipe through 9 areas →</p>
+        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 pb-2">
           {skills.map((skill, idx) => (
             <SkillTiltCard key={skill.name} skill={skill} idx={idx} />
           ))}

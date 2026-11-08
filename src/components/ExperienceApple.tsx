@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Briefcase, GraduationCap } from "lucide-react";
 import { motion, useScroll, useSpring, useReducedMotion } from "framer-motion";
 import { appleEase } from "@/lib/motion";
@@ -24,6 +24,8 @@ const journey2026 = [
 
 export function ExperienceApple() {
   const sectionRef = useRef<HTMLElement>(null);
+  // Phones show the first two highlights until expanded; larger screens always show all
+  const [showAllHighlights, setShowAllHighlights] = useState(false);
   const shouldReduce = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
@@ -92,11 +94,11 @@ export function ExperienceApple() {
                 transition={{ duration: 0.5, ease: appleEase }}
                 className="p-5 sm:p-6 rounded-2xl bg-[#fbfbfd] border border-slate-200/80 flex flex-col sm:flex-row sm:items-start justify-between gap-4 hover:border-slate-300 hover:shadow-xs transition-all"
               >
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-4 min-w-0">
                   <div className="hidden sm:flex w-10 h-10 rounded-xl bg-slate-100 text-slate-700 items-center justify-center flex-shrink-0 shadow-2xs mt-0.5">
                     <Briefcase className="w-5 h-5 text-slate-700" />
                   </div>
-                  <div className="space-y-1 max-w-2xl">
+                  <div className="space-y-1 max-w-2xl min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <h3 className="text-base font-bold text-slate-950">
                         WordPress Developer
@@ -110,19 +112,32 @@ export function ExperienceApple() {
                     </p>
 
                     <ul className="pt-1.5 space-y-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      {fbHighlights.map((item) => (
-                        <li key={item} className="flex items-start gap-2">
+                      {fbHighlights.map((item, idx) => (
+                        <li
+                          key={item}
+                          className={`items-start gap-2 ${idx < 2 || showAllHighlights ? "flex" : "hidden sm:flex"}`}
+                        >
                           <span className="w-1.5 h-1.5 rounded-full bg-[#087f5b] flex-shrink-0 mt-2" />
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
+                    <button
+                      type="button"
+                      onClick={() => setShowAllHighlights((v) => !v)}
+                      className="sm:hidden mt-1 py-2 text-xs font-semibold text-[#087f5b]"
+                    >
+                      {showAllHighlights ? "Show less" : `Show ${fbHighlights.length - 2} more highlights`}
+                    </button>
 
                     <div className="pt-4">
-                      <div className="text-[11px] font-bold tracking-widest text-[#087f5b] uppercase mb-2">
-                        2026 journey
+                      <div className="flex items-baseline justify-between mb-2">
+                        <span className="text-[11px] font-bold tracking-widest text-[#087f5b] uppercase">
+                          2026 journey
+                        </span>
+                        <span className="sm:hidden text-[11px] font-mono text-slate-400">Swipe →</span>
                       </div>
-                      <ol className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+                      <ol className="flex sm:grid sm:grid-cols-2 gap-2 sm:gap-x-6 sm:gap-y-2 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-none -mx-5 px-5 sm:mx-0 sm:px-0 pb-1">
                         {journey2026.map((step, idx) => (
                           <motion.li
                             key={step.date}
@@ -130,9 +145,9 @@ export function ExperienceApple() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.6 }}
                             transition={{ duration: 0.4, delay: idx * 0.07, ease: appleEase }}
-                            className="group flex items-start gap-3 text-xs sm:text-sm"
+                            className="group w-40 shrink-0 snap-start flex flex-col gap-1 rounded-xl border border-slate-200 bg-white p-3 sm:w-auto sm:shrink sm:flex-row sm:items-start sm:gap-3 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 text-xs sm:text-sm"
                           >
-                            <span className="font-mono font-semibold text-slate-400 whitespace-nowrap w-16 flex-shrink-0 transition-colors group-hover:text-[#087f5b]">
+                            <span className="font-mono font-semibold text-[#087f5b] sm:text-slate-400 whitespace-nowrap sm:w-16 flex-shrink-0 transition-colors group-hover:text-[#087f5b]">
                               {step.date}
                             </span>
                             <span className="text-slate-600 leading-snug">{step.text}</span>
@@ -171,11 +186,11 @@ export function ExperienceApple() {
                 transition={{ duration: 0.5, delay: 0.1, ease: appleEase }}
                 className="p-5 sm:p-6 rounded-2xl bg-[#fbfbfd] border border-slate-200/80 flex flex-col sm:flex-row sm:items-start justify-between gap-4 hover:border-slate-300 hover:shadow-xs transition-all"
               >
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-4 min-w-0">
                   <div className="hidden sm:flex w-10 h-10 rounded-xl bg-slate-100 text-slate-700 items-center justify-center flex-shrink-0 shadow-2xs mt-0.5">
                     <Briefcase className="w-5 h-5 text-slate-700" />
                   </div>
-                  <div className="space-y-1 max-w-2xl">
+                  <div className="space-y-1 max-w-2xl min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <h3 className="text-base font-bold text-slate-950">
                         Freelance Developer
@@ -231,7 +246,7 @@ export function ExperienceApple() {
                 transition={{ duration: 0.5, delay: 0.2, ease: appleEase }}
                 className="p-5 sm:p-6 rounded-2xl bg-[#fbfbfd] border border-slate-200/80 flex flex-col sm:flex-row sm:items-start justify-between gap-4 hover:border-slate-300 hover:shadow-xs transition-all"
               >
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-4 min-w-0">
                   <div className="hidden sm:flex w-10 h-10 rounded-xl bg-slate-100 text-slate-700 items-center justify-center flex-shrink-0 shadow-2xs mt-0.5">
                     <GraduationCap className="w-5 h-5 text-slate-700" />
                   </div>
