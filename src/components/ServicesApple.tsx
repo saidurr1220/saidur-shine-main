@@ -33,7 +33,7 @@ export function ServicesApple() {
   const shouldReduce = useReducedMotion();
 
   return (
-    <section id="services" className="py-24 px-4 sm:px-6 bg-white border-b border-slate-100">
+    <section id="services" className="py-24 px-4 sm:px-6 bg-[#fbfbfd] border-b border-slate-100">
       <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           {/* Left Title */}
