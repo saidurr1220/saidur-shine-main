@@ -137,7 +137,7 @@ export function ExperienceApple() {
                         </span>
                         <span className="sm:hidden text-[11px] font-mono text-slate-400">Swipe →</span>
                       </div>
-                      <ol className="flex sm:grid sm:grid-cols-2 gap-2 sm:gap-x-6 sm:gap-y-2 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-none -mx-5 px-5 sm:mx-0 sm:px-0 pb-1">
+                      <ol className="flex sm:grid sm:grid-cols-2 gap-2 sm:gap-x-6 sm:gap-y-2 overflow-x-auto sm:overflow-visible snap-x snap-mandatory scroll-px-5 sm:scroll-px-0 scrollbar-none -mx-5 px-5 sm:mx-0 sm:px-0 pb-1">
                         {journey2026.map((step, idx) => (
                           <motion.li
                             key={step.date}
